@@ -2,6 +2,10 @@ package domain.qiita
 
 final case class QiitaUserInitial(initial: Initial, page: Page) {
   def pageRange: Range = page.range
+
+  def usersUrl(currentPage: Int): String = {
+    s"https://qiita.com/users?char=${initial.value}&page=$currentPage"
+  }
 }
 
 final case class Initial(value: Char)
