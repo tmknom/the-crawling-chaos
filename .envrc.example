@@ -1,1 +1,0 @@
-export ARTIFACT_REPOSITORY=s3://xxxx.amazonaws.com/library/snapshots
