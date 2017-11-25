@@ -1,4 +1,4 @@
-name := """play-starter"""
+name := """qiita-ranker"""
 
 version := "1.0-SNAPSHOT"
 
