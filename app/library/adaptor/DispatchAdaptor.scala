@@ -19,6 +19,7 @@ final case class DispatchAdaptor(uri: String) {
 }
 
 object DispatchAdaptor {
+
   /**
     * アプリケーションの実行終了時にクローズする
     */
