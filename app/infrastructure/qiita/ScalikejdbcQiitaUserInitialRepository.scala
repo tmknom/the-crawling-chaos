@@ -1,6 +1,6 @@
 package infrastructure.qiita
 
-import domain.qiita.{QiitaUserInitial, QiitaUserInitialRepository}
+import domain.qiita.{Initial, Page, QiitaUserInitial, QiitaUserInitialRepository}
 import scalikejdbc._
 
 final class ScalikejdbcQiitaUserInitialRepository extends QiitaUserInitialRepository {
@@ -9,5 +9,11 @@ final class ScalikejdbcQiitaUserInitialRepository extends QiitaUserInitialReposi
     val page    = qiitaUserInitial.page.value
 
     sql"INSERT INTO qiita_user_initials (initial, page) VALUES ($initial, $page);".update.apply()
+  }
+
+  override def retrieveAll()(implicit session: DBSession = AutoSession): Seq[QiitaUserInitial] = {
+    sql"SELECT * FROM qiita_user_initials ORDER BY id ASC;".map { rs =>
+      QiitaUserInitial(Initial(rs.string("initial").charAt(0)), Page(rs.int("page")))
+    }.list().apply()
   }
 }
