@@ -13,11 +13,16 @@ final case class DispatchAdaptor(uri: String) {
   private val Timeout = 30.seconds
 
   def request(): String = {
-    try {
-      val future: Future[String] = Http.default(url(uri) OK as.String)
-      Await.result(future, Timeout)
-    } finally {
-      Http.default.client.close() // これがないと JVM がシャットダウンせず、プロセスが刺さりっぱなしになる
-    }
+    val future: Future[String] = Http.default(url(uri) OK as.String)
+    Await.result(future, Timeout)
+  }
+}
+
+object DispatchAdaptor {
+  /**
+    * アプリケーションの実行終了時にクローズする
+    */
+  def close(): Unit = {
+    Http.default.client.close()
   }
 }
