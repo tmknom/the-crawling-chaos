@@ -1,4 +1,6 @@
 import com.google.inject.AbstractModule
+import domain.qiita.{QiitaUserInitialGateway, QiitaUserInitialRepository}
+import infrastructure.qiita.{HttpQiitaUserInitialGateway, ScalikejdbcQiitaUserInitialRepository}
 
 /**
   * This class is a Guice module that tells Guice how to bind several
@@ -12,6 +14,12 @@ import com.google.inject.AbstractModule
   */
 class Module extends AbstractModule {
 
-  override def configure(): Unit = {}
+  override def configure(): Unit = {
+    configureInfrastructure()
+  }
 
+  private def configureInfrastructure() = {
+    bind(classOf[QiitaUserInitialRepository]).to(classOf[ScalikejdbcQiitaUserInitialRepository])
+    bind(classOf[QiitaUserInitialGateway]).to(classOf[HttpQiitaUserInitialGateway])
+  }
 }
