@@ -22,6 +22,7 @@ object Version {
 
   // 通信関連
   val DispatchCore = "0.13.2"
+  val ScalaScraper = "2.0.0"
 
   // ロギング関連
   val LogstashLogbackEncoder = "4.11"
@@ -68,6 +69,10 @@ object Library {
   // wsよりコッチを使うほうが推奨されているっぽい
   // http://qiita.com/bigwheel/items/44cb874ced4be204c09c
   val DispatchCore = "net.databinder.dispatch" %% "dispatch-core" % Version.DispatchCore
+
+  // HTMLパーサ
+  // https://github.com/ruippeixotog/scala-scraper
+  val ScalaScraper = "net.ruippeixotog" %% "scala-scraper" % Version.ScalaScraper
 
   // logbackでログをjson形式で出力
   // https://github.com/logstash/logstash-logback-encoder
@@ -123,6 +128,7 @@ object Dependencies {
     ScalikejdbcPlayInitializer,
     SprayJson,
     DispatchCore,
+    ScalaScraper,
     LogstashLogbackEncoder,
     Janino
   )
