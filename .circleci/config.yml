@@ -1,0 +1,120 @@
+# Scala CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/sample-config/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # https://github.com/tmknom/docker-play-framework
+      - image: tmknom/play-development
+        environment:
+          DB_URL: "jdbc:mysql://127.0.0.1/db_test?characterEncoding=UTF8&connectionCollation=utf8mb4_bin&useSSL=false"
+          DB_USER: "root"
+          DB_PASSWORD: ""
+          # タイムゾーンは本番環境に合わせる
+          TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+          # MySQLの起動チェック用
+          HEALTH_CHECK_RETRY_LIMIT: 10
+          HEALTH_CHECK_RETRY_WAIT: 3
+      - image: mysql:5.7
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+
+    working_directory: ~/repo
+
+    environment:
+      # Customize the JVM maximum heap limit
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+
+    steps:
+      - checkout
+
+      # CircleCI の Environment Variables に CACHE_KEY という名前で、適当な値を保存しておく。
+      # キャッシュをリフレッシュしたい場合は、設定した CACHE_KEY の値を CircleCI 上で変更する。
+      # http://engineer.crowdworks.jp/entry/2017/04/04/202719
+      - restore_cache:
+          name: Restoring cache - sbt
+          keys:
+            - sbt-{{ .Environment.CACHE_KEY }}-{{ checksum "project/Dependencies.scala" }}
+            - sbt-{{ .Environment.CACHE_KEY }}-
+
+      - restore_cache:
+          name: Restoring cache - ivy2
+          keys:
+            - ivy2-{{ .Environment.CACHE_KEY }}-{{ checksum "project/Dependencies.scala" }}
+            - ivy2-{{ .Environment.CACHE_KEY }}-
+
+      - restore_cache:
+          name: Restoring cache - target
+          keys:
+            - target-{{ .Environment.CACHE_KEY }}-{{ checksum "project/Dependencies.scala" }}
+            - target-{{ .Environment.CACHE_KEY }}-
+
+      - restore_cache:
+          name: Restoring cache - project/target
+          keys:
+            - project-{{ .Environment.CACHE_KEY }}-{{ checksum "project/Dependencies.scala" }}
+            - project-{{ .Environment.CACHE_KEY }}-
+
+      # コンパイルしてフォーマットをチェック
+      - run:
+          name: Compile and scalafmt test
+          command: cat /dev/null | sbt test:compile scalafmt::test
+
+      # MySQLの起動チェック
+      - run:
+          # テスト時にMySQLコンテナの起動が間に合わないことがあるため、接続できるようになるまで待つ
+          # http://engineer.crowdworks.jp/entry/2017/04/04/202719
+          name: Checking mysql connection
+          command: |
+            for i in $(seq $HEALTH_CHECK_RETRY_LIMIT)
+            do
+              mysql -u root -h 127.0.0.1 -e 'show databases' || (sleep $HEALTH_CHECK_RETRY_WAIT; false) && break
+            done
+
+      # テスト用のデータベース作成
+      - run:
+          name: Create test database
+          command: mysql -u root -h 127.0.0.1 -e 'create database db_test character set utf8mb4;'
+
+      # テスト高速化のためキャッシュ
+      - save_cache:
+          name: Saving cache - sbt
+          key: sbt-{{ .Environment.CACHE_KEY }}-{{ checksum "project/Dependencies.scala" }}
+          paths:
+            - "~/.sbt"
+
+      - save_cache:
+          name: Saving cache - ivy2
+          key: ivy2-{{ .Environment.CACHE_KEY }}-{{ checksum "project/Dependencies.scala" }}
+          paths:
+            - "~/.ivy2"
+
+      - save_cache:
+          name: Saving cache - target
+          key: target-{{ .Environment.CACHE_KEY }}-{{ checksum "project/Dependencies.scala" }}
+          paths:
+            - "/opt/app/target"
+
+      - save_cache:
+          name: Saving cache - project/target
+          key: project-{{ .Environment.CACHE_KEY }}-{{ checksum "project/Dependencies.scala" }}
+          paths:
+            - "/opt/app/project/target"
+
+      # root プロジェクトから共通ライブラリを aggregate 対象から除外したので、明示的にプロジェクトを指定して実行
+      - run:
+          name: Test Library
+          command: cat /dev/null | sbt "project library" test:test
+
+      # CI 高速化のため master のみカバレッジを取得
+      - run:
+          name: Test
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              cat /dev/null | sbt "project root" coverage test:test coverageReport codacyCoverage;
+            else
+              cat /dev/null | sbt "project root" test:test;
+            fi
