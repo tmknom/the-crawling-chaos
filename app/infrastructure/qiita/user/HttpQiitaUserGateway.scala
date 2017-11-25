@@ -1,12 +1,11 @@
 package infrastructure.qiita.user
 
-import domain.qiita._
 import domain.qiita.user.{QiitaUser, QiitaUserGateway}
+import library.adaptor.DispatchAdaptor
 
 final class HttpQiitaUserGateway extends QiitaUserGateway {
-  private val BaseUrl = "https://qiita.com/users?char="
-
-  override def fetch(): Seq[QiitaUser] = {
-    Seq(QiitaUser())
+  override def fetch(url: String): Seq[QiitaUser] = {
+    val response = DispatchAdaptor(url).request()
+    QiitaUserParser(response).parse
   }
 }
