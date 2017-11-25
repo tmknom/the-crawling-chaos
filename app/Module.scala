@@ -1,8 +1,10 @@
 import com.google.inject.AbstractModule
 import domain.qiita._
 import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository}
+import domain.qiita.userranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 import infrastructure.qiita._
 import infrastructure.qiita.user.{HttpQiitaUserGateway, ScalikejdbcQiitaUserRepository}
+import infrastructure.qiita.userranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
 
 /**
   * This class is a Guice module that tells Guice how to bind several
@@ -25,5 +27,7 @@ class Module extends AbstractModule {
     bind(classOf[QiitaUserInitialGateway]).to(classOf[HttpQiitaUserInitialGateway])
     bind(classOf[QiitaUserRepository]).to(classOf[ScalikejdbcQiitaUserRepository])
     bind(classOf[QiitaUserGateway]).to(classOf[HttpQiitaUserGateway])
+    bind(classOf[QiitaUserRankingRepository]).to(classOf[ScalikejdbcQiitaUserRankingRepository])
+    bind(classOf[QiitaUserRankingGateway]).to(classOf[HttpQiitaUserRankingGateway])
   }
 }
