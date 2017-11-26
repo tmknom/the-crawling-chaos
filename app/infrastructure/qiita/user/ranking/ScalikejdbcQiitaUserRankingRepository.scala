@@ -1,7 +1,7 @@
-package infrastructure.qiita.userranking
+package infrastructure.qiita.user.ranking
 
+import domain.qiita.user.ranking.{QiitaUserRanking, QiitaUserRankingContribution, QiitaUserRankingRepository}
 import domain.qiita.user.{QiitaUserId, QiitaUserName}
-import domain.qiita.userranking._
 import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))

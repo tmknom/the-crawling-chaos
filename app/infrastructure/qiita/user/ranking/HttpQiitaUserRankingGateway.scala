@@ -1,6 +1,6 @@
-package infrastructure.qiita.userranking
+package infrastructure.qiita.user.ranking
 
-import domain.qiita.userranking.{QiitaUserRanking, QiitaUserRankingGateway}
+import domain.qiita.user.ranking.{QiitaUserRanking, QiitaUserRankingGateway}
 import library.adaptor.DispatchAdaptor
 
 final class HttpQiitaUserRankingGateway extends QiitaUserRankingGateway {
