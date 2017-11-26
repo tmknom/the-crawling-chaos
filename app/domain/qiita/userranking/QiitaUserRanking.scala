@@ -1,9 +1,7 @@
 package domain.qiita.userranking
 
-import domain.qiita.user.QiitaUserId
+import domain.qiita.user.{QiitaUserId, QiitaUserName}
 
-final case class QiitaUserRanking(qiitaUserId: QiitaUserId, name: QiitaUserRankingName, contribution: QiitaUserRankingContribution)
-
-final case class QiitaUserRankingName(value: String)
+final case class QiitaUserRanking(qiitaUserId: QiitaUserId, name: QiitaUserName, contribution: QiitaUserRankingContribution)
 
 final case class QiitaUserRankingContribution(value: Int)
