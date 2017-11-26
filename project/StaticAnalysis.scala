@@ -68,10 +68,11 @@ object StaticAnalysis {
         * - 警告の除外設定
         *   - Overloading : オーバーロードは普通に使われるものであるため除外
         *   - Throw : 例外のスローは普通に使われるものであるため除外
+        *   - NonUnitStatements : Scala は言語仕様的に最後の式が自動で return され、ムダに警告されるため除外
         * - 参考
         *   - http://www.wartremover.org/doc/install-setup.html
         */
-      wartremoverWarnings in(Compile, compile in Compile) ++= Warts.allBut(Wart.Overloading, Wart.Throw),
+      wartremoverWarnings in(Compile, compile in Compile) ++= Warts.allBut(Wart.Overloading, Wart.Throw, Wart.NonUnitStatements),
 
       /**
         * WartRemover のテストコードのみの設定
