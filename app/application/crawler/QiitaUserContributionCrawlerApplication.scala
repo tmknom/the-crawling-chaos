@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
 import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserContributionRepository}
-import domain.qiita.userranking.{QiitaUserRanking, QiitaUserRankingRepository}
+import domain.qiita.user.ranking.{QiitaUserRanking, QiitaUserRankingRepository}
 import play.api.Logger
 
 @Singleton

@@ -1,13 +1,13 @@
-package infrastructure.qiita.userranking
+package infrastructure.qiita.user.ranking
 
+import domain.qiita.user.ranking.{QiitaUserRanking, QiitaUserRankingContribution}
 import domain.qiita.user.{QiitaUserId, QiitaUserName}
-import domain.qiita.userranking.{QiitaUserRanking, QiitaUserRankingContribution}
 import net.ruippeixotog.scalascraper.browser.JsoupBrowser
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
 import net.ruippeixotog.scalascraper.dsl.DSL._
 import net.ruippeixotog.scalascraper.model.Element
 
-private[userranking] final case class QiitaUserRankingParser(html: String) {
+private[ranking] final case class QiitaUserRankingParser(html: String) {
   def parse: Seq[QiitaUserRanking] = {
     val SkipElement = 4
     val doc         = JsoupBrowser().parseString(html)

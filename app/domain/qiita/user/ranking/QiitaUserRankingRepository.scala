@@ -1,4 +1,4 @@
-package domain.qiita.userranking
+package domain.qiita.user.ranking
 
 import scalikejdbc.{AutoSession, DBSession}
 

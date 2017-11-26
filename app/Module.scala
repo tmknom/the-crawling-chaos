@@ -1,12 +1,12 @@
 import com.google.inject.AbstractModule
 import domain.qiita.initial.{QiitaUserInitialGateway, QiitaUserInitialRepository}
 import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserContributionRepository}
+import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository}
-import domain.qiita.userranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 import infrastructure.qiita.initial.{HttpQiitaUserInitialGateway, ScalikejdbcQiitaUserInitialRepository}
 import infrastructure.qiita.user.contribution.{HttpQiitaUserContributionGateway, ScalikejdbcQiitaUserContributionRepository}
+import infrastructure.qiita.user.ranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
 import infrastructure.qiita.user.{HttpQiitaUserGateway, ScalikejdbcQiitaUserRepository}
-import infrastructure.qiita.userranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
 
 /**
   * This class is a Guice module that tells Guice how to bind several

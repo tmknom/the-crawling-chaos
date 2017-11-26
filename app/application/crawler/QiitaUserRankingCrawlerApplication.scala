@@ -3,7 +3,7 @@ package application.crawler
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.userranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
+import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 
 @Singleton
 final class QiitaUserRankingCrawlerApplication @Inject()(
