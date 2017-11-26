@@ -1,10 +1,10 @@
 import com.google.inject.AbstractModule
-import domain.qiita._
 import domain.qiita.initial.{QiitaUserInitialGateway, QiitaUserInitialRepository}
+import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserContributionRepository}
 import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository}
 import domain.qiita.userranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
-import infrastructure.qiita._
 import infrastructure.qiita.initial.{HttpQiitaUserInitialGateway, ScalikejdbcQiitaUserInitialRepository}
+import infrastructure.qiita.user.contribution.{HttpQiitaUserContributionGateway, ScalikejdbcQiitaUserContributionRepository}
 import infrastructure.qiita.user.{HttpQiitaUserGateway, ScalikejdbcQiitaUserRepository}
 import infrastructure.qiita.userranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
 
@@ -31,6 +31,8 @@ class Module extends AbstractModule {
     bind(classOf[QiitaUserGateway]).to(classOf[HttpQiitaUserGateway])
     bind(classOf[QiitaUserRankingRepository]).to(classOf[ScalikejdbcQiitaUserRankingRepository])
     bind(classOf[QiitaUserRankingGateway]).to(classOf[HttpQiitaUserRankingGateway])
+    bind(classOf[QiitaUserContributionRepository]).to(classOf[ScalikejdbcQiitaUserContributionRepository])
+    bind(classOf[QiitaUserContributionGateway]).to(classOf[HttpQiitaUserContributionGateway])
 
     () // 明示的に Unit を返す
   }
