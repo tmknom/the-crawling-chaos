@@ -3,6 +3,7 @@ package infrastructure.qiita
 import domain.qiita.{Initial, Page, QiitaUserInitial, QiitaUserInitialRepository}
 import scalikejdbc._
 
+@SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
 final class ScalikejdbcQiitaUserInitialRepository extends QiitaUserInitialRepository {
   override def register(qiitaUserInitial: QiitaUserInitial)(implicit session: DBSession = AutoSession): Unit = {
     val initial = qiitaUserInitial.initial.value.toString
