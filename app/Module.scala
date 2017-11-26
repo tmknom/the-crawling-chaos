@@ -1,8 +1,10 @@
 import com.google.inject.AbstractModule
 import domain.qiita._
+import domain.qiita.initial.{QiitaUserInitialGateway, QiitaUserInitialRepository}
 import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository}
 import domain.qiita.userranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 import infrastructure.qiita._
+import infrastructure.qiita.initial.{HttpQiitaUserInitialGateway, ScalikejdbcQiitaUserInitialRepository}
 import infrastructure.qiita.user.{HttpQiitaUserGateway, ScalikejdbcQiitaUserRepository}
 import infrastructure.qiita.userranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
 

@@ -1,4 +1,4 @@
-package domain.qiita
+package domain.qiita.initial
 
 final case class QiitaUserInitial(initial: Initial, page: Page) {
   def pageRange: Range = page.range

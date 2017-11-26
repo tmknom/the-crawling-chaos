@@ -1,6 +1,6 @@
-package infrastructure.qiita
+package infrastructure.qiita.initial
 
-import domain.qiita.{Initial, Page, QiitaUserInitial, QiitaUserInitialRepository}
+import domain.qiita.initial.{Initial, Page, QiitaUserInitial, QiitaUserInitialRepository}
 import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))

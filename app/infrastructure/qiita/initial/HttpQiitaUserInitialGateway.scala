@@ -1,8 +1,8 @@
-package infrastructure.qiita
+package infrastructure.qiita.initial
 
 import java.util.concurrent.TimeUnit
 
-import domain.qiita.{Initial, Page, QiitaUserInitial, QiitaUserInitialGateway}
+import domain.qiita.initial.{Initial, Page, QiitaUserInitial, QiitaUserInitialGateway}
 import library.adaptor.DispatchAdaptor
 import play.api.Logger
 
