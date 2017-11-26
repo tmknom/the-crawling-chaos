@@ -1,8 +1,10 @@
 package infrastructure.qiita.user.ranking
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
 import domain.qiita.user.contribution.QiitaUserContribution
 import domain.qiita.user.ranking.{QiitaUserRanking, QiitaUserRankingRepository}
 import domain.qiita.user.{QiitaUserId, QiitaUserName}
+import play.api.Logger
 import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
@@ -10,7 +12,12 @@ final class ScalikejdbcQiitaUserRankingRepository extends QiitaUserRankingReposi
   override def register(qiitaUserRanking: QiitaUserRanking)(implicit session: DBSession = AutoSession): Unit = {
     val userName     = qiitaUserRanking.name.value
     val contribution = qiitaUserRanking.contribution.value
-    sql"INSERT INTO qiita_user_rankings (user_name, contribution) VALUES ($userName, $contribution);".update.apply()
+    try {
+      sql"INSERT INTO qiita_user_rankings (user_name, contribution) VALUES ($userName, $contribution);".update.apply()
+    } catch {
+      // 処理を止めてほしくないのでログ吐いて握りつぶす
+      case e: MySQLIntegrityConstraintViolationException => Logger.warn(s"insert error $userName, because ${e.getMessage}")
+    }
 
     () // 明示的に Unit を返す
   }
