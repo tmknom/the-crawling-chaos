@@ -3,7 +3,7 @@ package application.crawler
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.QiitaUserInitialRepository
+import domain.qiita.initial.QiitaUserInitialRepository
 import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository}
 
 @Singleton

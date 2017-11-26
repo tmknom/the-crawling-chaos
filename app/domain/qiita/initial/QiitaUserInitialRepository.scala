@@ -1,4 +1,4 @@
-package domain.qiita
+package domain.qiita.initial
 
 import scalikejdbc.{AutoSession, DBSession}
 

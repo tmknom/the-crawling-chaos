@@ -2,7 +2,7 @@ package application.crawler
 
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.{QiitaUserInitialGateway, QiitaUserInitialRepository}
+import domain.qiita.initial.{QiitaUserInitialGateway, QiitaUserInitialRepository}
 
 @Singleton
 final class QiitaUserInitialCrawlerApplication @Inject()(

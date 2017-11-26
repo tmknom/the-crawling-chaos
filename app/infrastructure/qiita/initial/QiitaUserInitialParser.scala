@@ -1,4 +1,4 @@
-package infrastructure.qiita
+package infrastructure.qiita.initial
 
 import net.ruippeixotog.scalascraper.browser.JsoupBrowser
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
