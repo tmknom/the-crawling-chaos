@@ -1,6 +1,7 @@
 package infrastructure.qiita.user.ranking
 
-import domain.qiita.user.ranking.{QiitaUserRanking, QiitaUserRankingContribution}
+import domain.qiita.user.contribution.QiitaUserContribution
+import domain.qiita.user.ranking.QiitaUserRanking
 import domain.qiita.user.{QiitaUserId, QiitaUserName}
 import net.ruippeixotog.scalascraper.browser.JsoupBrowser
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
@@ -19,7 +20,7 @@ private[ranking] final case class QiitaUserRankingParser(html: String) {
     QiitaUserRanking(
       qiitaUserId  = QiitaUserId(-1),
       name         = QiitaUserName(item >> element("a") >> text),
-      contribution = QiitaUserRankingContribution(item.innerHtml.split(", ").last.toInt)
+      contribution = QiitaUserContribution(item.innerHtml.split(", ").last.toInt)
     )
   }
 }
