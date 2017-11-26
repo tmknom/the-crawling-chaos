@@ -22,12 +22,14 @@ class Module extends AbstractModule {
     configureInfrastructure()
   }
 
-  private def configureInfrastructure() = {
+  private def configureInfrastructure(): Unit = {
     bind(classOf[QiitaUserInitialRepository]).to(classOf[ScalikejdbcQiitaUserInitialRepository])
     bind(classOf[QiitaUserInitialGateway]).to(classOf[HttpQiitaUserInitialGateway])
     bind(classOf[QiitaUserRepository]).to(classOf[ScalikejdbcQiitaUserRepository])
     bind(classOf[QiitaUserGateway]).to(classOf[HttpQiitaUserGateway])
     bind(classOf[QiitaUserRankingRepository]).to(classOf[ScalikejdbcQiitaUserRankingRepository])
     bind(classOf[QiitaUserRankingGateway]).to(classOf[HttpQiitaUserRankingGateway])
+
+    () // 明示的に Unit を返す
   }
 }
