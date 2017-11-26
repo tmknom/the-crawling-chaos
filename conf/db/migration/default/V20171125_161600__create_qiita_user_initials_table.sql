@@ -3,5 +3,5 @@ CREATE TABLE IF NOT EXISTS qiita_user_initials (
   initial VARCHAR(1) NOT NULL COMMENT 'イニシャル',
   page    INT(11)    NOT NULL COMMENT 'ページ数',
   PRIMARY KEY (id),
-  UNIQUE (initial, page)
+  UNIQUE (initial)
 ) ENGINE InnoDB AUTO_INCREMENT 1 DEFAULT CHARSET utf8mb4 DEFAULT COLLATE utf8mb4_bin COMMENT 'Qiitaユーザイニシャル';
