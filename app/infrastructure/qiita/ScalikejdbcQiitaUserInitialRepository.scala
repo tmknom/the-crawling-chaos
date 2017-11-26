@@ -10,6 +10,8 @@ final class ScalikejdbcQiitaUserInitialRepository extends QiitaUserInitialReposi
     val page    = qiitaUserInitial.page.value
 
     sql"INSERT INTO qiita_user_initials (initial, page) VALUES ($initial, $page);".update.apply()
+
+    () // 明示的に Unit を返す
   }
 
   override def retrieveAll()(implicit session: DBSession = AutoSession): Seq[QiitaUserInitial] = {
