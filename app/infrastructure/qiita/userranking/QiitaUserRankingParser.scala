@@ -1,11 +1,6 @@
 package infrastructure.qiita.userranking
 
-import domain.qiita.userranking.{
-  QiitaUserRanking,
-  QiitaUserRankingContribution,
-  QiitaUserRankingId,
-  QiitaUserRankingName
-}
+import domain.qiita.userranking.{QiitaUserRanking, QiitaUserRankingContribution, QiitaUserRankingId, QiitaUserRankingName}
 import net.ruippeixotog.scalascraper.browser.JsoupBrowser
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
 import net.ruippeixotog.scalascraper.dsl.DSL._

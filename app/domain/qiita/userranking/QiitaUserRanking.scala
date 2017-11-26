@@ -1,8 +1,6 @@
 package domain.qiita.userranking
 
-final case class QiitaUserRanking(id:           QiitaUserRankingId,
-                                  name:         QiitaUserRankingName,
-                                  contribution: QiitaUserRankingContribution)
+final case class QiitaUserRanking(id: QiitaUserRankingId, name: QiitaUserRankingName, contribution: QiitaUserRankingContribution)
 
 final case class QiitaUserRankingId(value: Int)
 
