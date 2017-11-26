@@ -9,5 +9,7 @@ final class ScalikejdbcQiitaUserRankingRepository extends QiitaUserRankingReposi
     val userName     = qiitaUserRanking.name.value
     val contribution = qiitaUserRanking.contribution.value
     sql"INSERT INTO qiita_user_rankings (user_name, contribution) VALUES ($userName, $contribution);".update.apply()
+
+    () // 明示的に Unit を返す
   }
 }
