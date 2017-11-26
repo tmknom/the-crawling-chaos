@@ -4,6 +4,64 @@
 
 # qiita-ranker
 
+## 使い方
+
+### Qiitaユーザのイニシャルのページ数のクロール
+
+[Qiitaのユーザ一覧](https://qiita.com/users)のクローリングの事前準備として、各イニシャルのページ数を取得する。
+
+```
+run-main presentation.cli.operation.crawler.QiitaUserInitialCrawlerCli
+```
+
+### Qiitaユーザの全件クロール
+
+[Qiitaのユーザ一覧](https://qiita.com/users)からユーザ名を全件クロール。
+[Qiita API](https://qiita.com/api/v2/docs#ユーザ)では、全件取得できないので、HTMLをクロールしている。
+
+```
+run-main presentation.cli.operation.crawler.QiitaUserCrawlerCli
+```
+
+### Qiita User Rankingのクロール
+
+[Qiita User Ranking](https://qiita-user-ranking.herokuapp.com/)からユーザ名といいね数を全件クロール。
+2017年3月頃との比較を行いたいので実装している。
+
+```
+run-main presentation.cli.operation.crawler.QiitaUserRankingCrawlerCli
+```
+
+### Qiitaユーザのいいね数クロール
+
+[Qiita User Ranking](https://qiita-user-ranking.herokuapp.com/)に出てくるユーザのいいね数をクロール。
+
+```
+run-main presentation.cli.operation.crawler.QiitaUserContributionCrawlerCli
+```
+
+## チートシート
+
+### テーブルのエクスポート
+
+```sql
+SELECT * FROM qiita_users
+  INTO OUTFILE '/tmp/qiita_users.csv'
+  FIELDS TERMINATED BY '\t'
+  ENCLOSED BY '"'
+  ESCAPED BY '"';
+```
+
+### テーブルのインポート
+
+```sql
+LOAD DATA INFILE '/tmp/qiita_users.csv'
+  INTO TABLE qiita_users
+  FIELDS TERMINATED BY '\t'
+  ENCLOSED BY '"'
+  ESCAPED BY '"';
+```
+
 ## 新しいプロジェクトの始め方
 
 ### Codacy
