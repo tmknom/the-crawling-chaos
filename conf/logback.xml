@@ -58,11 +58,11 @@
   <root level="WARN">
     <appender-ref ref="ASYNCSTDOUT"/>
     <!-- 本番環境ではログをファイル出力したくないので、JVMのシステムプロパティがセットされているかチェックしている -->
-    <if condition='isDefined("logback.appender.file")'>
-      <then>
-        <appender-ref ref="ASYNCFILE"/>
-      </then>
-    </if>
+    <!--<if condition='isDefined("logback.appender.file")'>-->
+    <!--<then>-->
+    <appender-ref ref="ASYNCFILE"/>
+    <!--</then>-->
+    <!--</if>-->
   </root>
 
 </configuration>
