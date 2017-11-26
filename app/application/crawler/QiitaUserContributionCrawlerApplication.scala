@@ -18,11 +18,12 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
 
   def crawl(): Unit = {
     val qiitaUserRankings: Seq[QiitaUserRanking] = qiitaUserRankingRepository.retrieveAll()
-    qiitaUserRankings.foreach { qiitaUserRanking =>
-      val qiitaUserContribution = gateway.fetch(qiitaUserRanking.name)
-      repository.register(qiitaUserRanking.qiitaUserId, qiitaUserContribution)
-      Logger.info(s"crawled ${qiitaUserRanking.name} : ${qiitaUserContribution.value}")
-      TimeUnit.MILLISECONDS.sleep(SLEEP_TIME_MILLISECONDS)
+    qiitaUserRankings.zipWithIndex.foreach {
+      case (qiitaUserRanking, index) =>
+        val qiitaUserContribution = gateway.fetch(qiitaUserRanking.name)
+        repository.register(qiitaUserRanking.qiitaUserId, qiitaUserContribution)
+        Logger.info(s"crawled ${index + 1} : ${qiitaUserRanking.name} : ${qiitaUserContribution.value}")
+        TimeUnit.MILLISECONDS.sleep(SLEEP_TIME_MILLISECONDS)
     }
   }
 
