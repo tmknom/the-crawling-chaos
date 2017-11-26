@@ -20,11 +20,23 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
     val qiitaUserRankings: Seq[QiitaUserRanking] = qiitaUserRankingRepository.retrieveAll()
     qiitaUserRankings.zipWithIndex.foreach {
       case (qiitaUserRanking, index) =>
-        val qiitaUserContribution = gateway.fetch(qiitaUserRanking.name)
-        repository.register(qiitaUserRanking.qiitaUserId, qiitaUserContribution)
-        Logger.info(s"crawled ${index + 1} : ${qiitaUserRanking.name} : ${qiitaUserContribution.value}")
+        quietlyCrawlOneUser(qiitaUserRanking, index)
         TimeUnit.MILLISECONDS.sleep(SLEEP_TIME_MILLISECONDS)
     }
   }
 
+  private def quietlyCrawlOneUser(qiitaUserRanking: QiitaUserRanking, index: Int): Unit = {
+    try {
+      crawlOneUser(qiitaUserRanking, index)
+    } catch {
+      // 処理を止めてほしくないのでログ吐いて握りつぶす
+      case e: Exception => Logger.warn(s"crawl error ${index.toString} ${qiitaUserRanking.name.value}.", e)
+    }
+  }
+
+  private def crawlOneUser(qiitaUserRanking: QiitaUserRanking, index: Int): Unit = {
+    val qiitaUserContribution = gateway.fetch(qiitaUserRanking.name)
+    repository.register(qiitaUserRanking.qiitaUserId, qiitaUserContribution)
+    Logger.info(s"crawled ${index + 1} : ${qiitaUserRanking.name} : ${qiitaUserContribution.value}")
+  }
 }
