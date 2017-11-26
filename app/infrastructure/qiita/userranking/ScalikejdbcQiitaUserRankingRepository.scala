@@ -3,7 +3,7 @@ package infrastructure.qiita.userranking
 import domain.qiita.userranking.{QiitaUserRanking, QiitaUserRankingRepository}
 import scalikejdbc._
 
-@SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments"))
+@SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
 final class ScalikejdbcQiitaUserRankingRepository extends QiitaUserRankingRepository {
   override def register(qiitaUserRanking: QiitaUserRanking)(implicit session: DBSession = AutoSession): Unit = {
     val userName     = qiitaUserRanking.name.value
