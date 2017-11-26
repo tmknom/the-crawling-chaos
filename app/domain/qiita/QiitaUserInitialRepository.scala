@@ -2,6 +2,7 @@ package domain.qiita
 
 import scalikejdbc.{AutoSession, DBSession}
 
+@SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments"))
 trait QiitaUserInitialRepository {
   def register(qiitaUserInitial: QiitaUserInitial)(implicit session: DBSession = AutoSession): Unit
 
