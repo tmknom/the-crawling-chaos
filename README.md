@@ -32,12 +32,12 @@ run-main presentation.cli.operation.crawler.QiitaUserCrawlerCli
 run-main presentation.cli.operation.crawler.QiitaUserRankingCrawlerCli
 ```
 
-### Qiitaユーザのいいね数クロール
+### Qiita User Rankingにエントリーしているユーザのいいね数クロール
 
 [Qiita User Ranking](https://qiita-user-ranking.herokuapp.com/)に出てくるユーザのいいね数をクロール。
 
 ```
-run-main presentation.cli.operation.crawler.QiitaUserContributionCrawlerCli
+run-main presentation.cli.operation.crawler.QiitaUserRankingContributionCrawlerCli
 ```
 
 ## チートシート
