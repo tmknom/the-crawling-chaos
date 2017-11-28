@@ -23,6 +23,14 @@ run-main presentation.cli.operation.crawler.QiitaUserInitialCrawlerCli
 run-main presentation.cli.operation.crawler.QiitaUserCrawlerCli
 ```
 
+### Qiitaユーザのいいね数クロール
+
+Qiitaユーザの全件のいいね数をクロール。
+
+```
+run-main presentation.cli.operation.crawler.QiitaUserContributionCrawlerCli
+```
+
 ### Qiita User Rankingのクロール
 
 [Qiita User Ranking](https://qiita-user-ranking.herokuapp.com/)からユーザ名といいね数を全件クロール。
