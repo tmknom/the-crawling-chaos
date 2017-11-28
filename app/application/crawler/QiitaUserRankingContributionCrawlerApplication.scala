@@ -10,7 +10,7 @@ import play.api.Logger
 import scala.collection.mutable
 
 @Singleton
-final class QiitaUserContributionCrawlerApplication @Inject()(
+final class QiitaUserRankingContributionCrawlerApplication @Inject()(
     gateway:                    QiitaUserContributionGateway,
     repository:                 QiitaUserContributionRepository,
     qiitaUserRankingRepository: QiitaUserRankingRepository
