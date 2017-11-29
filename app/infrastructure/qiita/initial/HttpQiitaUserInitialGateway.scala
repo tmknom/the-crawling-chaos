@@ -3,7 +3,7 @@ package infrastructure.qiita.initial
 import java.util.concurrent.TimeUnit
 
 import domain.qiita.initial.{Initial, Page, QiitaUserInitial, QiitaUserInitialGateway}
-import library.adaptor.DispatchAdaptor
+import library.scalaj.ScalajHttpAdaptor
 import play.api.Logger
 
 import scala.collection.mutable
@@ -33,7 +33,7 @@ final class HttpQiitaUserInitialGateway extends QiitaUserInitialGateway {
 
   private def page(initial: Char) = {
     val url      = BaseUrl + initial.toString
-    val response = DispatchAdaptor(url).request()
+    val response = ScalajHttpAdaptor.get(url)
     QiitaUserInitialParser(response).parse
   }
 
