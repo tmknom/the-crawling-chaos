@@ -21,6 +21,7 @@ object Version {
   val SprayJson = "1.3.4"
 
   // 通信関連
+  val ScalajHttp = "2.3.0"
   val DispatchCore = "0.13.2"
   val ScalaScraper = "2.0.0"
 
@@ -64,6 +65,15 @@ object Library {
   // Scala オブジェクトと JSON の相互変換ライブラリ
   // http://arata.hatenadiary.com/entry/2015/02/11/015916
   val SprayJson = "io.spray" %% "spray-json" % Version.SprayJson
+
+  // HTTP 通信用ライブラリ
+  //
+  // dispatch を最初採用していたが、明示的なクローズ処理を書かないと
+  // JVM のプロセスが刺さるという減少に出くわしイマイチなので scalaj-http に切り替えた
+  //
+  // また ws は使わないほうが良いらしい
+  // http://qiita.com/bigwheel/items/44cb874ced4be204c09c
+  val ScalajHttp = "org.scalaj" %% "scalaj-http" % Version.ScalajHttp
 
   // HTTP通信用ライブラリ
   // wsよりコッチを使うほうが推奨されているっぽい
@@ -127,6 +137,7 @@ object Dependencies {
     ScalikejdbcConfig,
     ScalikejdbcPlayInitializer,
     SprayJson,
+    ScalajHttp,
     DispatchCore,
     ScalaScraper,
     LogstashLogbackEncoder,
