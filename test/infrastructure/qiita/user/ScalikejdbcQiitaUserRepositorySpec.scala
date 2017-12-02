@@ -3,9 +3,8 @@ package infrastructure.qiita.user
 import domain.qiita.user.{QiitaUser, QiitaUserId, QiitaUserName}
 import fixture.db.qiita.QiitaUsersTableFixture
 import library.test.db.{DatabaseSpec, FixtureDefinition}
-import org.scalatest.OptionValues
 
-class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec with OptionValues {
+class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec {
   "ScalikejdbcQiitaUserRepository#register" should {
     "登録できること" in { implicit session =>
       val user = QiitaUser(QiitaUserId(100), QiitaUserName("jojo")) // scalastyle:off
