@@ -6,20 +6,20 @@ import com.ninja_squad.dbsetup.operation.Operation
 /**
   * qiita_user_contributions テーブルのフィクスチャ
   */
-object QiitaUserContributionsTableFixture {
+object QiitaUserContributionsFixture {
 
-  val Table = "qiita_user_contributions"
+  private val Table: String = "qiita_user_contributions"
 
-  object Column {
-    val QiitaUserId  = "qiita_user_id"
-    val Contribution = "contribution"
+  private object Column {
+    val QiitaUserId:  String = "qiita_user_id"
+    val Contribution: String = "contribution"
   }
 
   object Default {
-    val QiitaUserId  = QiitaUsersTableFixture.Default.Id
-    val Contribution = "100"
+    val QiitaUserId:  String = QiitaUsersFixture.Default.Id
+    val Contribution: String = "100"
 
-    val One: Operation = {
+    val Fixtures: Operation = {
       Operations
         .insertInto(Table)
         .columns(Column.QiitaUserId, Column.Contribution)

@@ -2,15 +2,15 @@ package infrastructure.qiita.user.contribution
 
 import domain.qiita.user.QiitaUserId
 import domain.qiita.user.contribution.QiitaUserContribution
-import fixture.db.qiita.{QiitaUserContributionsTableFixture, QiitaUsersTableFixture}
+import fixture.db.qiita.{QiitaUserContributionsFixture, QiitaUsersFixture}
 import library.test.{DatabaseSpec, FixtureDefinition}
 
 class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
   "#register" should {
     "登録できること" in { implicit session =>
-      FixtureDefinition.define(QiitaUsersTableFixture.Default.One)
+      FixtureDefinition.define(QiitaUsersFixture.Default.Fixtures)
 
-      val qiitaUserId           = QiitaUserId(QiitaUsersTableFixture.Default.Id.toInt)
+      val qiitaUserId           = QiitaUserId(QiitaUsersFixture.Default.Id.toInt)
       val qiitaUserContribution = QiitaUserContribution(100) // scalastyle:off
 
       val sut = new ScalikejdbcQiitaUserContributionRepository()
@@ -24,16 +24,16 @@ class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
   "#retrieve" should {
     "参照できること" in { implicit session =>
       FixtureDefinition.define(
-        QiitaUsersTableFixture.Default.One,
-        QiitaUserContributionsTableFixture.Default.One
+        QiitaUsersFixture.Default.Fixtures,
+        QiitaUserContributionsFixture.Default.Fixtures
       )
 
       val sut = new ScalikejdbcQiitaUserContributionRepository()
 
-      val qiitaUserId = QiitaUserId(QiitaUsersTableFixture.Default.Id.toInt)
+      val qiitaUserId = QiitaUserId(QiitaUsersFixture.Default.Id.toInt)
       val actual      = sut.retrieve(qiitaUserId)
 
-      val expected = QiitaUserContribution(QiitaUserContributionsTableFixture.Default.Contribution.toInt)
+      val expected = QiitaUserContribution(QiitaUserContributionsFixture.Default.Contribution.toInt)
       actual mustBe expected
     }
   }
