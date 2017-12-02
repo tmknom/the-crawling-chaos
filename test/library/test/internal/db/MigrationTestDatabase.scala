@@ -1,4 +1,4 @@
-package library.test.db.internal
+package library.test.internal.db
 
 import library.flyway.Flyway
 import org.scalatest.TestSuite
@@ -8,7 +8,7 @@ import play.api.{Application, Logger}
 /**
   * テストデータベースのマイグレーション
   */
-private[internal] trait MigrationTestDatabase {
+private[db] trait MigrationTestDatabase {
   // org.scalatestplus.play.BaseOneAppPerTest を参考に実装
   self: TestSuite with FakeApplicationFactory =>
 
@@ -20,7 +20,7 @@ private[internal] trait MigrationTestDatabase {
   MigrationTestDatabase.migrate(fakeApplication())
 }
 
-private[internal] object MigrationTestDatabase {
+private[this] object MigrationTestDatabase {
 
   /**
     * マイグレーション済みかどうかを保持するフラグ
