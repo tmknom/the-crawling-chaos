@@ -29,7 +29,7 @@ object PrivateLibrary {
     Flyway,
     Migration,
     Filter,
-    Errorhandler,
-    Test
+    Errorhandler //,
+    //Test
   )
 }
