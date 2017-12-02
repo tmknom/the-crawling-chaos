@@ -23,7 +23,7 @@ final class ScalikejdbcQiitaUserRankingRepository extends QiitaUserRankingReposi
   }
 
   def retrieveAll()(implicit session: DBSession = AutoSession): Seq[QiitaUserRanking] = {
-    sql"SELECT qu.id, qu.user_name, qur.contribution FROM qiita_user_rankings AS qur INNER JOIN qiita_users AS qu ON qur.user_name = qu.user_name ORDER BY qur.contribution DESC;".map {
+    sql"SELECT qu.id, qu.user_name, qur.contribution FROM qiita_user_rankings AS qur INNER JOIN qiita_users AS qu ON qur.user_name = qu.user_name ORDER BY qur.contribution DESC;".map { // scalastyle:off
       rs =>
         QiitaUserRanking(QiitaUserId(rs.int("id")), QiitaUserName(rs.string("user_name")), QiitaUserContribution(rs.int("contribution")))
     }.list().apply()
