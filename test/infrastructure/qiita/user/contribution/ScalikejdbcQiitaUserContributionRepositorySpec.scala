@@ -4,9 +4,8 @@ import domain.qiita.user.QiitaUserId
 import domain.qiita.user.contribution.QiitaUserContribution
 import fixture.db.qiita.{QiitaUserContributionsTableFixture, QiitaUsersTableFixture}
 import library.test.db.{DatabaseSpec, FixtureDefinition}
-import org.scalatest.OptionValues
 
-class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec with OptionValues {
+class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
   "#register" should {
     "登録できること" in { implicit session =>
       FixtureDefinition.define(QiitaUsersTableFixture.Default.One)
