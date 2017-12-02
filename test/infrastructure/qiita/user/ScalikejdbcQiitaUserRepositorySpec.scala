@@ -1,9 +1,8 @@
 package infrastructure.qiita.user
 
 import com.ninja_squad.dbsetup.Operations
-import com.ninja_squad.dbsetup.bind.DefaultBinderConfiguration
 import domain.qiita.user.{QiitaUser, QiitaUserId, QiitaUserName}
-import library.test.db.DatabaseSpec
+import library.test.db.{DatabaseSpec, FixtureDefinition}
 import org.scalatest.OptionValues
 
 class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec with OptionValues {
@@ -22,9 +21,7 @@ class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec with OptionValues 
 
   "ScalikejdbcQiitaUserRepository#retrieveAll" should {
     "一覧できること" in { implicit session =>
-      val connection = session.connection
-
-      val operations = Operations.sequenceOf(
+      FixtureDefinition.define(
         Operations
           .insertInto("qiita_users")
           .columns("id", "user_name")
@@ -34,10 +31,7 @@ class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec with OptionValues 
           .build()
       )
 
-      connection.setAutoCommit(false)
-      operations.execute(connection, DefaultBinderConfiguration.INSTANCE)
-
-      val sut = new ScalikejdbcQiitaUserRepository()
+      val sut    = new ScalikejdbcQiitaUserRepository()
       val actual = sut.retrieveAll()
 
       actual.size mustBe 3
