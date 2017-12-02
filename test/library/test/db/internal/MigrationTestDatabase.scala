@@ -1,4 +1,4 @@
-package library.test.db
+package library.test.db.internal
 
 import library.flyway.Flyway
 import org.scalatest.TestSuite

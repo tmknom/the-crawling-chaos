@@ -1,4 +1,4 @@
-package library.test.db
+package library.test.db.internal
 
 import org.scalatest.fixture
 import org.scalatestplus.play.FakeApplicationFactory
