@@ -1,6 +1,4 @@
-[![CircleCI](https://circleci.com/gh/tmknom/play-starter.svg?style=svg)](https://circleci.com/gh/tmknom/play-starter)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4a63301e1b2e460492411c8d513c70ab)](https://www.codacy.com/app/tmknom/play-starter)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/4a63301e1b2e460492411c8d513c70ab)](https://www.codacy.com/app/tmknom/play-starter)
+[![CircleCI](https://circleci.com/gh/tmknom/qiita-ranker.svg?style=svg)](https://circleci.com/gh/tmknom/qiita-ranker)
 
 # qiita-ranker
 
