@@ -1,9 +1,12 @@
 package infrastructure.qiita.user
 
+import javax.inject.Singleton
+
 import domain.qiita.user.{QiitaUser, QiitaUserId, QiitaUserName, QiitaUserRepository}
 import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
+@Singleton
 final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
   override def register(qiitaUser: QiitaUser)(implicit session: DBSession = AutoSession): Unit = {
     val userName = qiitaUser.name.value

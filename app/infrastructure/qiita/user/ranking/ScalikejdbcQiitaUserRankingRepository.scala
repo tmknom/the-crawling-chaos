@@ -1,5 +1,7 @@
 package infrastructure.qiita.user.ranking
 
+import javax.inject.Singleton
+
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
 import domain.qiita.user.contribution.QiitaUserContribution
 import domain.qiita.user.ranking.{QiitaUserRanking, QiitaUserRankingRepository}
@@ -8,6 +10,7 @@ import play.api.Logger
 import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
+@Singleton
 final class ScalikejdbcQiitaUserRankingRepository extends QiitaUserRankingRepository {
   override def register(qiitaUserRanking: QiitaUserRanking)(implicit session: DBSession = AutoSession): Unit = {
     val userName     = qiitaUserRanking.name.value
