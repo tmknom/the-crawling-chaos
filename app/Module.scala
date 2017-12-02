@@ -7,6 +7,7 @@ import infrastructure.qiita.initial.{HttpQiitaUserInitialGateway, ScalikejdbcQii
 import infrastructure.qiita.user.contribution.{HttpQiitaUserContributionGateway, ScalikejdbcQiitaUserContributionRepository}
 import infrastructure.qiita.user.ranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
 import infrastructure.qiita.user.{HttpQiitaUserGateway, ScalikejdbcQiitaUserRepository}
+import library.scalaj.{RealScalajHttpAdaptor, ScalajHttpAdaptor}
 
 /**
   * This class is a Guice module that tells Guice how to bind several
@@ -25,6 +26,7 @@ class Module extends AbstractModule {
   }
 
   private def configureInfrastructure(): Unit = {
+    bind(classOf[ScalajHttpAdaptor]).to(classOf[RealScalajHttpAdaptor])
     bind(classOf[QiitaUserInitialRepository]).to(classOf[ScalikejdbcQiitaUserInitialRepository])
     bind(classOf[QiitaUserInitialGateway]).to(classOf[HttpQiitaUserInitialGateway])
     bind(classOf[QiitaUserRepository]).to(classOf[ScalikejdbcQiitaUserRepository])

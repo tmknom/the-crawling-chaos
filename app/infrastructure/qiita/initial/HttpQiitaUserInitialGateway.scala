@@ -1,6 +1,7 @@
 package infrastructure.qiita.initial
 
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 import domain.qiita.initial.{Initial, Page, QiitaUserInitial, QiitaUserInitialGateway}
 import library.scalaj.ScalajHttpAdaptor
@@ -8,7 +9,7 @@ import play.api.Logger
 
 import scala.collection.mutable
 
-final class HttpQiitaUserInitialGateway extends QiitaUserInitialGateway {
+final class HttpQiitaUserInitialGateway @Inject()(scalajHttpAdaptor: ScalajHttpAdaptor) extends QiitaUserInitialGateway {
   private val BaseUrl = "https://qiita.com/users?char="
 
   override def fetch(): Seq[QiitaUserInitial] = {
@@ -33,7 +34,7 @@ final class HttpQiitaUserInitialGateway extends QiitaUserInitialGateway {
 
   private def page(initial: Char) = {
     val url      = BaseUrl + initial.toString
-    val response = ScalajHttpAdaptor.get(url)
+    val response = scalajHttpAdaptor.get(url)
     QiitaUserInitialParser(response).parse
   }
 
