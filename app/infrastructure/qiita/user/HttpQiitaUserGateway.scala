@@ -1,11 +1,13 @@
 package infrastructure.qiita.user
 
+import javax.inject.Inject
+
 import domain.qiita.user.{QiitaUser, QiitaUserGateway}
 import library.scalaj.ScalajHttpAdaptor
 
-final class HttpQiitaUserGateway extends QiitaUserGateway {
+final class HttpQiitaUserGateway @Inject()(scalajHttpAdaptor: ScalajHttpAdaptor) extends QiitaUserGateway {
   override def fetch(url: String): Seq[QiitaUser] = {
-    val response = ScalajHttpAdaptor.get(url)
+    val response = scalajHttpAdaptor.get(url)
     QiitaUserParser(response).parse
   }
 }
