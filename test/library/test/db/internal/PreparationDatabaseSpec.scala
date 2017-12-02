@@ -7,6 +7,6 @@ import scalikejdbc.scalatest.AutoRollback
 /**
   * データベーステストに必要なトレイトを取りまとめるトレイト
   */
-trait PreparationDatabaseSpec extends InitializationConnectionPool with MigrationTestDatabase with AutoRollback {
+private[db] trait PreparationDatabaseSpec extends InitializationConnectionPool with MigrationTestDatabase with AutoRollback {
   this: fixture.TestSuite with FakeApplicationFactory =>
 }
