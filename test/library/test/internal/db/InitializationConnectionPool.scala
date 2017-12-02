@@ -1,6 +1,5 @@
 package library.test.internal.db
 
-import org.scalatest.TestSuite
 import scalikejdbc.ConnectionPool
 import scalikejdbc.config.DBs
 
@@ -8,7 +7,6 @@ import scalikejdbc.config.DBs
   * コネクションプールの初期化
   */
 private[db] trait InitializationConnectionPool {
-  self: TestSuite =>
 
   /**
     * 本トレイトを extends すると Spec テスト実行時に自動的にコネクションプールを初期化させる
