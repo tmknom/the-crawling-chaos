@@ -1,7 +1,7 @@
 package infrastructure.qiita.user
 
-import com.ninja_squad.dbsetup.Operations
 import domain.qiita.user.{QiitaUser, QiitaUserId, QiitaUserName}
+import fixture.db.qiita.QiitaUsersTableFixture
 import library.test.db.{DatabaseSpec, FixtureDefinition}
 import org.scalatest.OptionValues
 
@@ -21,15 +21,7 @@ class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec with OptionValues 
 
   "ScalikejdbcQiitaUserRepository#retrieveAll" should {
     "一覧できること" in { implicit session =>
-      FixtureDefinition.define(
-        Operations
-          .insertInto("qiita_users")
-          .columns("id", "user_name")
-          .values("1", "jojo")
-          .values("2", "dio")
-          .values("3", "kira")
-          .build()
-      )
+      FixtureDefinition.define(QiitaUsersTableFixture.Default.List)
 
       val sut    = new ScalikejdbcQiitaUserRepository()
       val actual = sut.retrieveAll()
