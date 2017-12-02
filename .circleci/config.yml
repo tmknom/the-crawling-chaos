@@ -109,7 +109,7 @@ jobs:
           name: Test
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              cat /dev/null | sbt "project root" coverage test:test coverageReport codacyCoverage;
+              cat /dev/null | sbt "project root" coverage test:test coverageReport;
             else
               cat /dev/null | sbt "project root" test:test;
             fi
