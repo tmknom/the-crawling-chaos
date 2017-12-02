@@ -1,4 +1,4 @@
-package library.test
+package library.test.internal
 
 import org.scalatest.{MustMatchers, OptionValues}
 
@@ -10,4 +10,4 @@ import org.scalatest.{MustMatchers, OptionValues}
   * 独自のテスト基底クラスを実装する場合、本トレイトを extends しておくと、
   * PlaySpec で普段書いているのと同じように、テストを書くことができるようになる。
   */
-trait BasicSpecAggregation extends MustMatchers with OptionValues
+private[test] trait BasicSpecAggregation extends MustMatchers with OptionValues
