@@ -31,6 +31,7 @@ object Version {
 
   // テスト関連
   val MockitoCore = "2.12.0"
+  val DbSetup = "2.1.0"
   val ScalatestplusPlay = "3.1.2"
 
   // 共通ライブラリ関連
@@ -100,6 +101,10 @@ object Library {
   // https://github.com/scalikejdbc/scalikejdbc-cookbook/blob/master/ja/08_unittest.md
   val ScalikejdbcTest = "org.scalikejdbc" %% "scalikejdbc-test" % Version.Scalikejdbc
 
+  // データベース用フィクスチャ定義ライブラリ　
+  // http://dbsetup.ninja-squad.com/
+  val DbSetup = "com.ninja-squad" % "DbSetup" % Version.DbSetup % Test
+
   // xUnit用ライブラリ
   // 共通ライブラリに定義するテスト用の基底クラス・ヘルパー向けに、main側からでも読めるようにする
   val ScalatestplusPlayForMain = "org.scalatestplus.play" %% "scalatestplus-play" % Version.ScalatestplusPlay
@@ -148,6 +153,7 @@ object Dependencies {
   val Test = Seq(
     MockitoCore,
     ScalikejdbcTest,
+    DbSetup,
     ScalatestplusPlay
   )
 
