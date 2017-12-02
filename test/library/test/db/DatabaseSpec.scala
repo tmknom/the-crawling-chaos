@@ -1,7 +1,7 @@
 package library.test.db
 
-import library.test.BasicSpecAggregation
 import library.test.db.internal.PreparationDatabaseSpec
+import library.test.internal.BasicSpecAggregation
 import org.scalatest.fixture
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 
