@@ -3,8 +3,7 @@ package infrastructure.qiita.user.contribution
 import domain.qiita.user.QiitaUserId
 import domain.qiita.user.contribution.QiitaUserContribution
 import fixture.db.qiita.{QiitaUserContributionsTableFixture, QiitaUsersTableFixture}
-import library.test.DatabaseSpec
-import library.test.db.FixtureDefinition
+import library.test.{DatabaseSpec, FixtureDefinition}
 
 class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
   "#register" should {
