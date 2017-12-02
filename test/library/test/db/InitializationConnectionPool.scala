@@ -7,7 +7,7 @@ import scalikejdbc.config.DBs
 /**
   * コネクションプールの初期化
   */
-class InitializationConnectionPool {
+trait InitializationConnectionPool {
   self: TestSuite =>
 
   /**
