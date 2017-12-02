@@ -104,17 +104,12 @@ jobs:
           paths:
             - "/opt/app/project/target"
 
-      # root プロジェクトから共通ライブラリを aggregate 対象から除外したので、明示的にプロジェクトを指定して実行
-      - run:
-          name: Test Library
-          command: cat /dev/null | sbt "project library" test:test
-
       # CI 高速化のため master のみカバレッジを取得
       - run:
           name: Test
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              cat /dev/null | sbt "project root" coverage test:test coverageReport codacyCoverage;
+              cat /dev/null | sbt "project root" coverage test:test coverageReport;
             else
               cat /dev/null | sbt "project root" test:test;
             fi

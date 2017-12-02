@@ -70,30 +70,6 @@ LOAD DATA INFILE '/tmp/qiita_users.csv'
   ESCAPED BY '"';
 ```
 
-## 新しいプロジェクトの始め方
-
-### Codacy
-
-* GitHubとのヒモ付を有効化
-* CircleCIに環境変数にセットするトークンを払い出し
- * CODACY_PROJECT_TOKEN
-
-### CircleCIに設定する
-
-* GitHubとのヒモ付を有効化
-* CircleCIに環境変数追加
- * CACHE_KEY : CircleCIのキャッシュ制御用のキー
- * CODACY_PROJECT_TOKEN : カバレッジ連携用のCodacyのトークン
- * ARTIFACT_REPOSITORY : アーティファクトリポジトリのS3
- * AWS_ACCESS_KEY_ID : AWSのアクセスキー／アーティファクトリポジトリのS3アクセス用
- * AWS_SECRET_KEY : AWSのシークレットキ／アーティファクトリポジトリのS3アクセス用
-
-### 本番の環境変数設定
-
-* APPLICATION_SECRET
-  * sbt playGenerateSecret で生成すると良い
-
-
 ## テスト
 
 ```
@@ -154,3 +130,10 @@ export ARTIFACT_REPOSITORY=xxxx
 export AWS_ACCESS_KEY_ID=xxxx
 export AWS_SECRET_KEY=xxxx
 ```
+
+## Codacyの設定方法
+
+* GitHubとのヒモ付を有効化
+* CircleCIに環境変数にセットするトークンを払い出し
+ * CODACY_PROJECT_TOKEN
+* sbtでテスト実行時にcodacyCoverageも実行させるよう設定
