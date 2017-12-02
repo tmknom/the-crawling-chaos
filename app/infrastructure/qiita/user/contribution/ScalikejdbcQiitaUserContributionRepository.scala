@@ -1,10 +1,13 @@
 package infrastructure.qiita.user.contribution
 
+import javax.inject.Singleton
+
 import domain.qiita.user.QiitaUserId
 import domain.qiita.user.contribution.{QiitaUserContribution, QiitaUserContributionRepository}
 import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
+@Singleton
 final class ScalikejdbcQiitaUserContributionRepository extends QiitaUserContributionRepository {
 
   def register(qiitaUserId: QiitaUserId, qiitaUserContribution: QiitaUserContribution)(implicit session: DBSession = AutoSession): Unit = {
