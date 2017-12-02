@@ -14,4 +14,10 @@ final class ScalikejdbcQiitaUserContributionRepository extends QiitaUserContribu
 
     () // 明示的に Unit を返す
   }
+
+  def retrieve(qiitaUserId: QiitaUserId)(implicit session: DBSession = AutoSession): QiitaUserContribution = {
+    sql"SELECT qiita_user_id, contribution FROM qiita_user_contributions;".map { rs =>
+      QiitaUserContribution(rs.int("contribution"))
+    }.single().apply().getOrElse(throw new RuntimeException(s"Not Found : $qiitaUserId"))
+  }
 }
