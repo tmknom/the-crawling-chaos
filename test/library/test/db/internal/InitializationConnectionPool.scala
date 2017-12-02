@@ -1,4 +1,4 @@
-package library.test.db
+package library.test.db.internal
 
 import org.scalatest.TestSuite
 import scalikejdbc.ConnectionPool
@@ -7,7 +7,7 @@ import scalikejdbc.config.DBs
 /**
   * コネクションプールの初期化
   */
-trait InitializationConnectionPool {
+private[internal] trait InitializationConnectionPool {
   self: TestSuite =>
 
   /**
@@ -18,7 +18,7 @@ trait InitializationConnectionPool {
   InitializationConnectionPool.initialize()
 }
 
-private[test] object InitializationConnectionPool {
+private[internal] object InitializationConnectionPool {
   def initialize(): Unit = {
     if (!ConnectionPool.isInitialized()) {
       DBs.setup()

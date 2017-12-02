@@ -1,5 +1,6 @@
 package library.test.db
 
+import library.test.db.internal.PreparationDatabaseSpec
 import org.scalatest.{fixture, MustMatchers}
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 
