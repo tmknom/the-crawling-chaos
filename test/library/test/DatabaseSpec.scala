@@ -1,4 +1,4 @@
-package library.test.db
+package library.test
 
 import library.test.internal.BasicSpecAggregation
 import library.test.internal.db.PreparationDatabaseSpec
