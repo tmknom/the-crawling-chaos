@@ -1,7 +1,7 @@
 package infrastructure.qiita.user
 
 import domain.qiita.user.{QiitaUser, QiitaUserId, QiitaUserName}
-import fixture.db.qiita.QiitaUsersTableFixture
+import fixture.db.qiita.QiitaUsersFixture
 import library.test.{DatabaseSpec, FixtureDefinition}
 
 class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec {
@@ -20,7 +20,7 @@ class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec {
 
   "ScalikejdbcQiitaUserRepository#retrieveAll" should {
     "一覧できること" in { implicit session =>
-      FixtureDefinition.define(QiitaUsersTableFixture.Default.List)
+      FixtureDefinition.define(QiitaUsersFixture.List.Fixtures)
 
       val sut    = new ScalikejdbcQiitaUserRepository()
       val actual = sut.retrieveAll()
