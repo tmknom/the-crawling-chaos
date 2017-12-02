@@ -104,11 +104,6 @@ jobs:
           paths:
             - "/opt/app/project/target"
 
-      # root プロジェクトから共通ライブラリを aggregate 対象から除外したので、明示的にプロジェクトを指定して実行
-      - run:
-          name: Test Library
-          command: cat /dev/null | sbt "project library" test:test
-
       # CI 高速化のため master のみカバレッジを取得
       - run:
           name: Test
