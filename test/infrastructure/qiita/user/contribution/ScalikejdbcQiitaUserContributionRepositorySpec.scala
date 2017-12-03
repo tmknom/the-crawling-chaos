@@ -5,13 +5,14 @@ import domain.qiita.user.contribution.QiitaUserContribution
 import fixture.db.qiita.{QiitaUserContributionsFixture, QiitaUsersFixture}
 import library.test.{DatabaseSpec, FixtureDefinition}
 
+// scalastyle:off magic.number
 class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
   "#register" should {
     "登録できること" in { implicit session =>
       FixtureDefinition.define(QiitaUsersFixture.Default.Fixtures)
 
       val qiitaUserId           = QiitaUserId(QiitaUsersFixture.Default.Id.toInt)
-      val qiitaUserContribution = QiitaUserContribution(100) // scalastyle:off
+      val qiitaUserContribution = QiitaUserContribution(100)
 
       val sut = new ScalikejdbcQiitaUserContributionRepository()
       sut.register(qiitaUserId, qiitaUserContribution)
