@@ -10,12 +10,10 @@ import scalikejdbc._
 @Singleton
 final class ScalikejdbcQiitaUserContributionRepository extends QiitaUserContributionRepository {
 
-  def register(qiitaUserId: QiitaUserId, qiitaUserContribution: QiitaUserContribution)(implicit session: DBSession = AutoSession): Unit = {
+  def register(qiitaUserId: QiitaUserId, qiitaUserContribution: QiitaUserContribution)(implicit session: DBSession = AutoSession): Int = {
     val id           = qiitaUserId.value
     val contribution = qiitaUserContribution.value
     sql"INSERT INTO qiita_user_contributions (qiita_user_id, contribution) VALUES ($id, $contribution);".update.apply()
-
-    () // 明示的に Unit を返す
   }
 
   def retrieve(qiitaUserId: QiitaUserId)(implicit session: DBSession = AutoSession): QiitaUserContribution = {
