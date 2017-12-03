@@ -5,13 +5,14 @@ import domain.qiita.user.contribution.QiitaUserContribution
 import library.scalaj._
 import org.scalatestplus.play.PlaySpec
 
+// scalastyle:off magic.number
 class HttpQiitaUserContributionGatewaySpec extends PlaySpec {
   "#fetch" should {
     "通信できること" in {
       val sut = new HttpQiitaUserContributionGateway(new MockScalajHttpAdaptor())
 
       val actual = sut.fetch(QiitaUserName("dummy_user"))
-      actual mustBe QiitaUserContribution(1234) // scalastyle:off
+      actual mustBe QiitaUserContribution(1234)
     }
   }
 
