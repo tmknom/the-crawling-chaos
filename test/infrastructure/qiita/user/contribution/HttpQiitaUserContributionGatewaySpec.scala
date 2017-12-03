@@ -7,11 +7,12 @@ import org.scalatestplus.play.PlaySpec
 
 // scalastyle:off magic.number
 class HttpQiitaUserContributionGatewaySpec extends PlaySpec {
+  val sut = new HttpQiitaUserContributionGateway(new MockScalajHttpAdaptor())
+
   "#fetch" should {
     "通信できること" in {
-      val sut = new HttpQiitaUserContributionGateway(new MockScalajHttpAdaptor())
-
       val actual = sut.fetch(QiitaUserName("dummy_user"))
+
       actual mustBe QiitaUserContribution(1234)
     }
   }

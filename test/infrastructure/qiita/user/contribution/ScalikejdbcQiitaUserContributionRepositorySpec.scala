@@ -7,6 +7,8 @@ import library.test.{DatabaseSpec, FixtureDefinition}
 
 // scalastyle:off magic.number
 class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
+  val sut = new ScalikejdbcQiitaUserContributionRepository()
+
   "#register" should {
     "登録できること" in { implicit session =>
       FixtureDefinition.define(QiitaUsersFixture.Default.Fixtures)
@@ -14,7 +16,6 @@ class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
       val qiitaUserId           = QiitaUserId(QiitaUsersFixture.Default.Id.toInt)
       val qiitaUserContribution = QiitaUserContribution(100)
 
-      val sut = new ScalikejdbcQiitaUserContributionRepository()
       sut.register(qiitaUserId, qiitaUserContribution)
 
       val actual = sut.retrieve(qiitaUserId)
@@ -28,8 +29,6 @@ class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
         QiitaUsersFixture.Default.Fixtures,
         QiitaUserContributionsFixture.Default.Fixtures
       )
-
-      val sut = new ScalikejdbcQiitaUserContributionRepository()
 
       val qiitaUserId = QiitaUserId(QiitaUsersFixture.Default.Id.toInt)
       val actual      = sut.retrieve(qiitaUserId)
