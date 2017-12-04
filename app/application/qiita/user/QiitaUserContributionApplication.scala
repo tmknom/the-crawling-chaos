@@ -5,7 +5,7 @@ import javax.inject.{Inject, Singleton}
 import domain.qiita.user.summary.{QiitaUserSummary, QiitaUserSummaryRepository}
 
 @Singleton
-final class QiitaUserContributionApplication @Inject()(
+class QiitaUserContributionApplication @Inject()(
     repository: QiitaUserSummaryRepository
 ) {
   def list(): List[QiitaUserSummary] = {
