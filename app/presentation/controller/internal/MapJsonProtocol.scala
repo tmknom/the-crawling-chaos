@@ -4,6 +4,7 @@ import spray.json._
 
 // scalastyle:off
 // https://tech.mendix.com/scala/runtime/spray-json/2014/09/28/scala-nested-maps-to-json/
+// https://groups.google.com/forum/#!topic/spray-user/zZl_LbH8fN8
 object MapJsonProtocol extends spray.json.DefaultJsonProtocol {
 
   implicit object MapJsonFormat extends JsonFormat[Map[String, Any]] { // 1
