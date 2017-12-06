@@ -3,7 +3,7 @@ package infrastructure.qiita.user.contribution
 import domain.qiita.user.QiitaUserId
 import domain.qiita.user.contribution.QiitaUserContribution
 import fixture.db.qiita.{QiitaUserContributionsFixture, QiitaUsersFixture}
-import library.test.{DatabaseFixture, DatabaseSpec}
+import library.test.db.{DatabaseFixture, DatabaseSpec}
 
 // scalastyle:off magic.number
 class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
