@@ -3,7 +3,7 @@ package infrastructure.qiita.user.contribution
 import domain.qiita.user.QiitaUserId
 import domain.qiita.user.contribution.QiitaUserContribution
 import fixture.db.qiita.{QiitaUserContributionsFixture, QiitaUsersFixture}
-import library.test.{DatabaseSpec, FixtureDefinition}
+import library.test.{DatabaseFixture, DatabaseSpec}
 
 // scalastyle:off magic.number
 class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
@@ -11,7 +11,7 @@ class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
 
   "#register" should {
     "登録できること" in { implicit session =>
-      FixtureDefinition.define(QiitaUsersFixture.Default.Fixtures)
+      DatabaseFixture.setup(QiitaUsersFixture.Default.Fixtures)
 
       val qiitaUserId           = QiitaUserId(QiitaUsersFixture.Default.Id.toInt)
       val qiitaUserContribution = QiitaUserContribution(100)
@@ -25,7 +25,7 @@ class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
 
   "#retrieve" should {
     "参照できること" in { implicit session =>
-      FixtureDefinition.define(
+      DatabaseFixture.setup(
         QiitaUsersFixture.Default.Fixtures,
         QiitaUserContributionsFixture.Default.Fixtures
       )
