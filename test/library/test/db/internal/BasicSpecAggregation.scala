@@ -1,4 +1,4 @@
-package library.test.internal
+package library.test.db.internal
 
 import org.scalatest.{MustMatchers, OptionValues}
 

@@ -1,4 +1,4 @@
-package library.test.internal.db
+package library.test.db.internal
 
 import scalikejdbc.ConnectionPool
 import scalikejdbc.config.DBs
@@ -6,7 +6,7 @@ import scalikejdbc.config.DBs
 /**
   * コネクションプールの初期化
   */
-private[db] trait InitializationConnectionPool {
+private[internal] trait InitializationConnectionPool {
 
   /**
     * 本トレイトを extends すると Spec テスト実行時に自動的にコネクションプールを初期化させる

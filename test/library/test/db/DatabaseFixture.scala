@@ -1,4 +1,4 @@
-package library.test
+package library.test.db
 
 import com.ninja_squad.dbsetup.Operations
 import com.ninja_squad.dbsetup.bind.DefaultBinderConfiguration
