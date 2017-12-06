@@ -21,7 +21,7 @@ class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec {
 
   "ScalikejdbcQiitaUserRepository#retrieveAll" should {
     "一覧できること" in { implicit session =>
-      DatabaseFixture.define(QiitaUsersFixture.List.Fixtures)
+      DatabaseFixture.setup(QiitaUsersFixture.List.Fixtures)
       val actual = sut.retrieveAll()
 
       actual.size mustBe 3

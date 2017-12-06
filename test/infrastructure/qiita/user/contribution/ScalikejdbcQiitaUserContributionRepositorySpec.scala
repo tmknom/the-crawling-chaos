@@ -11,7 +11,7 @@ class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
 
   "#register" should {
     "登録できること" in { implicit session =>
-      DatabaseFixture.define(QiitaUsersFixture.Default.Fixtures)
+      DatabaseFixture.setup(QiitaUsersFixture.Default.Fixtures)
 
       val qiitaUserId           = QiitaUserId(QiitaUsersFixture.Default.Id.toInt)
       val qiitaUserContribution = QiitaUserContribution(100)
@@ -25,7 +25,7 @@ class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
 
   "#retrieve" should {
     "参照できること" in { implicit session =>
-      DatabaseFixture.define(
+      DatabaseFixture.setup(
         QiitaUsersFixture.Default.Fixtures,
         QiitaUserContributionsFixture.Default.Fixtures
       )

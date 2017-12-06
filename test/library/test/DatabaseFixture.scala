@@ -18,7 +18,7 @@ import scalikejdbc.DBSession
   */
 object DatabaseFixture {
   @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter"))
-  def define(operations: Operation*)(implicit session: DBSession): Unit = {
+  def setup(operations: Operation*)(implicit session: DBSession): Unit = {
     val connection = session.connection
     connection.setAutoCommit(false)
 
