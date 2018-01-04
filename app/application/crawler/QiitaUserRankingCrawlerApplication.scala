@@ -12,7 +12,7 @@ final class QiitaUserRankingCrawlerApplication @Inject()(
     repository: QiitaUserRankingRepository
 ) {
 
-  private val SLEEP_TIME_MILLISECONDS = 250.toLong
+  private val SleepTimeMilliseconds = 250.toLong
 
   def crawl(): Unit = {
     (1 to 1184).zipWithIndex.foreach {
@@ -20,7 +20,7 @@ final class QiitaUserRankingCrawlerApplication @Inject()(
         val qiitaUserRankings = gateway.fetch(page)
         qiitaUserRankings.foreach(repository.register)
         Logger.info(s"crawled page ${index + 1}")
-        TimeUnit.MILLISECONDS.sleep(SLEEP_TIME_MILLISECONDS)
+        TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
     }
   }
 
