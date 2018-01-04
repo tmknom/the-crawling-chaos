@@ -1,7 +1,7 @@
 package infrastructure.qiita.user.contribution
 
 import domain.qiita.user.QiitaUserId
-import domain.qiita.user.contribution.QiitaUserContribution
+import domain.qiita.user.contribution.{QiitaUserContribution, UpdatedDateTime}
 import fixture.db.qiita.{QiitaUserContributionsFixture, QiitaUsersFixture}
 import library.test.db.{DatabaseFixture, DatabaseSpec}
 
@@ -16,7 +16,7 @@ class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
       val qiitaUserId           = QiitaUserId(QiitaUsersFixture.Default.Id.toInt)
       val qiitaUserContribution = QiitaUserContribution(100)
 
-      sut.register(qiitaUserId, qiitaUserContribution)
+      sut.register(qiitaUserId, qiitaUserContribution, UpdatedDateTime.now())
 
       val actual = sut.retrieve(qiitaUserId)
       actual mustBe qiitaUserContribution
