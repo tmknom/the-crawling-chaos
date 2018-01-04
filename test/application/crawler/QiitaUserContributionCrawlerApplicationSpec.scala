@@ -19,17 +19,14 @@ class QiitaUserContributionCrawlerApplicationSpec extends PlaySpec with MockitoS
     articlesCount = ArticlesCount(123)
   )
 
-  private val mockQiitaUserRepository                    = mock[QiitaUserRepository]
   private val mockQiitaUserContributionRepository        = mock[QiitaUserContributionRepository]
   private val mockQiitaUserContributionHistoryRepository = mock[QiitaUserContributionHistoryRepository]
   private val mockQiitaUserContributionGateway           = mock[QiitaUserContributionGateway]
 
   before {
-
     when(mockQiitaUserContributionGateway.fetch(any[QiitaUser])).thenReturn(qiitaUserSummary)
     when(mockQiitaUserContributionRepository.register(any[QiitaUserSummary], any[UpdatedDateTime])).thenReturn(1)
     when(mockQiitaUserContributionHistoryRepository.register(any[QiitaUserSummary], any[RegisteredDateTime])).thenReturn(1)
-    when(mockQiitaUserRepository.retrieveAll()).thenReturn(Seq(QiitaUser(qiitaUserSummary.id, qiitaUserSummary.name, RegisteredDateTime.now())))
   }
 
   "QiitaUserContributionCrawlerApplication#crawl" should {
@@ -37,11 +34,10 @@ class QiitaUserContributionCrawlerApplicationSpec extends PlaySpec with MockitoS
       val sut = new QiitaUserContributionCrawlerApplication(
         mockQiitaUserContributionGateway,
         mockQiitaUserContributionRepository,
-        mockQiitaUserContributionHistoryRepository,
-        mockQiitaUserRepository
+        mockQiitaUserContributionHistoryRepository
       )
 
-      sut.crawl()
+      sut.crawl(Seq.empty[QiitaUser])
     }
   }
 }

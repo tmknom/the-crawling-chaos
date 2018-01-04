@@ -4,17 +4,16 @@ import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
 import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserContributionHistoryRepository, QiitaUserContributionRepository, UpdatedDateTime}
-import domain.qiita.user.{QiitaUser, QiitaUserRepository, RegisteredDateTime}
+import domain.qiita.user.{QiitaUser, RegisteredDateTime}
 import play.api.Logger
 
 import scala.collection.mutable
 
 @Singleton
 final class QiitaUserContributionCrawlerApplication @Inject()(
-    gateway:             QiitaUserContributionGateway,
-    repository:          QiitaUserContributionRepository,
-    historyRepository:   QiitaUserContributionHistoryRepository,
-    qiitaUserRepository: QiitaUserRepository
+    gateway:           QiitaUserContributionGateway,
+    repository:        QiitaUserContributionRepository,
+    historyRepository: QiitaUserContributionHistoryRepository
 ) {
 
   private val SleepTimeMilliseconds = 100.toLong
@@ -22,8 +21,7 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
   @SuppressWarnings(Array("org.wartremover.warts.MutableDataStructures"))
   private val errorQiitaUserNames = mutable.ListBuffer.empty[String]
 
-  def crawl(): Unit = {
-    val qiitaUsers: Seq[QiitaUser] = qiitaUserRepository.retrieveAll()
+  def crawl(qiitaUsers: Seq[QiitaUser]): Unit = {
     val qiitaUsersSize = qiitaUsers.zipWithIndex.size
 
     qiitaUsers.zipWithIndex.foreach {
