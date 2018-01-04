@@ -1,7 +1,8 @@
 package infrastructure.qiita.user.contribution
 
-import domain.qiita.user.QiitaUserId
-import domain.qiita.user.contribution.{QiitaUserContribution, UpdatedDateTime}
+import domain.qiita.user.contribution.{ArticlesCount, QiitaUserContribution, UpdatedDateTime}
+import domain.qiita.user.summary.QiitaUserSummary
+import domain.qiita.user.{QiitaUserId, QiitaUserName}
 import fixture.db.qiita.{QiitaUserContributionsFixture, QiitaUsersFixture}
 import library.test.db.{DatabaseFixture, DatabaseSpec}
 
@@ -13,13 +14,17 @@ class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
     "登録できること" in { implicit session =>
       DatabaseFixture.setup(QiitaUsersFixture.Default.Fixtures)
 
-      val qiitaUserId           = QiitaUserId(QiitaUsersFixture.Default.Id.toInt)
-      val qiitaUserContribution = QiitaUserContribution(100)
+      val qiitaUserSummary = QiitaUserSummary(
+        id            = QiitaUserId(QiitaUsersFixture.Default.Id.toInt),
+        name          = QiitaUserName(QiitaUsersFixture.Default.UserName),
+        contribution  = QiitaUserContribution(1234),
+        articlesCount = ArticlesCount(123)
+      )
 
-      sut.register(qiitaUserId, qiitaUserContribution, UpdatedDateTime.now())
+      sut.register(qiitaUserSummary, UpdatedDateTime.now())
 
-      val actual = sut.retrieve(qiitaUserId)
-      actual mustBe qiitaUserContribution
+      val actual = sut.retrieve(qiitaUserSummary.id)
+      actual mustBe qiitaUserSummary.contribution
     }
   }
 

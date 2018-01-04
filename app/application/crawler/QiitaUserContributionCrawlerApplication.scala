@@ -52,7 +52,7 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
     val qiitaUserSummary = gateway.fetch(qiitaUser)
 
     val updatedDateTime = UpdatedDateTime.now()
-    repository.register(qiitaUser.id, qiitaUserSummary.contribution, updatedDateTime)
+    repository.register(qiitaUserSummary, updatedDateTime)
 
     val registeredDateTime = RegisteredDateTime(updatedDateTime.value)
     historyRepository.register(qiitaUser.id, qiitaUserSummary.contribution, registeredDateTime)

@@ -46,7 +46,7 @@ final class QiitaUserRankingContributionCrawlerApplication @Inject()(
   private def crawlOneUser(qiitaUserRanking: QiitaUserRanking, index: Int): Unit = {
     val qiitaUserSummary = gateway.fetch(qiitaUserRanking.toQiitaUser)
     val updatedDateTime  = UpdatedDateTime.now()
-    repository.register(qiitaUserRanking.qiitaUserId, qiitaUserSummary.contribution, updatedDateTime)
+    repository.register(qiitaUserSummary, updatedDateTime)
     Logger.info(s"crawled ${index + 1} : ${qiitaUserRanking.name} : ${qiitaUserSummary.contribution}")
   }
 }

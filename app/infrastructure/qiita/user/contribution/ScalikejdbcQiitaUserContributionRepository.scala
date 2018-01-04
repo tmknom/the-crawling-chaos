@@ -4,6 +4,7 @@ import javax.inject.Singleton
 
 import domain.qiita.user.QiitaUserId
 import domain.qiita.user.contribution.{QiitaUserContribution, QiitaUserContributionRepository, UpdatedDateTime}
+import domain.qiita.user.summary.QiitaUserSummary
 import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
@@ -11,10 +12,9 @@ import scalikejdbc._
 final class ScalikejdbcQiitaUserContributionRepository extends QiitaUserContributionRepository {
 
   // scalastyle:off
-  def register(qiitaUserId: QiitaUserId, qiitaUserContribution: QiitaUserContribution, updatedDateTime: UpdatedDateTime)(implicit session: DBSession =
-                                                                                                                           AutoSession): Int = {
-    val id            = qiitaUserId.value
-    val contribution  = qiitaUserContribution.value
+  def register(qiitaUserSummary: QiitaUserSummary, updatedDateTime: UpdatedDateTime)(implicit session: DBSession = AutoSession): Int = {
+    val id            = qiitaUserSummary.id.value
+    val contribution  = qiitaUserSummary.contribution.value
     val articlesCount = 2 // todo dummy
     val updated       = updatedDateTime.value
     sql"INSERT INTO qiita_user_contributions (qiita_user_id, contribution, articles_count, updated_date_time) VALUES ($id, $contribution, $articlesCount, $updated);".update
