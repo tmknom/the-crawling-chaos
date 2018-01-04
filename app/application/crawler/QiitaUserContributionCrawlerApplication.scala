@@ -55,7 +55,7 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
     repository.register(qiitaUserSummary, updatedDateTime)
 
     val registeredDateTime = RegisteredDateTime(updatedDateTime.value)
-    historyRepository.register(qiitaUser.id, qiitaUserSummary.contribution, registeredDateTime)
+    historyRepository.register(qiitaUserSummary, registeredDateTime)
   }
 
   private def log(qiitaUser: QiitaUser, index: Int, qiitaUsersSize: Int) = {

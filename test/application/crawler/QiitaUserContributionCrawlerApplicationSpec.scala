@@ -28,7 +28,7 @@ class QiitaUserContributionCrawlerApplicationSpec extends PlaySpec with MockitoS
 
     when(mockQiitaUserContributionGateway.fetch(any[QiitaUser])).thenReturn(qiitaUserSummary)
     when(mockQiitaUserContributionRepository.register(any[QiitaUserSummary], any[UpdatedDateTime])).thenReturn(1)
-    when(mockQiitaUserContributionHistoryRepository.register(any[QiitaUserId], any[QiitaUserContribution], any[RegisteredDateTime])).thenReturn(1)
+    when(mockQiitaUserContributionHistoryRepository.register(any[QiitaUserSummary], any[RegisteredDateTime])).thenReturn(1)
     when(mockQiitaUserRepository.retrieveAll()).thenReturn(Seq(QiitaUser(qiitaUserSummary.id, qiitaUserSummary.name, RegisteredDateTime.now())))
   }
 
