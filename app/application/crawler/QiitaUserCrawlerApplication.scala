@@ -13,6 +13,7 @@ final class QiitaUserCrawlerApplication @Inject()(
     repository:                 QiitaUserRepository,
     qiitaUserInitialRepository: QiitaUserInitialRepository
 ) {
+  private val SleepTimeMilliseconds = 100.toLong
 
   def crawl(): Unit = {
     val qiitaUserInitials = qiitaUserInitialRepository.retrieveAll()
@@ -24,7 +25,7 @@ final class QiitaUserCrawlerApplication @Inject()(
         qiitaUserNams.foreach(repository.register(_, registeredDateTime))
 
         Logger.info(s"crawled ${qiitaUserInitial.initial.value} ($currentPage / ${qiitaUserInitial.page.value})")
-        TimeUnit.SECONDS.sleep(1)
+        TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
       }
     }
   }
