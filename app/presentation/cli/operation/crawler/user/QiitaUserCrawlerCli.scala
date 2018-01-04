@@ -1,19 +1,19 @@
-package presentation.cli.operation.crawler
+package presentation.cli.operation.crawler.user
 
-import application.crawler.QiitaUserRankingCrawlerApplication
+import application.crawler.QiitaUserCrawlerApplication
 import library.task.Task
 import play.api.{Application, Logger}
 
 /**
-  * run-main presentation.cli.operation.crawler.QiitaUserRankingCrawlerCli
+  * run-main presentation.cli.operation.crawler.user.QiitaUserCrawlerCli
   */
-object QiitaUserRankingCrawlerCli extends App with Task {
+object QiitaUserCrawlerCli extends App with Task {
   run()
 
   override def task(app: Application): Unit = {
     try {
       Logger.info(s"Started ${this.getClass.getSimpleName}.")
-      app.injector.instanceOf[QiitaUserRankingCrawlerApplication].crawl()
+      app.injector.instanceOf[QiitaUserCrawlerApplication].crawl()
       Logger.info(s"Completed ${this.getClass.getSimpleName}.")
     } catch {
       case e: Exception => Logger.error(s"Failed ${this.getClass.getSimpleName}.", e)
