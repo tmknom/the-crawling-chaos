@@ -1,7 +1,7 @@
 package infrastructure.qiita.user.contribution
 
-import domain.qiita.user.QiitaUserName
 import domain.qiita.user.contribution.QiitaUserContribution
+import domain.qiita.user.{QiitaUser, QiitaUserId, QiitaUserName, RegisteredDateTime}
 import library.scalaj._
 import org.scalatestplus.play.PlaySpec
 
@@ -11,7 +11,8 @@ class HttpQiitaUserContributionGatewaySpec extends PlaySpec {
 
   "#fetch" should {
     "通信できること" in {
-      val actual = sut.fetch(QiitaUserName("dummy_user"))
+      val qiitaUser = QiitaUser(QiitaUserId(1), QiitaUserName("dummy_user"), RegisteredDateTime.now())
+      val actual    = sut.fetch(qiitaUser)
 
       actual mustBe QiitaUserContribution(1234)
     }

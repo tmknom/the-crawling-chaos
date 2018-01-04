@@ -1,7 +1,7 @@
 package domain.qiita.user.contribution
 
-import domain.qiita.user.QiitaUserName
+import domain.qiita.user.QiitaUser
 
 trait QiitaUserContributionGateway {
-  def fetch(qiitaUserName: QiitaUserName): QiitaUserContribution
+  def fetch(qiitaUser: QiitaUser): QiitaUserContribution
 }

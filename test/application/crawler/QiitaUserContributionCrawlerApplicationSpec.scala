@@ -17,7 +17,7 @@ class QiitaUserContributionCrawlerApplicationSpec extends PlaySpec with MockitoS
   private val mockQiitaUserContributionGateway           = mock[QiitaUserContributionGateway]
 
   before {
-    when(mockQiitaUserContributionGateway.fetch(any[QiitaUserName])).thenReturn(QiitaUserContribution(1234))
+    when(mockQiitaUserContributionGateway.fetch(any[QiitaUser])).thenReturn(QiitaUserContribution(1234))
     when(mockQiitaUserContributionRepository.register(any[QiitaUserId], any[QiitaUserContribution], any[UpdatedDateTime])).thenReturn(1)
     when(mockQiitaUserContributionHistoryRepository.register(any[QiitaUserId], any[QiitaUserContribution], any[RegisteredDateTime])).thenReturn(1)
     when(mockQiitaUserRepository.retrieveAll()).thenReturn(Seq(QiitaUser(QiitaUserId(1), QiitaUserName("jojo"), RegisteredDateTime.now())))

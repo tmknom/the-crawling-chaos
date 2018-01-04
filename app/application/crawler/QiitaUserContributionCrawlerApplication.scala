@@ -49,7 +49,7 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
   }
 
   private def crawlOneUser(qiitaUser: QiitaUser): Unit = {
-    val qiitaUserContribution = gateway.fetch(qiitaUser.name)
+    val qiitaUserContribution = gateway.fetch(qiitaUser)
 
     val updatedDateTime = UpdatedDateTime.now()
     repository.register(qiitaUser.id, qiitaUserContribution, updatedDateTime)
