@@ -23,9 +23,13 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
 
   def crawl(): Unit = {
     val qiitaUsers: Seq[QiitaUser] = qiitaUserRepository.retrieveAll()
+    val qiitaUsersSize = qiitaUsers.zipWithIndex.size
+
     qiitaUsers.zipWithIndex.foreach {
       case (qiitaUser, index) =>
         quietlyCrawlOneUser(qiitaUser, index)
+
+        log(qiitaUser, index, qiitaUsersSize)
         TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
     }
     Logger.info(s"crawl error ${errorQiitaUserNames.size.toString} users ( ${errorQiitaUserNames.mkString(",")} )")
@@ -33,7 +37,7 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
 
   private def quietlyCrawlOneUser(qiitaUser: QiitaUser, index: Int): Unit = {
     try {
-      crawlOneUser(qiitaUser, index)
+      crawlOneUser(qiitaUser)
     } catch {
       // 処理を止めてほしくないのでログ吐いて握りつぶす
       case e: Exception => {
@@ -43,9 +47,13 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
     }
   }
 
-  private def crawlOneUser(qiitaUser: QiitaUser, index: Int): Unit = {
+  private def crawlOneUser(qiitaUser: QiitaUser): Unit = {
     val qiitaUserContribution = gateway.fetch(qiitaUser.name)
     repository.register(qiitaUser.id, qiitaUserContribution)
-    Logger.info(s"crawled ${index + 1} : ${qiitaUser.name} : $qiitaUserContribution")
+  }
+
+  private def log(qiitaUser: QiitaUser, index: Int, qiitaUsersSize: Int) = {
+    val progress = (index + 1) / qiitaUsersSize
+    Logger.info(s"crawled ${qiitaUser.name.value} : ${index + 1} / $qiitaUsersSize ($progress%)")
   }
 }
