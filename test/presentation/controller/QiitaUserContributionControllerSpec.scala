@@ -1,7 +1,7 @@
 package presentation.controller
 
 import application.qiita.user.QiitaUserContributionApplication
-import domain.qiita.user.contribution.QiitaUserContribution
+import domain.qiita.user.contribution.{ArticlesCount, QiitaUserContribution}
 import domain.qiita.user.summary.QiitaUserSummary
 import domain.qiita.user.{QiitaUserId, QiitaUserName}
 import org.mockito.Mockito._
@@ -50,7 +50,7 @@ class QiitaUserContributionControllerSpec extends PlaySpec with GuiceOneAppPerSu
 
     def buildQiitaUserContributionApplication(): QiitaUserContributionApplication = {
       val application = mock[QiitaUserContributionApplication]
-      when(application.list()).thenReturn(List(QiitaUserSummary(QiitaUserId(123), QiitaUserName("jojo"), QiitaUserContribution(987))))
+      when(application.list()).thenReturn(List(QiitaUserSummary(QiitaUserId(123), QiitaUserName("jojo"), QiitaUserContribution(987), ArticlesCount(123))))
       application
     }
   }
