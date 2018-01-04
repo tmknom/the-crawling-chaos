@@ -11,7 +11,12 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
   override def register(qiitaUserName: QiitaUserName, registeredDateTime: RegisteredDateTime)(implicit session: DBSession = AutoSession): Unit = {
     val userName   = qiitaUserName.value
     val registered = registeredDateTime.value
-    sql"INSERT INTO qiita_users (user_name, registered_date_time) VALUES ($userName, $registered);".update.apply()
+    sql"""
+          INSERT INTO qiita_users (user_name, registered_date_time)
+          VALUES ($userName, $registered);
+       """
+      .update()
+      .apply()
 
     () // 明示的に Unit を返す
   }
@@ -23,16 +28,24 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
       .apply()
   }
 
-  // scalastyle:off
   def retrieveContributed()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
-    sql"SELECT qu.id, qu.user_name, qu.registered_date_time FROM qiita_users AS qu INNER JOIN qiita_user_contributions AS quc ON qu.id = quc.qiita_user_id WHERE quc.contribution > 0 ORDER BY quc.contribution DESC;"
+    sql"""
+          SELECT qu.id, qu.user_name, qu.registered_date_time FROM qiita_users AS qu
+          INNER JOIN qiita_user_contributions AS quc ON qu.id = quc.qiita_user_id
+          WHERE quc.contribution > 0
+          ORDER BY quc.contribution DESC;
+       """
       .map(toQiitaUser)
       .list()
       .apply()
   }
 
   def retrieveTop1000()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
-    sql"SELECT qu.id, qu.user_name, qu.registered_date_time FROM qiita_users AS qu INNER JOIN qiita_user_contributions AS quc ON qu.id = quc.qiita_user_id ORDER BY quc.contribution DESC LIMIT 10;"
+    sql"""
+          SELECT qu.id, qu.user_name, qu.registered_date_time FROM qiita_users AS qu
+          INNER JOIN qiita_user_contributions AS quc ON qu.id = quc.qiita_user_id
+          ORDER BY quc.contribution DESC LIMIT 1000;
+       """
       .map(toQiitaUser)
       .list()
       .apply()
