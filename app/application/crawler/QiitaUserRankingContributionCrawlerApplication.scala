@@ -3,7 +3,7 @@ package application.crawler
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserContributionRepository}
+import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserContributionRepository, UpdatedDateTime}
 import domain.qiita.user.ranking.{QiitaUserRanking, QiitaUserRankingRepository}
 import play.api.Logger
 
@@ -45,7 +45,8 @@ final class QiitaUserRankingContributionCrawlerApplication @Inject()(
 
   private def crawlOneUser(qiitaUserRanking: QiitaUserRanking, index: Int): Unit = {
     val qiitaUserContribution = gateway.fetch(qiitaUserRanking.name)
-    repository.register(qiitaUserRanking.qiitaUserId, qiitaUserContribution)
+    val updatedDateTime       = UpdatedDateTime.now()
+    repository.register(qiitaUserRanking.qiitaUserId, qiitaUserContribution, updatedDateTime)
     Logger.info(s"crawled ${index + 1} : ${qiitaUserRanking.name} : $qiitaUserContribution")
   }
 }
