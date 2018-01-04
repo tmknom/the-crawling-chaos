@@ -1,11 +1,11 @@
-package presentation.cli.operation.crawler
+package presentation.cli.operation.crawler.ranking
 
 import application.crawler.QiitaUserRankingCrawlerApplication
 import library.task.Task
 import play.api.{Application, Logger}
 
 /**
-  * run-main presentation.cli.operation.crawler.QiitaUserRankingCrawlerCli
+  * run-main presentation.cli.operation.crawler.ranking.QiitaUserRankingCrawlerCli
   */
 object QiitaUserRankingCrawlerCli extends App with Task {
   run()
