@@ -16,7 +16,7 @@ final class QiitaUserRankingContributionCrawlerApplication @Inject()(
     qiitaUserRankingRepository: QiitaUserRankingRepository
 ) {
 
-  private val SLEEP_TIME_MILLISECONDS = 250.toLong
+  private val SleepTimeMilliseconds = 250.toLong
 
   @SuppressWarnings(Array("org.wartremover.warts.MutableDataStructures"))
   private val errorQiitaUserNames = mutable.ListBuffer.empty[String]
@@ -26,7 +26,7 @@ final class QiitaUserRankingContributionCrawlerApplication @Inject()(
     qiitaUserRankings.zipWithIndex.foreach {
       case (qiitaUserRanking, index) =>
         quietlyCrawlOneUser(qiitaUserRanking, index)
-        TimeUnit.MILLISECONDS.sleep(SLEEP_TIME_MILLISECONDS)
+        TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
     }
     Logger.info(s"crawl error ${errorQiitaUserNames.size.toString} users ( ${errorQiitaUserNames.mkString(",")} )")
   }
