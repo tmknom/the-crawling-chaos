@@ -3,8 +3,8 @@ package application.crawler
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserContributionRepository, UpdatedDateTime}
-import domain.qiita.user.{QiitaUser, QiitaUserRepository}
+import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserContributionHistoryRepository, QiitaUserContributionRepository, UpdatedDateTime}
+import domain.qiita.user.{QiitaUser, QiitaUserRepository, RegisteredDateTime}
 import play.api.Logger
 
 import scala.collection.mutable
@@ -13,6 +13,7 @@ import scala.collection.mutable
 final class QiitaUserContributionCrawlerApplication @Inject()(
     gateway:             QiitaUserContributionGateway,
     repository:          QiitaUserContributionRepository,
+    historyRepository:   QiitaUserContributionHistoryRepository,
     qiitaUserRepository: QiitaUserRepository
 ) {
 
@@ -49,8 +50,12 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
 
   private def crawlOneUser(qiitaUser: QiitaUser): Unit = {
     val qiitaUserContribution = gateway.fetch(qiitaUser.name)
-    val updatedDateTime       = UpdatedDateTime.now()
+
+    val updatedDateTime = UpdatedDateTime.now()
     repository.register(qiitaUser.id, qiitaUserContribution, updatedDateTime)
+
+    val registeredDateTime = RegisteredDateTime(updatedDateTime.value)
+    historyRepository.register(qiitaUser.id, qiitaUserContribution, registeredDateTime)
   }
 
   private def log(qiitaUser: QiitaUser, index: Int, qiitaUsersSize: Int) = {
