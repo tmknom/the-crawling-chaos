@@ -12,6 +12,14 @@ final class QiitaUserContributionCrawlerScenario @Inject()(
 ) {
 
   /**
+    * いいねを獲得したことのあるユーザのいいね数をクロール
+    */
+  def crawlContributedUser(): Unit = {
+    val qiitaUsers: Seq[QiitaUser] = qiitaUserRepository.retrieveContributed()
+    qiitaUserContributionCrawlerApplication.crawl(qiitaUsers)
+  }
+
+  /**
     * 全ユーザのいいね数をクロール
     */
   def crawlAllUser(): Unit = {

@@ -17,12 +17,25 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
   }
 
   def retrieveAll()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
-    sql"SELECT id, user_name, registered_date_time FROM qiita_users ORDER BY id ASC;".map { rs =>
-      QiitaUser(
-        QiitaUserId(rs.int("id")),
-        QiitaUserName(rs.string("user_name")),
-        RegisteredDateTime(rs.zonedDateTime("registered_date_time"))
-      )
-    }.list().apply()
+    sql"SELECT id, user_name, registered_date_time FROM qiita_users ORDER BY id ASC;"
+      .map(toQiitaUser)
+      .list()
+      .apply()
+  }
+
+  // scalastyle:off
+  def retrieveContributed()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
+    sql"SELECT qu.id, qu.user_name, qu.registered_date_time FROM qiita_users AS qu INNER JOIN qiita_user_contributions AS quc ON qu.id = quc.qiita_user_id WHERE quc.contribution > 0 ORDER BY quc.contribution DESC;"
+      .map(toQiitaUser)
+      .list()
+      .apply()
+  }
+
+  private def toQiitaUser(rs: WrappedResultSet): QiitaUser = {
+    QiitaUser(
+      QiitaUserId(rs.int("id")),
+      QiitaUserName(rs.string("user_name")),
+      RegisteredDateTime(rs.zonedDateTime("registered_date_time"))
+    )
   }
 }

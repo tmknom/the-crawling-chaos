@@ -17,7 +17,7 @@ final class ScalikejdbcQiitaUserContributionRepository extends QiitaUserContribu
     val contribution  = qiitaUserSummary.contribution.value
     val articlesCount = qiitaUserSummary.articlesCount.value
     val updated       = updatedDateTime.value
-    sql"INSERT INTO qiita_user_contributions (qiita_user_id, contribution, articles_count, updated_date_time) VALUES ($id, $contribution, $articlesCount, $updated);".update
+    sql"INSERT INTO qiita_user_contributions (qiita_user_id, contribution, articles_count, updated_date_time) VALUES ($id, $contribution, $articlesCount, $updated) ON DUPLICATE KEY UPDATE qiita_user_id = VALUES(qiita_user_id), contribution = VALUES(contribution), articles_count = VALUES(articles_count), updated_date_time = VALUES(updated_date_time);".update
       .apply()
   }
 
