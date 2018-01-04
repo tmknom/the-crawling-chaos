@@ -5,6 +5,7 @@ import javax.inject.{Inject, Singleton}
 
 import domain.qiita.initial.QiitaUserInitialRepository
 import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository, RegisteredDateTime}
+import play.api.Logger
 
 @Singleton
 final class QiitaUserCrawlerApplication @Inject()(
@@ -21,6 +22,8 @@ final class QiitaUserCrawlerApplication @Inject()(
         val url                = qiitaUserInitial.usersUrl(currentPage)
         val qiitaUserNams      = gateway.fetch(url)
         qiitaUserNams.foreach(repository.register(_, registeredDateTime))
+
+        Logger.info(s"crawled ${qiitaUserInitial.initial.value} ($currentPage / ${qiitaUserInitial.page.value})")
         TimeUnit.SECONDS.sleep(1)
       }
     }
