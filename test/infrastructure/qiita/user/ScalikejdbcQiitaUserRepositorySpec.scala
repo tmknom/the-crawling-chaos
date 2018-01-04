@@ -1,6 +1,6 @@
 package infrastructure.qiita.user
 
-import domain.qiita.user.{QiitaUser, QiitaUserId, QiitaUserName}
+import domain.qiita.user.{QiitaUserName, RegisteredDateTime}
 import fixture.db.qiita.QiitaUsersFixture
 import library.test.db.{DatabaseFixture, DatabaseSpec}
 
@@ -10,8 +10,7 @@ class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec {
 
   "ScalikejdbcQiitaUserRepository#register" should {
     "登録できること" in { implicit session =>
-      val user = QiitaUser(QiitaUserId(100), QiitaUserName("jojo"))
-      sut.register(user)
+      sut.register(QiitaUserName("jojo"), RegisteredDateTime.now())
 
       val actual = sut.retrieveAll()
       actual.size mustBe 1

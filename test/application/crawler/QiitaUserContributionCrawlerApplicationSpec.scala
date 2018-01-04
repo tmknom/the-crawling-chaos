@@ -1,7 +1,7 @@
 package application.crawler
 
+import domain.qiita.user._
 import domain.qiita.user.contribution.{QiitaUserContribution, QiitaUserContributionGateway, QiitaUserContributionRepository}
-import domain.qiita.user.{QiitaUser, QiitaUserId, QiitaUserName, QiitaUserRepository}
 import org.mockito.ArgumentMatchers._
 import org.mockito.Mockito._
 import org.scalatest.BeforeAndAfter
@@ -18,7 +18,7 @@ class QiitaUserContributionCrawlerApplicationSpec extends PlaySpec with MockitoS
   before {
     when(mockQiitaUserContributionGateway.fetch(any[QiitaUserName])).thenReturn(QiitaUserContribution(1234))
     when(mockQiitaUserContributionRepository.register(any[QiitaUserId], any[QiitaUserContribution])).thenReturn(1)
-    when(mockQiitaUserRepository.retrieveAll()).thenReturn(Seq(QiitaUser(QiitaUserId(1), QiitaUserName("jojo"))))
+    when(mockQiitaUserRepository.retrieveAll()).thenReturn(Seq(QiitaUser(QiitaUserId(1), QiitaUserName("jojo"), RegisteredDateTime.now())))
   }
 
   "QiitaUserContributionCrawlerApplication#crawl" should {

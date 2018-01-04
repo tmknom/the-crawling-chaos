@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
 import domain.qiita.initial.QiitaUserInitialRepository
-import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository}
+import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository, RegisteredDateTime}
 
 @Singleton
 final class QiitaUserCrawlerApplication @Inject()(
@@ -17,9 +17,10 @@ final class QiitaUserCrawlerApplication @Inject()(
     val qiitaUserInitials = qiitaUserInitialRepository.retrieveAll()
     qiitaUserInitials.foreach { qiitaUserInitial =>
       qiitaUserInitial.pageRange.foreach { currentPage =>
-        val url        = qiitaUserInitial.usersUrl(currentPage)
-        val qiitaUsers = gateway.fetch(url)
-        qiitaUsers.foreach(repository.register)
+        val registeredDateTime = RegisteredDateTime.now()
+        val url                = qiitaUserInitial.usersUrl(currentPage)
+        val qiitaUserNams      = gateway.fetch(url)
+        qiitaUserNams.foreach(repository.register(_, registeredDateTime))
         TimeUnit.SECONDS.sleep(1)
       }
     }
