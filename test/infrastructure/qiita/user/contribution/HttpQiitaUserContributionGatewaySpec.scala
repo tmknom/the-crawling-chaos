@@ -1,6 +1,7 @@
 package infrastructure.qiita.user.contribution
 
-import domain.qiita.user.contribution.QiitaUserContribution
+import domain.qiita.user.contribution.{ArticlesCount, QiitaUserContribution}
+import domain.qiita.user.summary.QiitaUserSummary
 import domain.qiita.user.{QiitaUser, QiitaUserId, QiitaUserName, RegisteredDateTime}
 import library.scalaj._
 import org.scalatestplus.play.PlaySpec
@@ -14,7 +15,13 @@ class HttpQiitaUserContributionGatewaySpec extends PlaySpec {
       val qiitaUser = QiitaUser(QiitaUserId(1), QiitaUserName("dummy_user"), RegisteredDateTime.now())
       val actual    = sut.fetch(qiitaUser)
 
-      actual mustBe QiitaUserContribution(1234)
+      val expected = QiitaUserSummary(
+        id            = qiitaUser.id,
+        name          = qiitaUser.name,
+        contribution  = QiitaUserContribution(1234),
+        articlesCount = ArticlesCount(98)
+      )
+      actual mustBe expected
     }
   }
 
