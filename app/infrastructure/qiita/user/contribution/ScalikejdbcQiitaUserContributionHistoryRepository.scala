@@ -15,9 +15,10 @@ final class ScalikejdbcQiitaUserContributionHistoryRepository extends QiitaUserC
   def register(qiitaUserSummary: QiitaUserSummary, registeredDateTime: RegisteredDateTime)(implicit session: DBSession = AutoSession): Int = {
     val id             = qiitaUserSummary.id.value
     val contribution   = qiitaUserSummary.contribution.value
+    val articlesCount  = qiitaUserSummary.articlesCount.value
     val registeredDate = registeredDateTime.toLocalDate
     val registered     = registeredDateTime.value
-    sql"INSERT INTO qiita_user_contribution_histories (qiita_user_id, contribution, registered_date, registered_date_time) VALUES ($id, $contribution, $registeredDate, $registered);".update
+    sql"INSERT INTO qiita_user_contribution_histories (qiita_user_id, contribution, articles_count, registered_date, registered_date_time) VALUES ($id, $contribution, $articlesCount, $registeredDate, $registered);".update
       .apply()
   }
 }

@@ -15,7 +15,7 @@ final class ScalikejdbcQiitaUserContributionRepository extends QiitaUserContribu
   def register(qiitaUserSummary: QiitaUserSummary, updatedDateTime: UpdatedDateTime)(implicit session: DBSession = AutoSession): Int = {
     val id            = qiitaUserSummary.id.value
     val contribution  = qiitaUserSummary.contribution.value
-    val articlesCount = 2 // todo dummy
+    val articlesCount = qiitaUserSummary.articlesCount.value
     val updated       = updatedDateTime.value
     sql"INSERT INTO qiita_user_contributions (qiita_user_id, contribution, articles_count, updated_date_time) VALUES ($id, $contribution, $articlesCount, $updated);".update
       .apply()
