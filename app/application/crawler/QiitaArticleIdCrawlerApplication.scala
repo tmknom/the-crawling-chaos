@@ -4,12 +4,12 @@ import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
 import domain.qiita.article.page.QiitaArticlePage
-import domain.qiita.article.{QiitaArticleIdRepository, QiitaArticleListGateway, QiitaItemId}
+import domain.qiita.article.{QiitaArticleIdGateway, QiitaArticleIdRepository, QiitaItemId}
 import play.api.Logger
 
 @Singleton
 final class QiitaArticleIdCrawlerApplication @Inject()(
-    qiitaArticleListGateway: QiitaArticleListGateway,
+    qiitaArticleListGateway: QiitaArticleIdGateway,
     repository:              QiitaArticleIdRepository
 ) {
   private val SleepTimeMilliseconds = 100.toLong

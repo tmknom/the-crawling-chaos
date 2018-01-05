@@ -1,16 +1,11 @@
 import com.google.inject.AbstractModule
-import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdRepository, QiitaArticleListGateway, QiitaArticleRepository}
+import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdGateway, QiitaArticleIdRepository, QiitaArticleRepository}
 import domain.qiita.initial.{QiitaUserInitialGateway, QiitaUserInitialRepository}
 import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserContributionHistoryRepository, QiitaUserContributionRepository}
 import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 import domain.qiita.user.summary.QiitaUserSummaryRepository
 import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository}
-import infrastructure.qiita.article.{
-  HttpQiitaArticleGateway,
-  HttpQiitaArticleListGateway,
-  ScalikejdbcQiitaArticleIdRepository,
-  ScalikejdbcQiitaArticleRepository
-}
+import infrastructure.qiita.article.{HttpQiitaArticleGateway, HttpQiitaArticleIdGateway, ScalikejdbcQiitaArticleIdRepository, ScalikejdbcQiitaArticleRepository}
 import infrastructure.qiita.initial.{HttpQiitaUserInitialGateway, ScalikejdbcQiitaUserInitialRepository}
 import infrastructure.qiita.user.contribution._
 import infrastructure.qiita.user.ranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
@@ -46,7 +41,7 @@ class Module extends AbstractModule {
     bind(classOf[QiitaUserContributionHistoryRepository]).to(classOf[ScalikejdbcQiitaUserContributionHistoryRepository])
     bind(classOf[QiitaUserContributionGateway]).to(classOf[HttpQiitaUserContributionGateway])
     bind(classOf[QiitaUserSummaryRepository]).to(classOf[ScalikejdbcQiitaUserSummaryRepository])
-    bind(classOf[QiitaArticleListGateway]).to(classOf[HttpQiitaArticleListGateway])
+    bind(classOf[QiitaArticleIdGateway]).to(classOf[HttpQiitaArticleIdGateway])
     bind(classOf[QiitaArticleGateway]).to(classOf[HttpQiitaArticleGateway])
     bind(classOf[QiitaArticleIdRepository]).to(classOf[ScalikejdbcQiitaArticleIdRepository])
     bind(classOf[QiitaArticleRepository]).to(classOf[ScalikejdbcQiitaArticleRepository])

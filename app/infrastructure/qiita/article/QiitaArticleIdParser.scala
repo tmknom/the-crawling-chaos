@@ -5,7 +5,7 @@ import net.ruippeixotog.scalascraper.browser.JsoupBrowser
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
 import net.ruippeixotog.scalascraper.dsl.DSL._
 
-private[article] final case class QiitaArticleListParser(html: String) {
+private[article] final case class QiitaArticleIdParser(html: String) {
   private val PrefixUrl = "https://qiita.com"
 
   private val UndefinedQiitaArticleId = QiitaArticleId(-1)
