@@ -1,5 +1,5 @@
 package domain.qiita.article
 
-trait QiitaArticleGateway {
+trait QiitaArticleListGateway {
   def fetch(pageNumber: Int): List[QiitaArticle]
 }
