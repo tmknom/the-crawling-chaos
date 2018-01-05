@@ -22,7 +22,12 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
   }
 
   def retrieveAll()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
-    sql"SELECT id, user_name, registered_date_time FROM qiita_users ORDER BY id ASC;"
+    sql"""
+          SELECT id, user_name, registered_date_time FROM qiita_users AS qu
+          WHERE NOT EXISTS
+          (SELECT 1 FROM qiita_user_contributions AS quc WHERE qu.id = quc.qiita_user_id)
+          ORDER BY id ASC;
+       """
       .map(toQiitaUser)
       .list()
       .apply()
