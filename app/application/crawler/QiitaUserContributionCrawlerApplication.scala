@@ -6,6 +6,7 @@ import javax.inject.{Inject, Singleton}
 import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserContributionHistoryRepository, QiitaUserContributionRepository, UpdatedDateTime}
 import domain.qiita.user.{QiitaUser, RegisteredDateTime}
 import play.api.Logger
+import scalikejdbc.DB
 
 import scala.collection.mutable
 
@@ -49,11 +50,13 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
   private def crawlOneUser(qiitaUser: QiitaUser): Unit = {
     val qiitaUserSummary = gateway.fetch(qiitaUser)
 
-    val updatedDateTime = UpdatedDateTime.now()
-    repository.register(qiitaUserSummary, updatedDateTime)
-
+    val updatedDateTime    = UpdatedDateTime.now()
     val registeredDateTime = RegisteredDateTime(updatedDateTime.value)
-    historyRepository.register(qiitaUserSummary, registeredDateTime)
+
+    DB.localTx { implicit session =>
+      repository.register(qiitaUserSummary, updatedDateTime)
+      historyRepository.register(qiitaUserSummary, registeredDateTime)
+    }
   }
 
   private def log(qiitaUser: QiitaUser, index: Int, qiitaUsersSize: Int) = {
