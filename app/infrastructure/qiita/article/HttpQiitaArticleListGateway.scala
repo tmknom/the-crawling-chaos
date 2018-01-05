@@ -11,6 +11,6 @@ final class HttpQiitaArticleListGateway @Inject()(scalajHttpAdaptor: ScalajHttpA
 
   override def fetch(pageNumber: Int): List[QiitaArticle] = {
     val response = scalajHttpAdaptor.get(BaseUrl + pageNumber.toString)
-    QiitaArticleParser(response).parse
+    QiitaArticleListParser(response).parse
   }
 }
