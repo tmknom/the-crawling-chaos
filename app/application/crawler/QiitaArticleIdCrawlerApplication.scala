@@ -9,8 +9,8 @@ import play.api.Logger
 
 @Singleton
 final class QiitaArticleIdCrawlerApplication @Inject()(
-    qiitaArticleListGateway: QiitaArticleIdGateway,
-    repository:              QiitaArticleIdRepository
+    gateway:    QiitaArticleIdGateway,
+    repository: QiitaArticleIdRepository
 ) {
   private val SleepTimeMilliseconds = 100.toLong
 
@@ -23,8 +23,10 @@ final class QiitaArticleIdCrawlerApplication @Inject()(
 
   private def quietlyCrawl(currentPage: Int): Unit = {
     try {
-      val articles = qiitaArticleListGateway.fetch(currentPage)
-      articles.foreach(article => quietlyRegister(article.itemId))
+      val qiitaItemIds = gateway.fetch(currentPage)
+      qiitaItemIds.foreach { qiitaItemId =>
+        quietlyRegister(qiitaItemId)
+      }
       Logger.info(s"crawled $currentPage / ${QiitaArticlePage.PageMax}")
     } catch {
       case e: Exception =>
