@@ -20,4 +20,18 @@ final class ScalikejdbcQiitaArticleIdRepository extends QiitaArticleIdRepository
 
     () // 明示的に Unit を返す
   }
+
+  override def retrieveAll()(implicit session: DBSession = AutoSession): List[QiitaItemId] = {
+    sql"""
+          SELECT item_id FROM qiita_article_ids
+          ORDER BY id DESC;
+       """
+      .map(toQiitaItemId)
+      .list()
+      .apply()
+  }
+
+  private def toQiitaItemId(rs: WrappedResultSet): QiitaItemId = {
+    QiitaItemId(rs.string("item_id"))
+  }
 }

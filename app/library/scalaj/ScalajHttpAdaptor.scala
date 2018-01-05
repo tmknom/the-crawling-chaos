@@ -1,6 +1,6 @@
 package library.scalaj
 
-import scalaj.http.{Http, HttpRequest, HttpResponse}
+import scalaj.http.{Http, HttpOptions, HttpRequest, HttpResponse}
 
 @SuppressWarnings(Array("org.wartremover.warts.DefaultArguments"))
 trait ScalajHttpAdaptor {
@@ -29,6 +29,7 @@ final class RealScalajHttpAdaptor extends ScalajHttpAdaptor {
       .params(httpParams.toMap)
       .headers(headers.toMap)
       .timeout(timeout.connectionTimeoutMs, timeout.readTimeoutMs)
+      .option(HttpOptions.followRedirects(true))
   }
 
   private def requestAndLog(httpRequest: HttpRequest): HttpResponse[String] = {

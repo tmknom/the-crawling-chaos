@@ -4,4 +4,8 @@ final case class QiitaItemId(value: String) {
   def apiUrl: String = {
     s"https://qiita.com/api/v2/items/$value"
   }
+
+  def url: String = {
+    s"https://qiita.com/items/$value"
+  }
 }
