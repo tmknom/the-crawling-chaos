@@ -3,31 +3,27 @@ package application.crawler
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
+import domain.qiita.article.page.QiitaArticlePage
+import domain.qiita.article.{QiitaArticleGateway, QiitaArticleRepository}
 import play.api.Logger
 
 @Singleton
 final class QiitaArticleCrawlerApplication @Inject()(
-                                                    ) {
-
-  private val PageMax = 15000
-  private val PageMin = 1
-
+    gateway:    QiitaArticleGateway,
+    repository: QiitaArticleRepository
+) {
   private val SleepTimeMilliseconds = 100.toLong
 
   def crawl(): Unit = {
-    pageRange.foreach { currentPage =>
-      // ページを取得してパース
-      val articles = List.empty[AnyVal]
-      // 記事の集合をそれぞれ保存
+    QiitaArticlePage.range.foreach { currentPage =>
+      val articles = gateway.fetch(currentPage)
       articles.foreach { article =>
-
+        repository.register(article)
       }
-      Logger.info(s"crawled $currentPage / $PageMax")
+
+      Logger.info(s"crawled $currentPage / ${QiitaArticlePage.PageMax}")
       TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
     }
   }
 
-  private def pageRange: Range = {
-    PageMin to PageMax
-  }
 }
