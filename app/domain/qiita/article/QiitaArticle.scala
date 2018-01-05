@@ -8,5 +8,5 @@ final case class QiitaArticle(
     title:          QiitaArticleTitle,
     url:            QiitaArticleUrl,
     postedDateTime: QiitaArticlePostedDateTime,
-    userName:       QiitaUserName
+    postedUserName: QiitaUserName
 ) {}

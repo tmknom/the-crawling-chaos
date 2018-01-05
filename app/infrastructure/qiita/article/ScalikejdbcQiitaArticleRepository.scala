@@ -12,7 +12,7 @@ final class ScalikejdbcQiitaArticleRepository extends QiitaArticleRepository {
     val itemId         = qiitaArticle.itemId.value
     val title          = qiitaArticle.title.value
     val url            = qiitaArticle.url.value
-    val postedUserName = qiitaArticle.userName.value
+    val postedUserName = qiitaArticle.postedUserName.value
     val postedDateTime = qiitaArticle.postedDateTime.value
 
     sql"""

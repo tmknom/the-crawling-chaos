@@ -28,7 +28,7 @@ private[article] final case class QiitaArticleParser(html: String) {
       title          = QiitaArticleTitle(parse[String](jsonMap, "title")),
       url            = QiitaArticleUrl(parse[String](jsonMap, "showUrl")),
       postedDateTime = QiitaArticlePostedDateTime(dateTime),
-      userName       = QiitaUserName(parse[String](author, "urlName"))
+      postedUserName = QiitaUserName(parse[String](author, "urlName"))
     )
   }
 
