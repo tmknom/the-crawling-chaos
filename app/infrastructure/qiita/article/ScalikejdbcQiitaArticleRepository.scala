@@ -3,7 +3,6 @@ package infrastructure.qiita.article
 import javax.inject.Singleton
 
 import domain.qiita.article.{QiitaArticle, QiitaArticleRepository}
-import library.datetime.DateTimeProvider
 import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
@@ -13,12 +12,12 @@ final class ScalikejdbcQiitaArticleRepository extends QiitaArticleRepository {
     val itemId         = qiitaArticle.itemId.value
     val title          = qiitaArticle.title.value
     val url            = qiitaArticle.url.value
-    val qiitaUserId    = 1 // TODO 正しい値を入れること！
-    val postedDateTime = DateTimeProvider.nowJST() // TODO 正しい値を入れること！
+    val postedUserName = qiitaArticle.userName.value
+    val postedDateTime = qiitaArticle.postedDateTime.value
 
     sql"""
-          INSERT INTO qiita_articles (item_id, title, url, qiita_user_id, posted_date_time)
-          VALUES ($itemId, $title, $url, $qiitaUserId, $postedDateTime);
+          INSERT INTO qiita_articles (item_id, title, url, posted_user_name, posted_date_time)
+          VALUES ($itemId, $title, $url, $postedUserName, $postedDateTime);
        """
       .update()
       .apply()
