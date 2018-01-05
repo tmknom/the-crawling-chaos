@@ -46,6 +46,12 @@ run-main presentation.cli.operation.crawler.QiitaUserRankingCrawlerCli
 run-main presentation.cli.operation.crawler.QiitaUserRankingContributionCrawlerCli
 ```
 
+## デプロイ
+
+```
+./deploy.sh
+```
+
 ## チートシート
 
 ### テーブルのエクスポート
