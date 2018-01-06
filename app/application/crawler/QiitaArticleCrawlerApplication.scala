@@ -3,6 +3,7 @@ package application.crawler
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
+import domain.qiita.article.json.QiitaRawArticleJsonRepository
 import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdRepository, QiitaArticleRepository, QiitaItemId}
 import play.api.Logger
 
@@ -10,6 +11,7 @@ import play.api.Logger
 final class QiitaArticleCrawlerApplication @Inject()(
     gateway:                  QiitaArticleGateway,
     repository:               QiitaArticleRepository,
+    rawJsonRepository:        QiitaRawArticleJsonRepository,
     qiitaArticleIdRepository: QiitaArticleIdRepository
 ) {
   private val SleepTimeMilliseconds = 100.toLong
@@ -25,8 +27,9 @@ final class QiitaArticleCrawlerApplication @Inject()(
 
   private def quietlyCrawl(qiitaItemId: QiitaItemId, index: Int, qiitaItemIdsCount: Int): Unit = {
     try {
-      val qiitaArticle = gateway.fetch(qiitaItemId)
+      val (qiitaArticle, rawArticleJson) = gateway.fetch(qiitaItemId)
       repository.register(qiitaArticle)
+      rawJsonRepository.register(qiitaArticle.itemId, rawArticleJson)
       log(qiitaItemId, index, qiitaItemIdsCount)
     } catch {
       case e: Exception =>
