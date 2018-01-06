@@ -7,6 +7,5 @@ final case class QiitaArticleContribution(
     likesCount:    LikesCount,
     commentsCount: CommentsCount,
     hatenaCount:   HatenaCount,
-    facebookCount: FacebookCount,
-    pocketCount:   PocketCount
+    facebookCount: FacebookCount
 )
