@@ -3,6 +3,7 @@ package infrastructure.qiita.article
 import java.time.{Instant, ZoneId, ZonedDateTime}
 
 import domain.qiita.article._
+import domain.qiita.article.json.RawArticleJson
 import domain.qiita.user.QiitaUserName
 import net.ruippeixotog.scalascraper.browser.JsoupBrowser
 import net.ruippeixotog.scalascraper.dsl.DSL._
@@ -13,15 +14,16 @@ import spray.json._
 private[article] final case class QiitaArticleParser(html: String) {
   private val UndefinedQiitaArticleId = QiitaArticleId(-1)
 
-  def parse: QiitaArticle = {
-    val jsonMap = parseHtml(html)
-    toQiitaArticle(jsonMap)
+  def parse: (QiitaArticle, RawArticleJson) = {
+    val rawArticleJson = parseHtml(html)
+    val qiitaArticle   = toQiitaArticle(rawArticleJson.toJsonMap)
+    (qiitaArticle, rawArticleJson)
   }
 
-  private def parseHtml(html: String): Map[String, JsValue] = {
+  private def parseHtml(html: String): RawArticleJson = {
     val doc  = JsoupBrowser().parseString(html)
     val json = doc >> element("#main article .p-items_article") >> attr("data-article-props")
-    JsonParser(json).asJsObject.fields
+    RawArticleJson(json)
   }
 
   private def toQiitaArticle(jsonMap: Map[String, JsValue]): QiitaArticle = {
