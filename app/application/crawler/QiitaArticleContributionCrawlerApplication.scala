@@ -13,6 +13,7 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
     repository:             QiitaArticleContributionRepository,
     hatenaGateway:          HatenaGateway,
     facebookGateway:        FacebookGateway,
+    pocketGateway:          PocketGateway,
     qiitaArticleRepository: QiitaArticleRepository,
     rawJsonRepository:      QiitaRawArticleJsonRepository
 ) {
@@ -34,12 +35,14 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
 
       val hatenaCount   = hatenaGateway.fetch(qiitaArticleUrl)
       val facebookCount = facebookGateway.fetch(qiitaArticleUrl)
+      val pocketCount   = pocketGateway.fetch(qiitaArticleUrl)
 
       val qiitaArticleContribution = QiitaArticleContribution(
         rawArticleJson.toLikesCount,
         rawArticleJson.toCommentsCount,
         hatenaCount,
-        facebookCount
+        facebookCount,
+        pocketCount
       )
       repository.register(qiitaArticle.id, qiitaArticleContribution)
       log(qiitaItemId, index, itemsCount)
