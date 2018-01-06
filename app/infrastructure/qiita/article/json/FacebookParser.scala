@@ -1,13 +1,21 @@
 package infrastructure.qiita.article.json
 
 import domain.qiita.article.contribution.FacebookCount
-import spray.json.DefaultJsonProtocol._
-import spray.json._
+import net.ruippeixotog.scalascraper.browser.JsoupBrowser
+import net.ruippeixotog.scalascraper.dsl.DSL._
+import net.ruippeixotog.scalascraper.scraper.ContentExtractors._
 
-private[json] final case class FacebookParser(json: String) {
+private[json] final case class FacebookParser(html: String) {
   def parse: FacebookCount = {
-    val share         = JsonParser(json).asJsObject.getFields("share").head
-    val facebookCount = share.asJsObject.getFields("share_count").head.convertTo[Int]
+    val doc = JsoupBrowser().parseString(html)
+    val raw = doc >> text("td._2pir #u_0_3 span")
+
+    val pattern = "([0-9]+).*".r
+    val facebookCount = raw match {
+      case pattern(v) => v.toString.toInt
+      case _          => 0
+    }
+
     FacebookCount(facebookCount)
   }
 }

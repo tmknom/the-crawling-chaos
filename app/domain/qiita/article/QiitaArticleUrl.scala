@@ -6,6 +6,6 @@ final case class QiitaArticleUrl(value: String) {
   }
 
   def facebookApiUrl: String = {
-    s"http://graph.facebook.com/?id=$value"
+    s"https://www.facebook.com/plugins/like.php?href=$value"
   }
 }
