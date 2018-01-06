@@ -14,25 +14,32 @@ private[article] final case class QiitaArticleParser(html: String) {
   private val UndefinedQiitaArticleId = QiitaArticleId(-1)
 
   def parse: QiitaArticle = {
+    val jsonMap = parseHtml(html)
+    toQiitaArticle(jsonMap)
+  }
+
+  private def parseHtml(html: String): Map[String, JsValue] = {
     val doc  = JsoupBrowser().parseString(html)
     val json = doc >> element("#main article .p-items_article") >> attr("data-article-props")
+    JsonParser(json).asJsObject.fields
+  }
 
-    val jsonMap  = JsonParser(json).asJsObject.fields
-    val instant  = Instant.ofEpochSecond(parse[Int](jsonMap, "createdAtInUnixtime"))
+  private def toQiitaArticle(jsonMap: Map[String, JsValue]): QiitaArticle = {
+    val instant  = Instant.ofEpochSecond(parseJson[Int](jsonMap, "createdAtInUnixtime"))
     val dateTime = ZonedDateTime.ofInstant(instant, ZoneId.of("Asia/Tokyo"))
-    val author   = parse[Map[String, JsValue]](jsonMap, "author")
+    val author   = parseJson[Map[String, JsValue]](jsonMap, "author")
 
     QiitaArticle(
       id             = UndefinedQiitaArticleId,
-      itemId         = QiitaItemId(parse[String](jsonMap, "uuid")),
-      title          = QiitaArticleTitle(parse[String](jsonMap, "title")),
-      url            = QiitaArticleUrl(parse[String](jsonMap, "showUrl")),
+      itemId         = QiitaItemId(parseJson[String](jsonMap, "uuid")),
+      title          = QiitaArticleTitle(parseJson[String](jsonMap, "title")),
+      url            = QiitaArticleUrl(parseJson[String](jsonMap, "showUrl")),
       postedDateTime = QiitaArticlePostedDateTime(dateTime),
-      postedUserName = QiitaUserName(parse[String](author, "urlName"))
+      postedUserName = QiitaUserName(parseJson[String](author, "urlName"))
     )
   }
 
-  private def parse[T: JsonReader](jsonMap: Map[String, JsValue], keyName: String): T = {
+  private def parseJson[T: JsonReader](jsonMap: Map[String, JsValue], keyName: String): T = {
     jsonMap.get(keyName) match {
       case Some(value) => value.convertTo[T]
       case None        => throw new RuntimeException(s"Not found $keyName.")
