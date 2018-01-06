@@ -1,5 +1,5 @@
 import com.google.inject.AbstractModule
-import domain.qiita.article.contribution.{FacebookGateway, HatenaGateway, QiitaArticleContributionRepository}
+import domain.qiita.article.contribution.{FacebookGateway, HatenaGateway, PocketGateway, QiitaArticleContributionRepository}
 import domain.qiita.article.json.QiitaRawArticleJsonRepository
 import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdGateway, QiitaArticleIdRepository, QiitaArticleRepository}
 import domain.qiita.initial.{QiitaUserInitialGateway, QiitaUserInitialRepository}
@@ -8,7 +8,7 @@ import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepos
 import domain.qiita.user.summary.QiitaUserSummaryRepository
 import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository}
 import infrastructure.qiita.article.contribution.ScalikejdbcQiitaArticleContributionRepository
-import infrastructure.qiita.article.json.{HttpFacebookGateway, HttpHatenaGateway, ScalikejdbcQiitaRawArticleJsonRepository}
+import infrastructure.qiita.article.json.{HttpFacebookGateway, HttpHatenaGateway, HttpPocketGateway, ScalikejdbcQiitaRawArticleJsonRepository}
 import infrastructure.qiita.article.{HttpQiitaArticleGateway, HttpQiitaArticleIdGateway, ScalikejdbcQiitaArticleIdRepository, ScalikejdbcQiitaArticleRepository}
 import infrastructure.qiita.initial.{HttpQiitaUserInitialGateway, ScalikejdbcQiitaUserInitialRepository}
 import infrastructure.qiita.user.contribution._
@@ -52,6 +52,7 @@ class Module extends AbstractModule {
     bind(classOf[QiitaRawArticleJsonRepository]).to(classOf[ScalikejdbcQiitaRawArticleJsonRepository])
     bind(classOf[HatenaGateway]).to(classOf[HttpHatenaGateway])
     bind(classOf[FacebookGateway]).to(classOf[HttpFacebookGateway])
+    bind(classOf[PocketGateway]).to(classOf[HttpPocketGateway])
     bind(classOf[QiitaArticleContributionRepository]).to(classOf[ScalikejdbcQiitaArticleContributionRepository])
 
     () // 明示的に Unit を返す
