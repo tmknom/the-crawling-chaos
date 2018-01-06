@@ -15,8 +15,7 @@ final class ScalikejdbcQiitaArticleContributionRepository extends QiitaArticleCo
     val commentsCount = qiitaArticleContribution.commentsCount.value
     val hatenaCount   = qiitaArticleContribution.hatenaCount.value
     val facebookCount = qiitaArticleContribution.facebookCount.value
-    // TODO 正しい値を入れる
-    val pocketCount = 0
+    val pocketCount   = qiitaArticleContribution.pocketCount.value
 
     sql"""
           INSERT INTO qiita_article_contributions (qiita_article_id, likes_count, comments_count, hatena_count, facebook_count, pocket_count)
