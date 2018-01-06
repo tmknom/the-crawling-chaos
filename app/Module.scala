@@ -5,6 +5,7 @@ import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdGateway, QiitaAr
 import domain.qiita.initial.{QiitaUserInitialGateway, QiitaUserInitialRepository}
 import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserContributionHistoryRepository, QiitaUserContributionRepository}
 import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
+import domain.qiita.user.recently.RecentlyQiitaUserGateway
 import domain.qiita.user.summary.QiitaUserSummaryRepository
 import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository}
 import infrastructure.qiita.article.contribution.ScalikejdbcQiitaArticleContributionRepository
@@ -13,6 +14,7 @@ import infrastructure.qiita.article.{HttpQiitaArticleGateway, HttpQiitaArticleId
 import infrastructure.qiita.initial.{HttpQiitaUserInitialGateway, ScalikejdbcQiitaUserInitialRepository}
 import infrastructure.qiita.user.contribution._
 import infrastructure.qiita.user.ranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
+import infrastructure.qiita.user.recently.HttpRecentlyQiitaUserGateway
 import infrastructure.qiita.user.summary.ScalikejdbcQiitaUserSummaryRepository
 import infrastructure.qiita.user.{HttpQiitaUserGateway, ScalikejdbcQiitaUserRepository}
 import library.scalaj.{RealScalajHttpAdaptor, ScalajHttpAdaptor}
@@ -54,6 +56,7 @@ class Module extends AbstractModule {
     bind(classOf[FacebookGateway]).to(classOf[HttpFacebookGateway])
     bind(classOf[PocketGateway]).to(classOf[HttpPocketGateway])
     bind(classOf[QiitaArticleContributionRepository]).to(classOf[ScalikejdbcQiitaArticleContributionRepository])
+    bind(classOf[RecentlyQiitaUserGateway]).to(classOf[HttpRecentlyQiitaUserGateway])
 
     () // 明示的に Unit を返す
   }
