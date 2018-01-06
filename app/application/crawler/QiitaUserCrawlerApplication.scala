@@ -21,8 +21,8 @@ final class QiitaUserCrawlerApplication @Inject()(
       qiitaUserInitial.pageRange.foreach { currentPage =>
         val registeredDateTime = RegisteredDateTime.now()
         val url                = qiitaUserInitial.usersUrl(currentPage)
-        val qiitaUserNams      = gateway.fetch(url)
-        qiitaUserNams.foreach(repository.register(_, registeredDateTime))
+        val qiitaUserNames     = gateway.fetch(url)
+        qiitaUserNames.foreach(repository.register(_, registeredDateTime))
 
         Logger.info(s"crawled ${qiitaUserInitial.initial.value} ($currentPage / ${qiitaUserInitial.page.value})")
         TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
