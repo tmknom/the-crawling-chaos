@@ -5,5 +5,7 @@ package domain.qiita.article.contribution
   */
 final case class QiitaArticleContribution(
     likesCount:    LikesCount,
-    commentsCount: CommentsCount
+    commentsCount: CommentsCount,
+    hatenaCount:   HatenaCount,
+    facebookCount: FacebookCount
 )
