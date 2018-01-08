@@ -4,12 +4,20 @@
 
 ## 使い方
 
-### 最新登録されたQiitaユーザの名前をクロール
+### 最近登録されたQiitaユーザの名前をクロール
 
 ```
 /tmp/qiita-ranker-1.0-SNAPSHOT/bin/recently-qiita-user-name-crawler-cli > /dev/null 2>&1 &
 
 run-main presentation.cli.batch.daily.RecentlyQiitaUserNameCrawlerCli
+```
+
+### 最近登録されたQiitaユーザのいいね数をクロール
+
+```
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/recently-qiita-user-contribution-crawler-cli > /dev/null 2>&1 &
+
+run-main presentation.cli.batch.daily.RecentlyQiitaUserContributionCrawlerCli
 ```
 
 

@@ -7,8 +7,8 @@ import library.scalaj._
 import org.scalatestplus.play.PlaySpec
 
 // scalastyle:off magic.number
-class HttpQiitaUserContributionGatewaySpec extends PlaySpec {
-  val sut = new HttpQiitaUserContributionGateway(new MockScalajHttpAdaptor())
+class HttpQiitaUserInternalApiGatewaySpec extends PlaySpec {
+  val sut = new HttpQiitaUserInternalApiGateway(new MockScalajHttpAdaptor())
 
   "#fetch" should {
     "通信できること" in {

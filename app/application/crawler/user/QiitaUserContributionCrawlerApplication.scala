@@ -3,7 +3,7 @@ package application.crawler.user
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserContributionHistoryRepository, QiitaUserContributionRepository, UpdatedDateTime}
+import domain.qiita.user.contribution.{QiitaUserContributionHistoryRepository, QiitaUserContributionRepository, QiitaUserInternalApiGateway, UpdatedDateTime}
 import domain.qiita.user.{QiitaUser, RegisteredDateTime}
 import play.api.Logger
 import scalikejdbc.DB
@@ -12,7 +12,7 @@ import scala.collection.mutable
 
 @Singleton
 final class QiitaUserContributionCrawlerApplication @Inject()(
-    gateway:           QiitaUserContributionGateway,
+    gateway:           QiitaUserInternalApiGateway,
     repository:        QiitaUserContributionRepository,
     historyRepository: QiitaUserContributionHistoryRepository
 ) {
@@ -60,7 +60,7 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
   }
 
   private def log(qiitaUser: QiitaUser, index: Int, qiitaUsersSize: Int) = {
-    val progress = (index + 1) / qiitaUsersSize
+    val progress = ((index + 1) / qiitaUsersSize.toDouble) * 100.0
     Logger.info(s"crawled ${qiitaUser.name.value} : ${index + 1} / $qiitaUsersSize ($progress%)")
   }
 }

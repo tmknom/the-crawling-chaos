@@ -6,7 +6,7 @@ import scalikejdbc.{AutoSession, DBSession}
 trait QiitaUserRepository {
   def register(qiitaUserName: QiitaUserName, registeredDateTime: RegisteredDateTime)(implicit session: DBSession = AutoSession): Unit
 
-  def retrieveAll()(implicit session: DBSession = AutoSession): Seq[QiitaUser]
+  def retrieveRecently()(implicit session: DBSession = AutoSession): Seq[QiitaUser]
 
   def retrieveContributed()(implicit session: DBSession = AutoSession): Seq[QiitaUser]
 

@@ -3,16 +3,16 @@ package infrastructure.qiita.user.contribution
 import javax.inject.{Inject, Singleton}
 
 import domain.qiita.user.QiitaUser
-import domain.qiita.user.contribution.QiitaUserContributionGateway
+import domain.qiita.user.contribution.QiitaUserInternalApiGateway
 import domain.qiita.user.summary.QiitaUserSummary
 import library.scalaj.ScalajHttpAdaptor
 
 @Singleton
-final class HttpQiitaUserContributionGateway @Inject()(scalajHttpAdaptor: ScalajHttpAdaptor) extends QiitaUserContributionGateway {
+final class HttpQiitaUserInternalApiGateway @Inject()(scalajHttpAdaptor: ScalajHttpAdaptor) extends QiitaUserInternalApiGateway {
 
   def fetch(qiitaUser: QiitaUser): QiitaUserSummary = {
     val response                               = scalajHttpAdaptor.get(qiitaUser.name.urlHovercardUsers)
-    val (qiitaUserContribution, articlesCount) = QiitaUserContributionParser(response).parse
+    val (qiitaUserContribution, articlesCount) = QiitaUserInternalApiParser(response).parse
 
     QiitaUserSummary(
       id            = qiitaUser.id,

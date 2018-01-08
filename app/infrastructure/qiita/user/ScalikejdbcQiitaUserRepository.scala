@@ -21,7 +21,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
     () // 明示的に Unit を返す
   }
 
-  def retrieveAll()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
+  def retrieveRecently()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
     sql"""
           SELECT id, user_name, registered_date_time FROM qiita_users AS qu
           WHERE NOT EXISTS
