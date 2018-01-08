@@ -2,7 +2,7 @@ package scenario.crawler
 
 import javax.inject.{Inject, Singleton}
 
-import application.crawler.QiitaUserContributionCrawlerApplication
+import application.crawler.user.QiitaUserContributionCrawlerApplication
 import domain.qiita.user.{QiitaUser, QiitaUserRepository}
 
 @Singleton

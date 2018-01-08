@@ -1,6 +1,6 @@
 package presentation.cli.batch.daily
 
-import application.crawler.RecentlyQiitaUserNameCrawlerApplication
+import application.crawler.user.RecentlyQiitaUserNameCrawlerApplication
 import library.task.Task
 import play.api.{Application, Logger}
 
