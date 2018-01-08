@@ -28,9 +28,9 @@ final class QiitaUserContributionCrawlerScenario @Inject()(
   }
 
   /**
-    * 全ユーザのいいね数をクロール
+    * 最近登録されたユーザのいいね数をクロール
     */
-  def crawlAllUser(): Unit = {
+  def crawlRecentlyUser(): Unit = {
     val qiitaUsers: Seq[QiitaUser] = qiitaUserRepository.retrieveRecently()
     application.crawl(qiitaUsers)
   }
