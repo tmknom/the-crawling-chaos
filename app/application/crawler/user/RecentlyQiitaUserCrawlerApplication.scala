@@ -3,7 +3,8 @@ package application.crawler.user
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.user.{DeprecatedQiitaUserRepository, QiitaUserInternalApiGateway, QiitaUserName, QiitaUserNameRepository}
+import domain.qiita.user.json.{CrawledDateTime, QiitaRawInternalUserJsonRepository}
+import domain.qiita.user.{QiitaUserInternalApiGateway, QiitaUserName, QiitaUserNameRepository}
 import library.scalaj.ScalajHttpException
 import play.api.Logger
 
@@ -12,7 +13,7 @@ import scala.collection.mutable
 @Singleton
 final class RecentlyQiitaUserCrawlerApplication @Inject()(
     gateway:                 QiitaUserInternalApiGateway,
-    repository:              DeprecatedQiitaUserRepository,
+    repository:              QiitaRawInternalUserJsonRepository,
     qiitaUserNameRepository: QiitaUserNameRepository
 ) {
   @SuppressWarnings(Array("org.wartremover.warts.MutableDataStructures"))
@@ -28,12 +29,15 @@ final class RecentlyQiitaUserCrawlerApplication @Inject()(
         val progress = calculateProgress(index, itemsCount)
         quietlyCrawlOneUser(qiitaUserName, progress)
     }
+    Logger.warn(s"${this.getClass.getSimpleName} crawl error ${errorQiitaUserNames.size.toString} users : ${errorQiitaUserNames.toString()}")
   }
 
   private def quietlyCrawlOneUser(qiitaUserName: QiitaUserName, progress: String): Unit = {
     try {
       val rawInternalUserJson = gateway.fetch(qiitaUserName)
-      Logger.warn(s"${this.getClass.getSimpleName} crawled ${qiitaUserName.value} $progress")
+      val crawledDateTime     = CrawledDateTime.now()
+      repository.register(qiitaUserName, rawInternalUserJson, crawledDateTime)
+      Logger.info(s"${this.getClass.getSimpleName} crawled ${qiitaUserName.value} $progress")
     } catch {
       // 処理を止めてほしくないのでログ吐いて握りつぶす
       case e: ScalajHttpException => {
