@@ -5,12 +5,12 @@ import javax.inject.{Inject, Singleton}
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
 import domain.qiita.user.page.RecentlyPage
-import domain.qiita.user.{QiitaUserApiGateway, QiitaUserRepository, RegisteredDateTime}
+import domain.qiita.user.{DeprecatedQiitaUserRepository, QiitaUserApiGateway, RegisteredDateTime}
 import play.api.Logger
 
 @Singleton
 final class RecentlyQiitaUserNameCrawlerApplication @Inject()(
-    repository: QiitaUserRepository,
+    repository: DeprecatedQiitaUserRepository,
     gateway:    QiitaUserApiGateway
 ) {
   private val SleepTimeMilliseconds = 100.toLong

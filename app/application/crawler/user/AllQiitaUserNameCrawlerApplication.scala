@@ -3,8 +3,8 @@ package application.crawler.user
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.user.QiitaUserNameGateway
 import domain.qiita.user.initial.{Initial, Initials}
+import domain.qiita.user.{QiitaUserNameGateway, QiitaUserNameRepository}
 import library.scalaj.ScalajHttpException
 import play.api.Logger
 
@@ -12,7 +12,8 @@ import scala.util.control.Breaks.{break, breakable}
 
 @Singleton
 final class AllQiitaUserNameCrawlerApplication @Inject()(
-    gateway: QiitaUserNameGateway
+    repository: QiitaUserNameRepository,
+    gateway:    QiitaUserNameGateway
 ) {
   private val SleepTimeMilliseconds = 100.toLong
 
@@ -44,6 +45,7 @@ final class AllQiitaUserNameCrawlerApplication @Inject()(
 
   private def crawlOnePage(initial: Initial, currentPage: Int): Unit = {
     val qiitaUserNames = gateway.fetch(initial.usersUrl(currentPage))
+    qiitaUserNames.foreach(repository.register)
     Logger.info(s"${this.getClass.getSimpleName} crawled ${initial.toString}#${currentPage.toString}")
   }
 }

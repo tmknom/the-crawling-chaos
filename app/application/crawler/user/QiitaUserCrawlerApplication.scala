@@ -4,13 +4,13 @@ import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
 import domain.qiita.initial.QiitaUserInitialRepository
-import domain.qiita.user.{QiitaUserNameGateway, QiitaUserRepository, RegisteredDateTime}
+import domain.qiita.user.{DeprecatedQiitaUserRepository, QiitaUserNameGateway, RegisteredDateTime}
 import play.api.Logger
 
 @Singleton
 final class QiitaUserCrawlerApplication @Inject()(
     gateway:                    QiitaUserNameGateway,
-    repository:                 QiitaUserRepository,
+    repository:                 DeprecatedQiitaUserRepository,
     qiitaUserInitialRepository: QiitaUserInitialRepository
 ) {
   private val SleepTimeMilliseconds = 100.toLong

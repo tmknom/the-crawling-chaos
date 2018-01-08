@@ -7,12 +7,12 @@ import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
 @Singleton
-final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
+final class ScalikejdbcDeprecatedQiitaUserRepository extends DeprecatedQiitaUserRepository {
   override def register(qiitaUserName: QiitaUserName, registeredDateTime: RegisteredDateTime)(implicit session: DBSession = AutoSession): Unit = {
     val userName   = qiitaUserName.value
     val registered = registeredDateTime.value
     sql"""
-          INSERT INTO qiita_users (user_name, registered_date_time)
+          INSERT INTO deprecated_qiita_users (user_name, registered_date_time)
           VALUES ($userName, $registered);
        """
       .update()
@@ -24,7 +24,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
   override def delete(qiitaUserId: QiitaUserId)(implicit session: DBSession = AutoSession): Unit = {
     val id = qiitaUserId.value
     sql"""
-          DELETE FROM qiita_users
+          DELETE FROM deprecated_qiita_users
           WHERE id = $id;
        """
       .update()
@@ -35,7 +35,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
 
   override def retrieveRecently()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
     sql"""
-          SELECT id, user_name, registered_date_time FROM qiita_users AS qu
+          SELECT id, user_name, registered_date_time FROM deprecated_qiita_users AS qu
           WHERE NOT EXISTS
           (SELECT 1 FROM qiita_user_contributions AS quc WHERE qu.id = quc.qiita_user_id)
           ORDER BY id ASC;
@@ -47,7 +47,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
 
   override def retrieveContributed()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
     sql"""
-          SELECT qu.id, qu.user_name, qu.registered_date_time FROM qiita_users AS qu
+          SELECT qu.id, qu.user_name, qu.registered_date_time FROM deprecated_qiita_users AS qu
           INNER JOIN qiita_user_contributions AS quc ON qu.id = quc.qiita_user_id
           WHERE quc.contribution > 0
           ORDER BY quc.contribution DESC;
@@ -59,7 +59,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
 
   override def retrieveTop1000()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
     sql"""
-          SELECT qu.id, qu.user_name, qu.registered_date_time FROM qiita_users AS qu
+          SELECT qu.id, qu.user_name, qu.registered_date_time FROM deprecated_qiita_users AS qu
           INNER JOIN qiita_user_contributions AS quc ON qu.id = quc.qiita_user_id
           ORDER BY quc.contribution DESC LIMIT 1000;
        """

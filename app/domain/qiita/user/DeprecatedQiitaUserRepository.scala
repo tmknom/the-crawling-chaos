@@ -3,7 +3,7 @@ package domain.qiita.user
 import scalikejdbc.{AutoSession, DBSession}
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments"))
-trait QiitaUserRepository {
+trait DeprecatedQiitaUserRepository {
   def register(qiitaUserName: QiitaUserName, registeredDateTime: RegisteredDateTime)(implicit session: DBSession = AutoSession): Unit
 
   def delete(qiitaUserId: QiitaUserId)(implicit session: DBSession = AutoSession): Unit

@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS qiita_user_initials (
+CREATE TABLE IF NOT EXISTS deprecated_qiita_user_initials (
   id      INT(11)    NOT NULL AUTO_INCREMENT,
   initial VARCHAR(1) NOT NULL COMMENT 'イニシャル',
   page    INT(11)    NOT NULL COMMENT 'ページ数',

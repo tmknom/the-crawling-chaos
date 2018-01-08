@@ -12,13 +12,13 @@ final class ScalikejdbcQiitaUserInitialRepository extends QiitaUserInitialReposi
     val initial = qiitaUserInitial.initial.value.toString
     val page    = qiitaUserInitial.page.value
 
-    sql"INSERT INTO qiita_user_initials (initial, page) VALUES ($initial, $page);".update.apply()
+    sql"INSERT INTO deprecated_qiita_user_initials (initial, page) VALUES ($initial, $page);".update.apply()
 
     () // 明示的に Unit を返す
   }
 
   override def retrieveAll()(implicit session: DBSession = AutoSession): Seq[QiitaUserInitial] = {
-    sql"SELECT * FROM qiita_user_initials ORDER BY id ASC;".map { rs =>
+    sql"SELECT * FROM deprecated_qiita_user_initials ORDER BY id ASC;".map { rs =>
       QiitaUserInitial(Initial(rs.string("initial").charAt(0)), Page(rs.int("page")))
     }.list().apply()
   }

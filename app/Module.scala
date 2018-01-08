@@ -6,7 +6,7 @@ import domain.qiita.initial.{QiitaUserInitialGateway, QiitaUserInitialRepository
 import domain.qiita.user.contribution.{QiitaUserContributionHistoryRepository, QiitaUserContributionRepository, QiitaUserInternalApiGateway}
 import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 import domain.qiita.user.summary.QiitaUserSummaryRepository
-import domain.qiita.user.{QiitaUserApiGateway, QiitaUserNameGateway, QiitaUserRepository}
+import domain.qiita.user.{DeprecatedQiitaUserRepository, QiitaUserApiGateway, QiitaUserNameGateway, QiitaUserNameRepository}
 import infrastructure.qiita.article.contribution.ScalikejdbcQiitaArticleContributionRepository
 import infrastructure.qiita.article.json.{HttpFacebookGateway, HttpHatenaGateway, HttpPocketGateway, ScalikejdbcQiitaRawArticleJsonRepository}
 import infrastructure.qiita.article.{HttpQiitaArticleGateway, HttpQiitaArticleIdGateway, ScalikejdbcQiitaArticleIdRepository, ScalikejdbcQiitaArticleRepository}
@@ -14,7 +14,12 @@ import infrastructure.qiita.initial.{HttpQiitaUserInitialGateway, ScalikejdbcQii
 import infrastructure.qiita.user.contribution._
 import infrastructure.qiita.user.ranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
 import infrastructure.qiita.user.summary.ScalikejdbcQiitaUserSummaryRepository
-import infrastructure.qiita.user.{HttpQiitaUserApiGateway, HttpQiitaUserNameGateway, ScalikejdbcQiitaUserRepository}
+import infrastructure.qiita.user.{
+  HttpQiitaUserApiGateway,
+  HttpQiitaUserNameGateway,
+  ScalikejdbcDeprecatedQiitaUserRepository,
+  ScalikejdbcQiitaUserNameRepository
+}
 import library.scalaj.{RealScalajHttpAdaptor, ScalajHttpAdaptor}
 
 /**
@@ -37,7 +42,8 @@ class Module extends AbstractModule {
     bind(classOf[ScalajHttpAdaptor]).to(classOf[RealScalajHttpAdaptor])
     bind(classOf[QiitaUserInitialRepository]).to(classOf[ScalikejdbcQiitaUserInitialRepository])
     bind(classOf[QiitaUserInitialGateway]).to(classOf[HttpQiitaUserInitialGateway])
-    bind(classOf[QiitaUserRepository]).to(classOf[ScalikejdbcQiitaUserRepository])
+    bind(classOf[QiitaUserNameRepository]).to(classOf[ScalikejdbcQiitaUserNameRepository])
+    bind(classOf[DeprecatedQiitaUserRepository]).to(classOf[ScalikejdbcDeprecatedQiitaUserRepository])
     bind(classOf[QiitaUserNameGateway]).to(classOf[HttpQiitaUserNameGateway])
     bind(classOf[QiitaUserRankingRepository]).to(classOf[ScalikejdbcQiitaUserRankingRepository])
     bind(classOf[QiitaUserRankingGateway]).to(classOf[HttpQiitaUserRankingGateway])
