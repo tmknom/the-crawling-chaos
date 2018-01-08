@@ -7,8 +7,8 @@ import domain.qiita.user.{QiitaUser, QiitaUserRepository}
 
 @Singleton
 final class QiitaUserContributionCrawlerScenario @Inject()(
-    qiitaUserContributionCrawlerApplication: QiitaUserContributionCrawlerApplication,
-    qiitaUserRepository:                     QiitaUserRepository
+    application:         QiitaUserContributionCrawlerApplication,
+    qiitaUserRepository: QiitaUserRepository
 ) {
 
   /**
@@ -16,7 +16,7 @@ final class QiitaUserContributionCrawlerScenario @Inject()(
     */
   def crawlTop1000User(): Unit = {
     val qiitaUsers: Seq[QiitaUser] = qiitaUserRepository.retrieveTop1000()
-    qiitaUserContributionCrawlerApplication.crawl(qiitaUsers)
+    application.crawl(qiitaUsers)
   }
 
   /**
@@ -24,14 +24,14 @@ final class QiitaUserContributionCrawlerScenario @Inject()(
     */
   def crawlContributedUser(): Unit = {
     val qiitaUsers: Seq[QiitaUser] = qiitaUserRepository.retrieveContributed()
-    qiitaUserContributionCrawlerApplication.crawl(qiitaUsers)
+    application.crawl(qiitaUsers)
   }
 
   /**
     * 全ユーザのいいね数をクロール
     */
   def crawlAllUser(): Unit = {
-    val qiitaUsers: Seq[QiitaUser] = qiitaUserRepository.retrieveAll()
-    qiitaUserContributionCrawlerApplication.crawl(qiitaUsers)
+    val qiitaUsers: Seq[QiitaUser] = qiitaUserRepository.retrieveRecently()
+    application.crawl(qiitaUsers)
   }
 }

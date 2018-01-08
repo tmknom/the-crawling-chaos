@@ -12,7 +12,7 @@ class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec {
     "登録できること" in { implicit session =>
       sut.register(QiitaUserName("jojo"), RegisteredDateTime.now())
 
-      val actual = sut.retrieveAll()
+      val actual = sut.retrieveRecently()
       actual.size mustBe 1
       actual.headOption.value.name mustBe QiitaUserName("jojo")
     }
@@ -21,7 +21,7 @@ class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec {
   "ScalikejdbcQiitaUserRepository#retrieveAll" should {
     "一覧できること" in { implicit session =>
       DatabaseFixture.setup(QiitaUsersFixture.List.Fixtures)
-      val actual = sut.retrieveAll()
+      val actual = sut.retrieveRecently()
 
       actual.size mustBe 3
       actual.headOption.value.name mustBe QiitaUserName("jojo")
