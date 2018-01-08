@@ -28,6 +28,14 @@ run-main presentation.cli.batch.daily.user.RecentlyQiitaUserContributionCrawlerC
 run-main presentation.cli.batch.daily.article.RecentlyQiitaArticleIdCrawlerCli
 ```
 
+### 最近登録された記事をクロール
+
+```
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/recently-qiita-article-crawler-cli > /dev/null 2>&1 &
+
+run-main presentation.cli.batch.daily.article.RecentlyQiitaArticleCrawlerCli
+```
+
 
 ## 使い方（旧）
 

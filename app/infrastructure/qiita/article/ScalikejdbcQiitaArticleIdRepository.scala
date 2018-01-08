@@ -23,8 +23,10 @@ final class ScalikejdbcQiitaArticleIdRepository extends QiitaArticleIdRepository
 
   override def retrieveRecently()(implicit session: DBSession = AutoSession): List[QiitaItemId] = {
     sql"""
-          SELECT item_id FROM qiita_article_ids
-          ORDER BY id DESC;
+          SELECT item_id FROM qiita_article_ids AS qai
+          WHERE NOT EXISTS
+          (SELECT 1 FROM qiita_articles AS qa WHERE qa.item_id = qai.item_id)
+          ORDER BY id ASC;
        """
       .map(toQiitaItemId)
       .list()
