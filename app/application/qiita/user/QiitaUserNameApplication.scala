@@ -2,11 +2,11 @@ package application.qiita.user
 
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.user.QiitaUserRepository
+import domain.qiita.user.DeprecatedQiitaUserRepository
 
 @Singleton
 final class QiitaUserNameApplication @Inject()(
-    repository: QiitaUserRepository
+    repository: DeprecatedQiitaUserRepository
 ) {
 
   /**

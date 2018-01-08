@@ -4,13 +4,13 @@ import javax.inject.{Inject, Singleton}
 
 import application.crawler.user.QiitaUserContributionCrawlerApplication
 import application.qiita.user.QiitaUserNameApplication
-import domain.qiita.user.{QiitaUser, QiitaUserRepository}
+import domain.qiita.user.{DeprecatedQiitaUserRepository, QiitaUser}
 
 @Singleton
 final class QiitaUserScenario @Inject()(
     qiitaUserNameApplication:                QiitaUserNameApplication,
     qiitaUserContributionCrawlerApplication: QiitaUserContributionCrawlerApplication,
-    repository:                              QiitaUserRepository
+    repository:                              DeprecatedQiitaUserRepository
 ) {
 
   /**

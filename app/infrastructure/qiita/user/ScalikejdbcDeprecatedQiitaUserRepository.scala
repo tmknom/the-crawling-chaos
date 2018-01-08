@@ -7,7 +7,7 @@ import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
 @Singleton
-final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
+final class ScalikejdbcDeprecatedQiitaUserRepository extends DeprecatedQiitaUserRepository {
   override def register(qiitaUserName: QiitaUserName, registeredDateTime: RegisteredDateTime)(implicit session: DBSession = AutoSession): Unit = {
     val userName   = qiitaUserName.value
     val registered = registeredDateTime.value
