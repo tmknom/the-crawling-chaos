@@ -4,12 +4,12 @@ import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
 import domain.qiita.initial.QiitaUserInitialRepository
-import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository, RegisteredDateTime}
+import domain.qiita.user.{QiitaUserNameGateway, QiitaUserRepository, RegisteredDateTime}
 import play.api.Logger
 
 @Singleton
 final class QiitaUserCrawlerApplication @Inject()(
-    gateway:                    QiitaUserGateway,
+    gateway:                    QiitaUserNameGateway,
     repository:                 QiitaUserRepository,
     qiitaUserInitialRepository: QiitaUserInitialRepository
 ) {

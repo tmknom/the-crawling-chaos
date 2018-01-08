@@ -1,5 +1,5 @@
 package domain.qiita.user
 
-trait QiitaUserGateway {
+trait QiitaUserNameGateway {
   def fetch(url: String): Seq[QiitaUserName]
 }

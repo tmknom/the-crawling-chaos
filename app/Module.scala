@@ -7,7 +7,7 @@ import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserCo
 import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 import domain.qiita.user.recently.RecentlyQiitaUserGateway
 import domain.qiita.user.summary.QiitaUserSummaryRepository
-import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository}
+import domain.qiita.user.{QiitaUserNameGateway, QiitaUserRepository}
 import infrastructure.qiita.article.contribution.ScalikejdbcQiitaArticleContributionRepository
 import infrastructure.qiita.article.json.{HttpFacebookGateway, HttpHatenaGateway, HttpPocketGateway, ScalikejdbcQiitaRawArticleJsonRepository}
 import infrastructure.qiita.article.{HttpQiitaArticleGateway, HttpQiitaArticleIdGateway, ScalikejdbcQiitaArticleIdRepository, ScalikejdbcQiitaArticleRepository}
@@ -16,7 +16,7 @@ import infrastructure.qiita.user.contribution._
 import infrastructure.qiita.user.ranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
 import infrastructure.qiita.user.recently.HttpRecentlyQiitaUserGateway
 import infrastructure.qiita.user.summary.ScalikejdbcQiitaUserSummaryRepository
-import infrastructure.qiita.user.{HttpQiitaUserGateway, ScalikejdbcQiitaUserRepository}
+import infrastructure.qiita.user.{HttpQiitaUserNameGateway, ScalikejdbcQiitaUserRepository}
 import library.scalaj.{RealScalajHttpAdaptor, ScalajHttpAdaptor}
 
 /**
@@ -40,7 +40,7 @@ class Module extends AbstractModule {
     bind(classOf[QiitaUserInitialRepository]).to(classOf[ScalikejdbcQiitaUserInitialRepository])
     bind(classOf[QiitaUserInitialGateway]).to(classOf[HttpQiitaUserInitialGateway])
     bind(classOf[QiitaUserRepository]).to(classOf[ScalikejdbcQiitaUserRepository])
-    bind(classOf[QiitaUserGateway]).to(classOf[HttpQiitaUserGateway])
+    bind(classOf[QiitaUserNameGateway]).to(classOf[HttpQiitaUserNameGateway])
     bind(classOf[QiitaUserRankingRepository]).to(classOf[ScalikejdbcQiitaUserRankingRepository])
     bind(classOf[QiitaUserRankingGateway]).to(classOf[HttpQiitaUserRankingGateway])
     bind(classOf[QiitaUserContributionRepository]).to(classOf[ScalikejdbcQiitaUserContributionRepository])
