@@ -19,4 +19,20 @@ final class ScalikejdbcQiitaUserNameRepository extends QiitaUserNameRepository {
 
     () // 明示的に Unit を返す
   }
+
+  def retrieveRecently()(implicit session: DBSession = AutoSession): List[QiitaUserName] = {
+    sql"""
+          SELECT user_name FROM qiita_user_names AS qun
+          WHERE NOT EXISTS
+          (SELECT 1 FROM raw_qiita_internal_user_jsons AS r WHERE qun.user_name = r.user_name)
+          ORDER BY user_name ASC;
+       """
+      .map(toQiitaUserName)
+      .list()
+      .apply()
+  }
+
+  private def toQiitaUserName(rs: WrappedResultSet): QiitaUserName = {
+    QiitaUserName(rs.string("user_name"))
+  }
 }
