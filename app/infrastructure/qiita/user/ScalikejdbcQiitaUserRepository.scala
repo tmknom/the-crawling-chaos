@@ -21,6 +21,18 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
     () // 明示的に Unit を返す
   }
 
+  override def delete(qiitaUserId: QiitaUserId)(implicit session: DBSession = AutoSession): Unit = {
+    val id = qiitaUserId.value
+    sql"""
+          DELETE FROM qiita_users
+          WHERE id = $id;
+       """
+      .update()
+      .apply()
+
+    () // 明示的に Unit を返す
+  }
+
   override def retrieveRecently()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
     sql"""
           SELECT id, user_name, registered_date_time FROM qiita_users AS qu
