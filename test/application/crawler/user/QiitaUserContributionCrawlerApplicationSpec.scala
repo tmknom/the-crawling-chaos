@@ -21,10 +21,10 @@ class QiitaUserContributionCrawlerApplicationSpec extends PlaySpec with MockitoS
 
   private val mockQiitaUserContributionRepository        = mock[QiitaUserContributionRepository]
   private val mockQiitaUserContributionHistoryRepository = mock[QiitaUserContributionHistoryRepository]
-  private val mockQiitaUserContributionGateway           = mock[QiitaUserContributionGateway]
+  private val mockQiitaUserInternalApiGateway            = mock[QiitaUserInternalApiGateway]
 
   before {
-    when(mockQiitaUserContributionGateway.fetch(any[QiitaUser])).thenReturn(qiitaUserSummary)
+    when(mockQiitaUserInternalApiGateway.fetch(any[QiitaUser])).thenReturn(qiitaUserSummary)
     when(mockQiitaUserContributionRepository.register(any[QiitaUserSummary], any[UpdatedDateTime])).thenReturn(1)
     when(mockQiitaUserContributionHistoryRepository.register(any[QiitaUserSummary], any[RegisteredDateTime])).thenReturn(1)
   }
@@ -32,7 +32,7 @@ class QiitaUserContributionCrawlerApplicationSpec extends PlaySpec with MockitoS
   "QiitaUserContributionCrawlerApplication#crawl" should {
     "クロールできること" in {
       val sut = new QiitaUserContributionCrawlerApplication(
-        mockQiitaUserContributionGateway,
+        mockQiitaUserInternalApiGateway,
         mockQiitaUserContributionRepository,
         mockQiitaUserContributionHistoryRepository
       )

@@ -3,7 +3,7 @@ package application.crawler
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.user.contribution.{QiitaUserContributionGateway, QiitaUserContributionRepository, UpdatedDateTime}
+import domain.qiita.user.contribution.{QiitaUserContributionRepository, QiitaUserInternalApiGateway, UpdatedDateTime}
 import domain.qiita.user.ranking.{QiitaUserRanking, QiitaUserRankingRepository}
 import play.api.Logger
 
@@ -11,7 +11,7 @@ import scala.collection.mutable
 
 @Singleton
 final class QiitaUserRankingContributionCrawlerApplication @Inject()(
-    gateway:                    QiitaUserContributionGateway,
+    gateway:                    QiitaUserInternalApiGateway,
     repository:                 QiitaUserContributionRepository,
     qiitaUserRankingRepository: QiitaUserRankingRepository
 ) {
