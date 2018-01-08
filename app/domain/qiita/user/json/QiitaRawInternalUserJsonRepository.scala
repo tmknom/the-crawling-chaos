@@ -5,5 +5,6 @@ import scalikejdbc.{AutoSession, DBSession}
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments"))
 trait QiitaRawInternalUserJsonRepository {
-  def register(qiitaUserName: QiitaUserName, rawInternalUserJson: RawInternalUserJson)(implicit session: DBSession = AutoSession): Unit
+  def register(qiitaUserName: QiitaUserName, rawInternalUserJson: RawInternalUserJson, crawledDateTime: CrawledDateTime)(implicit session: DBSession =
+                                                                                                                           AutoSession): Unit
 }
