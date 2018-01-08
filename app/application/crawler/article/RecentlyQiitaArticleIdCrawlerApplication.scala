@@ -1,4 +1,4 @@
-package application.crawler
+package application.crawler.article
 
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
@@ -9,7 +9,7 @@ import domain.qiita.article.{QiitaArticleIdGateway, QiitaArticleIdRepository}
 import play.api.Logger
 
 @Singleton
-final class QiitaArticleIdCrawlerApplication @Inject()(
+final class RecentlyQiitaArticleIdCrawlerApplication @Inject()(
     gateway:    QiitaArticleIdGateway,
     repository: QiitaArticleIdRepository
 ) {
