@@ -6,11 +6,11 @@ import com.ninja_squad.dbsetup.Operations
 import com.ninja_squad.dbsetup.operation.Operation
 
 /**
-  * qiita_users テーブルのフィクスチャ
+  * deprecated_qiita_users テーブルのフィクスチャ
   */
-object QiitaUsersFixture {
+object DeprecatedQiitaUsersFixture {
 
-  private val Table: String = "qiita_users"
+  private val Table: String = "deprecated_qiita_users"
 
   private object Column {
     val Id:                 String = "id"

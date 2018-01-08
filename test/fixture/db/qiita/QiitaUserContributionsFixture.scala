@@ -20,7 +20,7 @@ object QiitaUserContributionsFixture {
   }
 
   object Default {
-    val QiitaUserId:     String        = QiitaUsersFixture.Default.Id
+    val QiitaUserId:     String        = DeprecatedQiitaUsersFixture.Default.Id
     val Contribution:    String        = "100"
     val ArticlesCount:   String        = "11"
     val UpdatedDateTime: ZonedDateTime = ZonedDateTime.of(2017, 12, 31, 23, 59, 59, 0, ZoneId.of("Asia/Tokyo")) // scalastyle:off

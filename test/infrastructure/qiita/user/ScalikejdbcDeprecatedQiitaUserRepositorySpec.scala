@@ -1,7 +1,7 @@
 package infrastructure.qiita.user
 
 import domain.qiita.user.{QiitaUserName, RegisteredDateTime}
-import fixture.db.qiita.QiitaUsersFixture
+import fixture.db.qiita.DeprecatedQiitaUsersFixture
 import library.test.db.{DatabaseFixture, DatabaseSpec}
 
 // scalastyle:off magic.number
@@ -20,7 +20,7 @@ class ScalikejdbcDeprecatedQiitaUserRepositorySpec extends DatabaseSpec {
 
   "ScalikejdbcQiitaUserRepository#retrieveAll" should {
     "一覧できること" in { implicit session =>
-      DatabaseFixture.setup(QiitaUsersFixture.List.Fixtures)
+      DatabaseFixture.setup(DeprecatedQiitaUsersFixture.List.Fixtures)
       val actual = sut.retrieveRecently()
 
       actual.size mustBe 3
