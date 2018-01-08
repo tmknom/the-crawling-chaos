@@ -3,20 +3,19 @@ package application.crawler.user
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.initial.QiitaUserInitialRepository
+import domain.qiita.initial.QiitaUserInitial
 import domain.qiita.user.{DeprecatedQiitaUserRepository, QiitaUserNameGateway, RegisteredDateTime}
 import play.api.Logger
 
 @Singleton
 final class QiitaUserCrawlerApplication @Inject()(
-    gateway:                    QiitaUserNameGateway,
-    repository:                 DeprecatedQiitaUserRepository,
-    qiitaUserInitialRepository: QiitaUserInitialRepository
+    gateway:    QiitaUserNameGateway,
+    repository: DeprecatedQiitaUserRepository
 ) {
   private val SleepTimeMilliseconds = 100.toLong
 
   def crawl(): Unit = {
-    val qiitaUserInitials = qiitaUserInitialRepository.retrieveAll()
+    val qiitaUserInitials = Seq.empty[QiitaUserInitial]
     qiitaUserInitials.foreach { qiitaUserInitial =>
       qiitaUserInitial.pageRange.foreach { currentPage =>
         val registeredDateTime = RegisteredDateTime.now()
