@@ -1,6 +1,6 @@
 package presentation.cli.operation.crawler.article
 
-import application.crawler.QiitaArticleContributionCrawlerApplication
+import application.crawler.article.QiitaArticleContributionCrawlerApplication
 import library.task.Task
 import play.api.{Application, Logger}
 
