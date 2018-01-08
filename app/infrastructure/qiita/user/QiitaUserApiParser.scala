@@ -1,10 +1,10 @@
-package infrastructure.qiita.user.recently
+package infrastructure.qiita.user
 
 import domain.qiita.user.QiitaUserName
 import spray.json.DefaultJsonProtocol._
 import spray.json._
 
-private[user] final case class RecentlyQiitaUserParser(json: String) {
+private[user] final case class QiitaUserApiParser(json: String) {
   def parse: Seq[QiitaUserName] = {
     val items = JsonParser(json).asInstanceOf[JsArray].elements
     items.map { item =>

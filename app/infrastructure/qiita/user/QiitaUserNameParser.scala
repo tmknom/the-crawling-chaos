@@ -5,7 +5,7 @@ import net.ruippeixotog.scalascraper.browser.JsoupBrowser
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
 import net.ruippeixotog.scalascraper.dsl.DSL._
 
-private[user] final case class QiitaUserParser(html: String) {
+private[user] final case class QiitaUserNameParser(html: String) {
   def parse: Seq[QiitaUserName] = {
     val doc   = JsoupBrowser().parseString(html)
     val items = doc >> elementList("#main .js-hovercard")

@@ -1,4 +1,4 @@
-package application.crawler
+package application.crawler.user
 
 import domain.qiita.user._
 import domain.qiita.user.contribution._

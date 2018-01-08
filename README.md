@@ -4,6 +4,17 @@
 
 ## 使い方
 
+### 最新登録されたQiitaユーザの名前をクロール
+
+```
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/recently-qiita-user-name-crawler-cli > /dev/null 2>&1 &
+
+run-main presentation.cli.batch.daily.RecentlyQiitaUserNameCrawlerCli
+```
+
+
+## 使い方（旧）
+
 ### Qiitaユーザのイニシャルのページ数のクロール
 
 [Qiitaのユーザ一覧](https://qiita.com/users)のクローリングの事前準備として、各イニシャルのページ数を取得する。
