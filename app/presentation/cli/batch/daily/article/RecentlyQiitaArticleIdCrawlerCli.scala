@@ -1,13 +1,13 @@
-package presentation.cli.operation.crawler.article
+package presentation.cli.batch.daily.article
 
 import application.crawler.QiitaArticleIdCrawlerApplication
 import library.task.Task
 import play.api.{Application, Logger}
 
 /**
-  * run-main presentation.cli.operation.crawler.article.QiitaArticleIdCrawlerCli
+  * run-main presentation.cli.batch.daily.article.RecentlyQiitaArticleIdCrawlerCli
   */
-object QiitaArticleIdCrawlerCli extends App with Task {
+object RecentlyQiitaArticleIdCrawlerCli extends App with Task {
   run()
 
   override def task(app: Application): Unit = {
