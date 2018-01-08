@@ -10,7 +10,7 @@ import domain.qiita.user.{QiitaUserGateway, QiitaUserRepository, RegisteredDateT
 import play.api.Logger
 
 @Singleton
-final class RecentlyQiitaUserCrawlerApplication @Inject()(
+final class RecentlyQiitaUserNameCrawlerApplication @Inject()(
     gateway:                  QiitaUserGateway,
     repository:               QiitaUserRepository,
     recentlyQiitaUserGateway: RecentlyQiitaUserGateway
