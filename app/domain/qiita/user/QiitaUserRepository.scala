@@ -11,4 +11,6 @@ trait QiitaUserRepository {
   def retrieveContributed()(implicit session: DBSession = AutoSession): Seq[QiitaUser]
 
   def retrieveTop1000()(implicit session: DBSession = AutoSession): Seq[QiitaUser]
+
+  def retrieveUnavailable()(implicit session: DBSession = AutoSession): Seq[QiitaUser]
 }
