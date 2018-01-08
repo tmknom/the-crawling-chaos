@@ -6,14 +6,13 @@ import javax.inject.{Inject, Singleton}
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
 import domain.qiita.user.page.RecentlyPage
 import domain.qiita.user.recently.RecentlyQiitaUserGateway
-import domain.qiita.user.{QiitaUserNameGateway, QiitaUserRepository, RegisteredDateTime}
+import domain.qiita.user.{QiitaUserRepository, RegisteredDateTime}
 import play.api.Logger
 
 @Singleton
 final class RecentlyQiitaUserNameCrawlerApplication @Inject()(
-    gateway:                  QiitaUserNameGateway,
-    repository:               QiitaUserRepository,
-    recentlyQiitaUserGateway: RecentlyQiitaUserGateway
+    repository: QiitaUserRepository,
+    gateway:    RecentlyQiitaUserGateway
 ) {
   private val SleepTimeMilliseconds = 100.toLong
 
@@ -32,7 +31,7 @@ final class RecentlyQiitaUserNameCrawlerApplication @Inject()(
 
   private def crawlUntilDuplicated(): Unit = {
     RecentlyPage.range.foreach { currentPage =>
-      val qiitaUserNames     = recentlyQiitaUserGateway.fetch(currentPage)
+      val qiitaUserNames     = gateway.fetch(currentPage)
       val registeredDateTime = RegisteredDateTime.now()
       qiitaUserNames.foreach(repository.register(_, registeredDateTime))
 
