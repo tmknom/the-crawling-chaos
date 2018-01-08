@@ -7,5 +7,5 @@ CREATE TABLE IF NOT EXISTS qiita_articles (
   posted_date_time DATETIME(6)  NOT NULL COMMENT '投稿日時',
   PRIMARY KEY (id),
   UNIQUE (item_id),
-  FOREIGN KEY (posted_user_name) REFERENCES qiita_users (user_name)
+  FOREIGN KEY (posted_user_name) REFERENCES deprecated_qiita_users (user_name)
 ) ENGINE InnoDB AUTO_INCREMENT 1 DEFAULT CHARSET utf8mb4 DEFAULT COLLATE utf8mb4_bin COMMENT 'Qiitaの記事';
