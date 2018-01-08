@@ -17,7 +17,7 @@ final class RecentlyQiitaArticleCrawlerApplication @Inject()(
   private val SleepTimeMilliseconds = 100.toLong
 
   def crawl(): Unit = {
-    val qiitaItemIds = qiitaArticleIdRepository.retrieveAll()
+    val qiitaItemIds = qiitaArticleIdRepository.retrieveRecently()
     qiitaItemIds.zipWithIndex.foreach {
       case (qiitaItemId, index) =>
         quietlyCrawl(qiitaItemId, index, qiitaItemIds.size)

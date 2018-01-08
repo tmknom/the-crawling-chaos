@@ -6,5 +6,5 @@ import scalikejdbc.{AutoSession, DBSession}
 trait QiitaArticleIdRepository {
   def register(qiitaItemId: QiitaItemId)(implicit session: DBSession = AutoSession): Unit
 
-  def retrieveAll()(implicit session: DBSession = AutoSession): List[QiitaItemId]
+  def retrieveRecently()(implicit session: DBSession = AutoSession): List[QiitaItemId]
 }

@@ -21,7 +21,7 @@ final class ScalikejdbcQiitaArticleIdRepository extends QiitaArticleIdRepository
     () // 明示的に Unit を返す
   }
 
-  override def retrieveAll()(implicit session: DBSession = AutoSession): List[QiitaItemId] = {
+  override def retrieveRecently()(implicit session: DBSession = AutoSession): List[QiitaItemId] = {
     sql"""
           SELECT item_id FROM qiita_article_ids
           ORDER BY id DESC;
