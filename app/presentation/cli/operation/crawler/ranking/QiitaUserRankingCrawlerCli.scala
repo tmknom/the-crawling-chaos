@@ -1,6 +1,6 @@
 package presentation.cli.operation.crawler.ranking
 
-import application.crawler.QiitaUserRankingCrawlerApplication
+import application.crawler.ranking.QiitaUserRankingCrawlerApplication
 import library.task.Task
 import play.api.{Application, Logger}
 
