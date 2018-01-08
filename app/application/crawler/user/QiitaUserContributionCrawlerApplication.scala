@@ -60,7 +60,7 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
   }
 
   private def log(qiitaUser: QiitaUser, index: Int, qiitaUsersSize: Int) = {
-    val progress = (index + 1) / qiitaUsersSize
+    val progress = ((index + 1) / qiitaUsersSize.toDouble) * 100.0
     Logger.info(s"crawled ${qiitaUser.name.value} : ${index + 1} / $qiitaUsersSize ($progress%)")
   }
 }
