@@ -43,7 +43,7 @@ final class RecentlyQiitaArticleCrawlerApplication @Inject()(
   }
 
   private def log(qiitaItemId: QiitaItemId, index: Int, qiitaItemIdsCount: Int) = {
-    val progress = ((index + 1) / qiitaItemIdsCount) * 100.0
+    val progress = ((index + 1) / qiitaItemIdsCount.toDouble) * 100.0
     Logger.info(s"${this.getClass.getSimpleName} crawled ${qiitaItemId.value} : ${index + 1} / $qiitaItemIdsCount ($progress%)")
   }
 }
