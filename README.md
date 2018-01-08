@@ -9,7 +9,7 @@
 ```
 /tmp/qiita-ranker-1.0-SNAPSHOT/bin/recently-qiita-user-name-crawler-cli > /dev/null 2>&1 &
 
-run-main presentation.cli.batch.daily.RecentlyQiitaUserNameCrawlerCli
+run-main presentation.cli.batch.daily.user.RecentlyQiitaUserNameCrawlerCli
 ```
 
 ### 最近登録されたQiitaユーザのいいね数をクロール
@@ -17,7 +17,7 @@ run-main presentation.cli.batch.daily.RecentlyQiitaUserNameCrawlerCli
 ```
 /tmp/qiita-ranker-1.0-SNAPSHOT/bin/recently-qiita-user-contribution-crawler-cli > /dev/null 2>&1 &
 
-run-main presentation.cli.batch.daily.RecentlyQiitaUserContributionCrawlerCli
+run-main presentation.cli.batch.daily.user.RecentlyQiitaUserContributionCrawlerCli
 ```
 
 ### 最近登録された記事IDをクロール

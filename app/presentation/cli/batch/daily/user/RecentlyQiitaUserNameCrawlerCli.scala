@@ -1,11 +1,11 @@
-package presentation.cli.batch.daily
+package presentation.cli.batch.daily.user
 
 import application.crawler.user.RecentlyQiitaUserNameCrawlerApplication
 import library.task.Task
 import play.api.{Application, Logger}
 
 /**
-  * run-main presentation.cli.batch.daily.RecentlyQiitaUserNameCrawlerCli
+  * run-main presentation.cli.batch.daily.user.RecentlyQiitaUserNameCrawlerCli
   */
 object RecentlyQiitaUserNameCrawlerCli extends App with Task {
   run()
