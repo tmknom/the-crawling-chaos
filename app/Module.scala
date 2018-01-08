@@ -5,6 +5,7 @@ import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdGateway, QiitaAr
 import domain.qiita.initial.{QiitaUserInitialGateway, QiitaUserInitialRepository}
 import domain.qiita.user._
 import domain.qiita.user.contribution.{DeprecatedQiitaUserInternalApiGateway, QiitaUserContributionHistoryRepository, QiitaUserContributionRepository}
+import domain.qiita.user.json.QiitaRawInternalUserJsonRepository
 import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 import domain.qiita.user.summary.QiitaUserSummaryRepository
 import infrastructure.qiita.article.contribution.ScalikejdbcQiitaArticleContributionRepository
@@ -13,6 +14,7 @@ import infrastructure.qiita.article.{HttpQiitaArticleGateway, HttpQiitaArticleId
 import infrastructure.qiita.initial.{HttpQiitaUserInitialGateway, ScalikejdbcQiitaUserInitialRepository}
 import infrastructure.qiita.user._
 import infrastructure.qiita.user.contribution._
+import infrastructure.qiita.user.json.ScalikejdbcQiitaRawInternalUserJsonRepository
 import infrastructure.qiita.user.ranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
 import infrastructure.qiita.user.summary.ScalikejdbcQiitaUserSummaryRepository
 import library.scalaj.{RealScalajHttpAdaptor, ScalajHttpAdaptor}
@@ -38,6 +40,7 @@ class Module extends AbstractModule {
     bind(classOf[QiitaUserInternalApiGateway]).to(classOf[HttpQiitaUserInternalApiGateway])
 
     bind(classOf[QiitaUserNameRepository]).to(classOf[ScalikejdbcQiitaUserNameRepository])
+    bind(classOf[QiitaRawInternalUserJsonRepository]).to(classOf[ScalikejdbcQiitaRawInternalUserJsonRepository])
   }
 
   private def configureInfrastructure(): Unit = {
