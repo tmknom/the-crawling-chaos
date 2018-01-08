@@ -3,7 +3,12 @@ package application.crawler.user
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.user.contribution.{QiitaUserContributionHistoryRepository, QiitaUserContributionRepository, QiitaUserInternalApiGateway, UpdatedDateTime}
+import domain.qiita.user.contribution.{
+  DeprecatedQiitaUserInternalApiGateway,
+  QiitaUserContributionHistoryRepository,
+  QiitaUserContributionRepository,
+  UpdatedDateTime
+}
 import domain.qiita.user.{QiitaUser, RegisteredDateTime}
 import play.api.Logger
 import scalikejdbc.DB
@@ -12,7 +17,7 @@ import scala.collection.mutable
 
 @Singleton
 final class QiitaUserContributionCrawlerApplication @Inject()(
-    gateway:           QiitaUserInternalApiGateway,
+    gateway:           DeprecatedQiitaUserInternalApiGateway,
     repository:        QiitaUserContributionRepository,
     historyRepository: QiitaUserContributionHistoryRepository
 ) {
