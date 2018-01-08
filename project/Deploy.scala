@@ -4,6 +4,7 @@
 
 import com.typesafe.sbt.packager.universal.UniversalPlugin.autoImport.Universal
 import sbt.Keys._
+import sbt._
 
 // noinspection TypeAnnotation
 object Deploy {
@@ -15,6 +16,16 @@ object Deploy {
   )
 
   val Settings = Seq(
+    /**
+      * Artifact 作成時にドキュメントを含めない
+      */
+    publishArtifact in(Compile, packageDoc) := false,
+
+    /**
+      * Artifact 作成時にソースを含めない
+      */
+    publishArtifact in(Compile, packageDoc) := false,
+
     /**
       * dist タスク実行時に、テスト用の設定ファイルを除外する
       *
