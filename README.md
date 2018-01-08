@@ -25,7 +25,7 @@ run-main presentation.cli.batch.daily.user.RecentlyQiitaUserContributionCrawlerC
 #### 無効なQiitaユーザを削除
 
 ```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/deletion-unavailable-qiita-user-name-crawler-cli > /dev/null 2>&1 &
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/deletion-unavailable-qiita-user-name-cli > /dev/null 2>&1 &
 
 run-main presentation.cli.batch.monthly.DeletionUnavailableQiitaUserNameCli
 ```
