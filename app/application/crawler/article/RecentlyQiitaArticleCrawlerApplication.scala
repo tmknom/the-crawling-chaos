@@ -8,7 +8,7 @@ import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdRepository, Qiit
 import play.api.Logger
 
 @Singleton
-final class QiitaArticleCrawlerApplication @Inject()(
+final class RecentlyQiitaArticleCrawlerApplication @Inject()(
     gateway:                  QiitaArticleGateway,
     repository:               QiitaArticleRepository,
     rawJsonRepository:        QiitaRawArticleJsonRepository,
@@ -17,7 +17,7 @@ final class QiitaArticleCrawlerApplication @Inject()(
   private val SleepTimeMilliseconds = 100.toLong
 
   def crawl(): Unit = {
-    val qiitaItemIds = qiitaArticleIdRepository.retrieveAll()
+    val qiitaItemIds = qiitaArticleIdRepository.retrieveRecently()
     qiitaItemIds.zipWithIndex.foreach {
       case (qiitaItemId, index) =>
         quietlyCrawl(qiitaItemId, index, qiitaItemIds.size)
