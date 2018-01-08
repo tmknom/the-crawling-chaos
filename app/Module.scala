@@ -2,7 +2,6 @@ import com.google.inject.AbstractModule
 import domain.qiita.article.contribution.{FacebookGateway, HatenaGateway, PocketGateway, QiitaArticleContributionRepository}
 import domain.qiita.article.json.QiitaRawArticleJsonRepository
 import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdGateway, QiitaArticleIdRepository, QiitaArticleRepository}
-import domain.qiita.initial.{QiitaUserInitialGateway, QiitaUserInitialRepository}
 import domain.qiita.user._
 import domain.qiita.user.contribution.{DeprecatedQiitaUserInternalApiGateway, QiitaUserContributionHistoryRepository, QiitaUserContributionRepository}
 import domain.qiita.user.json.QiitaRawInternalUserJsonRepository
@@ -11,7 +10,6 @@ import domain.qiita.user.summary.QiitaUserSummaryRepository
 import infrastructure.qiita.article.contribution.ScalikejdbcQiitaArticleContributionRepository
 import infrastructure.qiita.article.json.{HttpFacebookGateway, HttpHatenaGateway, HttpPocketGateway, ScalikejdbcQiitaRawArticleJsonRepository}
 import infrastructure.qiita.article.{HttpQiitaArticleGateway, HttpQiitaArticleIdGateway, ScalikejdbcQiitaArticleIdRepository, ScalikejdbcQiitaArticleRepository}
-import infrastructure.qiita.initial.{HttpQiitaUserInitialGateway, ScalikejdbcQiitaUserInitialRepository}
 import infrastructure.qiita.user._
 import infrastructure.qiita.user.contribution._
 import infrastructure.qiita.user.json.ScalikejdbcQiitaRawInternalUserJsonRepository
@@ -46,9 +44,6 @@ class Module extends AbstractModule {
   private def configureInfrastructure(): Unit = {
     configureInfrastructureUser()
     bind(classOf[ScalajHttpAdaptor]).to(classOf[RealScalajHttpAdaptor])
-
-    bind(classOf[QiitaUserInitialRepository]).to(classOf[ScalikejdbcQiitaUserInitialRepository])
-    bind(classOf[QiitaUserInitialGateway]).to(classOf[HttpQiitaUserInitialGateway])
 
     bind(classOf[DeprecatedQiitaUserRepository]).to(classOf[ScalikejdbcDeprecatedQiitaUserRepository])
     bind(classOf[DeprecatedQiitaUserInternalApiGateway]).to(classOf[HttpDeprecatedQiitaUserInternalApiGateway])
