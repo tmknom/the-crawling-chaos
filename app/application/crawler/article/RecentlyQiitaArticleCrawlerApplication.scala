@@ -6,6 +6,7 @@ import javax.inject.{Inject, Singleton}
 import domain.qiita.article.json.QiitaRawArticleJsonRepository
 import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdRepository, QiitaArticleRepository, QiitaItemId}
 import play.api.Logger
+import scalikejdbc.DB
 
 @Singleton
 final class RecentlyQiitaArticleCrawlerApplication @Inject()(
@@ -28,8 +29,12 @@ final class RecentlyQiitaArticleCrawlerApplication @Inject()(
   private def quietlyCrawl(qiitaItemId: QiitaItemId, index: Int, qiitaItemIdsCount: Int): Unit = {
     try {
       val (qiitaArticle, rawArticleJson) = gateway.fetch(qiitaItemId)
-      repository.register(qiitaArticle)
-      rawJsonRepository.register(qiitaArticle.itemId, rawArticleJson)
+
+      DB.localTx { implicit session =>
+        repository.register(qiitaArticle)
+        rawJsonRepository.register(qiitaArticle.itemId, rawArticleJson)
+      }
+
       log(qiitaItemId, index, qiitaItemIdsCount)
     } catch {
       case e: Exception =>
