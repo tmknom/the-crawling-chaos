@@ -4,7 +4,9 @@
 
 ## 使い方
 
-### 最近登録されたQiitaユーザの名前をクロール
+### Qiitaユーザ
+
+#### 最近登録されたQiitaユーザの名前をクロール
 
 ```
 /tmp/qiita-ranker-1.0-SNAPSHOT/bin/recently-qiita-user-name-crawler-cli > /dev/null 2>&1 &
@@ -12,7 +14,7 @@
 run-main presentation.cli.batch.daily.user.RecentlyQiitaUserNameCrawlerCli
 ```
 
-### 最近登録されたQiitaユーザのいいね数をクロール
+#### 最近登録されたQiitaユーザのいいね数をクロール
 
 ```
 /tmp/qiita-ranker-1.0-SNAPSHOT/bin/recently-qiita-user-contribution-crawler-cli > /dev/null 2>&1 &
@@ -20,7 +22,7 @@ run-main presentation.cli.batch.daily.user.RecentlyQiitaUserNameCrawlerCli
 run-main presentation.cli.batch.daily.user.RecentlyQiitaUserContributionCrawlerCli
 ```
 
-### 無効なQiitaユーザを削除
+#### 無効なQiitaユーザを削除
 
 ```
 /tmp/qiita-ranker-1.0-SNAPSHOT/bin/deletion-unavailable-qiita-user-name-crawler-cli > /dev/null 2>&1 &
@@ -28,7 +30,9 @@ run-main presentation.cli.batch.daily.user.RecentlyQiitaUserContributionCrawlerC
 run-main presentation.cli.batch.monthly.DeletionUnavailableQiitaUserNameCli
 ```
 
-### 最近登録された記事IDをクロール
+### Qiita記事
+
+#### 最近登録された記事IDをクロール
 
 ```
 /tmp/qiita-ranker-1.0-SNAPSHOT/bin/recently-qiita-article-id-crawler-cli > /dev/null 2>&1 &
@@ -36,7 +40,7 @@ run-main presentation.cli.batch.monthly.DeletionUnavailableQiitaUserNameCli
 run-main presentation.cli.batch.daily.article.RecentlyQiitaArticleIdCrawlerCli
 ```
 
-### 最近登録された記事をクロール
+#### 最近登録された記事をクロール
 
 ```
 /tmp/qiita-ranker-1.0-SNAPSHOT/bin/recently-qiita-article-crawler-cli > /dev/null 2>&1 &
