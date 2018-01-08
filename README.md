@@ -20,6 +20,14 @@ run-main presentation.cli.batch.daily.user.RecentlyQiitaUserNameCrawlerCli
 run-main presentation.cli.batch.daily.user.RecentlyQiitaUserContributionCrawlerCli
 ```
 
+### 無効なQiitaユーザを削除
+
+```
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/deletion-unavailable-qiita-user-name-crawler-cli > /dev/null 2>&1 &
+
+run-main presentation.cli.batch.monthly.DeletionUnavailableQiitaUserNameCli
+```
+
 ### 最近登録された記事IDをクロール
 
 ```

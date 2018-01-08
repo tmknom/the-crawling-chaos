@@ -21,7 +21,19 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
     () // 明示的に Unit を返す
   }
 
-  def retrieveRecently()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
+  override def delete(qiitaUserId: QiitaUserId)(implicit session: DBSession = AutoSession): Unit = {
+    val id = qiitaUserId.value
+    sql"""
+          DELETE FROM qiita_users
+          WHERE id = $id;
+       """
+      .update()
+      .apply()
+
+    () // 明示的に Unit を返す
+  }
+
+  override def retrieveRecently()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
     sql"""
           SELECT id, user_name, registered_date_time FROM qiita_users AS qu
           WHERE NOT EXISTS
@@ -33,7 +45,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
       .apply()
   }
 
-  def retrieveContributed()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
+  override def retrieveContributed()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
     sql"""
           SELECT qu.id, qu.user_name, qu.registered_date_time FROM qiita_users AS qu
           INNER JOIN qiita_user_contributions AS quc ON qu.id = quc.qiita_user_id
@@ -45,7 +57,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
       .apply()
   }
 
-  def retrieveTop1000()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
+  override def retrieveTop1000()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
     sql"""
           SELECT qu.id, qu.user_name, qu.registered_date_time FROM qiita_users AS qu
           INNER JOIN qiita_user_contributions AS quc ON qu.id = quc.qiita_user_id
@@ -54,6 +66,13 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
       .map(toQiitaUser)
       .list()
       .apply()
+  }
+
+  override def retrieveUnavailable()(implicit session: DBSession = AutoSession): Seq[QiitaUser] = {
+    // 事前に RecentlyQiitaUserContributionCrawlerCli を実行していることを前提とすると
+    // qiita_user_contributions テーブルにレコードがない = 無効なユーザであると判断できる。
+    // よって、単純に retrieveRecently メソッドを呼ぶだけとしている。
+    retrieveRecently()
   }
 
   private def toQiitaUser(rs: WrappedResultSet): QiitaUser = {
