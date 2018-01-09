@@ -2,7 +2,7 @@ package infrastructure.qiita.user.contribution
 
 import domain.qiita.user.contribution.{ArticlesCount, QiitaUserContribution}
 import domain.qiita.user.summary.QiitaUserSummary
-import domain.qiita.user.{QiitaUser, QiitaUserId, QiitaUserName, RegisteredDateTime}
+import domain.qiita.user.{DeprecatedQiitaUser, QiitaUserId, QiitaUserName, RegisteredDateTime}
 import library.scalaj._
 import org.scalatestplus.play.PlaySpec
 
@@ -12,7 +12,7 @@ class HttpDeprecatedQiitaUserInternalApiGatewaySpec extends PlaySpec {
 
   "#fetch" should {
     "通信できること" in {
-      val qiitaUser = QiitaUser(QiitaUserId(1), QiitaUserName("dummy_user"), RegisteredDateTime.now())
+      val qiitaUser = DeprecatedQiitaUser(QiitaUserId(1), QiitaUserName("dummy_user"), RegisteredDateTime.now())
       val actual    = sut.fetch(qiitaUser)
 
       val expected = QiitaUserSummary(

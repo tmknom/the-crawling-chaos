@@ -9,7 +9,7 @@ import domain.qiita.user.contribution.{
   QiitaUserContributionRepository,
   UpdatedDateTime
 }
-import domain.qiita.user.{QiitaUser, RegisteredDateTime}
+import domain.qiita.user.{DeprecatedQiitaUser, RegisteredDateTime}
 import play.api.Logger
 import scalikejdbc.DB
 
@@ -27,7 +27,7 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
   @SuppressWarnings(Array("org.wartremover.warts.MutableDataStructures"))
   private val errorQiitaUserNames = mutable.ListBuffer.empty[String]
 
-  def crawl(qiitaUsers: Seq[QiitaUser]): Unit = {
+  def crawl(qiitaUsers: Seq[DeprecatedQiitaUser]): Unit = {
     val qiitaUsersSize = qiitaUsers.zipWithIndex.size
 
     qiitaUsers.zipWithIndex.foreach {
@@ -40,7 +40,7 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
     Logger.info(s"crawl error ${errorQiitaUserNames.size.toString} users ( ${errorQiitaUserNames.mkString(",")} )")
   }
 
-  private def quietlyCrawlOneUser(qiitaUser: QiitaUser, index: Int): Unit = {
+  private def quietlyCrawlOneUser(qiitaUser: DeprecatedQiitaUser, index: Int): Unit = {
     try {
       crawlOneUser(qiitaUser)
     } catch {
@@ -52,7 +52,7 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
     }
   }
 
-  private def crawlOneUser(qiitaUser: QiitaUser): Unit = {
+  private def crawlOneUser(qiitaUser: DeprecatedQiitaUser): Unit = {
     val qiitaUserSummary = gateway.fetch(qiitaUser)
 
     val updatedDateTime    = UpdatedDateTime.now()
@@ -64,7 +64,7 @@ final class QiitaUserContributionCrawlerApplication @Inject()(
     }
   }
 
-  private def log(qiitaUser: QiitaUser, index: Int, qiitaUsersSize: Int) = {
+  private def log(qiitaUser: DeprecatedQiitaUser, index: Int, qiitaUsersSize: Int) = {
     val progress = ((index + 1) / qiitaUsersSize.toDouble) * 100.0
     Logger.info(s"crawled ${qiitaUser.name.value} : ${index + 1} / $qiitaUsersSize ($progress%)")
   }

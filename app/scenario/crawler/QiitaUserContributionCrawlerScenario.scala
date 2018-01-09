@@ -3,7 +3,7 @@ package scenario.crawler
 import javax.inject.{Inject, Singleton}
 
 import application.crawler.user.QiitaUserContributionCrawlerApplication
-import domain.qiita.user.{DeprecatedQiitaUserRepository, QiitaUser}
+import domain.qiita.user.{DeprecatedQiitaUser, DeprecatedQiitaUserRepository}
 
 @Singleton
 final class QiitaUserContributionCrawlerScenario @Inject()(
@@ -15,7 +15,7 @@ final class QiitaUserContributionCrawlerScenario @Inject()(
     * いいね数トップ1000ユーザのいいね数をクロール
     */
   def crawlTop1000User(): Unit = {
-    val qiitaUsers: Seq[QiitaUser] = qiitaUserRepository.retrieveTop1000()
+    val qiitaUsers: Seq[DeprecatedQiitaUser] = qiitaUserRepository.retrieveTop1000()
     application.crawl(qiitaUsers)
   }
 
@@ -23,7 +23,7 @@ final class QiitaUserContributionCrawlerScenario @Inject()(
     * いいねを獲得したことのあるユーザのいいね数をクロール
     */
   def crawlContributedUser(): Unit = {
-    val qiitaUsers: Seq[QiitaUser] = qiitaUserRepository.retrieveContributed()
+    val qiitaUsers: Seq[DeprecatedQiitaUser] = qiitaUserRepository.retrieveContributed()
     application.crawl(qiitaUsers)
   }
 
@@ -31,7 +31,7 @@ final class QiitaUserContributionCrawlerScenario @Inject()(
     * 最近登録されたユーザのいいね数をクロール
     */
   def crawlRecentlyUser(): Unit = {
-    val qiitaUsers: Seq[QiitaUser] = qiitaUserRepository.retrieveRecently()
+    val qiitaUsers: Seq[DeprecatedQiitaUser] = qiitaUserRepository.retrieveRecently()
     application.crawl(qiitaUsers)
   }
 }
