@@ -39,6 +39,7 @@ class Module extends AbstractModule {
 
     bind(classOf[QiitaUserNameRepository]).to(classOf[ScalikejdbcQiitaUserNameRepository])
     bind(classOf[QiitaRawInternalUserJsonRepository]).to(classOf[ScalikejdbcQiitaRawInternalUserJsonRepository])
+    bind(classOf[QiitaUserRepository]).to(classOf[ScalikejdbcQiitaUserRepository])
   }
 
   private def configureInfrastructure(): Unit = {
