@@ -11,7 +11,7 @@ import play.api.Logger
 import scala.collection.mutable
 
 @Singleton
-final class RecentlyQiitaUserCrawlerApplication @Inject()(
+final class AllQiitaRawInternalUserJsonCrawlerApplication @Inject()(
     gateway:                 QiitaUserInternalApiGateway,
     repository:              QiitaRawInternalUserJsonRepository,
     qiitaUserNameRepository: QiitaUserNameRepository
