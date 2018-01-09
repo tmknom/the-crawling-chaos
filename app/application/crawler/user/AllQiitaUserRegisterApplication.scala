@@ -17,10 +17,11 @@ final class AllQiitaUserRegisterApplication @Inject()(
   }
 
   private def register(qiitaUserName: QiitaUserName): Unit = {
-    val rawInternalUserJson = qiitaRawInternalUserJsonRepository.retrieve(qiitaUserName)
-    // 永続化対象のデータを取り出し
-
-    //永続化
-
+    val optionValue = qiitaRawInternalUserJsonRepository.retrieve(qiitaUserName)
+    val rawInternalUserJson = optionValue match {
+      case Some(v) => v
+      case None    => throw new RuntimeException(s"ココに来たらバグなので雑に例外をスロー ${qiitaUserName.value}")
+    }
+    repository.register(rawInternalUserJson.toQiitaUser)
   }
 }
