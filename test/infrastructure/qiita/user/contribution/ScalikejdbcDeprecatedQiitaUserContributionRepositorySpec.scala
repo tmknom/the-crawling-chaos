@@ -3,7 +3,7 @@ package infrastructure.qiita.user.contribution
 import domain.qiita.user.contribution.{ArticlesCount, QiitaUserContribution, UpdatedDateTime}
 import domain.qiita.user.summary.QiitaUserSummary
 import domain.qiita.user.{QiitaUserId, QiitaUserName}
-import fixture.db.qiita.{DeprecatedQiitaUsersFixture, QiitaUserContributionsFixture}
+import fixture.db.qiita.{DeprecatedQiitaUserContributionsFixture, DeprecatedQiitaUsersFixture}
 import library.test.db.{DatabaseFixture, DatabaseSpec}
 
 // scalastyle:off magic.number
@@ -32,13 +32,13 @@ class ScalikejdbcDeprecatedQiitaUserContributionRepositorySpec extends DatabaseS
     "参照できること" in { implicit session =>
       DatabaseFixture.setup(
         DeprecatedQiitaUsersFixture.Default.Fixtures,
-        QiitaUserContributionsFixture.Default.Fixtures
+        DeprecatedQiitaUserContributionsFixture.Default.Fixtures
       )
 
       val qiitaUserId = QiitaUserId(DeprecatedQiitaUsersFixture.Default.Id.toInt)
       val actual      = sut.retrieve(qiitaUserId)
 
-      val expected = QiitaUserContribution(QiitaUserContributionsFixture.Default.Contribution.toInt)
+      val expected = QiitaUserContribution(DeprecatedQiitaUserContributionsFixture.Default.Contribution.toInt)
       actual mustBe expected
     }
   }
