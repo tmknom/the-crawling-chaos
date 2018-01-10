@@ -10,7 +10,7 @@ import org.scalatest.mockito.MockitoSugar
 import org.scalatestplus.play.PlaySpec
 
 // scalastyle:off magic.number
-class QiitaUserContributionCrawlerApplicationSpec extends PlaySpec with MockitoSugar with BeforeAndAfter {
+class DeprecatedQiitaUserContributionCrawlerApplicationSpec extends PlaySpec with MockitoSugar with BeforeAndAfter {
 
   private val qiitaUserSummary = QiitaUserSummary(
     id            = QiitaUserId(1),
@@ -31,7 +31,7 @@ class QiitaUserContributionCrawlerApplicationSpec extends PlaySpec with MockitoS
 
   "QiitaUserContributionCrawlerApplication#crawl" should {
     "クロールできること" in {
-      val sut = new QiitaUserContributionCrawlerApplication(
+      val sut = new DeprecatedQiitaUserContributionCrawlerApplication(
         mockQiitaUserInternalApiGateway,
         mockQiitaUserContributionRepository,
         mockQiitaUserContributionHistoryRepository
