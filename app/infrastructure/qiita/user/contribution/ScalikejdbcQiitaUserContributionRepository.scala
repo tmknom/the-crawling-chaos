@@ -17,7 +17,7 @@ final class ScalikejdbcQiitaUserContributionRepository extends QiitaUserContribu
     val articlesCount = qiitaUserSummary.articlesCount.value
     val updated       = updatedDateTime.value
     sql"""
-          INSERT INTO qiita_user_contributions (qiita_user_id, contribution, articles_count, updated_date_time)
+          INSERT INTO deprecated_qiita_user_contributions (qiita_user_id, contribution, articles_count, updated_date_time)
           VALUES ($id, $contribution, $articlesCount, $updated)
           ON DUPLICATE KEY UPDATE
           qiita_user_id = VALUES(qiita_user_id),
@@ -30,7 +30,7 @@ final class ScalikejdbcQiitaUserContributionRepository extends QiitaUserContribu
   }
 
   def retrieve(qiitaUserId: QiitaUserId)(implicit session: DBSession = AutoSession): QiitaUserContribution = {
-    sql"SELECT qiita_user_id, contribution FROM qiita_user_contributions;".map { rs =>
+    sql"SELECT qiita_user_id, contribution FROM deprecated_qiita_user_contributions;".map { rs =>
       QiitaUserContribution(rs.int("contribution"))
     }.single().apply().getOrElse(throw new RuntimeException(s"Not Found : $qiitaUserId"))
   }
