@@ -24,7 +24,7 @@ class QiitaUserContributionCrawlerApplicationSpec extends PlaySpec with MockitoS
   private val mockQiitaUserInternalApiGateway            = mock[DeprecatedQiitaUserInternalApiGateway]
 
   before {
-    when(mockQiitaUserInternalApiGateway.fetch(any[QiitaUser])).thenReturn(qiitaUserSummary)
+    when(mockQiitaUserInternalApiGateway.fetch(any[DeprecatedQiitaUser])).thenReturn(qiitaUserSummary)
     when(mockQiitaUserContributionRepository.register(any[QiitaUserSummary], any[UpdatedDateTime])).thenReturn(1)
     when(mockQiitaUserContributionHistoryRepository.register(any[QiitaUserSummary], any[RegisteredDateTime])).thenReturn(1)
   }
@@ -37,7 +37,7 @@ class QiitaUserContributionCrawlerApplicationSpec extends PlaySpec with MockitoS
         mockQiitaUserContributionHistoryRepository
       )
 
-      sut.crawl(Seq.empty[QiitaUser])
+      sut.crawl(Seq.empty[DeprecatedQiitaUser])
     }
   }
 }

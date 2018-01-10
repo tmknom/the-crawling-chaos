@@ -7,4 +7,8 @@ import scalikejdbc.{AutoSession, DBSession}
 trait QiitaRawInternalUserJsonRepository {
   def register(qiitaUserName: QiitaUserName, rawInternalUserJson: RawInternalUserJson, crawledDateTime: CrawledDateTime)(implicit session: DBSession =
                                                                                                                            AutoSession): Unit
+
+  def retrieve(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Option[RawInternalUserJson]
+
+  def retrieveRecently()(implicit session: DBSession = AutoSession): List[QiitaUserName]
 }

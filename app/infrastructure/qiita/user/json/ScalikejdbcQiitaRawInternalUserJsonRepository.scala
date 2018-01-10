@@ -24,4 +24,36 @@ final class ScalikejdbcQiitaRawInternalUserJsonRepository extends QiitaRawIntern
 
     () // 明示的に Unit を返す
   }
+
+  override def retrieve(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Option[RawInternalUserJson] = {
+    val name = qiitaUserName.value
+
+    sql"""
+          SELECT raw_json FROM raw_qiita_internal_user_jsons
+          WHERE user_name = $name;
+       """
+      .map(toRawInternalUserJson)
+      .single()
+      .apply()
+  }
+
+  override def retrieveRecently()(implicit session: DBSession = AutoSession): List[QiitaUserName] = {
+    sql"""
+          SELECT user_name FROM raw_qiita_internal_user_jsons AS r
+          WHERE NOT EXISTS
+          (SELECT 1 FROM qiita_users AS qu WHERE r.user_name = qu.user_name)
+          ORDER BY user_name ASC;
+       """
+      .map(toQiitaUserName)
+      .list()
+      .apply()
+  }
+
+  private def toRawInternalUserJson(rs: WrappedResultSet): RawInternalUserJson = {
+    RawInternalUserJson(rs.string("raw_json"))
+  }
+
+  private def toQiitaUserName(rs: WrappedResultSet): QiitaUserName = {
+    QiitaUserName(rs.string("user_name"))
+  }
 }
