@@ -16,7 +16,7 @@ import scalikejdbc.DB
 import scala.collection.mutable
 
 @Singleton
-final class QiitaUserContributionCrawlerApplication @Inject()(
+final class DeprecatedQiitaUserContributionCrawlerApplication @Inject()(
     gateway:           DeprecatedQiitaUserInternalApiGateway,
     repository:        DeprecatedQiitaUserContributionRepository,
     historyRepository: DeprecatedQiitaUserContributionHistoryRepository
