@@ -19,8 +19,8 @@ class QiitaUserContributionCrawlerApplicationSpec extends PlaySpec with MockitoS
     articlesCount = ArticlesCount(123)
   )
 
-  private val mockQiitaUserContributionRepository        = mock[QiitaUserContributionRepository]
-  private val mockQiitaUserContributionHistoryRepository = mock[QiitaUserContributionHistoryRepository]
+  private val mockQiitaUserContributionRepository        = mock[DeprecatedQiitaUserContributionRepository]
+  private val mockQiitaUserContributionHistoryRepository = mock[DeprecatedQiitaUserContributionHistoryRepository]
   private val mockQiitaUserInternalApiGateway            = mock[DeprecatedQiitaUserInternalApiGateway]
 
   before {

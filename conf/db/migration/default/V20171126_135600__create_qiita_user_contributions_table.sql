@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS qiita_user_contributions (
+CREATE TABLE IF NOT EXISTS deprecated_qiita_user_contributions (
   qiita_user_id     INT(11)     NOT NULL,
   contribution      INT(11)     NOT NULL COMMENT 'いいね数',
   articles_count    INT(11)     NOT NULL COMMENT '記事数',

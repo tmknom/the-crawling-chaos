@@ -13,7 +13,7 @@ final class ScalikejdbcQiitaUserSummaryRepository extends QiitaUserSummaryReposi
   def retrieveTop200()(implicit session: DBSession = AutoSession): List[QiitaUserSummary] = {
     sql"""
           SELECT qu.id, qu.user_name, quc.contribution, quc.articles_count
-          FROM qiita_user_contributions AS quc
+          FROM deprecated_qiita_user_contributions AS quc
           INNER JOIN deprecated_qiita_users AS qu
           ON quc.qiita_user_id = qu.id
           ORDER BY quc.contribution DESC
