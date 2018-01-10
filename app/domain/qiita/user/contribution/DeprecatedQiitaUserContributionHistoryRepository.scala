@@ -5,6 +5,6 @@ import domain.qiita.user.summary.QiitaUserSummary
 import scalikejdbc.{AutoSession, DBSession}
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments"))
-trait QiitaUserContributionHistoryRepository {
+trait DeprecatedQiitaUserContributionHistoryRepository {
   def register(qiitaUserSummary: QiitaUserSummary, registeredDateTime: RegisteredDateTime)(implicit session: DBSession = AutoSession): Int
 }

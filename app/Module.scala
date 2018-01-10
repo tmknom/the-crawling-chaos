@@ -3,7 +3,7 @@ import domain.qiita.article.contribution.{FacebookGateway, HatenaGateway, Pocket
 import domain.qiita.article.json.QiitaRawArticleJsonRepository
 import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdGateway, QiitaArticleIdRepository, QiitaArticleRepository}
 import domain.qiita.user._
-import domain.qiita.user.contribution.{DeprecatedQiitaUserInternalApiGateway, QiitaUserContributionHistoryRepository, QiitaUserContributionRepository}
+import domain.qiita.user.contribution.{DeprecatedQiitaUserContributionHistoryRepository, DeprecatedQiitaUserInternalApiGateway, QiitaUserContributionRepository}
 import domain.qiita.user.json.QiitaRawInternalUserJsonRepository
 import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 import domain.qiita.user.summary.QiitaUserSummaryRepository
@@ -53,7 +53,7 @@ class Module extends AbstractModule {
     bind(classOf[QiitaUserRankingGateway]).to(classOf[HttpQiitaUserRankingGateway])
 
     bind(classOf[QiitaUserContributionRepository]).to(classOf[ScalikejdbcQiitaUserContributionRepository])
-    bind(classOf[QiitaUserContributionHistoryRepository]).to(classOf[ScalikejdbcQiitaUserContributionHistoryRepository])
+    bind(classOf[DeprecatedQiitaUserContributionHistoryRepository]).to(classOf[ScalikejdbcDeprecatedQiitaUserContributionHistoryRepository])
     bind(classOf[QiitaUserSummaryRepository]).to(classOf[ScalikejdbcQiitaUserSummaryRepository])
 
     bind(classOf[QiitaArticleIdGateway]).to(classOf[HttpQiitaArticleIdGateway])

@@ -4,8 +4,8 @@ import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
 import domain.qiita.user.contribution.{
+  DeprecatedQiitaUserContributionHistoryRepository,
   DeprecatedQiitaUserInternalApiGateway,
-  QiitaUserContributionHistoryRepository,
   QiitaUserContributionRepository,
   UpdatedDateTime
 }
@@ -19,7 +19,7 @@ import scala.collection.mutable
 final class QiitaUserContributionCrawlerApplication @Inject()(
     gateway:           DeprecatedQiitaUserInternalApiGateway,
     repository:        QiitaUserContributionRepository,
-    historyRepository: QiitaUserContributionHistoryRepository
+    historyRepository: DeprecatedQiitaUserContributionHistoryRepository
 ) {
 
   private val SleepTimeMilliseconds = 100.toLong

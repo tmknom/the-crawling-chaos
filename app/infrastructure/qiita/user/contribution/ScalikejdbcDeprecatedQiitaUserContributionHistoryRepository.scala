@@ -3,13 +3,13 @@ package infrastructure.qiita.user.contribution
 import javax.inject.Singleton
 
 import domain.qiita.user.RegisteredDateTime
-import domain.qiita.user.contribution.QiitaUserContributionHistoryRepository
+import domain.qiita.user.contribution.DeprecatedQiitaUserContributionHistoryRepository
 import domain.qiita.user.summary.QiitaUserSummary
 import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
 @Singleton
-final class ScalikejdbcQiitaUserContributionHistoryRepository extends QiitaUserContributionHistoryRepository {
+final class ScalikejdbcDeprecatedQiitaUserContributionHistoryRepository extends DeprecatedQiitaUserContributionHistoryRepository {
 
   def register(qiitaUserSummary: QiitaUserSummary, registeredDateTime: RegisteredDateTime)(implicit session: DBSession = AutoSession): Int = {
     val id             = qiitaUserSummary.id.value
