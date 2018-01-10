@@ -9,7 +9,7 @@ import domain.qiita.user.{DeprecatedQiitaUserRepository, QiitaUserApiGateway, Re
 import play.api.Logger
 
 @Singleton
-final class RecentlyQiitaUserNameCrawlerApplication @Inject()(
+final class DeprecatedRecentlyQiitaUserNameCrawlerApplication @Inject()(
     repository: DeprecatedQiitaUserRepository,
     gateway:    QiitaUserApiGateway
 ) {
