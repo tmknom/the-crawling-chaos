@@ -6,5 +6,9 @@ import scalikejdbc.{AutoSession, DBSession}
 trait QiitaUserNameRepository {
   def register(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Unit
 
+  def delete(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Unit
+
   def retrieveRecently()(implicit session: DBSession = AutoSession): List[QiitaUserName]
+
+  def retrieveUnavailable()(implicit session: DBSession = AutoSession): List[QiitaUserName]
 }
