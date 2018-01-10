@@ -3,11 +3,7 @@ import domain.qiita.article.contribution.{FacebookGateway, HatenaGateway, Pocket
 import domain.qiita.article.json.QiitaRawArticleJsonRepository
 import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdGateway, QiitaArticleIdRepository, QiitaArticleRepository}
 import domain.qiita.user._
-import domain.qiita.user.contribution.{
-  DeprecatedQiitaUserContributionHistoryRepository,
-  DeprecatedQiitaUserContributionRepository,
-  DeprecatedQiitaUserInternalApiGateway
-}
+import domain.qiita.user.contribution._
 import domain.qiita.user.json.QiitaRawInternalUserJsonRepository
 import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 import domain.qiita.user.summary.QiitaUserSummaryRepository
@@ -44,6 +40,8 @@ class Module extends AbstractModule {
     bind(classOf[QiitaUserNameRepository]).to(classOf[ScalikejdbcQiitaUserNameRepository])
     bind(classOf[QiitaRawInternalUserJsonRepository]).to(classOf[ScalikejdbcQiitaRawInternalUserJsonRepository])
     bind(classOf[QiitaUserRepository]).to(classOf[ScalikejdbcQiitaUserRepository])
+    bind(classOf[QiitaUserContributionRepository]).to(classOf[ScalikejdbcQiitaUserContributionRepository])
+    bind(classOf[QiitaUserContributionHistoryRepository]).to(classOf[ScalikejdbcQiitaUserContributionHistoryRepository])
   }
 
   private def configureInfrastructure(): Unit = {

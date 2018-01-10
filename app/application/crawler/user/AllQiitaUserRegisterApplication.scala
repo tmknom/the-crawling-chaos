@@ -2,13 +2,17 @@ package application.crawler.user
 
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.user.json.QiitaRawInternalUserJsonRepository
+import domain.qiita.user.contribution.{QiitaUserContributionHistoryRepository, QiitaUserContributionRepository}
+import domain.qiita.user.json.{QiitaRawInternalUserJsonRepository, RawInternalUserJson}
 import domain.qiita.user.{QiitaUserName, QiitaUserRepository}
+import scalikejdbc.DB
 
 @Singleton
 final class AllQiitaUserRegisterApplication @Inject()(
-    repository:                         QiitaUserRepository,
-    qiitaRawInternalUserJsonRepository: QiitaRawInternalUserJsonRepository
+    qiitaUserRepository:                    QiitaUserRepository,
+    qiitaUserContributionRepository:        QiitaUserContributionRepository,
+    qiitaUserContributionHistoryRepository: QiitaUserContributionHistoryRepository,
+    qiitaRawInternalUserJsonRepository:     QiitaRawInternalUserJsonRepository
 ) {
 
   def crawl(): Unit = {
@@ -22,6 +26,17 @@ final class AllQiitaUserRegisterApplication @Inject()(
       case Some(v) => v
       case None    => throw new RuntimeException(s"ココに来たらバグなので雑に例外をスロー ${qiitaUserName.value}")
     }
-    repository.register(rawInternalUserJson.toQiitaUser)
+
+    registerWithTransaction(rawInternalUserJson)
+  }
+
+  private def registerWithTransaction(rawInternalUserJson: RawInternalUserJson): Unit = {
+    DB.localTx { implicit session =>
+      qiitaUserRepository.register(rawInternalUserJson.toQiitaUser)
+
+      val crawledEvent = rawInternalUserJson.toCrawledEvent
+      qiitaUserContributionRepository.register(crawledEvent)
+      qiitaUserContributionHistoryRepository.register(crawledEvent)
+    }
   }
 }
