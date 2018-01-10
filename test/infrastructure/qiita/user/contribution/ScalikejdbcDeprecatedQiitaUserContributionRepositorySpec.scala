@@ -7,8 +7,8 @@ import fixture.db.qiita.{DeprecatedQiitaUsersFixture, QiitaUserContributionsFixt
 import library.test.db.{DatabaseFixture, DatabaseSpec}
 
 // scalastyle:off magic.number
-class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
-  val sut = new ScalikejdbcQiitaUserContributionRepository()
+class ScalikejdbcDeprecatedQiitaUserContributionRepositorySpec extends DatabaseSpec {
+  val sut = new ScalikejdbcDeprecatedQiitaUserContributionRepository()
 
   "#register" should {
     "登録できること" in { implicit session =>

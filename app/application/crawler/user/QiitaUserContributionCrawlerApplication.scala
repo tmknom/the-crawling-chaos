@@ -5,8 +5,8 @@ import javax.inject.{Inject, Singleton}
 
 import domain.qiita.user.contribution.{
   DeprecatedQiitaUserContributionHistoryRepository,
+  DeprecatedQiitaUserContributionRepository,
   DeprecatedQiitaUserInternalApiGateway,
-  QiitaUserContributionRepository,
   UpdatedDateTime
 }
 import domain.qiita.user.{DeprecatedQiitaUser, RegisteredDateTime}
@@ -18,7 +18,7 @@ import scala.collection.mutable
 @Singleton
 final class QiitaUserContributionCrawlerApplication @Inject()(
     gateway:           DeprecatedQiitaUserInternalApiGateway,
-    repository:        QiitaUserContributionRepository,
+    repository:        DeprecatedQiitaUserContributionRepository,
     historyRepository: DeprecatedQiitaUserContributionHistoryRepository
 ) {
 
