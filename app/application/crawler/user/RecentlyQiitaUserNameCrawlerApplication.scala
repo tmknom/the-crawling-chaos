@@ -5,12 +5,12 @@ import javax.inject.{Inject, Singleton}
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
 import domain.qiita.user.page.RecentlyPage
-import domain.qiita.user.{DeprecatedQiitaUserRepository, QiitaUserApiGateway, RegisteredDateTime}
+import domain.qiita.user.{QiitaUserApiGateway, QiitaUserNameRepository}
 import play.api.Logger
 
 @Singleton
-final class DeprecatedRecentlyQiitaUserNameCrawlerApplication @Inject()(
-    repository: DeprecatedQiitaUserRepository,
+final class RecentlyQiitaUserNameCrawlerApplication @Inject()(
+    repository: QiitaUserNameRepository,
     gateway:    QiitaUserApiGateway
 ) {
   private val SleepTimeMilliseconds = 100.toLong
@@ -30,9 +30,8 @@ final class DeprecatedRecentlyQiitaUserNameCrawlerApplication @Inject()(
 
   private def crawlUntilDuplicated(): Unit = {
     RecentlyPage.range.foreach { currentPage =>
-      val qiitaUserNames     = gateway.fetch(currentPage)
-      val registeredDateTime = RegisteredDateTime.now()
-      qiitaUserNames.foreach(repository.register(_, registeredDateTime))
+      val qiitaUserNames = gateway.fetch(currentPage)
+      qiitaUserNames.foreach(repository.register)
 
       Logger.info(s"${this.getClass.getSimpleName} crawled ($currentPage / ${RecentlyPage.PageMax})")
       TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
