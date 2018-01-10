@@ -18,7 +18,7 @@ final class ScalikejdbcQiitaUserContributionHistoryRepository extends QiitaUserC
     val registeredDate = registeredDateTime.toLocalDate
     val registered     = registeredDateTime.value
     sql"""
-          INSERT INTO qiita_user_contribution_histories
+          INSERT INTO deprecated_qiita_user_contribution_histories
           (qiita_user_id, contribution, articles_count, registered_date, registered_date_time)
           VALUES ($id, $contribution, $articlesCount, $registeredDate, $registered);
        """
