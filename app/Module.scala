@@ -6,7 +6,8 @@ import domain.qiita.user._
 import domain.qiita.user.contribution.{
   DeprecatedQiitaUserContributionHistoryRepository,
   DeprecatedQiitaUserContributionRepository,
-  DeprecatedQiitaUserInternalApiGateway
+  DeprecatedQiitaUserInternalApiGateway,
+  QiitaUserContributionRepository
 }
 import domain.qiita.user.json.QiitaRawInternalUserJsonRepository
 import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
@@ -44,6 +45,7 @@ class Module extends AbstractModule {
     bind(classOf[QiitaUserNameRepository]).to(classOf[ScalikejdbcQiitaUserNameRepository])
     bind(classOf[QiitaRawInternalUserJsonRepository]).to(classOf[ScalikejdbcQiitaRawInternalUserJsonRepository])
     bind(classOf[QiitaUserRepository]).to(classOf[ScalikejdbcQiitaUserRepository])
+    bind(classOf[QiitaUserContributionRepository]).to(classOf[ScalikejdbcQiitaUserContributionRepository])
   }
 
   private def configureInfrastructure(): Unit = {
