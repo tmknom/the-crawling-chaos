@@ -6,20 +6,12 @@
 
 ### Qiitaユーザ
 
-#### 最近登録されたQiitaユーザの名前をクロール
+#### Qiitaユーザ名をクロール
 
 ```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/recently-qiita-user-name-crawler-cli > /dev/null 2>&1 &
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/qiita-user-name-crawler-cli > /dev/null 2>&1 &
 
-run-main presentation.cli.batch.daily.user.RecentlyQiitaUserNameCrawlerCli
-```
-
-#### 最近登録されたQiitaユーザのいいね数をクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/recently-qiita-user-contribution-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.batch.daily.user.RecentlyQiitaUserContributionCrawlerCli
+run-main presentation.cli.batch.daily.user.QiitaUserNameCrawlerCli
 ```
 
 #### 無効なQiitaユーザを削除
@@ -48,49 +40,30 @@ run-main presentation.cli.batch.daily.article.RecentlyQiitaArticleIdCrawlerCli
 run-main presentation.cli.batch.daily.article.RecentlyQiitaArticleCrawlerCli
 ```
 
+### 初期データ取得
 
-## 使い方（旧）
-
-### Qiitaユーザのイニシャルのページ数のクロール
-
-[Qiitaのユーザ一覧](https://qiita.com/users)のクローリングの事前準備として、各イニシャルのページ数を取得する。
+#### 全Qiitaユーザ名をクロール
 
 ```
-run-main presentation.cli.operation.crawler.QiitaUserInitialCrawlerCli
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-user-name-crawler-cli > /dev/null 2>&1 &
+
+run-main presentation.cli.onetime.AllQiitaUserNameCrawlerCli
 ```
 
-### Qiitaユーザの全件クロール
-
-[Qiitaのユーザ一覧](https://qiita.com/users)からユーザ名を全件クロール。
-[Qiita API](https://qiita.com/api/v2/docs#ユーザ)では、全件取得できないので、HTMLをクロールしている。
+#### 全Qiitaユーザ情報をクロール
 
 ```
-run-main presentation.cli.operation.crawler.QiitaUserCrawlerCli
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-raw-internal-user-json-crawler-cli > /dev/null 2>&1 &
+
+run-main presentation.cli.onetime.AllQiitaRawInternalUserJsonCrawlerCli
 ```
 
-### Qiitaユーザのいいね数クロール
-
-Qiitaユーザの全件のいいね数をクロール。
+#### 全Qiitaユーザ情報を登録
 
 ```
-run-main presentation.cli.operation.crawler.QiitaUserContributionCrawlerCli
-```
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-user-register-cli > /dev/null 2>&1 &
 
-### Qiita User Rankingのクロール
-
-[Qiita User Ranking](https://qiita-user-ranking.herokuapp.com/)からユーザ名といいね数を全件クロール。
-2017年3月頃との比較を行いたいので実装している。
-
-```
-run-main presentation.cli.operation.crawler.QiitaUserRankingCrawlerCli
-```
-
-### Qiita User Rankingにエントリーしているユーザのいいね数クロール
-
-[Qiita User Ranking](https://qiita-user-ranking.herokuapp.com/)に出てくるユーザのいいね数をクロール。
-
-```
-run-main presentation.cli.operation.crawler.QiitaUserRankingContributionCrawlerCli
+run-main presentation.cli.onetime.AllQiitaUserRegisterCli
 ```
 
 ## デプロイ
