@@ -20,7 +20,20 @@ final class ScalikejdbcQiitaUserNameRepository extends QiitaUserNameRepository {
     () // 明示的に Unit を返す
   }
 
-  def retrieveRecently()(implicit session: DBSession = AutoSession): List[QiitaUserName] = {
+  def delete(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Unit = {
+    val userName = qiitaUserName.value
+
+    sql"""
+          DELETE FROM qiita_user_names
+          WHERE user_name = $userName;
+       """
+      .update()
+      .apply()
+
+    () // 明示的に Unit を返す
+  }
+
+  override def retrieveRecently()(implicit session: DBSession = AutoSession): List[QiitaUserName] = {
     sql"""
           SELECT user_name FROM qiita_user_names AS qun
           WHERE NOT EXISTS
@@ -30,6 +43,10 @@ final class ScalikejdbcQiitaUserNameRepository extends QiitaUserNameRepository {
       .map(toQiitaUserName)
       .list()
       .apply()
+  }
+
+  override def retrieveUnavailable()(implicit session: DBSession = AutoSession): List[QiitaUserName] = {
+    retrieveRecently()
   }
 
   private def toQiitaUserName(rs: WrappedResultSet): QiitaUserName = {
