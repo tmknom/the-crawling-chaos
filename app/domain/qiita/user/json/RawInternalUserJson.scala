@@ -3,7 +3,8 @@ package domain.qiita.user.json
 import domain.qiita.user.contribution.{ArticlesCount, QiitaUserContribution}
 import domain.qiita.user.event.{EventDateTime, QiitaUserContributionCrawledEvent}
 import domain.qiita.user.{ProfileImageUrl, QiitaUser, QiitaUserId, QiitaUserName}
-import spray.json.JsonParser
+import spray.json.DefaultJsonProtocol._
+import spray.json._
 
 final case class RawInternalUserJson(value: String) {
   def toQiitaUser: QiitaUser = {
@@ -24,10 +25,14 @@ final case class RawInternalUserJson(value: String) {
   }
 
   private def parseJsonInt(keyName: String): Int = {
-    parseJsonString(keyName).toInt
+    parseJsValue(keyName).convertTo[Int]
   }
 
   private def parseJsonString(keyName: String): String = {
-    JsonParser(value).asJsObject.getFields(keyName).head.toString
+    parseJsValue(keyName).convertTo[String]
+  }
+
+  private def parseJsValue(keyName: String): JsValue = {
+    JsonParser(value).asJsObject.getFields(keyName).head
   }
 }
