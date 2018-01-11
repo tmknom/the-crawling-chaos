@@ -9,7 +9,7 @@ import domain.qiita.user.{QiitaUserApiGateway, QiitaUserNameRepository}
 import play.api.Logger
 
 @Singleton
-final class RecentlyQiitaUserNameCrawlerApplication @Inject()(
+final class QiitaUserNameCrawlerApplication @Inject()(
     repository: QiitaUserNameRepository,
     gateway:    QiitaUserApiGateway
 ) {
