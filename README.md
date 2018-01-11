@@ -14,6 +14,14 @@
 run-main presentation.cli.batch.daily.user.QiitaUserNameCrawlerCli
 ```
 
+#### Qiitaユーザをクロール
+
+```
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/qiita-user-crawler-cli > /dev/null 2>&1 &
+
+run-main presentation.cli.batch.daily.user.QiitaUserCrawlerCli
+```
+
 #### 無効なQiitaユーザを削除
 
 ```
