@@ -22,4 +22,24 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
 
     () // 明示的に Unit を返す
   }
+
+  override def retrieve(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Option[QiitaUser] = {
+    val name = qiitaUserName.value
+
+    sql"""
+          SELECT * FROM qiita_users
+          WHERE user_name = $name ;
+       """
+      .map(toQiitaUser)
+      .single()
+      .apply()
+  }
+
+  private def toQiitaUser(rs: WrappedResultSet): QiitaUser = {
+    QiitaUser(
+      QiitaUserId(rs.int("qiita_user_id")),
+      QiitaUserName(rs.string("user_name")),
+      ProfileImageUrl(rs.string("profile_image_url"))
+    )
+  }
 }
