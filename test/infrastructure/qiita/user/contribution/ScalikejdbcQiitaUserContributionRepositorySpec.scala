@@ -15,10 +15,10 @@ class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
       DatabaseFixture.setup(QiitaUsersFixture.Default.Fixtures)
 
       val crawledEvent = QiitaUserContributionCrawledEvent(
-        qiitaUserName         = QiitaUserName(QiitaUsersFixture.Default.UserName),
-        qiitaUserContribution = Contribution(1234),
-        articlesCount         = ArticlesCount(123),
-        crawledDateTime       = CrawledDateTime(DateTimeProvider.nowJST())
+        qiitaUserName   = QiitaUserName(QiitaUsersFixture.Default.UserName),
+        contribution    = Contribution(1234),
+        articlesCount   = ArticlesCount(123),
+        crawledDateTime = CrawledDateTime(DateTimeProvider.nowJST())
       )
 
       sut.register(crawledEvent)

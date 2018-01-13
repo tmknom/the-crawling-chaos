@@ -48,6 +48,6 @@ final class QiitaUserRankingContributionCrawlerApplication @Inject()(
     val rawInternalUserJson = gateway.fetch(qiitaUserRanking.name)
     val crawledEvent        = rawInternalUserJson.toCrawledEvent
     repository.register(crawledEvent)
-    Logger.info(s"crawled ${index + 1} : ${qiitaUserRanking.name} : ${crawledEvent.qiitaUserContribution}")
+    Logger.info(s"crawled ${index + 1} : ${qiitaUserRanking.name} : ${crawledEvent.contribution}")
   }
 }
