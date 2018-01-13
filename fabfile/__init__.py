@@ -6,11 +6,8 @@ from fabric.api import *
 @task
 def deploy():
     '''デプロイ'''
-    local('git checkout develop')
-    local('git pull --rebase origin develop')
-    local('sbt dist')
-    local('rm -rf /tmp/qiita-ranker-1.0-SNAPSHOT')
-    local('unzip target/universal/qiita-ranker-1.0-SNAPSHOT.zip -d /tmp')
+    import deploy
+    deploy.execute()
 
 
 @task
