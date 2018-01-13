@@ -7,7 +7,8 @@ TABLE_NAMES = [
     'raw_qiita_internal_user_jsons',
     'qiita_users',
     'qiita_user_contributions',
-    'qiita_user_contribution_histories'
+    'qiita_user_contribution_histories',
+    'qiita_article_ids',
 ]
 
 
