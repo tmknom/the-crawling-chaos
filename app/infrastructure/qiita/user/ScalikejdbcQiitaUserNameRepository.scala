@@ -8,7 +8,7 @@ import scalikejdbc._
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
 @Singleton
 final class ScalikejdbcQiitaUserNameRepository extends QiitaUserNameRepository {
-  override def register(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Unit = {
+  override def register(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Int = {
     val userName = qiitaUserName.value
     sql"""
           INSERT INTO qiita_user_names (user_name)
@@ -16,8 +16,6 @@ final class ScalikejdbcQiitaUserNameRepository extends QiitaUserNameRepository {
        """
       .update()
       .apply()
-
-    () // 明示的に Unit を返す
   }
 
   def delete(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Unit = {
