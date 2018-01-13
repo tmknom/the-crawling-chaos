@@ -35,6 +35,7 @@ class Module extends AbstractModule {
     bind(classOf[QiitaUserNameGateway]).to(classOf[HttpQiitaUserNameGateway])
     bind(classOf[QiitaUserInternalApiGateway]).to(classOf[HttpQiitaUserInternalApiGateway])
 
+    bind(classOf[QiitaUserRepository]).to(classOf[ScalikejdbcQiitaUserRepository])
     bind(classOf[QiitaUserNameRepository]).to(classOf[ScalikejdbcQiitaUserNameRepository])
     bind(classOf[QiitaRawInternalUserJsonRepository]).to(classOf[ScalikejdbcQiitaRawInternalUserJsonRepository])
     bind(classOf[QiitaUserProfileRepository]).to(classOf[ScalikejdbcQiitaUserProfileRepository])
