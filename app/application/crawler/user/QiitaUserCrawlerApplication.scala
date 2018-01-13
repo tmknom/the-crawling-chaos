@@ -10,7 +10,7 @@ import play.api.Logger
 import scalikejdbc.DB
 
 @Singleton
-final class TopQiitaUserCrawlerApplication @Inject()(
+final class QiitaUserCrawlerApplication @Inject()(
     gateway:                                QiitaUserInternalApiGateway,
     qiitaRawInternalUserJsonRepository:     QiitaRawInternalUserJsonRepository,
     qiitaUserContributionRepository:        QiitaUserContributionRepository,
@@ -19,7 +19,7 @@ final class TopQiitaUserCrawlerApplication @Inject()(
 ) {
   private val SleepTimeMilliseconds = 100.toLong
 
-  def crawl(): Unit = {
+  def crawlTopUser(): Unit = {
     val qiitaUsers     = qiitaUserRepository.retrieveTop1000()
     val qiitaUserNames = qiitaUsers.map(_.profile.name)
     crawlUsers(qiitaUserNames)
