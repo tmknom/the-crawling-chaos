@@ -5,10 +5,6 @@
 # ユーザ一覧
 GET        /qiita/users                       presentation.controller.QiitaUserController.list()
 
-# ユーザのイイね一覧
-GET        /qiita/users/contributions         presentation.controller.QiitaUserContributionController.list()
-GET        /qiita/users/contributions2        presentation.controller.QiitaUserContributionController.list2()
-
 # ヘルスチェック
 GET        /health_check                      library.controller.HealthCheckController.index
 
