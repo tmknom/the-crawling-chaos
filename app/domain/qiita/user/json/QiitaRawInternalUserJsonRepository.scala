@@ -1,6 +1,6 @@
 package domain.qiita.user.json
 
-import domain.qiita.user.QiitaUserName
+import domain.qiita.user.{CrawledDateTime, QiitaUserName}
 import scalikejdbc.{AutoSession, DBSession}
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments"))

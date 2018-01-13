@@ -1,8 +1,7 @@
 package infrastructure.qiita.user.contribution
 
-import domain.qiita.user.QiitaUserName
+import domain.qiita.user.{CrawledDateTime, QiitaUserName}
 import domain.qiita.user.contribution.{ArticlesCount, QiitaUserContribution, QiitaUserContributionCrawledEvent}
-import domain.qiita.user.json.CrawledDateTime
 import fixture.db.qiita.QiitaUsersFixture
 import library.datetime.DateTimeProvider
 import library.test.db.{DatabaseFixture, DatabaseSpec}

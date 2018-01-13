@@ -1,7 +1,6 @@
 package domain.qiita.user.contribution
 
-import domain.qiita.user.QiitaUserName
-import domain.qiita.user.json.CrawledDateTime
+import domain.qiita.user.{CrawledDateTime, QiitaUserName}
 
 final case class QiitaUserContributionCrawledEvent(
     qiitaUserName:         QiitaUserName,

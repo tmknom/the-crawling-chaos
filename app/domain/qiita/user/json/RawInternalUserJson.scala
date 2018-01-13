@@ -1,7 +1,7 @@
 package domain.qiita.user.json
 
 import domain.qiita.user.contribution.{ArticlesCount, QiitaUserContribution, QiitaUserContributionCrawledEvent}
-import domain.qiita.user.{ProfileImageUrl, QiitaUser, QiitaUserId, QiitaUserName}
+import domain.qiita.user._
 import spray.json.DefaultJsonProtocol._
 import spray.json._
 
