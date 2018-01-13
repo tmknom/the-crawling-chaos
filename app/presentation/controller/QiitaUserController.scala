@@ -20,8 +20,8 @@ object QiitaUserJson {
     Map(
       "id" -> qiitaUser.profile.id.value,
       "name" -> qiitaUser.profile.name.value,
-      "contribution" -> qiitaUser.contribution.value,
-      "articles_count" -> qiitaUser.articlesCount.value
+      "contribution" -> qiitaUser.qiitaUserContribution.contribution.value,
+      "articles_count" -> qiitaUser.qiitaUserContribution.articlesCount.value
     )
   }
 }
