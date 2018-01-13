@@ -119,27 +119,6 @@ fab export_data
 fab download_csv -H $SSH_HOST -u $SSH_USER_NAME --port=$SSH_PORT
 ```
 
-## チートシート
-
-### テーブルのエクスポート
-
-```sql
-SELECT * FROM qiita_users
-  INTO OUTFILE '/tmp/qiita_users.csv'
-  FIELDS TERMINATED BY '\t'
-  ENCLOSED BY '"'
-  ESCAPED BY '"';
-```
-
-### テーブルのインポート
-
-```sql
-LOAD DATA INFILE '/tmp/qiita_users.csv'
-  INTO TABLE qiita_users
-  FIELDS TERMINATED BY '\t'
-  ENCLOSED BY '"'
-  ESCAPED BY '"';
-```
 
 ## テスト
 
@@ -252,64 +231,10 @@ rm -rf /tmp/qiita-ranker-1.0-SNAPSHOT
 unzip target/universal/qiita-ranker-1.0-SNAPSHOT.zip -d /tmp
 ```
 
-### データアップロード
-
-ローカルで実行。
-
-```
-scp -P $SSH_PORT ~/qiita-ranker/*.csv $SSH_USER_NAME@$SSH_HOST:/tmp
-```
-
-### データインポート
-
-`mysql -uroot db_production` でMySQLにログイン。
-
-```sql
-LOAD DATA INFILE '/tmp/qiita_user_initials.csv'
-INTO TABLE qiita_user_initials
-FIELDS TERMINATED BY '\t'
-ENCLOSED BY '"'
-ESCAPED BY '"';
-
-LOAD DATA INFILE '/tmp/qiita_users.csv'
-INTO TABLE qiita_users
-FIELDS TERMINATED BY '\t'
-ENCLOSED BY '"'
-ESCAPED BY '"';
-
-LOAD DATA INFILE '/tmp/qiita_user_rankings.csv'
-INTO TABLE qiita_user_rankings
-FIELDS TERMINATED BY '\t'
-ENCLOSED BY '"'
-ESCAPED BY '"';
-```
-
-### 実行
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/qiita-user-contribution-crawler-cli > /dev/null 2>&1 &
-```
-
 ### ログ確認
 
 ```
 less /tmp/qiita-ranker-1.0-SNAPSHOT/logs/application.log
-```
-
-### データのエクスポート
-
-```sql
-SELECT * FROM qiita_user_contributions
-INTO OUTFILE '/tmp/qiita_user_contributions.csv'
-FIELDS TERMINATED BY '\t'
-ENCLOSED BY '"'
-ESCAPED BY '"';
-```
-
-### データのダウンロード
-
-```
-scp -P $SSH_PORT $SSH_USER_NAME@$SSH_HOST:/home/$SSH_USER_NAME/*.csv ~/qiita-ranker
 ```
 
 ## Codacyの設定方法
