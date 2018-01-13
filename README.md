@@ -190,6 +190,8 @@ export SSH_PORT='xxxx'
 export SSH_USER_NAME='xxxx'
 export SSH_HOME='/home/xxxx'
 export SSH_HOST='XX.XX.XX.XX'
+export QIITA_ACCESS_TOKEN='xxxx'
+export CSV_PATH='/path/to/csv'
 ```
 
 ### ログイン
