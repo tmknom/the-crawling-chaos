@@ -1,4 +1,4 @@
-package application.crawler.user
+package application.crawler.user.all
 
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
