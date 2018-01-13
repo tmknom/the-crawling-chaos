@@ -10,14 +10,12 @@ def init_db():
     load_data()
 
 
-@task
 def clean_migrate():
     '''クリーンマイグレーション'''
     command = "sbt flywayClean flywayMigrate"
     local(command)
 
 
-@task
 def load_data():
     '''初期データのロード'''
     load_data_table('qiita_user_names')
