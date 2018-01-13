@@ -54,8 +54,6 @@ class Module extends AbstractModule {
     bind(classOf[QiitaUserRankingRepository]).to(classOf[ScalikejdbcQiitaUserRankingRepository])
     bind(classOf[QiitaUserRankingGateway]).to(classOf[HttpQiitaUserRankingGateway])
 
-    bind(classOf[DeprecatedQiitaUserContributionRepository]).to(classOf[ScalikejdbcDeprecatedQiitaUserContributionRepository])
-    bind(classOf[DeprecatedQiitaUserContributionHistoryRepository]).to(classOf[ScalikejdbcDeprecatedQiitaUserContributionHistoryRepository])
     bind(classOf[QiitaUserSummaryRepository]).to(classOf[ScalikejdbcQiitaUserSummaryRepository])
 
     bind(classOf[QiitaArticleIdGateway]).to(classOf[HttpQiitaArticleIdGateway])
