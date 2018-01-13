@@ -233,6 +233,10 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 sdk install java 8u152-zulu
 sdk install sbt
 
+# Install fabric
+sudo /usr/bin/pip install --upgrade pip
+sudo /usr/bin/pip install fabric
+
 # Deploy
 git clone https://github.com/tmknom/qiita-ranker.git
 cd qiita-ranker
