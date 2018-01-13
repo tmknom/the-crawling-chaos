@@ -2,8 +2,7 @@ package infrastructure.qiita.user.contribution
 
 import javax.inject.Singleton
 
-import domain.qiita.user.contribution.QiitaUserContributionRepository
-import domain.qiita.user.event.QiitaUserContributionCrawledEvent
+import domain.qiita.user.contribution.{QiitaUserContributionCrawledEvent, QiitaUserContributionRepository}
 import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
@@ -14,7 +13,7 @@ final class ScalikejdbcQiitaUserContributionRepository extends QiitaUserContribu
     val name          = event.qiitaUserName.value
     val contribution  = event.qiitaUserContribution.value
     val articlesCount = event.articlesCount.value
-    val updated       = event.eventDateTime.value
+    val updated       = event.crawledDateTime.value
 
     sql"""
           INSERT INTO qiita_user_contributions (user_name, contribution, articles_count, updated_date_time)
