@@ -44,6 +44,7 @@ def export_data():
     export_data_table('qiita_users', 'qiita_user_id ASC')
     export_data_table('qiita_user_contributions', 'updated_date_time ASC')
     export_data_table('qiita_user_contribution_histories', 'registered_date_time ASC')
+    export_data_table('qiita_article_ids', 'id ASC')
     local('ls -alh /tmp/*.csv')
     local('wc -l /tmp/*.csv')
 
