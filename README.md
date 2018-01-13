@@ -106,6 +106,12 @@ run-main presentation.cli.onetime.AllQiitaUserRegisterCli
 fab init_db
 ```
 
+### データのエクスポート
+
+```
+fab export_data
+```
+
 ## チートシート
 
 ### テーブルのエクスポート
