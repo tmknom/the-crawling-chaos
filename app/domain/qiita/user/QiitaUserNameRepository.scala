@@ -11,4 +11,8 @@ trait QiitaUserNameRepository {
   def retrieveRecently()(implicit session: DBSession = AutoSession): List[QiitaUserName]
 
   def retrieveUnavailable()(implicit session: DBSession = AutoSession): List[QiitaUserName]
+
+  def retrieveTopUser()(implicit session: DBSession = AutoSession): List[QiitaUserName]
+
+  def retrieveContributedUser()(implicit session: DBSession = AutoSession): List[QiitaUserName]
 }
