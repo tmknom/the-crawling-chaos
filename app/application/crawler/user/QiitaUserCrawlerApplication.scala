@@ -25,6 +25,12 @@ final class QiitaUserCrawlerApplication @Inject()(
     crawlUsers(qiitaUserNames)
   }
 
+  def crawlContributedUser(): Unit = {
+    val qiitaUsers     = qiitaUserRepository.retrieveContributed()
+    val qiitaUserNames = qiitaUsers.map(_.profile.name)
+    crawlUsers(qiitaUserNames)
+  }
+
   private def crawlUsers(qiitaUserNames: List[QiitaUserName]): Unit = {
     val itemsCount = qiitaUserNames.size
     qiitaUserNames.zipWithIndex.foreach {
