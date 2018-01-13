@@ -4,6 +4,20 @@ from fabric.api import *
 
 
 @task
+def authorize_security_group():
+    '''セキュリティグループの許可'''
+    import security_group
+    security_group.authorize()
+
+
+@task
+def revoke_security_group():
+    '''セキュリティグループの剥奪'''
+    import security_group
+    security_group.revoke()
+
+
+@task
 def start_ec2():
     '''EC2のスタート'''
     import ec2
