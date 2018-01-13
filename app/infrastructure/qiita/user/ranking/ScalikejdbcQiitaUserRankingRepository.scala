@@ -3,7 +3,7 @@ package infrastructure.qiita.user.ranking
 import javax.inject.Singleton
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
-import domain.qiita.user.contribution.QiitaUserContribution
+import domain.qiita.user.contribution.Contribution
 import domain.qiita.user.ranking.{QiitaUserRanking, QiitaUserRankingRepository}
 import domain.qiita.user.{QiitaUserId, QiitaUserName}
 import play.api.Logger
@@ -47,7 +47,7 @@ final class ScalikejdbcQiitaUserRankingRepository extends QiitaUserRankingReposi
     QiitaUserRanking(
       QiitaUserId(rs.int("id")),
       QiitaUserName(rs.string("user_name")),
-      QiitaUserContribution(rs.int("contribution"))
+      Contribution(rs.int("contribution"))
     )
   }
 }

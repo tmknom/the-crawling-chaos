@@ -1,5 +1,5 @@
 package domain.qiita.user
 
-import domain.qiita.user.contribution.{ArticlesCount, QiitaUserContribution}
+import domain.qiita.user.contribution.QiitaUserContribution
 
-final case class QiitaUser(profile: QiitaUserProfile, contribution: QiitaUserContribution, articlesCount: ArticlesCount)
+final case class QiitaUser(profile: QiitaUserProfile, qiitaUserContribution: QiitaUserContribution)

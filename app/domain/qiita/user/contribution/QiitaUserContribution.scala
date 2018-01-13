@@ -1,6 +1,3 @@
 package domain.qiita.user.contribution
 
-/**
-  * Qiita ユーザのいいね数
-  */
-final case class QiitaUserContribution(value: Int)
+final case class QiitaUserContribution(contribution: Contribution, articlesCount: ArticlesCount)
