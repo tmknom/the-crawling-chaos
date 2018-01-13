@@ -1,11 +1,11 @@
-package presentation.cli.batch.monthly
+package presentation.cli.batch.monthly.user
 
 import application.qiita.user.QiitaUserNameApplication
 import library.task.Task
 import play.api.{Application, Logger}
 
 /**
-  * run-main presentation.cli.batch.monthly.DeletionUnavailableQiitaUserNameCli
+  * run-main presentation.cli.batch.monthly.user.DeletionUnavailableQiitaUserNameCli
   */
 object DeletionUnavailableQiitaUserNameCli extends App with Task {
   run()

@@ -35,7 +35,7 @@ run-main presentation.cli.batch.monthly.user.TopQiitaUserCrawlerCli
 ```
 /tmp/qiita-ranker-1.0-SNAPSHOT/bin/deletion-unavailable-qiita-user-name-cli > /dev/null 2>&1 &
 
-run-main presentation.cli.batch.monthly.DeletionUnavailableQiitaUserNameCli
+run-main presentation.cli.batch.monthly.user.DeletionUnavailableQiitaUserNameCli
 ```
 
 ### Qiita記事
