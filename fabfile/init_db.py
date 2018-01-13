@@ -23,8 +23,8 @@ def load_data():
 
 
 def load_data_table(table_name):
-    execute_sql(load_data_sql(table_name))
-    execute_sql(select_count_sql(table_name))
+    common.execute_sql(load_data_sql(table_name))
+    common.execute_sql(select_count_sql(table_name))
     print('\n')
 
 
@@ -39,8 +39,3 @@ def load_data_sql(table_name):
 
 def select_count_sql(table_name):
     return 'select count(*) from %s' % table_name
-
-
-def execute_sql(sql):
-    command = 'mysql -uroot db_production -e "%s"' % (sql)
-    local(command)
