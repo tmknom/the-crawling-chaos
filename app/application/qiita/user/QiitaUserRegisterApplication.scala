@@ -1,4 +1,4 @@
-package application.crawler.user
+package application.qiita.user
 
 import javax.inject.{Inject, Singleton}
 

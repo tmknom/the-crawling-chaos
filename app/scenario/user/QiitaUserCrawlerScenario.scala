@@ -2,7 +2,8 @@ package scenario.user
 
 import javax.inject.{Inject, Singleton}
 
-import application.crawler.user.{AllQiitaRawInternalUserJsonCrawlerApplication, QiitaUserRegisterApplication}
+import application.crawler.user.AllQiitaRawInternalUserJsonCrawlerApplication
+import application.qiita.user.QiitaUserRegisterApplication
 
 @Singleton
 final class QiitaUserCrawlerScenario @Inject()(
