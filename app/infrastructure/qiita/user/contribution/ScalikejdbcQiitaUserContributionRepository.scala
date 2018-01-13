@@ -2,8 +2,7 @@ package infrastructure.qiita.user.contribution
 
 import javax.inject.Singleton
 
-import domain.qiita.user.contribution.QiitaUserContributionRepository
-import domain.qiita.user.event.QiitaUserContributionCrawledEvent
+import domain.qiita.user.contribution.{QiitaUserContributionCrawledEvent, QiitaUserContributionRepository}
 import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))

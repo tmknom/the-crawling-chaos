@@ -1,7 +1,7 @@
-package domain.qiita.user.event
+package domain.qiita.user.contribution
 
 import domain.qiita.user.QiitaUserName
-import domain.qiita.user.contribution.{ArticlesCount, QiitaUserContribution}
+import domain.qiita.user.event.EventDateTime
 
 final case class QiitaUserContributionCrawledEvent(
     qiitaUserName:         QiitaUserName,
