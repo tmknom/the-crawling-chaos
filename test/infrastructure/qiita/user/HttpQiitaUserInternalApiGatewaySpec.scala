@@ -12,13 +12,13 @@ class HttpQiitaUserInternalApiGatewaySpec extends PlaySpec {
     "通信できること" in {
       val actual = sut.fetch(QiitaUserName("jojo"))
 
-      val expected = QiitaUser(
+      val expected = QiitaUserProfile(
         QiitaUserId(123456789),
         QiitaUserName("jojo"),
         ProfileImageUrl("https://qiita-image-store.s3.amazonaws.com/xxxx")
       )
 
-      actual.toQiitaUser mustBe expected
+      actual.toQiitaUserProfile mustBe expected
     }
   }
 

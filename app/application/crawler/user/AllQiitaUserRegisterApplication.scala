@@ -31,7 +31,7 @@ final class AllQiitaUserRegisterApplication @Inject()(
 
   private def registerWithTransaction(rawInternalUserJson: RawInternalUserJson): Unit = {
     DB.localTx { implicit session =>
-      qiitaUserRepository.register(rawInternalUserJson.toQiitaUser)
+      qiitaUserRepository.register(rawInternalUserJson.toQiitaUserProfile)
 
       val crawledEvent = rawInternalUserJson.toCrawledEvent
       qiitaUserContributionRepository.register(crawledEvent)
