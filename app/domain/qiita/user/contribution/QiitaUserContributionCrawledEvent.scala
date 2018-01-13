@@ -4,7 +4,7 @@ import domain.qiita.user.{CrawledDateTime, QiitaUserName}
 
 final case class QiitaUserContributionCrawledEvent(
     qiitaUserName:         QiitaUserName,
-    qiitaUserContribution: QiitaUserContribution,
+    qiitaUserContribution: Contribution,
     articlesCount:         ArticlesCount,
     crawledDateTime:       CrawledDateTime
 )

@@ -1,7 +1,7 @@
 package infrastructure.qiita.user.contribution
 
 import domain.qiita.user.{CrawledDateTime, QiitaUserName}
-import domain.qiita.user.contribution.{ArticlesCount, QiitaUserContribution, QiitaUserContributionCrawledEvent}
+import domain.qiita.user.contribution.{ArticlesCount, Contribution, QiitaUserContributionCrawledEvent}
 import fixture.db.qiita.QiitaUsersFixture
 import library.datetime.DateTimeProvider
 import library.test.db.{DatabaseFixture, DatabaseSpec}
@@ -16,7 +16,7 @@ class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
 
       val crawledEvent = QiitaUserContributionCrawledEvent(
         qiitaUserName         = QiitaUserName(QiitaUsersFixture.Default.UserName),
-        qiitaUserContribution = QiitaUserContribution(1234),
+        qiitaUserContribution = Contribution(1234),
         articlesCount         = ArticlesCount(123),
         crawledDateTime       = CrawledDateTime(DateTimeProvider.nowJST())
       )

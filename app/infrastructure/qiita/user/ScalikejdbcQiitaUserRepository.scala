@@ -3,7 +3,7 @@ package infrastructure.qiita.user
 import javax.inject.Singleton
 
 import domain.qiita.user._
-import domain.qiita.user.contribution.{ArticlesCount, QiitaUserContribution}
+import domain.qiita.user.contribution.{ArticlesCount, Contribution}
 import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
@@ -30,7 +30,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
         QiitaUserName(rs.string("user_name")),
         ProfileImageUrl(rs.string("profile_image_url"))
       ),
-      QiitaUserContribution(rs.int("contribution")),
+      Contribution(rs.int("contribution")),
       ArticlesCount(rs.int("articles_count"))
     )
   }
