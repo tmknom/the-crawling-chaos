@@ -2,6 +2,14 @@
 
 from fabric.api import *
 
+TABLE_NAMES = [
+    'qiita_user_names',
+    'raw_qiita_internal_user_jsons',
+    'qiita_users',
+    'qiita_user_contributions',
+    'qiita_user_contribution_histories'
+]
+
 
 @task
 def export_data():
@@ -44,11 +52,8 @@ def clean_migrate():
 
 def load_data():
     '''初期データのロード'''
-    load_data_table('qiita_user_names')
-    load_data_table('raw_qiita_internal_user_jsons')
-    load_data_table('qiita_users')
-    load_data_table('qiita_user_contributions')
-    load_data_table('qiita_user_contribution_histories')
+    for table_name in TABLE_NAMES:
+        load_data_table(table_name)
 
 
 def load_data_table(table_name):
