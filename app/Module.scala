@@ -38,7 +38,7 @@ class Module extends AbstractModule {
 
     bind(classOf[QiitaUserNameRepository]).to(classOf[ScalikejdbcQiitaUserNameRepository])
     bind(classOf[QiitaRawInternalUserJsonRepository]).to(classOf[ScalikejdbcQiitaRawInternalUserJsonRepository])
-    bind(classOf[QiitaUserRepository]).to(classOf[ScalikejdbcQiitaUserRepository])
+    bind(classOf[QiitaUserProfileRepository]).to(classOf[ScalikejdbcQiitaUserProfileRepository])
     bind(classOf[QiitaUserContributionRepository]).to(classOf[ScalikejdbcQiitaUserContributionRepository])
     bind(classOf[QiitaUserContributionHistoryRepository]).to(classOf[ScalikejdbcQiitaUserContributionHistoryRepository])
   }

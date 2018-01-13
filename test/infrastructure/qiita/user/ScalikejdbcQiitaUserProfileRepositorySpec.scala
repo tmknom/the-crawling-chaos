@@ -5,8 +5,8 @@ import fixture.db.qiita.QiitaUsersFixture
 import library.test.db.{DatabaseFixture, DatabaseSpec}
 
 // scalastyle:off magic.number
-class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec {
-  val sut = new ScalikejdbcQiitaUserRepository()
+class ScalikejdbcQiitaUserProfileRepositorySpec extends DatabaseSpec {
+  val sut = new ScalikejdbcQiitaUserProfileRepository()
 
   "#register" should {
     "登録できること" in { implicit session =>
