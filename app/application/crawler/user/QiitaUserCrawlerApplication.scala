@@ -19,7 +19,7 @@ final class QiitaUserCrawlerApplication @Inject()(
 ) {
   private val SleepTimeMilliseconds = 100.toLong
 
-  def crawl(): Unit = {
+  def crawlTopUser(): Unit = {
     val qiitaUsers     = qiitaUserRepository.retrieveTop1000()
     val qiitaUserNames = qiitaUsers.map(_.profile.name)
     crawlUsers(qiitaUserNames)
