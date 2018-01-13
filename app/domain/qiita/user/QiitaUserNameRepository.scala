@@ -4,7 +4,7 @@ import scalikejdbc.{AutoSession, DBSession}
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments"))
 trait QiitaUserNameRepository {
-  def register(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Unit
+  def register(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Int
 
   def delete(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Unit
 
