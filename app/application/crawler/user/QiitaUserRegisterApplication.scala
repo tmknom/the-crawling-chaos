@@ -7,7 +7,7 @@ import domain.qiita.user.{QiitaRawInternalUserJsonRepository, QiitaUserName, Qii
 import scalikejdbc.DB
 
 @Singleton
-final class AllQiitaUserRegisterApplication @Inject()(
+final class QiitaUserRegisterApplication @Inject()(
     qiitaUserProfileRepository:             QiitaUserProfileRepository,
     qiitaUserContributionRepository:        QiitaUserContributionRepository,
     qiitaUserContributionHistoryRepository: QiitaUserContributionHistoryRepository,
