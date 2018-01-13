@@ -29,6 +29,17 @@ class Module extends AbstractModule {
     configureInfrastructure()
   }
 
+  private def configureInfrastructure(): Unit = {
+    configureInfrastructureUser()
+    configureInfrastructureArticle()
+    bind(classOf[ScalajHttpAdaptor]).to(classOf[RealScalajHttpAdaptor])
+
+    bind(classOf[QiitaUserRankingRepository]).to(classOf[ScalikejdbcQiitaUserRankingRepository])
+    bind(classOf[QiitaUserRankingGateway]).to(classOf[HttpQiitaUserRankingGateway])
+
+    () // 明示的に Unit を返す
+  }
+
   private def configureInfrastructureUser(): Unit = {
     bind(classOf[QiitaUserNameGateway]).to(classOf[HttpQiitaUserNameGateway])
     bind(classOf[QiitaUserInternalApiGateway]).to(classOf[HttpQiitaUserInternalApiGateway])
@@ -39,15 +50,11 @@ class Module extends AbstractModule {
     bind(classOf[QiitaUserProfileRepository]).to(classOf[ScalikejdbcQiitaUserProfileRepository])
     bind(classOf[QiitaUserContributionRepository]).to(classOf[ScalikejdbcQiitaUserContributionRepository])
     bind(classOf[QiitaUserContributionHistoryRepository]).to(classOf[ScalikejdbcQiitaUserContributionHistoryRepository])
+
+    () // 明示的に Unit を返す
   }
 
-  private def configureInfrastructure(): Unit = {
-    configureInfrastructureUser()
-    bind(classOf[ScalajHttpAdaptor]).to(classOf[RealScalajHttpAdaptor])
-
-    bind(classOf[QiitaUserRankingRepository]).to(classOf[ScalikejdbcQiitaUserRankingRepository])
-    bind(classOf[QiitaUserRankingGateway]).to(classOf[HttpQiitaUserRankingGateway])
-
+  private def configureInfrastructureArticle(): Unit = {
     bind(classOf[QiitaArticleIdGateway]).to(classOf[HttpQiitaArticleIdGateway])
     bind(classOf[QiitaArticleGateway]).to(classOf[HttpQiitaArticleGateway])
     bind(classOf[QiitaArticleIdRepository]).to(classOf[ScalikejdbcQiitaArticleIdRepository])
