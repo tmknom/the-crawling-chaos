@@ -23,6 +23,19 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
       .apply()
   }
 
+  override def retrieveTop1000()(implicit session: DBSession = AutoSession): List[QiitaUser] = {
+    sql"""
+          SELECT * FROM qiita_users AS qu
+          INNER JOIN qiita_user_contributions AS quc
+          ON qu.user_name = quc.user_name
+          ORDER BY quc.contribution DESC
+          LIMIT 1000;
+       """
+      .map(toQiitaUser)
+      .list()
+      .apply()
+  }
+
   private def toQiitaUser(rs: WrappedResultSet): QiitaUser = {
     QiitaUser(
       QiitaUserProfile(
