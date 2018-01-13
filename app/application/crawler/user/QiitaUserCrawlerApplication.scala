@@ -10,7 +10,7 @@ import play.api.Logger
 import scalikejdbc.DB
 
 @Singleton
-final class TopQiitaUserCrawlerApplication @Inject()(
+final class QiitaUserCrawlerApplication @Inject()(
     gateway:                                QiitaUserInternalApiGateway,
     qiitaRawInternalUserJsonRepository:     QiitaRawInternalUserJsonRepository,
     qiitaUserContributionRepository:        QiitaUserContributionRepository,
