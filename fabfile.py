@@ -4,13 +4,6 @@ from fabric.api import *
 
 
 @task
-def init_db():
-    '''データベースの初期化'''
-    clean_migrate()
-    load_data()
-
-
-@task
 def export_data():
     '''データのエクスポート'''
     local('sudo rm -rf /tmp/*.csv')
@@ -34,6 +27,13 @@ def export_data_sql(table_name, order):
            + ' FIELDS TERMINATED BY \'\t\' ' \
            + ' ENCLOSED BY \'\\"\' ' \
            + ' ESCAPED BY \'\\"\' ; '
+
+
+@task
+def init_db():
+    '''データベースの初期化'''
+    clean_migrate()
+    load_data()
 
 
 def clean_migrate():
