@@ -4,9 +4,9 @@ from fabric.api import *
 
 
 @task
-def init_db():
-    '''データベースの初期化'''
-    command = "time sbt flywayClean flywayMigrate"
+def clean_migrate():
+    '''クリーンマイグレーション'''
+    command = "sbt flywayClean flywayMigrate"
     local(command)
 
 
