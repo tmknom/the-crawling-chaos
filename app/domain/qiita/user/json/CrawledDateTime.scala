@@ -1,10 +1,14 @@
 package domain.qiita.user.json
 
-import java.time.ZonedDateTime
+import java.time.{LocalDate, ZonedDateTime}
 
 import library.datetime.DateTimeProvider
 
-final case class CrawledDateTime(value: ZonedDateTime)
+final case class CrawledDateTime(value: ZonedDateTime) {
+  def toLocalDate: LocalDate = {
+    value.toLocalDate
+  }
+}
 
 object CrawledDateTime {
   def now(): CrawledDateTime = {

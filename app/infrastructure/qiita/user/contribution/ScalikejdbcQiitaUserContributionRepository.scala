@@ -13,7 +13,7 @@ final class ScalikejdbcQiitaUserContributionRepository extends QiitaUserContribu
     val name          = event.qiitaUserName.value
     val contribution  = event.qiitaUserContribution.value
     val articlesCount = event.articlesCount.value
-    val updated       = event.eventDateTime.value
+    val updated       = event.crawledDateTime.value
 
     sql"""
           INSERT INTO qiita_user_contributions (user_name, contribution, articles_count, updated_date_time)
