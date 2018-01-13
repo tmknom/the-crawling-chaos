@@ -4,8 +4,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
-import domain.qiita.user.page.RecentlyPage
-import domain.qiita.user.{QiitaUserApiGateway, QiitaUserNameRepository}
+import domain.qiita.user.{QiitaUserApiGateway, QiitaUserName, QiitaUserNameRepository}
 import play.api.Logger
 
 @Singleton
@@ -29,11 +28,11 @@ final class QiitaUserNameCrawlerApplication @Inject()(
   }
 
   private def crawlUntilDuplicated(): Unit = {
-    RecentlyPage.range.foreach { currentPage =>
+    QiitaUserName.pageRange.foreach { currentPage =>
       val qiitaUserNames = gateway.fetch(currentPage)
       qiitaUserNames.foreach(repository.register)
 
-      Logger.info(s"${this.getClass.getSimpleName} crawled ($currentPage / ${RecentlyPage.PageMax})")
+      Logger.info(s"${this.getClass.getSimpleName} crawled ($currentPage / ${QiitaUserName.pageMax})")
       TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
     }
   }
