@@ -15,19 +15,17 @@ final class QiitaUserCrawlerApplication @Inject()(
     qiitaRawInternalUserJsonRepository:     QiitaRawInternalUserJsonRepository,
     qiitaUserContributionRepository:        QiitaUserContributionRepository,
     qiitaUserContributionHistoryRepository: QiitaUserContributionHistoryRepository,
-    qiitaUserRepository:                    QiitaUserRepository
+    qiitaUserNameRepository:                QiitaUserNameRepository
 ) {
   private val SleepTimeMilliseconds = 100.toLong
 
   def crawlTopUser(): Unit = {
-    val qiitaUsers     = qiitaUserRepository.retrieveTop1000()
-    val qiitaUserNames = qiitaUsers.map(_.profile.name)
+    val qiitaUserNames = qiitaUserNameRepository.retrieveTopUser()
     crawlUsers(qiitaUserNames)
   }
 
   def crawlContributedUser(): Unit = {
-    val qiitaUsers     = qiitaUserRepository.retrieveContributed()
-    val qiitaUserNames = qiitaUsers.map(_.profile.name)
+    val qiitaUserNames = qiitaUserNameRepository.retrieveContributedUser()
     crawlUsers(qiitaUserNames)
   }
 
