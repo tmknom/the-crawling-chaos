@@ -1,4 +1,4 @@
-package application.crawler.user
+package application.qiita.user
 
 import javax.inject.{Inject, Singleton}
 
@@ -7,14 +7,14 @@ import domain.qiita.user.{QiitaRawInternalUserJsonRepository, QiitaUserName, Qii
 import scalikejdbc.DB
 
 @Singleton
-final class AllQiitaUserRegisterApplication @Inject()(
+final class QiitaUserRegisterApplication @Inject()(
     qiitaUserProfileRepository:             QiitaUserProfileRepository,
     qiitaUserContributionRepository:        QiitaUserContributionRepository,
     qiitaUserContributionHistoryRepository: QiitaUserContributionHistoryRepository,
     qiitaRawInternalUserJsonRepository:     QiitaRawInternalUserJsonRepository
 ) {
 
-  def crawl(): Unit = {
+  def registerRecently(): Unit = {
     val qiitaUserNames = qiitaRawInternalUserJsonRepository.retrieveRecently()
     qiitaUserNames.foreach(register)
   }

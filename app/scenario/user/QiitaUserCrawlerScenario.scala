@@ -2,12 +2,13 @@ package scenario.user
 
 import javax.inject.{Inject, Singleton}
 
-import application.crawler.user.{AllQiitaRawInternalUserJsonCrawlerApplication, AllQiitaUserRegisterApplication}
+import application.crawler.user.AllQiitaRawInternalUserJsonCrawlerApplication
+import application.qiita.user.QiitaUserRegisterApplication
 
 @Singleton
 final class QiitaUserCrawlerScenario @Inject()(
     qiitaRawInternalUserJsonCrawlerApplication: AllQiitaRawInternalUserJsonCrawlerApplication,
-    qiitaUserRegisterApplication:               AllQiitaUserRegisterApplication
+    qiitaUserRegisterApplication:               QiitaUserRegisterApplication
 ) {
 
   /**
@@ -17,6 +18,6 @@ final class QiitaUserCrawlerScenario @Inject()(
     // QiitaユーザのJSONをクロール
     qiitaRawInternalUserJsonCrawlerApplication.crawl()
     // Qiitaユーザの情報情報（評価含む）を永続化
-    qiitaUserRegisterApplication.crawl()
+    qiitaUserRegisterApplication.registerRecently()
   }
 }
