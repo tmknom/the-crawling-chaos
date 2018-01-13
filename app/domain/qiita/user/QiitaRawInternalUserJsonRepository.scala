@@ -1,6 +1,5 @@
 package domain.qiita.user
 
-import domain.qiita.user.json.RawInternalUserJson
 import scalikejdbc.{AutoSession, DBSession}
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments"))
