@@ -48,8 +48,6 @@ class Module extends AbstractModule {
     configureInfrastructureUser()
     bind(classOf[ScalajHttpAdaptor]).to(classOf[RealScalajHttpAdaptor])
 
-    bind(classOf[DeprecatedQiitaUserRepository]).to(classOf[ScalikejdbcDeprecatedQiitaUserRepository])
-
     bind(classOf[QiitaUserRankingRepository]).to(classOf[ScalikejdbcQiitaUserRankingRepository])
     bind(classOf[QiitaUserRankingGateway]).to(classOf[HttpQiitaUserRankingGateway])
 
