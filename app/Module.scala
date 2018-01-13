@@ -4,7 +4,6 @@ import domain.qiita.article.json.QiitaRawArticleJsonRepository
 import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdGateway, QiitaArticleIdRepository, QiitaArticleRepository}
 import domain.qiita.user._
 import domain.qiita.user.contribution._
-import domain.qiita.user.json.QiitaRawInternalUserJsonRepository
 import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 import domain.qiita.user.summary.QiitaUserSummaryRepository
 import infrastructure.qiita.article.contribution.ScalikejdbcQiitaArticleContributionRepository
