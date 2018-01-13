@@ -14,7 +14,7 @@ final class QiitaUserRegisterApplication @Inject()(
     qiitaRawInternalUserJsonRepository:     QiitaRawInternalUserJsonRepository
 ) {
 
-  def crawl(): Unit = {
+  def registerRecently(): Unit = {
     val qiitaUserNames = qiitaRawInternalUserJsonRepository.retrieveRecently()
     qiitaUserNames.foreach(register)
   }

@@ -17,6 +17,6 @@ final class QiitaUserCrawlerScenario @Inject()(
     // QiitaユーザのJSONをクロール
     qiitaRawInternalUserJsonCrawlerApplication.crawl()
     // Qiitaユーザの情報情報（評価含む）を永続化
-    qiitaUserRegisterApplication.crawl()
+    qiitaUserRegisterApplication.registerRecently()
   }
 }
