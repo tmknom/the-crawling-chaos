@@ -2,8 +2,7 @@ package infrastructure.qiita.user.json
 
 import javax.inject.Singleton
 
-import domain.qiita.user.QiitaUserName
-import domain.qiita.user.json.{CrawledDateTime, QiitaRawInternalUserJsonRepository, RawInternalUserJson}
+import domain.qiita.user.{CrawledDateTime, QiitaRawInternalUserJsonRepository, QiitaUserName, RawInternalUserJson}
 import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))

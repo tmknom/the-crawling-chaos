@@ -3,8 +3,7 @@ package application.crawler.user
 import javax.inject.{Inject, Singleton}
 
 import domain.qiita.user.contribution.{QiitaUserContributionHistoryRepository, QiitaUserContributionRepository}
-import domain.qiita.user.json.{QiitaRawInternalUserJsonRepository, RawInternalUserJson}
-import domain.qiita.user.{QiitaUserName, QiitaUserRepository}
+import domain.qiita.user.{QiitaRawInternalUserJsonRepository, QiitaUserName, QiitaUserRepository, RawInternalUserJson}
 import scalikejdbc.DB
 
 @Singleton

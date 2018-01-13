@@ -2,8 +2,7 @@ package infrastructure.qiita.user
 
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.user.json.RawInternalUserJson
-import domain.qiita.user.{QiitaUserInternalApiGateway, QiitaUserName}
+import domain.qiita.user.{QiitaUserInternalApiGateway, QiitaUserName, RawInternalUserJson}
 import library.scalaj.ScalajHttpAdaptor
 
 @Singleton

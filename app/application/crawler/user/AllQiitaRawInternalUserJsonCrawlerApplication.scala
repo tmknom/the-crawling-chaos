@@ -3,8 +3,7 @@ package application.crawler.user
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
-import domain.qiita.user.json.{CrawledDateTime, QiitaRawInternalUserJsonRepository}
-import domain.qiita.user.{QiitaUserInternalApiGateway, QiitaUserName, QiitaUserNameRepository}
+import domain.qiita.user._
 import library.scalaj.ScalajHttpException
 import play.api.Logger
 

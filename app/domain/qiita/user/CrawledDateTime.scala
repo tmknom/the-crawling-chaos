@@ -1,4 +1,4 @@
-package domain.qiita.user.json
+package domain.qiita.user
 
 import java.time.{LocalDate, ZonedDateTime}
 
