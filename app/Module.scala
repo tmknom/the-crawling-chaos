@@ -5,14 +5,12 @@ import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdGateway, QiitaAr
 import domain.qiita.user._
 import domain.qiita.user.contribution._
 import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
-import domain.qiita.user.summary.QiitaUserSummaryRepository
 import infrastructure.qiita.article.contribution.ScalikejdbcQiitaArticleContributionRepository
 import infrastructure.qiita.article.json.{HttpFacebookGateway, HttpHatenaGateway, HttpPocketGateway, ScalikejdbcQiitaRawArticleJsonRepository}
 import infrastructure.qiita.article.{HttpQiitaArticleGateway, HttpQiitaArticleIdGateway, ScalikejdbcQiitaArticleIdRepository, ScalikejdbcQiitaArticleRepository}
 import infrastructure.qiita.user._
 import infrastructure.qiita.user.contribution._
 import infrastructure.qiita.user.ranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
-import infrastructure.qiita.user.summary.ScalikejdbcQiitaUserSummaryRepository
 import library.scalaj.{RealScalajHttpAdaptor, ScalajHttpAdaptor}
 
 /**
@@ -49,8 +47,6 @@ class Module extends AbstractModule {
 
     bind(classOf[QiitaUserRankingRepository]).to(classOf[ScalikejdbcQiitaUserRankingRepository])
     bind(classOf[QiitaUserRankingGateway]).to(classOf[HttpQiitaUserRankingGateway])
-
-    bind(classOf[QiitaUserSummaryRepository]).to(classOf[ScalikejdbcQiitaUserSummaryRepository])
 
     bind(classOf[QiitaArticleIdGateway]).to(classOf[HttpQiitaArticleIdGateway])
     bind(classOf[QiitaArticleGateway]).to(classOf[HttpQiitaArticleGateway])
