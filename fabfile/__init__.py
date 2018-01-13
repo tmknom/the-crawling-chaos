@@ -4,6 +4,20 @@ from fabric.api import *
 
 
 @task
+def start_ec2():
+    '''EC2のスタート'''
+    import ec2
+    ec2.start()
+
+
+@task
+def start_ec2():
+    '''EC2のストップ'''
+    import ec2
+    ec2.stop()
+
+
+@task
 def deploy():
     '''デプロイ'''
     import deploy
