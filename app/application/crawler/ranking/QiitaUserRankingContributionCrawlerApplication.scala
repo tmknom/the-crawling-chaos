@@ -3,17 +3,16 @@ package application.crawler.ranking
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
+import domain.qiita.user.QiitaUserInternalApiGateway
 import domain.qiita.user.contribution._
-import domain.qiita.user.event.{EventDateTime, QiitaUserContributionCrawledEvent}
 import domain.qiita.user.ranking.{QiitaUserRanking, QiitaUserRankingRepository}
-import library.datetime.DateTimeProvider
 import play.api.Logger
 
 import scala.collection.mutable
 
 @Singleton
 final class QiitaUserRankingContributionCrawlerApplication @Inject()(
-    gateway:                    DeprecatedQiitaUserInternalApiGateway,
+    gateway:                    QiitaUserInternalApiGateway,
     repository:                 QiitaUserContributionRepository,
     qiitaUserRankingRepository: QiitaUserRankingRepository
 ) {
@@ -46,14 +45,9 @@ final class QiitaUserRankingContributionCrawlerApplication @Inject()(
   }
 
   private def crawlOneUser(qiitaUserRanking: QiitaUserRanking, index: Int): Unit = {
-    val qiitaUserSummary = gateway.fetch(qiitaUserRanking.toQiitaUser)
-    val crawledEvent = QiitaUserContributionCrawledEvent(
-      qiitaUserSummary.name,
-      qiitaUserSummary.contribution,
-      qiitaUserSummary.articlesCount,
-      EventDateTime(DateTimeProvider.nowJST())
-    )
+    val rawInternalUserJson = gateway.fetch(qiitaUserRanking.name)
+    val crawledEvent        = rawInternalUserJson.toCrawledEvent
     repository.register(crawledEvent)
-    Logger.info(s"crawled ${index + 1} : ${qiitaUserRanking.name} : ${qiitaUserSummary.contribution}")
+    Logger.info(s"crawled ${index + 1} : ${qiitaUserRanking.name} : ${crawledEvent.qiitaUserContribution}")
   }
 }

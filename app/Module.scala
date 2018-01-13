@@ -49,7 +49,6 @@ class Module extends AbstractModule {
     bind(classOf[ScalajHttpAdaptor]).to(classOf[RealScalajHttpAdaptor])
 
     bind(classOf[DeprecatedQiitaUserRepository]).to(classOf[ScalikejdbcDeprecatedQiitaUserRepository])
-    bind(classOf[DeprecatedQiitaUserInternalApiGateway]).to(classOf[HttpDeprecatedQiitaUserInternalApiGateway])
 
     bind(classOf[QiitaUserRankingRepository]).to(classOf[ScalikejdbcQiitaUserRankingRepository])
     bind(classOf[QiitaUserRankingGateway]).to(classOf[HttpQiitaUserRankingGateway])
