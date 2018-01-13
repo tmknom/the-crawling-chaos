@@ -90,13 +90,14 @@ run-main presentation.cli.onetime.AllQiitaRawInternalUserJsonCrawlerCli
 run-main presentation.cli.onetime.AllQiitaUserRegisterCli
 ```
 
-## デプロイ
-
-```
-./deploy.sh
-```
 
 ## 運用
+
+### デプロイ
+
+```
+fab deploy
+```
 
 ### データベースの初期化
 
