@@ -11,8 +11,8 @@ final class ScalikejdbcQiitaUserContributionRepository extends QiitaUserContribu
 
   def register(event: QiitaUserContributionCrawledEvent)(implicit session: DBSession = AutoSession): Int = {
     val name          = event.qiitaUserName.value
-    val contribution  = event.contribution.value
-    val articlesCount = event.articlesCount.value
+    val contribution  = event.qiitaUserContribution.contribution.value
+    val articlesCount = event.qiitaUserContribution.articlesCount.value
     val updated       = event.crawledDateTime.value
 
     sql"""
