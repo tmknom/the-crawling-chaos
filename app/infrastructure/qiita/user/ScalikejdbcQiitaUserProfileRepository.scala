@@ -7,11 +7,11 @@ import scalikejdbc._
 
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
 @Singleton
-final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
-  override def register(qiitaUser: QiitaUser)(implicit session: DBSession = AutoSession): Unit = {
-    val name            = qiitaUser.name.value
-    val id              = qiitaUser.id.value
-    val profileImageUrl = qiitaUser.profileImageUrl.value
+final class ScalikejdbcQiitaUserProfileRepository extends QiitaUserProfileRepository {
+  override def register(qiitaUserProfile: QiitaUserProfile)(implicit session: DBSession = AutoSession): Unit = {
+    val name            = qiitaUserProfile.name.value
+    val id              = qiitaUserProfile.id.value
+    val profileImageUrl = qiitaUserProfile.profileImageUrl.value
 
     sql"""
           INSERT INTO qiita_users (user_name, qiita_user_id, profile_image_url)
@@ -23,20 +23,20 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
     () // 明示的に Unit を返す
   }
 
-  override def retrieve(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Option[QiitaUser] = {
+  override def retrieve(qiitaUserName: QiitaUserName)(implicit session: DBSession = AutoSession): Option[QiitaUserProfile] = {
     val name = qiitaUserName.value
 
     sql"""
           SELECT * FROM qiita_users
           WHERE user_name = $name ;
        """
-      .map(toQiitaUser)
+      .map(toQiitaUserProfile)
       .single()
       .apply()
   }
 
-  private def toQiitaUser(rs: WrappedResultSet): QiitaUser = {
-    QiitaUser(
+  private def toQiitaUserProfile(rs: WrappedResultSet): QiitaUserProfile = {
+    QiitaUserProfile(
       QiitaUserId(rs.int("qiita_user_id")),
       QiitaUserName(rs.string("user_name")),
       ProfileImageUrl(rs.string("profile_image_url"))

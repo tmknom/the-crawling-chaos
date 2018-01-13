@@ -1,4 +1,4 @@
-package infrastructure.qiita.user.json
+package infrastructure.qiita.user
 
 import javax.inject.Singleton
 

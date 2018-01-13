@@ -5,8 +5,8 @@ import spray.json.DefaultJsonProtocol._
 import spray.json._
 
 final case class RawInternalUserJson(value: String) {
-  def toQiitaUser: QiitaUser = {
-    QiitaUser(
+  def toQiitaUserProfile: QiitaUserProfile = {
+    QiitaUserProfile(
       QiitaUserId(parseJsonInt("id")),
       QiitaUserName(parseJsonString("url_name")),
       ProfileImageUrl(parseJsonString("profile_image_url"))

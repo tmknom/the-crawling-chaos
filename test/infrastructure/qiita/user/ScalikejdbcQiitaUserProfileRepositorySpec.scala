@@ -1,25 +1,25 @@
 package infrastructure.qiita.user
 
-import domain.qiita.user.{ProfileImageUrl, QiitaUser, QiitaUserId, QiitaUserName}
+import domain.qiita.user.{ProfileImageUrl, QiitaUserId, QiitaUserName, QiitaUserProfile}
 import fixture.db.qiita.QiitaUsersFixture
 import library.test.db.{DatabaseFixture, DatabaseSpec}
 
 // scalastyle:off magic.number
-class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec {
-  val sut = new ScalikejdbcQiitaUserRepository()
+class ScalikejdbcQiitaUserProfileRepositorySpec extends DatabaseSpec {
+  val sut = new ScalikejdbcQiitaUserProfileRepository()
 
   "#register" should {
     "登録できること" in { implicit session =>
-      val qiitaUser = QiitaUser(
+      val qiitaUserProfile = QiitaUserProfile(
         id              = QiitaUserId(QiitaUsersFixture.Default.QiitaUserId.toInt),
         name            = QiitaUserName(QiitaUsersFixture.Default.UserName),
         profileImageUrl = ProfileImageUrl(QiitaUsersFixture.Default.ProfileImageUrl)
       )
 
-      sut.register(qiitaUser)
+      sut.register(qiitaUserProfile)
 
-      val actual = sut.retrieve(qiitaUser.name)
-      actual mustBe Some(qiitaUser)
+      val actual = sut.retrieve(qiitaUserProfile.name)
+      actual mustBe Some(qiitaUserProfile)
     }
   }
 
@@ -30,7 +30,7 @@ class ScalikejdbcQiitaUserRepositorySpec extends DatabaseSpec {
       val name   = QiitaUserName(QiitaUsersFixture.Default.UserName)
       val actual = sut.retrieve(name)
 
-      val expected = QiitaUser(
+      val expected = QiitaUserProfile(
         id              = QiitaUserId(QiitaUsersFixture.Default.QiitaUserId.toInt),
         name            = QiitaUserName(QiitaUsersFixture.Default.UserName),
         profileImageUrl = ProfileImageUrl(QiitaUsersFixture.Default.ProfileImageUrl)
