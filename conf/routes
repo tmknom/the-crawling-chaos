@@ -2,6 +2,9 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+# ユーザ一覧
+GET        /qiita/users                       presentation.controller.QiitaUserController.list()
+
 # ユーザのイイね一覧
 GET        /qiita/users/contributions         presentation.controller.QiitaUserContributionController.list()
 GET        /qiita/users/contributions2        presentation.controller.QiitaUserContributionController.list2()
