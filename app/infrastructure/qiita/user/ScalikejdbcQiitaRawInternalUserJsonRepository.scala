@@ -16,7 +16,10 @@ final class ScalikejdbcQiitaRawInternalUserJsonRepository extends QiitaRawIntern
 
     sql"""
           INSERT INTO raw_qiita_internal_user_jsons (user_name, raw_json, crawled_date_time)
-          VALUES ($name, $rawJson, $crawled);
+          VALUES ($name, $rawJson, $crawled)
+          ON DUPLICATE KEY UPDATE
+          raw_json = VALUES(raw_json),
+          crawled_date_time = VALUES(crawled_date_time);
        """
       .update()
       .apply()
