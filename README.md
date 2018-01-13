@@ -112,6 +112,12 @@ fab init_db
 fab export_data
 ```
 
+### CSVのダウンロード
+
+```
+fab download_csv -H $SSH_HOST -u $SSH_USER_NAME --port=$SSH_PORT
+```
+
 ## チートシート
 
 ### テーブルのエクスポート

@@ -2,12 +2,26 @@
 
 from fabric.api import *
 
+TABLE_NAMES = [
+    'qiita_user_names',
+    'raw_qiita_internal_user_jsons',
+    'qiita_users',
+    'qiita_user_contributions',
+    'qiita_user_contribution_histories'
+]
+
 
 @task
-def init_db():
-    '''データベースの初期化'''
-    clean_migrate()
-    load_data()
+def download_csv():
+    '''-H $SSH_HOST -u $SSH_USER_NAME --port=$SSH_PORT CSVのダウンロード'''
+    for table_name in TABLE_NAMES:
+        download_csv_table(table_name)
+
+
+def download_csv_table(table_name):
+    csv_path = get_local_env('CSV_PATH')
+    print('%s.csv downloading...' % table_name)
+    get('/tmp/%s.csv' % table_name, '%s/%s.csv' % (csv_path, table_name))
 
 
 @task
@@ -36,6 +50,13 @@ def export_data_sql(table_name, order):
            + ' ESCAPED BY \'\\"\' ; '
 
 
+@task
+def init_db():
+    '''データベースの初期化'''
+    clean_migrate()
+    load_data()
+
+
 def clean_migrate():
     '''クリーンマイグレーション'''
     command = "sbt flywayClean flywayMigrate"
@@ -44,11 +65,8 @@ def clean_migrate():
 
 def load_data():
     '''初期データのロード'''
-    load_data_table('qiita_user_names')
-    load_data_table('raw_qiita_internal_user_jsons')
-    load_data_table('qiita_users')
-    load_data_table('qiita_user_contributions')
-    load_data_table('qiita_user_contribution_histories')
+    for table_name in TABLE_NAMES:
+        load_data_table(table_name)
 
 
 def load_data_table(table_name):
