@@ -96,6 +96,16 @@ run-main presentation.cli.onetime.AllQiitaUserRegisterCli
 ./deploy.sh
 ```
 
+## 運用
+
+### データベースの初期化
+
+事前にロード対象の CSV ファイルのパスを `CSV_PATH` 環境変数にセットしておく。
+
+```
+fab init_db
+```
+
 ## チートシート
 
 ### テーブルのエクスポート
