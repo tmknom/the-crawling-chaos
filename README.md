@@ -178,7 +178,7 @@ IntelliJが環境変数を認識できる `~/.bashrc` に下記を追加。
 ```
 export ARTIFACT_REPOSITORY=xxxx
 export AWS_ACCESS_KEY_ID=xxxx
-export AWS_SECRET_KEY=xxxx
+export AWS_SECRET_ACCESS_KEY=xxxx
 ```
 
 ## 本番環境
