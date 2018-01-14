@@ -90,6 +90,14 @@ run-main presentation.cli.onetime.AllQiitaRawInternalUserJsonCrawlerCli
 run-main presentation.cli.onetime.AllQiitaUserRegisterCli
 ```
 
+#### 全記事の情報をクロール
+
+```
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-raw-props-article-json-crawler-cli > /dev/null 2>&1 &
+
+run-main presentation.cli.onetime.AllQiitaRawPropsArticleJsonCrawlerCli
+```
+
 
 ## 運用
 
