@@ -4,8 +4,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
-import domain.qiita.article.page.QiitaArticlePage
-import domain.qiita.article.{QiitaArticleIdGateway, QiitaArticleIdRepository}
+import domain.qiita.article.{QiitaArticleIdGateway, QiitaArticleIdRepository, QiitaItemId}
 import play.api.Logger
 
 @Singleton
@@ -17,7 +16,7 @@ final class QiitaArticleIdCrawlerApplication @Inject()(
 
   def crawl(): Unit = {
     try {
-      QiitaArticlePage.range.foreach { currentPage =>
+      QiitaItemId.pageRange.foreach { currentPage =>
         crawlOnePage(currentPage)
         TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
       }
@@ -33,6 +32,6 @@ final class QiitaArticleIdCrawlerApplication @Inject()(
   private def crawlOnePage(currentPage: Int): Unit = {
     val qiitaItemIds = gateway.fetch(currentPage)
     qiitaItemIds.foreach(repository.register)
-    Logger.info(s"crawled $currentPage / ${QiitaArticlePage.PageMax}")
+    Logger.info(s"crawled $currentPage / ${QiitaItemId.pageMax}")
   }
 }
