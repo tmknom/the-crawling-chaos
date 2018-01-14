@@ -5,6 +5,13 @@ from fabric.api import *
 from env import *
 
 
+def show():
+    '''EC2の状態確認'''
+    instance_name = get_local_env(AWS.INSTANCE_NAME)
+    instance_id = get_instance_id(instance_name)
+    show_instances(instance_id)
+
+
 def start():
     '''EC2のスタート'''
     instance_name = get_local_env(AWS.INSTANCE_NAME)
@@ -13,10 +20,18 @@ def start():
 
 
 def stop():
-    '''EC2のスタート'''
+    '''EC2のストップ'''
     instance_name = get_local_env(AWS.INSTANCE_NAME)
     instance_id = get_instance_id(instance_name)
     stop_instances(instance_id)
+
+
+def show_instances(instance_id):
+    command = "aws ec2 describe-instances " \
+              + " --instance-ids %s " % instance_id \
+              + " | jq -r '.Reservations[].Instances[] " \
+              + " | {ip_address: .PublicIpAddress, status: .State.Name}' "
+    local(command)
 
 
 def start_instances(instance_id):
