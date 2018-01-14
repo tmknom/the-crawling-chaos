@@ -46,6 +46,13 @@ def download_csv():
 
 
 @task
+def upoad_csv():
+    '''-H $SSH_HOST -u $SSH_USER_NAME --port=$SSH_PORT CSVのアップロード'''
+    import upload_csv
+    upload_csv.execute()
+
+
+@task
 def export_data():
     '''データのエクスポート'''
     import export_data
