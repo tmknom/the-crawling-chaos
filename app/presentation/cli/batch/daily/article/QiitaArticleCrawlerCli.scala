@@ -5,9 +5,9 @@ import library.task.Task
 import play.api.{Application, Logger}
 
 /**
-  * run-main presentation.cli.batch.daily.article.RecentlyQiitaArticleCrawlerCli
+  * run-main presentation.cli.batch.daily.article.QiitaArticleCrawlerCli
   */
-object RecentlyQiitaArticleCrawlerCli extends App with Task {
+object QiitaArticleCrawlerCli extends App with Task {
   run()
 
   override def task(app: Application): Unit = {
