@@ -26,7 +26,7 @@ final class ScalikejdbcQiitaArticleIdRepository extends QiitaArticleIdRepository
           SELECT item_id FROM qiita_article_ids AS qai
           WHERE NOT EXISTS
           (SELECT 1 FROM qiita_articles AS qa WHERE qa.item_id = qai.item_id)
-          ORDER BY id ASC;
+          ORDER BY qai.id ASC;
        """
       .map(toQiitaItemId)
       .list()
