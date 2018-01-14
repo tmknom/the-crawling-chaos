@@ -186,12 +186,21 @@ export AWS_SECRET_ACCESS_KEY=xxxx
 ### direnv
 
 ```
+# ssh
 export SSH_PORT='xxxx'
 export SSH_USER_NAME='xxxx'
 export SSH_HOME='/home/xxxx'
 export SSH_HOST='XX.XX.XX.XX'
+
+# api token
 export QIITA_ACCESS_TOKEN='xxxx'
+
+# path
 export CSV_PATH='/path/to/csv'
+
+# aws
+export INSTANCE_NAME='xxxx'
+export SECURITY_GROUP_NAME='xxxx'
 ```
 
 ### ログイン
