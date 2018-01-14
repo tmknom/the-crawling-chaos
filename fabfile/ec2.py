@@ -3,18 +3,19 @@
 from fabric.api import *
 
 import common
+from env import *
 
 
 def start():
     '''EC2のスタート'''
-    instance_name = common.get_local_env('INSTANCE_NAME')
+    instance_name = common.get_local_env(AWS.INSTANCE_NAME)
     instance_id = get_instance_id(instance_name)
     start_instances(instance_id)
 
 
 def stop():
     '''EC2のスタート'''
-    instance_name = common.get_local_env('INSTANCE_NAME')
+    instance_name = common.get_local_env(AWS.INSTANCE_NAME)
     instance_id = get_instance_id(instance_name)
     stop_instances(instance_id)
 

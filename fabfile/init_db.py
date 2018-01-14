@@ -3,6 +3,7 @@
 from fabric.api import *
 
 import common
+from env import *
 
 
 def execute():
@@ -29,7 +30,7 @@ def load_data_table(table_name):
 
 
 def load_data_sql(table_name):
-    csv_path = common.get_local_env('CSV_PATH')
+    csv_path = common.get_local_env(PATH.CSV)
     return ' LOAD DATA INFILE \'%s/%s.csv\' ' % (csv_path, table_name) \
            + ' INTO TABLE %s ' % table_name \
            + ' FIELDS TERMINATED BY \'\t\' ' \

@@ -4,6 +4,7 @@ import json
 from fabric.api import *
 
 import common
+from env import *
 
 
 def authorize():
@@ -78,12 +79,12 @@ def get_cidr_blocks(security_group_id):
 
 
 def get_security_group_name():
-    return common.get_local_env('SG_NAME')
+    return common.get_local_env(AWS.SECURITY_GROUP_NAME)
 
 
 def get_ports():
     return [
-        common.get_local_env('SSH_PORT'),
+        common.get_local_env(SSH.PORT),
         # 9000,
     ]
 
