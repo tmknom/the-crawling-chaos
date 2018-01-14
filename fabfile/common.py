@@ -15,7 +15,3 @@ TABLE_NAMES = [
 def execute_sql(sql):
     command = 'mysql -uroot db_production -e "%s"' % (sql)
     local(command)
-
-
-def get_local_env(env_name):
-    return local('echo $%s' % (env_name), capture=True)
