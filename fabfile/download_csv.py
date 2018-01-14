@@ -13,6 +13,6 @@ def execute():
 
 
 def download_csv_table(table_name):
-    csv_path = common.get_local_env(PATH.CSV)
+    csv_path = get_local_env(PATH.CSV)
     print('%s.csv downloading...' % table_name)
     get('/tmp/%s.csv' % table_name, '%s/%s.csv' % (csv_path, table_name))

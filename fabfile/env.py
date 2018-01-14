@@ -3,6 +3,11 @@
 # 環境変数のキー名の定義
 #
 
+
+def get_local_env(env_name):
+    return local('echo $%s' % (env_name), capture=True)
+
+
 class SSH:
     PORT = 'SSH_PORT'
 
