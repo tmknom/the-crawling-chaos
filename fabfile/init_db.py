@@ -4,6 +4,7 @@ from fabric.api import *
 
 import common
 from env import *
+from table import TABLES
 
 
 def execute():
@@ -19,8 +20,8 @@ def clean_migrate():
 
 def load_data():
     '''初期データのロード'''
-    for table_name in common.TABLE_NAMES:
-        load_data_table(table_name)
+    for table in TABLES:
+        load_data_table(table.name)
 
 
 def load_data_table(table_name):
