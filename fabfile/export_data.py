@@ -3,17 +3,14 @@
 from fabric.api import *
 
 import common
+from table import TABLES
 
 
 def execute():
     '''データのエクスポート'''
     local('sudo rm -rf /tmp/*.csv')
-    export_data_table('qiita_user_names', 'user_name ASC')
-    export_data_table('raw_qiita_internal_user_jsons', 'crawled_date_time ASC')
-    export_data_table('qiita_users', 'qiita_user_id ASC')
-    export_data_table('qiita_user_contributions', 'updated_date_time ASC')
-    export_data_table('qiita_user_contribution_histories', 'registered_date_time ASC')
-    export_data_table('qiita_article_ids', 'id ASC')
+    for table in TABLES:
+        export_data_table(table.name, table.order_query)
     local('ls -alh /tmp/*.csv')
     local('wc -l /tmp/*.csv')
 

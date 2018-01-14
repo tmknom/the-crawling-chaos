@@ -2,14 +2,14 @@
 
 from fabric.api import *
 
-import common
 from env import *
+from table import TABLES
 
 
 def execute():
     '''-H $SSH_HOST -u $SSH_USER_NAME --port=$SSH_PORT CSVのダウンロード'''
-    for table_name in common.TABLE_NAMES:
-        download_csv_table(table_name)
+    for table in TABLES:
+        download_csv_table(table.name)
 
 
 def download_csv_table(table_name):
