@@ -18,6 +18,13 @@ def security_group_revoke():
 
 
 @task
+def ec2_show():
+    '''EC2の状態確認'''
+    import ec2
+    ec2.show()
+
+
+@task
 def ec2_start():
     '''EC2のスタート'''
     import ec2
