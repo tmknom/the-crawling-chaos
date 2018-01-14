@@ -1,13 +1,13 @@
 import com.google.inject.AbstractModule
+import domain.qiita.article._
 import domain.qiita.article.contribution.{FacebookGateway, HatenaGateway, PocketGateway, QiitaArticleContributionRepository}
 import domain.qiita.article.json.QiitaRawArticleJsonRepository
-import domain.qiita.article.{QiitaArticleGateway, QiitaArticleIdGateway, QiitaArticleIdRepository, QiitaArticleRepository}
 import domain.qiita.user._
 import domain.qiita.user.contribution._
 import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
+import infrastructure.qiita.article._
 import infrastructure.qiita.article.contribution.ScalikejdbcQiitaArticleContributionRepository
 import infrastructure.qiita.article.json.{HttpFacebookGateway, HttpHatenaGateway, HttpPocketGateway, ScalikejdbcQiitaRawArticleJsonRepository}
-import infrastructure.qiita.article.{HttpQiitaArticleGateway, HttpQiitaArticleIdGateway, ScalikejdbcQiitaArticleIdRepository, ScalikejdbcQiitaArticleRepository}
 import infrastructure.qiita.user._
 import infrastructure.qiita.user.contribution._
 import infrastructure.qiita.user.ranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
@@ -55,8 +55,10 @@ class Module extends AbstractModule {
   }
 
   private def configureInfrastructureArticle(): Unit = {
+    bind(classOf[QiitaArticleInternalApiGateway]).to(classOf[HttpQiitaArticleInternalApiGateway])
     bind(classOf[QiitaArticleIdGateway]).to(classOf[HttpQiitaArticleIdGateway])
     bind(classOf[QiitaArticleGateway]).to(classOf[HttpQiitaArticleGateway])
+
     bind(classOf[QiitaArticleIdRepository]).to(classOf[ScalikejdbcQiitaArticleIdRepository])
     bind(classOf[QiitaArticleRepository]).to(classOf[ScalikejdbcQiitaArticleRepository])
     bind(classOf[QiitaRawArticleJsonRepository]).to(classOf[ScalikejdbcQiitaRawArticleJsonRepository])
