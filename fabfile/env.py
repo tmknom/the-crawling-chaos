@@ -3,6 +3,8 @@
 # 環境変数のキー名の定義
 #
 
+from fabric.api import *
+
 
 def get_local_env(env_name):
     return local('echo $%s' % (env_name), capture=True)
