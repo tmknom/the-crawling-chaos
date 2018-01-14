@@ -27,7 +27,7 @@ object Version {
 
   // ロギング関連
   val LogstashLogbackEncoder = "4.11"
-  val Janino = "3.0.7"
+  val Janino = "3.0.8"
 
   // テスト関連
   val MockitoCore = "2.12.0"
