@@ -48,12 +48,12 @@ run-main presentation.cli.batch.monthly.user.DeletionUnavailableQiitaUserNameCli
 
 ### Qiita記事
 
-#### 最近登録された記事IDをクロール
+#### 記事IDをクロール
 
 ```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/recently-qiita-article-id-crawler-cli > /dev/null 2>&1 &
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/qiita-article-id-crawler-cli > /dev/null 2>&1 &
 
-run-main presentation.cli.batch.daily.article.RecentlyQiitaArticleIdCrawlerCli
+run-main presentation.cli.batch.daily.article.QiitaArticleIdCrawlerCli
 ```
 
 #### 最近登録された記事をクロール
