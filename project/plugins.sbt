@@ -18,7 +18,7 @@ resolvers += "Flyway" at "https://flywaydb.org/repo"
   *
   * @see https://github.com/lucidsoftware/neo-sbt-scalafmt
   */
-addSbtPlugin("com.lucidchart" % "sbt-scalafmt" % "1.14")
+addSbtPlugin("com.lucidchart" % "sbt-scalafmt" % "1.15")
 
 /**
   * カバレッジ
