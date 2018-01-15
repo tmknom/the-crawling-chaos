@@ -51,7 +51,6 @@ def get_instance_id(instance_name):
               + " --filters " \
               + " 'Name=tag-key,Values=Name' " \
               + " 'Name=tag-value,Values=%s' " % instance_name \
-              + " 'Name=instance-state-name,Values=running,stopped' " \
               + " | jq -r '.Reservations[].Instances[].InstanceId' "
     result = local(command, capture=True)
     return result
