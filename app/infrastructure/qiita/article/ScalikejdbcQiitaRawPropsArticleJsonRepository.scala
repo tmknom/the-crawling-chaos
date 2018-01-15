@@ -24,4 +24,20 @@ final class ScalikejdbcQiitaRawPropsArticleJsonRepository extends QiitaRawPropsA
 
     () // 明示的に Unit を返す
   }
+
+  def retrieve(itemId: QiitaItemId)(implicit session: DBSession = AutoSession): Option[RawArticleJson] = {
+    val id = itemId.value
+
+    sql"""
+          SELECT raw_json FROM raw_qiita_props_article_jsons
+          WHERE item_id = $id;
+       """
+      .map(toRawJson)
+      .single()
+      .apply()
+  }
+
+  private def toRawJson(rs: WrappedResultSet): RawArticleJson = {
+    RawArticleJson(rs.string("raw_json"))
+  }
 }
