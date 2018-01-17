@@ -1,12 +1,11 @@
 import com.google.inject.AbstractModule
 import domain.qiita.article._
-import domain.qiita.article.contribution.{FacebookGateway, HatenaGateway, PocketGateway, QiitaArticleContributionRepository}
+import domain.qiita.article.contribution.{FacebookGateway, HatenaGateway, PocketGateway}
 import domain.qiita.article.json.QiitaRawArticleJsonRepository
 import domain.qiita.user._
 import domain.qiita.user.contribution._
 import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 import infrastructure.qiita.article._
-import infrastructure.qiita.article.contribution.ScalikejdbcQiitaArticleContributionRepository
 import infrastructure.qiita.article.json.{HttpFacebookGateway, HttpHatenaGateway, HttpPocketGateway, ScalikejdbcQiitaRawArticleJsonRepository}
 import infrastructure.qiita.user._
 import infrastructure.qiita.user.contribution._
@@ -67,7 +66,6 @@ class Module extends AbstractModule {
     bind(classOf[HatenaGateway]).to(classOf[HttpHatenaGateway])
     bind(classOf[FacebookGateway]).to(classOf[HttpFacebookGateway])
     bind(classOf[PocketGateway]).to(classOf[HttpPocketGateway])
-    bind(classOf[QiitaArticleContributionRepository]).to(classOf[ScalikejdbcQiitaArticleContributionRepository])
     bind(classOf[QiitaUserApiGateway]).to(classOf[HttpQiitaUserApiGateway])
 
     () // 明示的に Unit を返す
