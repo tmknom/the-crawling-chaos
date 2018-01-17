@@ -1,12 +1,11 @@
 import com.google.inject.AbstractModule
 import domain.qiita.article._
 import domain.qiita.article.contribution.{FacebookGateway, HatenaGateway, PocketGateway}
-import domain.qiita.article.json.QiitaRawArticleJsonRepository
 import domain.qiita.user._
 import domain.qiita.user.contribution._
 import domain.qiita.user.ranking.{QiitaUserRankingGateway, QiitaUserRankingRepository}
 import infrastructure.qiita.article._
-import infrastructure.qiita.article.json.{HttpFacebookGateway, HttpHatenaGateway, HttpPocketGateway, ScalikejdbcQiitaRawArticleJsonRepository}
+import infrastructure.qiita.article.json.{HttpFacebookGateway, HttpHatenaGateway, HttpPocketGateway}
 import infrastructure.qiita.user._
 import infrastructure.qiita.user.contribution._
 import infrastructure.qiita.user.ranking.{HttpQiitaUserRankingGateway, ScalikejdbcQiitaUserRankingRepository}
@@ -61,7 +60,6 @@ class Module extends AbstractModule {
     bind(classOf[QiitaArticleIdRepository]).to(classOf[ScalikejdbcQiitaArticleIdRepository])
     bind(classOf[QiitaRawPropsArticleJsonRepository]).to(classOf[ScalikejdbcQiitaRawPropsArticleJsonRepository])
     bind(classOf[QiitaArticleRepository]).to(classOf[ScalikejdbcQiitaArticleRepository])
-    bind(classOf[QiitaRawArticleJsonRepository]).to(classOf[ScalikejdbcQiitaRawArticleJsonRepository])
 
     bind(classOf[HatenaGateway]).to(classOf[HttpHatenaGateway])
     bind(classOf[FacebookGateway]).to(classOf[HttpFacebookGateway])
