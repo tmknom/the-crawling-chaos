@@ -56,14 +56,6 @@ run-main presentation.cli.batch.monthly.user.DeletionUnavailableQiitaUserNameCli
 run-main presentation.cli.batch.daily.article.QiitaArticleIdCrawlerCli
 ```
 
-#### 記事をクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/qiita-article-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.batch.daily.article.QiitaArticleCrawlerCli
-```
-
 ### 初期データ取得
 
 #### 全Qiitaユーザ名をクロール
