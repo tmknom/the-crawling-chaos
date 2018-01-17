@@ -9,4 +9,6 @@ trait QiitaArticleIdRepository {
   def retrieveRecently()(implicit session: DBSession = AutoSession): List[QiitaItemId]
 
   def retrieveNotRegistered()(implicit session: DBSession = AutoSession): List[QiitaItemId]
+
+  def retrieveNotRegisteredContribution()(implicit session: DBSession = AutoSession): List[QiitaItemId]
 }

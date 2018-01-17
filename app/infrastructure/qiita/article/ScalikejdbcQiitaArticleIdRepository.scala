@@ -45,6 +45,18 @@ final class ScalikejdbcQiitaArticleIdRepository extends QiitaArticleIdRepository
       .apply()
   }
 
+  override def retrieveNotRegisteredContribution()(implicit session: DBSession = AutoSession): List[QiitaItemId] = {
+    sql"""
+          SELECT item_id FROM qiita_articles AS qa
+          WHERE NOT EXISTS
+          (SELECT 1 FROM qiita_article_contributions AS qac WHERE qac.item_id = qa.item_id)
+          ORDER BY qa.posted_date_time ASC;
+       """
+      .map(toQiitaItemId)
+      .list()
+      .apply()
+  }
+
   private def toQiitaItemId(rs: WrappedResultSet): QiitaItemId = {
     QiitaItemId(rs.string("item_id"))
   }
