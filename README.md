@@ -98,6 +98,14 @@ run-main presentation.cli.onetime.AllQiitaRawPropsArticleJsonCrawlerCli
 run-main presentation.cli.onetime.AllQiitaArticleRegisterCli
 ```
 
+#### 全記事の評価をクロール
+
+```
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-article-contribution-crawler-cli > /dev/null 2>&1 &
+
+run-main presentation.cli.onetime.AllQiitaArticleContributionCrawlerCli
+```
+
 
 ## 運用
 
