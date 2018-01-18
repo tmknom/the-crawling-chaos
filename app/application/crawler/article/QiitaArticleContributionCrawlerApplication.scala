@@ -40,13 +40,8 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
 
   private def quietlyCrawl(qiitaItemId: QiitaItemId, progress: String): Unit = {
     try {
-      val contribution = crawlContribution(qiitaItemId)
-      val event        = contribution.toCrawledEvent(qiitaItemId)
-
-      DB.localTx { implicit session =>
-        repository.register(qiitaItemId, contribution)
-        historyRepository.register(event)
-      }
+      val event = crawlContribution(qiitaItemId)
+      registerWithTransaction(event)
       Logger.info(s"${this.getClass.getSimpleName} crawled ${qiitaItemId.value} $progress")
     } catch {
       case e: Exception =>
@@ -57,18 +52,27 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
     }
   }
 
-  private def crawlContribution(qiitaItemId: QiitaItemId): QiitaArticleContribution = {
+  private def registerWithTransaction(event: QiitaArticleContributionCrawledEvent): Unit = {
+    DB.localTx { implicit session =>
+      repository.register(event)
+      historyRepository.register(event)
+    }
+  }
+
+  private def crawlContribution(qiitaItemId: QiitaItemId): QiitaArticleContributionCrawledEvent = {
     val (hatenaCount, facebookCount, pocketCount) = crawlSocial(qiitaItemId)
 
     val rawArticleJson = getRawArticleJson(qiitaItemId)
 
-    QiitaArticleContribution(
+    val contribution = QiitaArticleContribution(
       rawArticleJson.toLikesCount,
       rawArticleJson.toCommentsCount,
       hatenaCount,
       facebookCount,
       pocketCount
     )
+
+    contribution.toCrawledEvent(qiitaItemId)
   }
 
   private def crawlSocial(qiitaItemId: QiitaItemId): (HatenaCount, FacebookCount, PocketCount) = {
