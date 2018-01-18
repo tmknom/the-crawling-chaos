@@ -7,6 +7,7 @@ import domain.qiita.article._
 import domain.qiita.article.contribution._
 import domain.qiita.article.json.RawArticleJson
 import play.api.Logger
+import scalikejdbc.DB
 
 import scala.collection.mutable
 
@@ -16,6 +17,7 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
     facebookGateway:        FacebookGateway,
     pocketGateway:          PocketGateway,
     repository:             QiitaArticleContributionRepository,
+    historyRepository:      QiitaArticleContributionHistoryRepository,
     qiitaArticleRepository: QiitaArticleRepository,
     idRepository:           QiitaArticleIdRepository,
     rawJsonRepository:      QiitaRawPropsArticleJsonRepository
@@ -38,8 +40,13 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
 
   private def quietlyCrawl(qiitaItemId: QiitaItemId, progress: String): Unit = {
     try {
-      val qiitaArticleContribution = crawlContribution(qiitaItemId)
-      repository.register(qiitaItemId, qiitaArticleContribution)
+      val contribution = crawlContribution(qiitaItemId)
+      val event        = contribution.toCrawledEvent(qiitaItemId)
+
+      DB.localTx { implicit session =>
+        repository.register(qiitaItemId, contribution)
+        historyRepository.register(event)
+      }
       Logger.info(s"${this.getClass.getSimpleName} crawled ${qiitaItemId.value} $progress")
     } catch {
       case e: Exception =>
