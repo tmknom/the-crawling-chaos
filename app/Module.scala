@@ -57,6 +57,7 @@ class Module extends AbstractModule {
     bind(classOf[QiitaArticleInternalApiGateway]).to(classOf[HttpQiitaArticleInternalApiGateway])
     bind(classOf[QiitaArticleIdGateway]).to(classOf[HttpQiitaArticleIdGateway])
     bind(classOf[QiitaArticleGateway]).to(classOf[HttpQiitaArticleGateway])
+    bind(classOf[QiitaArticleApiGateway]).to(classOf[HttpQiitaArticleApiGateway])
 
     bind(classOf[QiitaArticleIdRepository]).to(classOf[ScalikejdbcQiitaArticleIdRepository])
     bind(classOf[QiitaRawPropsArticleJsonRepository]).to(classOf[ScalikejdbcQiitaRawPropsArticleJsonRepository])
