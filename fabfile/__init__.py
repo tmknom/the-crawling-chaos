@@ -39,6 +39,20 @@ def ec2_stop():
 
 
 @task
+def s3_upload():
+    '''S3へのアップロード'''
+    import s3
+    s3.upload()
+
+
+@task
+def s3_download():
+    '''S3へのダウンロード'''
+    import s3
+    s3.download()
+
+
+@task
 def deploy():
     '''デプロイ'''
     import deploy
