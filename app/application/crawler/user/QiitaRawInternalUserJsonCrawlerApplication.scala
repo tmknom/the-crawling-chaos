@@ -14,13 +14,8 @@ final class QiitaRawInternalUserJsonCrawlerApplication @Inject()(
 
   def crawl(): Unit = {
     val qiitaUserNames = qiitaUserNameRepository.retrieveRecently()
-    withLoop[QiitaUserName](qiitaUserNames) { (qiitaUserName, progress) =>
-      quietlyCrawlOneUser(qiitaUserName, progress)
-    }
-  }
 
-  private def quietlyCrawlOneUser(qiitaUserName: QiitaUserName, progress: String): Unit = {
-    withSleep[String](qiitaUserName, progress, errors) { (_) =>
+    withSleepLoop[QiitaUserName](qiitaUserNames) { (qiitaUserName) =>
       val rawInternalUserJson = gateway.fetch(qiitaUserName)
       val crawledDateTime     = CrawledDateTime.now()
       repository.register(qiitaUserName, rawInternalUserJson, crawledDateTime)

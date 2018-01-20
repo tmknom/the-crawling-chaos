@@ -27,13 +27,7 @@ final class QiitaUserCrawlerApplication @Inject()(
   }
 
   private def crawlUsers(qiitaUserNames: List[QiitaUserName]): Unit = {
-    withLoop[QiitaUserName](qiitaUserNames) { (qiitaUserName, progress) =>
-      quietlyCrawlOneUser(qiitaUserName, progress)
-    }
-  }
-
-  private def quietlyCrawlOneUser(qiitaUserName: QiitaUserName, progress: String): Unit = {
-    withSleep[String](qiitaUserName, progress, errors) { (_) =>
+    withSleepLoop[QiitaUserName](qiitaUserNames) { (qiitaUserName) =>
       crawlOneUser(qiitaUserName)
     }
   }
