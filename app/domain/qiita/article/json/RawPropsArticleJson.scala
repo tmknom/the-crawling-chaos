@@ -6,7 +6,7 @@ import domain.qiita.user.QiitaUserName
 import spray.json.DefaultJsonProtocol._
 import spray.json._
 
-final case class RawArticleJson(value: String) {
+final case class RawPropsArticleJson(value: String) {
   def toQiitaArticle: QiitaArticle = {
     QiitaArticle(
       QiitaArticleId.undefined,

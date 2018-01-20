@@ -5,7 +5,7 @@ import javax.inject.{Inject, Singleton}
 
 import domain.qiita.article._
 import domain.qiita.article.contribution._
-import domain.qiita.article.json.RawArticleJson
+import domain.qiita.article.json.RawPropsArticleJson
 import play.api.Logger
 import scalikejdbc.DB
 
@@ -86,7 +86,7 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
     (hatenaCount, facebookCount, pocketCount)
   }
 
-  private def getRawArticleJson(qiitaItemId: QiitaItemId): RawArticleJson = {
+  private def getRawArticleJson(qiitaItemId: QiitaItemId): RawPropsArticleJson = {
     val optionValue = rawJsonRepository.retrieve(qiitaItemId)
     optionValue match {
       case Some(v) => v
