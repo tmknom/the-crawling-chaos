@@ -2,6 +2,7 @@ package application.qiita.user
 
 import javax.inject.{Inject, Singleton}
 
+import domain.crawler.Crawler
 import domain.qiita.user.contribution.{QiitaUserContributionHistoryRepository, QiitaUserContributionRepository}
 import domain.qiita.user.{QiitaRawInternalUserJsonRepository, QiitaUserName, QiitaUserProfileRepository, RawInternalUserJson}
 import scalikejdbc.DB
@@ -12,11 +13,19 @@ final class QiitaUserRegisterApplication @Inject()(
     qiitaUserContributionRepository:        QiitaUserContributionRepository,
     qiitaUserContributionHistoryRepository: QiitaUserContributionHistoryRepository,
     qiitaRawInternalUserJsonRepository:     QiitaRawInternalUserJsonRepository
-) {
+) extends Crawler {
 
   def registerRecently(): Unit = {
     val qiitaUserNames = qiitaRawInternalUserJsonRepository.retrieveRecently()
-    qiitaUserNames.foreach(register)
+    withLoop[QiitaUserName](qiitaUserNames) { (qiitaUserName, progress) =>
+      registerWithoutSleep(qiitaUserName, progress)
+    }
+  }
+
+  private def registerWithoutSleep(qiitaUserName: QiitaUserName, progress: String): Unit = {
+    withoutSleep[String](qiitaUserName, progress, errors) { (_) =>
+      register(qiitaUserName)
+    }
   }
 
   private def register(qiitaUserName: QiitaUserName): Unit = {
