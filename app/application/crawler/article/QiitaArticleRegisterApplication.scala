@@ -14,13 +14,8 @@ final class QiitaArticleRegisterApplication @Inject()(
 
   def crawl(): Unit = {
     val qiitaItemIds = idRepository.retrieveNotRegistered()
-    withLoop[QiitaItemId](qiitaItemIds) { (qiitaItemId, progress) =>
-      quietlyRegister(qiitaItemId, progress)
-    }
-  }
 
-  private def quietlyRegister(qiitaItemId: QiitaItemId, progress: String): Unit = {
-    withoutSleep[String](qiitaItemId, progress, errors) { (_) =>
+    withoutSleepLoop[QiitaItemId](qiitaItemIds) { (qiitaItemId) =>
       val optionValue = rawJsonRepository.retrieve(qiitaItemId)
       val rawArticleJson = optionValue match {
         case Some(v) => v

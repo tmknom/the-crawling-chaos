@@ -1,3 +1,21 @@
 package domain.crawler
 
-trait Crawler extends Bulk with QuietlyExecution
+import domain.Identifier
+
+trait Crawler extends Bulk with QuietlyExecution {
+  def withSleepLoop[I <: Identifier[String]](items: List[I])(f: (I) => Unit): Unit = {
+    withLoop[I](items) { (item, progress) =>
+      withSleep[String](item, progress, errors) { (_) =>
+        f(item)
+      }
+    }
+  }
+
+  def withoutSleepLoop[I <: Identifier[String]](items: List[I])(f: (I) => Unit): Unit = {
+    withLoop[I](items) { (item, progress) =>
+      withoutSleep[String](item, progress, errors) { (_) =>
+        f(item)
+      }
+    }
+  }
+}

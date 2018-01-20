@@ -15,13 +15,7 @@ final class QiitaRawPropsArticleJsonCrawlerApplication @Inject()(
 
   def crawl(): Unit = {
     val qiitaItemIds = qiitaArticleIdRepository.retrieveRecently()
-    withLoop[QiitaItemId](qiitaItemIds) { (qiitaItemId, progress) =>
-      quietlyCrawl(qiitaItemId, progress)
-    }
-  }
-
-  private def quietlyCrawl(qiitaItemId: QiitaItemId, progress: String): Unit = {
-    withSleep[String](qiitaItemId, progress, errors) { (_) =>
+    withSleepLoop[QiitaItemId](qiitaItemIds) { (qiitaItemId) =>
       val rawArticleJson  = gateway.fetch(qiitaItemId)
       val crawledDateTime = CrawledDateTime.now()
       repository.register(qiitaItemId, rawArticleJson, crawledDateTime)

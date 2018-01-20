@@ -17,13 +17,8 @@ final class QiitaUserRegisterApplication @Inject()(
 
   def registerRecently(): Unit = {
     val qiitaUserNames = qiitaRawInternalUserJsonRepository.retrieveRecently()
-    withLoop[QiitaUserName](qiitaUserNames) { (qiitaUserName, progress) =>
-      registerWithoutSleep(qiitaUserName, progress)
-    }
-  }
 
-  private def registerWithoutSleep(qiitaUserName: QiitaUserName, progress: String): Unit = {
-    withoutSleep[String](qiitaUserName, progress, errors) { (_) =>
+    withoutSleepLoop[QiitaUserName](qiitaUserNames) { (qiitaUserName) =>
       register(qiitaUserName)
     }
   }

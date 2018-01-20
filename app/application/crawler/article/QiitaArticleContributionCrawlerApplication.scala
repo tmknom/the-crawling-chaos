@@ -22,13 +22,8 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
 
   def crawl(): Unit = {
     val items = idRepository.retrieveNotRegisteredContribution()
-    withLoop[QiitaItemId](items) { (qiitaItemId, progress) =>
-      quietlyCrawl(qiitaItemId, progress)
-    }
-  }
 
-  private def quietlyCrawl(qiitaItemId: QiitaItemId, progress: String): Unit = {
-    withSleep[String](qiitaItemId, progress, errors) { (_) =>
+    withSleepLoop[QiitaItemId](items) { (qiitaItemId) =>
       val event = crawlContribution(qiitaItemId)
       registerWithTransaction(event)
     }
