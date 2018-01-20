@@ -10,4 +10,12 @@ trait Crawler extends Bulk with QuietlyExecution {
       }
     }
   }
+
+  def withoutSleepLoop[I <: Identifier[String]](items: List[I])(f: (I) => Unit): Unit = {
+    withLoop[I](items) { (item, progress) =>
+      withoutSleep[String](item, progress, errors) { (_) =>
+        f(item)
+      }
+    }
+  }
 }
