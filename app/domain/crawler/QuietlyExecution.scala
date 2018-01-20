@@ -5,7 +5,7 @@ import play.api.Logger
 
 import scala.collection.mutable
 
-trait QuietlyCrawler {
+trait QuietlyExecution {
   def withQuietly[T](identifier: Identifier[T], progress: String, errors: mutable.ListBuffer[String])(f: (Identifier[T]) => Unit): Unit = {
     try {
       f(identifier)
