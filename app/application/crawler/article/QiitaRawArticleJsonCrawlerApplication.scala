@@ -2,7 +2,7 @@ package application.crawler.article
 
 import javax.inject.{Inject, Singleton}
 
-import domain.crawler.{Progress, Sleeper}
+import domain.crawler.{Progress, QuietlyCrawler}
 import domain.qiita.article._
 import domain.qiita.user.CrawledDateTime
 import play.api.Logger
@@ -14,7 +14,7 @@ final class QiitaRawArticleJsonCrawlerApplication @Inject()(
     gateway:                  QiitaArticleApiGateway,
     repository:               QiitaRawArticleJsonRepository,
     qiitaArticleIdRepository: QiitaArticleIdRepository
-) {
+) extends QuietlyCrawler {
   @SuppressWarnings(Array("org.wartremover.warts.MutableDataStructures"))
   private val errors = mutable.ListBuffer.empty[String]
 
@@ -30,17 +30,10 @@ final class QiitaRawArticleJsonCrawlerApplication @Inject()(
   }
 
   private def quietlyCrawl(qiitaItemId: QiitaItemId, progress: String): Unit = {
-    try {
+    withQuietly[String](qiitaItemId, progress, errors) { (_) =>
       val rawJson         = gateway.fetch(qiitaItemId)
       val crawledDateTime = CrawledDateTime.now()
       repository.register(qiitaItemId, rawJson, crawledDateTime)
-      Logger.info(s"${this.getClass.getSimpleName} crawled ${qiitaItemId.value} $progress")
-    } catch {
-      case e: Exception =>
-        errors += qiitaItemId.value
-        Logger.warn(s"${this.getClass.getSimpleName} crawl error ${qiitaItemId.value}.", e)
-    } finally {
-      Sleeper.sleep()
     }
   }
 }
