@@ -2,12 +2,10 @@ package application.crawler.user
 
 import javax.inject.{Inject, Singleton}
 
-import domain.crawler.{Progress, QuietlyCrawler}
+import domain.crawler.{Bulk, QuietlyCrawler}
 import domain.qiita.user._
 import domain.qiita.user.contribution.{QiitaUserContributionHistoryRepository, QiitaUserContributionRepository}
 import scalikejdbc.DB
-
-import scala.collection.mutable
 
 @Singleton
 final class QiitaUserCrawlerApplication @Inject()(
@@ -16,9 +14,8 @@ final class QiitaUserCrawlerApplication @Inject()(
     qiitaUserContributionRepository:        QiitaUserContributionRepository,
     qiitaUserContributionHistoryRepository: QiitaUserContributionHistoryRepository,
     qiitaUserNameRepository:                QiitaUserNameRepository
-) extends QuietlyCrawler {
-  @SuppressWarnings(Array("org.wartremover.warts.MutableDataStructures"))
-  private val errors = mutable.ListBuffer.empty[String]
+) extends Bulk
+    with QuietlyCrawler {
 
   def crawlTopUser(): Unit = {
     val qiitaUserNames = qiitaUserNameRepository.retrieveTopUser()
@@ -31,11 +28,8 @@ final class QiitaUserCrawlerApplication @Inject()(
   }
 
   private def crawlUsers(qiitaUserNames: List[QiitaUserName]): Unit = {
-    val itemsCount = qiitaUserNames.size
-    qiitaUserNames.zipWithIndex.foreach {
-      case (qiitaUserName, index) =>
-        val progress = Progress.calculate(index, itemsCount)
-        quietlyCrawlOneUser(qiitaUserName, progress)
+    withLoop[QiitaUserName](qiitaUserNames) { (qiitaUserName, progress) =>
+      quietlyCrawlOneUser(qiitaUserName, progress)
     }
   }
 
