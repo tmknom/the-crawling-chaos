@@ -14,9 +14,8 @@ final class QiitaRawArticleJsonCrawlerApplication @Inject()(
 ) extends Crawler {
 
   def crawl(): Unit = {
-    val qiitaItemIds = qiitaArticleIdRepository.retrieveNotRegisteredRawJson()
-
-    withSleepLoop[QiitaItemId](qiitaItemIds)(crawlOne)
+    val items = qiitaArticleIdRepository.retrieveNotRegisteredRawJson()
+    withSleepLoop[QiitaItemId](items)(crawlOne)
   }
 
   def crawlOne(qiitaItemId: QiitaItemId): Unit = {

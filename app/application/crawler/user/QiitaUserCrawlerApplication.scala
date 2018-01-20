@@ -17,17 +17,17 @@ final class QiitaUserCrawlerApplication @Inject()(
 ) extends Crawler {
 
   def crawlTopUser(): Unit = {
-    val qiitaUserNames = qiitaUserNameRepository.retrieveTopUser()
-    crawlUsers(qiitaUserNames)
+    val items = qiitaUserNameRepository.retrieveTopUser()
+    crawlUsers(items)
   }
 
   def crawlContributedUser(): Unit = {
-    val qiitaUserNames = qiitaUserNameRepository.retrieveContributedUser()
-    crawlUsers(qiitaUserNames)
+    val items = qiitaUserNameRepository.retrieveContributedUser()
+    crawlUsers(items)
   }
 
-  private def crawlUsers(qiitaUserNames: List[QiitaUserName]): Unit = {
-    withSleepLoop[QiitaUserName](qiitaUserNames)(crawlOne)
+  private def crawlUsers(items: List[QiitaUserName]): Unit = {
+    withSleepLoop[QiitaUserName](items)(crawlOne)
   }
 
   private def crawlOne(qiitaUserName: QiitaUserName): Unit = {

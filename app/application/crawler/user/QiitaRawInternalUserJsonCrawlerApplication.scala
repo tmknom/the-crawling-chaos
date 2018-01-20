@@ -13,9 +13,8 @@ final class QiitaRawInternalUserJsonCrawlerApplication @Inject()(
 ) extends Crawler {
 
   def crawl(): Unit = {
-    val qiitaUserNames = qiitaUserNameRepository.retrieveRecently()
-
-    withSleepLoop[QiitaUserName](qiitaUserNames)(crawlOne)
+    val items = qiitaUserNameRepository.retrieveRecently()
+    withSleepLoop[QiitaUserName](items)(crawlOne)
   }
 
   def crawlOne(qiitaUserName: QiitaUserName): Unit = {
