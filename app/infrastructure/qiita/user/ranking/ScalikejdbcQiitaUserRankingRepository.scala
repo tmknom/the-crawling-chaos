@@ -32,7 +32,7 @@ final class ScalikejdbcQiitaUserRankingRepository extends QiitaUserRankingReposi
 
   def retrieveAll()(implicit session: DBSession = AutoSession): Seq[QiitaUserRanking] = {
     sql"""
-          SELECT qu.id, qu.user_name, qur.contribution
+          SELECT qu.user_name, qur.contribution
           FROM qiita_user_rankings AS qur
           INNER JOIN qiita_users AS qu
           ON qur.user_name = qu.user_name
@@ -45,7 +45,6 @@ final class ScalikejdbcQiitaUserRankingRepository extends QiitaUserRankingReposi
 
   private def toQiitaUserRanking(rs: WrappedResultSet): QiitaUserRanking = {
     QiitaUserRanking(
-      QiitaUserId(rs.int("id")),
       QiitaUserName(rs.string("user_name")),
       Contribution(rs.int("contribution"))
     )
