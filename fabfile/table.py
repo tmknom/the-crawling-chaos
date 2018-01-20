@@ -17,4 +17,6 @@ TABLES = [
     Table('qiita_article_ids', 'id ASC'),
     Table('raw_qiita_props_article_jsons', 'crawled_date_time ASC'),
     Table('qiita_articles', 'posted_date_time ASC'),
+    Table('qiita_article_contributions', 'updated_date_time ASC'),
+    Table('qiita_article_contribution_histories', 'registered_date_time ASC'),
 ]
