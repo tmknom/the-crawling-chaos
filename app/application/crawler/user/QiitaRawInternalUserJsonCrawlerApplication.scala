@@ -20,7 +20,7 @@ final class QiitaRawInternalUserJsonCrawlerApplication @Inject()(
   }
 
   private def quietlyCrawlOneUser(qiitaUserName: QiitaUserName, progress: String): Unit = {
-    withQuietly[String](qiitaUserName, progress, errors) { (_) =>
+    withSleep[String](qiitaUserName, progress, errors) { (_) =>
       val rawInternalUserJson = gateway.fetch(qiitaUserName)
       val crawledDateTime     = CrawledDateTime.now()
       repository.register(qiitaUserName, rawInternalUserJson, crawledDateTime)

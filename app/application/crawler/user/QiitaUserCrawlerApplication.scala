@@ -33,7 +33,7 @@ final class QiitaUserCrawlerApplication @Inject()(
   }
 
   private def quietlyCrawlOneUser(qiitaUserName: QiitaUserName, progress: String): Unit = {
-    withQuietly[String](qiitaUserName, progress, errors) { (_) =>
+    withSleep[String](qiitaUserName, progress, errors) { (_) =>
       crawlOneUser(qiitaUserName)
     }
   }
