@@ -122,14 +122,13 @@ run-main presentation.cli.onetime.AllQiitaArticleContributionCrawlerCli
 run-main presentation.cli.onetime.AllQiitaRawArticleJsonCrawlerCli
 ```
 
+## デプロイ
+
+```
+./deploy.sh
+```
 
 ## 運用
-
-### デプロイ
-
-```
-fab deploy
-```
 
 ### データベースの初期化
 
@@ -233,6 +232,7 @@ export CSV_PATH='/path/to/csv'
 # aws
 export INSTANCE_NAME='xxxx'
 export SECURITY_GROUP_NAME='xxxx'
+export S3_BUCKET='xxxx'
 ```
 
 ### ログイン
