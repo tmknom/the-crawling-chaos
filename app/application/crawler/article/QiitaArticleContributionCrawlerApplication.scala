@@ -2,7 +2,7 @@ package application.crawler.article
 
 import javax.inject.{Inject, Singleton}
 
-import domain.crawler.{Bulk, QuietlyCrawler}
+import domain.crawler.Crawler
 import domain.qiita.article._
 import domain.qiita.article.contribution._
 import domain.qiita.article.json.RawPropsArticleJson
@@ -18,8 +18,7 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
     qiitaArticleRepository: QiitaArticleRepository,
     idRepository:           QiitaArticleIdRepository,
     rawJsonRepository:      QiitaRawPropsArticleJsonRepository
-) extends Bulk
-    with QuietlyCrawler {
+) extends Crawler {
 
   def crawl(): Unit = {
     val items = idRepository.retrieveNotRegisteredContribution()

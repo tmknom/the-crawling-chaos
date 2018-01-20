@@ -2,7 +2,7 @@ package application.crawler.user
 
 import javax.inject.{Inject, Singleton}
 
-import domain.crawler.{Bulk, QuietlyCrawler}
+import domain.crawler.Crawler
 import domain.qiita.user._
 
 @Singleton
@@ -10,8 +10,7 @@ final class QiitaRawInternalUserJsonCrawlerApplication @Inject()(
     gateway:                 QiitaUserInternalApiGateway,
     repository:              QiitaRawInternalUserJsonRepository,
     qiitaUserNameRepository: QiitaUserNameRepository
-) extends Bulk
-    with QuietlyCrawler {
+) extends Crawler {
 
   def crawl(): Unit = {
     val qiitaUserNames = qiitaUserNameRepository.retrieveRecently()

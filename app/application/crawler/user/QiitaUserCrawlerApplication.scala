@@ -2,7 +2,7 @@ package application.crawler.user
 
 import javax.inject.{Inject, Singleton}
 
-import domain.crawler.{Bulk, QuietlyCrawler}
+import domain.crawler.Crawler
 import domain.qiita.user._
 import domain.qiita.user.contribution.{QiitaUserContributionHistoryRepository, QiitaUserContributionRepository}
 import scalikejdbc.DB
@@ -14,8 +14,7 @@ final class QiitaUserCrawlerApplication @Inject()(
     qiitaUserContributionRepository:        QiitaUserContributionRepository,
     qiitaUserContributionHistoryRepository: QiitaUserContributionHistoryRepository,
     qiitaUserNameRepository:                QiitaUserNameRepository
-) extends Bulk
-    with QuietlyCrawler {
+) extends Crawler {
 
   def crawlTopUser(): Unit = {
     val qiitaUserNames = qiitaUserNameRepository.retrieveTopUser()
