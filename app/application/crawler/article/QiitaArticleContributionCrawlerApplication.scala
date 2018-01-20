@@ -3,6 +3,7 @@ package application.crawler.article
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
+import domain.crawler.Progress
 import domain.qiita.article._
 import domain.qiita.article.contribution._
 import domain.qiita.article.json.RawPropsArticleJson
@@ -32,7 +33,7 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
     val itemsCount = items.size
     items.zipWithIndex.foreach {
       case (qiitaItemId, index) =>
-        val progress = calculateProgress(index, itemsCount)
+        val progress = Progress.calculate(index, itemsCount)
         quietlyCrawl(qiitaItemId, progress)
     }
     Logger.warn(s"${this.getClass.getSimpleName} crawl error ${errors.size.toString} items : ${errors.toString()}")
@@ -92,10 +93,5 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
       case Some(v) => v
       case None    => throw new RuntimeException(s"ココに来たらバグなので雑に例外をスロー ${qiitaItemId.value}")
     }
-  }
-
-  private def calculateProgress(index: Int, itemsCount: Int): String = {
-    val progress = ((index + 1) / itemsCount.toDouble) * 100.0
-    s"(${index + 1} / $itemsCount = $progress%)"
   }
 }

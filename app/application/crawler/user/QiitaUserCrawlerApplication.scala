@@ -3,6 +3,7 @@ package application.crawler.user
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
+import domain.crawler.Progress
 import domain.qiita.user._
 import domain.qiita.user.contribution.{QiitaUserContributionHistoryRepository, QiitaUserContributionRepository}
 import library.scalaj.ScalajHttpException
@@ -33,7 +34,7 @@ final class QiitaUserCrawlerApplication @Inject()(
     val itemsCount = qiitaUserNames.size
     qiitaUserNames.zipWithIndex.foreach {
       case (qiitaUserName, index) =>
-        val progress = calculateProgress(index, itemsCount)
+        val progress = Progress.calculate(index, itemsCount)
         quietlyCrawlOneUser(qiitaUserName, progress)
     }
   }
@@ -60,10 +61,5 @@ final class QiitaUserCrawlerApplication @Inject()(
       qiitaUserContributionRepository.register(crawledEvent)
       qiitaUserContributionHistoryRepository.register(crawledEvent)
     }
-  }
-
-  private def calculateProgress(index: Int, itemsCount: Int): String = {
-    val progress = ((index + 1) / itemsCount.toDouble) * 100.0
-    s"(${index + 1} / $itemsCount = $progress%)"
   }
 }

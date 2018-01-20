@@ -3,6 +3,7 @@ package application.crawler.article
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
+import domain.crawler.Progress
 import domain.qiita.article._
 import domain.qiita.user.CrawledDateTime
 import play.api.Logger
@@ -25,7 +26,7 @@ final class QiitaRawPropsArticleJsonCrawlerApplication @Inject()(
     val itemsCount   = qiitaItemIds.size
     qiitaItemIds.zipWithIndex.foreach {
       case (qiitaItemId, index) =>
-        val progress = calculateProgress(index, itemsCount)
+        val progress = Progress.calculate(index, itemsCount)
         quietlyCrawl(qiitaItemId, progress)
     }
     Logger.warn(s"${this.getClass.getSimpleName} crawl error ${errors.size.toString} items : ${errors.toString()}")
@@ -44,10 +45,5 @@ final class QiitaRawPropsArticleJsonCrawlerApplication @Inject()(
     } finally {
       TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
     }
-  }
-
-  private def calculateProgress(index: Int, itemsCount: Int): String = {
-    val progress = ((index + 1) / itemsCount.toDouble) * 100.0
-    s"(${index + 1} / $itemsCount = $progress%)"
   }
 }
