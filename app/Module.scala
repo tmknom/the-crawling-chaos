@@ -63,6 +63,7 @@ class Module extends AbstractModule {
     bind(classOf[QiitaArticleRepository]).to(classOf[ScalikejdbcQiitaArticleRepository])
     bind(classOf[QiitaArticleContributionRepository]).to(classOf[ScalikejdbcQiitaArticleContributionRepository])
     bind(classOf[QiitaArticleContributionHistoryRepository]).to(classOf[ScalikejdbcQiitaArticleContributionHistoryRepository])
+    bind(classOf[QiitaRawArticleJsonRepository]).to(classOf[ScalikejdbcQiitaRawArticleJsonRepository])
 
     bind(classOf[HatenaGateway]).to(classOf[HttpHatenaGateway])
     bind(classOf[FacebookGateway]).to(classOf[HttpFacebookGateway])
