@@ -1,6 +1,6 @@
 package presentation.cli.onetime
 
-import application.crawler.user.all.AllQiitaUserNameCrawlerApplication
+import application.crawler.user.AllQiitaUserNameCrawlerApplication
 import library.task.Task
 import play.api.{Application, Logger}
 
