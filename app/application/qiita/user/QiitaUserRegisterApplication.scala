@@ -16,14 +16,11 @@ final class QiitaUserRegisterApplication @Inject()(
 ) extends Crawler {
 
   def registerRecently(): Unit = {
-    val qiitaUserNames = qiitaRawInternalUserJsonRepository.retrieveRecently()
-
-    withoutSleepLoop[QiitaUserName](qiitaUserNames) { (qiitaUserName) =>
-      register(qiitaUserName)
-    }
+    val items = qiitaRawInternalUserJsonRepository.retrieveRecently()
+    withoutSleepLoop[QiitaUserName](items)(registerOne)
   }
 
-  private def register(qiitaUserName: QiitaUserName): Unit = {
+  private def registerOne(qiitaUserName: QiitaUserName): Unit = {
     val optionValue = qiitaRawInternalUserJsonRepository.retrieve(qiitaUserName)
     val rawInternalUserJson = optionValue match {
       case Some(v) => v
