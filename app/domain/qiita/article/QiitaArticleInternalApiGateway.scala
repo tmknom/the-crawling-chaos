@@ -1,7 +1,7 @@
 package domain.qiita.article
 
-import domain.qiita.article.json.RawArticleJson
+import domain.qiita.article.json.RawPropsArticleJson
 
 trait QiitaArticleInternalApiGateway {
-  def fetch(qiitaItemId: QiitaItemId): RawArticleJson
+  def fetch(qiitaItemId: QiitaItemId): RawPropsArticleJson
 }

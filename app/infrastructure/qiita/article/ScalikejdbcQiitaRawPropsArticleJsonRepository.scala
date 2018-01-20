@@ -2,7 +2,7 @@ package infrastructure.qiita.article
 
 import javax.inject.Singleton
 
-import domain.qiita.article.json.RawArticleJson
+import domain.qiita.article.json.RawPropsArticleJson
 import domain.qiita.article.{QiitaItemId, _}
 import domain.qiita.user.CrawledDateTime
 import scalikejdbc._
@@ -10,7 +10,7 @@ import scalikejdbc._
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
 @Singleton
 final class ScalikejdbcQiitaRawPropsArticleJsonRepository extends QiitaRawPropsArticleJsonRepository {
-  override def register(itemId: QiitaItemId, rawJson: RawArticleJson, crawled: CrawledDateTime)(implicit session: DBSession = AutoSession): Unit = {
+  override def register(itemId: QiitaItemId, rawJson: RawPropsArticleJson, crawled: CrawledDateTime)(implicit session: DBSession = AutoSession): Unit = {
     val qiitaItemId     = itemId.value
     val rawArticleJson  = rawJson.value
     val crawledDateTime = crawled.value
@@ -25,7 +25,7 @@ final class ScalikejdbcQiitaRawPropsArticleJsonRepository extends QiitaRawPropsA
     () // 明示的に Unit を返す
   }
 
-  def retrieve(itemId: QiitaItemId)(implicit session: DBSession = AutoSession): Option[RawArticleJson] = {
+  def retrieve(itemId: QiitaItemId)(implicit session: DBSession = AutoSession): Option[RawPropsArticleJson] = {
     val id = itemId.value
 
     sql"""
@@ -37,7 +37,7 @@ final class ScalikejdbcQiitaRawPropsArticleJsonRepository extends QiitaRawPropsA
       .apply()
   }
 
-  private def toRawJson(rs: WrappedResultSet): RawArticleJson = {
-    RawArticleJson(rs.string("raw_json"))
+  private def toRawJson(rs: WrappedResultSet): RawPropsArticleJson = {
+    RawPropsArticleJson(rs.string("raw_json"))
   }
 }
