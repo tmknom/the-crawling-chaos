@@ -2,12 +2,12 @@ package application.crawler.user
 
 import javax.inject.{Inject, Singleton}
 
-import domain.crawler.{Progress, Sleeper}
+import domain.crawler.{Progress, QuietlyCrawler}
 import domain.qiita.user._
 import domain.qiita.user.contribution.{QiitaUserContributionHistoryRepository, QiitaUserContributionRepository}
-import library.scalaj.ScalajHttpException
-import play.api.Logger
 import scalikejdbc.DB
+
+import scala.collection.mutable
 
 @Singleton
 final class QiitaUserCrawlerApplication @Inject()(
@@ -16,7 +16,9 @@ final class QiitaUserCrawlerApplication @Inject()(
     qiitaUserContributionRepository:        QiitaUserContributionRepository,
     qiitaUserContributionHistoryRepository: QiitaUserContributionHistoryRepository,
     qiitaUserNameRepository:                QiitaUserNameRepository
-) {
+) extends QuietlyCrawler {
+  @SuppressWarnings(Array("org.wartremover.warts.MutableDataStructures"))
+  private val errors = mutable.ListBuffer.empty[String]
 
   def crawlTopUser(): Unit = {
     val qiitaUserNames = qiitaUserNameRepository.retrieveTopUser()
@@ -38,15 +40,8 @@ final class QiitaUserCrawlerApplication @Inject()(
   }
 
   private def quietlyCrawlOneUser(qiitaUserName: QiitaUserName, progress: String): Unit = {
-    try {
+    withQuietly[String](qiitaUserName, progress, errors) { (_) =>
       crawlOneUser(qiitaUserName)
-      Logger.info(s"${this.getClass.getSimpleName} crawled ${qiitaUserName.value} $progress")
-    } catch {
-      // 処理を止めてほしくないのでログ吐いて握りつぶす
-      case e: ScalajHttpException =>
-        Logger.warn(s"${this.getClass.getSimpleName} crawl error ${qiitaUserName.value} $progress because ${e.message}")
-    } finally {
-      Sleeper.sleep()
     }
   }
 
