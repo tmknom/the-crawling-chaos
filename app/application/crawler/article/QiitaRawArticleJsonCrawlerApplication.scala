@@ -21,7 +21,7 @@ final class QiitaRawArticleJsonCrawlerApplication @Inject()(
   }
 
   private def quietlyCrawl(qiitaItemId: QiitaItemId, progress: String): Unit = {
-    withQuietly[String](qiitaItemId, progress, errors) { (_) =>
+    withSleep[String](qiitaItemId, progress, errors) { (_) =>
       val rawJson         = gateway.fetch(qiitaItemId)
       val crawledDateTime = CrawledDateTime.now()
       repository.register(qiitaItemId, rawJson, crawledDateTime)

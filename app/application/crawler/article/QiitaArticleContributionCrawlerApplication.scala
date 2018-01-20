@@ -28,7 +28,7 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
   }
 
   private def quietlyCrawl(qiitaItemId: QiitaItemId, progress: String): Unit = {
-    withQuietly[String](qiitaItemId, progress, errors) { (_) =>
+    withSleep[String](qiitaItemId, progress, errors) { (_) =>
       val event = crawlContribution(qiitaItemId)
       registerWithTransaction(event)
     }
