@@ -266,6 +266,10 @@ sdk install sbt
 sudo /usr/bin/pip install --upgrade pip
 sudo /usr/bin/pip install fabric
 
+# Setup dir
+sudo mkdir /var/data
+sudo chmod 777 /var/data
+
 # Deploy
 git clone https://github.com/tmknom/qiita-ranker.git
 cd qiita-ranker
