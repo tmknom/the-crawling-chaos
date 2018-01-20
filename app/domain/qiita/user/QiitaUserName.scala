@@ -1,6 +1,8 @@
 package domain.qiita.user
 
-final case class QiitaUserName(value: String) {
+import domain.Identifier
+
+final case class QiitaUserName(value: String) extends Identifier[String] {
   def urlHovercardUsers: String = {
     s"https://qiita.com/api/internal/hovercard_users/$value"
   }
