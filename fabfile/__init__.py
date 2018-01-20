@@ -53,27 +53,6 @@ def s3_download():
 
 
 @task
-def deploy():
-    '''デプロイ'''
-    import deploy
-    deploy.execute()
-
-
-@task
-def download_csv():
-    '''-H $SSH_HOST -u $SSH_USER_NAME --port=$SSH_PORT CSVのダウンロード'''
-    import download_csv
-    download_csv.execute()
-
-
-@task
-def upoad_csv():
-    '''-H $SSH_HOST -u $SSH_USER_NAME --port=$SSH_PORT CSVのアップロード'''
-    import upload_csv
-    upload_csv.execute()
-
-
-@task
 def export_data():
     '''データのエクスポート'''
     import export_data
