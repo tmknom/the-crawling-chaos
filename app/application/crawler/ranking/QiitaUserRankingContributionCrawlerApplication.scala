@@ -1,8 +1,8 @@
 package application.crawler.ranking
 
-import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
+import domain.crawler.Sleeper
 import domain.qiita.user.QiitaUserInternalApiGateway
 import domain.qiita.user.contribution._
 import domain.qiita.user.ranking.{QiitaUserRanking, QiitaUserRankingRepository}
@@ -17,8 +17,6 @@ final class QiitaUserRankingContributionCrawlerApplication @Inject()(
     qiitaUserRankingRepository: QiitaUserRankingRepository
 ) {
 
-  private val SleepTimeMilliseconds = 250.toLong
-
   @SuppressWarnings(Array("org.wartremover.warts.MutableDataStructures"))
   private val errorQiitaUserNames = mutable.ListBuffer.empty[String]
 
@@ -27,7 +25,7 @@ final class QiitaUserRankingContributionCrawlerApplication @Inject()(
     qiitaUserRankings.zipWithIndex.foreach {
       case (qiitaUserRanking, index) =>
         quietlyCrawlOneUser(qiitaUserRanking, index)
-        TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
+        Sleeper.sleep()
     }
     Logger.info(s"crawl error ${errorQiitaUserNames.size.toString} users ( ${errorQiitaUserNames.mkString(",")} )")
   }

@@ -1,8 +1,8 @@
 package application.crawler.user
 
-import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
+import domain.crawler.Sleeper
 import domain.qiita.user.initial.{Initial, Initials}
 import domain.qiita.user.{QiitaUserNameGateway, QiitaUserNameRepository}
 import library.scalaj.ScalajHttpException
@@ -15,14 +15,13 @@ final class AllQiitaUserNameCrawlerApplication @Inject()(
     repository: QiitaUserNameRepository,
     gateway:    QiitaUserNameGateway
 ) {
-  private val SleepTimeMilliseconds = 100.toLong
 
   def crawl(): Unit = {
     Initials.all().value.foreach { initial =>
       crawlOneInitial(initial)
 
       Logger.info(s"${this.getClass.getSimpleName} crawled ${initial.toString}")
-      TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
+      Sleeper.sleep()
     }
   }
 

@@ -1,9 +1,8 @@
 package application.crawler.user
 
-import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
-import domain.crawler.Progress
+import domain.crawler.{Progress, Sleeper}
 import domain.qiita.user._
 import domain.qiita.user.contribution.{QiitaUserContributionHistoryRepository, QiitaUserContributionRepository}
 import library.scalaj.ScalajHttpException
@@ -18,7 +17,6 @@ final class QiitaUserCrawlerApplication @Inject()(
     qiitaUserContributionHistoryRepository: QiitaUserContributionHistoryRepository,
     qiitaUserNameRepository:                QiitaUserNameRepository
 ) {
-  private val SleepTimeMilliseconds = 100.toLong
 
   def crawlTopUser(): Unit = {
     val qiitaUserNames = qiitaUserNameRepository.retrieveTopUser()
@@ -48,7 +46,7 @@ final class QiitaUserCrawlerApplication @Inject()(
       case e: ScalajHttpException =>
         Logger.warn(s"${this.getClass.getSimpleName} crawl error ${qiitaUserName.value} $progress because ${e.message}")
     } finally {
-      TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
+      Sleeper.sleep()
     }
   }
 
