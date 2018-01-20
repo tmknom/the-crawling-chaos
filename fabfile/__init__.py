@@ -4,14 +4,14 @@ from fabric.api import *
 
 
 @task
-def security_group_authorize():
+def sg_authorize():
     '''セキュリティグループの許可'''
     import security_group
     security_group.authorize()
 
 
 @task
-def security_group_revoke():
+def sg_revoke():
     '''セキュリティグループの剥奪'''
     import security_group
     security_group.revoke()
