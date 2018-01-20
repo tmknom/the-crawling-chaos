@@ -15,8 +15,8 @@ private[article] final case class QiitaArticleParser(html: String) {
   private val UndefinedQiitaArticleId = QiitaArticleId(-1)
 
   def parse: (QiitaArticle, RawPropsArticleJson) = {
-    val rawJson = parseHtml(html)
-    val qiitaArticle   = toQiitaArticle(rawJson.toJsonMap)
+    val rawJson      = parseHtml(html)
+    val qiitaArticle = toQiitaArticle(rawJson.toJsonMap)
     (qiitaArticle, rawJson)
   }
 

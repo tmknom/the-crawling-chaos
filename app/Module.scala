@@ -57,12 +57,14 @@ class Module extends AbstractModule {
     bind(classOf[QiitaArticleInternalApiGateway]).to(classOf[HttpQiitaArticleInternalApiGateway])
     bind(classOf[QiitaArticleIdGateway]).to(classOf[HttpQiitaArticleIdGateway])
     bind(classOf[QiitaArticleGateway]).to(classOf[HttpQiitaArticleGateway])
+    bind(classOf[QiitaArticleApiGateway]).to(classOf[HttpQiitaArticleApiGateway])
 
     bind(classOf[QiitaArticleIdRepository]).to(classOf[ScalikejdbcQiitaArticleIdRepository])
     bind(classOf[QiitaRawPropsArticleJsonRepository]).to(classOf[ScalikejdbcQiitaRawPropsArticleJsonRepository])
     bind(classOf[QiitaArticleRepository]).to(classOf[ScalikejdbcQiitaArticleRepository])
     bind(classOf[QiitaArticleContributionRepository]).to(classOf[ScalikejdbcQiitaArticleContributionRepository])
     bind(classOf[QiitaArticleContributionHistoryRepository]).to(classOf[ScalikejdbcQiitaArticleContributionHistoryRepository])
+    bind(classOf[QiitaRawArticleJsonRepository]).to(classOf[ScalikejdbcQiitaRawArticleJsonRepository])
 
     bind(classOf[HatenaGateway]).to(classOf[HttpHatenaGateway])
     bind(classOf[FacebookGateway]).to(classOf[HttpFacebookGateway])
