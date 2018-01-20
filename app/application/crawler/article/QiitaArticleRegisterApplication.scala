@@ -15,13 +15,15 @@ final class QiitaArticleRegisterApplication @Inject()(
   def crawl(): Unit = {
     val qiitaItemIds = idRepository.retrieveNotRegistered()
 
-    withoutSleepLoop[QiitaItemId](qiitaItemIds) { (qiitaItemId) =>
-      val optionValue = rawJsonRepository.retrieve(qiitaItemId)
-      val rawArticleJson = optionValue match {
-        case Some(v) => v
-        case None    => throw new RuntimeException(s"ココに来たらバグなので雑に例外をスロー ${qiitaItemId.value}")
-      }
-      repository.register(rawArticleJson.toQiitaArticle)
+    withoutSleepLoop[QiitaItemId](qiitaItemIds)(registerOne)
+  }
+
+  def registerOne(qiitaItemId: QiitaItemId): Unit = {
+    val optionValue = rawJsonRepository.retrieve(qiitaItemId)
+    val rawArticleJson = optionValue match {
+      case Some(v) => v
+      case None    => throw new RuntimeException(s"ココに来たらバグなので雑に例外をスロー ${qiitaItemId.value}")
     }
+    repository.register(rawArticleJson.toQiitaArticle)
   }
 }

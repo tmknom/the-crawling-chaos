@@ -18,12 +18,10 @@ final class QiitaUserRegisterApplication @Inject()(
   def registerRecently(): Unit = {
     val qiitaUserNames = qiitaRawInternalUserJsonRepository.retrieveRecently()
 
-    withoutSleepLoop[QiitaUserName](qiitaUserNames) { (qiitaUserName) =>
-      register(qiitaUserName)
-    }
+    withoutSleepLoop[QiitaUserName](qiitaUserNames)(registerOne)
   }
 
-  private def register(qiitaUserName: QiitaUserName): Unit = {
+  private def registerOne(qiitaUserName: QiitaUserName): Unit = {
     val optionValue = qiitaRawInternalUserJsonRepository.retrieve(qiitaUserName)
     val rawInternalUserJson = optionValue match {
       case Some(v) => v

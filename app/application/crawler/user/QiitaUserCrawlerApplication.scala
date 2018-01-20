@@ -27,12 +27,10 @@ final class QiitaUserCrawlerApplication @Inject()(
   }
 
   private def crawlUsers(qiitaUserNames: List[QiitaUserName]): Unit = {
-    withSleepLoop[QiitaUserName](qiitaUserNames) { (qiitaUserName) =>
-      crawlOneUser(qiitaUserName)
-    }
+    withSleepLoop[QiitaUserName](qiitaUserNames)(crawlOne)
   }
 
-  private def crawlOneUser(qiitaUserName: QiitaUserName): Unit = {
+  private def crawlOne(qiitaUserName: QiitaUserName): Unit = {
     val rawInternalUserJson = gateway.fetch(qiitaUserName)
     val crawledEvent        = rawInternalUserJson.toCrawledEvent
 
