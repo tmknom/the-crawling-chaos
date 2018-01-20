@@ -2,31 +2,22 @@ package application.crawler.article
 
 import javax.inject.{Inject, Singleton}
 
-import domain.crawler.Progress
+import domain.crawler.Bulk
 import domain.qiita.article.{QiitaArticleIdRepository, QiitaArticleRepository, QiitaItemId, QiitaRawPropsArticleJsonRepository}
 import play.api.Logger
-
-import scala.collection.mutable
 
 @Singleton
 final class QiitaArticleRegisterApplication @Inject()(
     repository:        QiitaArticleRepository,
     rawJsonRepository: QiitaRawPropsArticleJsonRepository,
     idRepository:      QiitaArticleIdRepository
-) {
-
-  @SuppressWarnings(Array("org.wartremover.warts.MutableDataStructures"))
-  private val errors = mutable.ListBuffer.empty[String]
+) extends Bulk {
 
   def crawl(): Unit = {
     val qiitaItemIds = idRepository.retrieveNotRegistered()
-    val itemsCount   = qiitaItemIds.size
-    qiitaItemIds.zipWithIndex.foreach {
-      case (qiitaItemId, index) =>
-        val progress = Progress.calculate(index, itemsCount)
-        quietlyRegister(qiitaItemId, progress)
+    withLoop[QiitaItemId](qiitaItemIds) { (qiitaItemId, progress) =>
+      quietlyRegister(qiitaItemId, progress)
     }
-    Logger.warn(s"${this.getClass.getSimpleName} register error ${errors.size.toString} items : ${errors.toString()}")
   }
 
   private def quietlyRegister(qiitaItemId: QiitaItemId, progress: String): Unit = {
