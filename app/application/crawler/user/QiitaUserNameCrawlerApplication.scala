@@ -1,9 +1,9 @@
 package application.crawler.user
 
-import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
+import domain.crawler.Sleeper
 import domain.qiita.user.{QiitaUserApiGateway, QiitaUserName, QiitaUserNameRepository}
 import play.api.Logger
 
@@ -12,7 +12,6 @@ final class QiitaUserNameCrawlerApplication @Inject()(
     repository: QiitaUserNameRepository,
     gateway:    QiitaUserApiGateway
 ) {
-  private val SleepTimeMilliseconds = 100.toLong
 
   def crawl(): Unit = {
     try {
@@ -33,7 +32,7 @@ final class QiitaUserNameCrawlerApplication @Inject()(
       qiitaUserNames.foreach(repository.register)
 
       Logger.info(s"${this.getClass.getSimpleName} crawled ($currentPage / ${QiitaUserName.pageMax})")
-      TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
+      Sleeper.sleep()
     }
   }
 }

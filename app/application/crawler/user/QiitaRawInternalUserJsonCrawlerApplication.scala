@@ -1,9 +1,8 @@
 package application.crawler.user
 
-import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
-import domain.crawler.Progress
+import domain.crawler.{Progress, Sleeper}
 import domain.qiita.user._
 import library.scalaj.ScalajHttpException
 import play.api.Logger
@@ -18,8 +17,6 @@ final class QiitaRawInternalUserJsonCrawlerApplication @Inject()(
 ) {
   @SuppressWarnings(Array("org.wartremover.warts.MutableDataStructures"))
   private val errorQiitaUserNames = mutable.ListBuffer.empty[String]
-
-  private val SleepTimeMilliseconds = 100.toLong
 
   def crawl(): Unit = {
     val qiitaUserNames = qiitaUserNameRepository.retrieveRecently()
@@ -45,7 +42,7 @@ final class QiitaRawInternalUserJsonCrawlerApplication @Inject()(
         Logger.warn(s"${this.getClass.getSimpleName} crawl error ${qiitaUserName.value} $progress because ${e.message}")
       }
     } finally {
-      TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
+      Sleeper.sleep()
     }
   }
 }

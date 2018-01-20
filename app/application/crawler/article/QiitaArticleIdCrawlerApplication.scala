@@ -1,9 +1,9 @@
 package application.crawler.article
 
-import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
+import domain.crawler.Sleeper
 import domain.qiita.article.{QiitaArticleIdGateway, QiitaArticleIdRepository, QiitaItemId}
 import play.api.Logger
 
@@ -20,8 +20,6 @@ final class QiitaArticleIdCrawlerApplication @Inject()(
     */
   private val SuspendCount = 10
 
-  private val SleepTimeMilliseconds = 100.toLong
-
   @SuppressWarnings(Array("org.wartremover.warts.MutableDataStructures"))
   private val errorQiitaItemIds = mutable.ListBuffer.empty[String]
 
@@ -29,7 +27,7 @@ final class QiitaArticleIdCrawlerApplication @Inject()(
     try {
       QiitaItemId.pageRange.foreach { currentPage =>
         crawlOnePage(currentPage)
-        TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
+        Sleeper.sleep()
       }
     } catch {
       // 一定回数MySQLIntegrityConstraintViolationExceptionがスローされるまでは、
