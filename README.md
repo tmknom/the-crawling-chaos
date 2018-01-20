@@ -82,6 +82,14 @@ run-main presentation.cli.onetime.AllQiitaRawInternalUserJsonCrawlerCli
 run-main presentation.cli.onetime.AllQiitaUserRegisterCli
 ```
 
+#### 全記事IDをクロール
+
+```
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-article-id-crawler-cli > /dev/null 2>&1 &
+
+run-main presentation.cli.onetime.AllQiitaArticleIdCrawlerCli
+```
+
 #### 全記事の情報をクロール
 
 ```
