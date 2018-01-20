@@ -2,6 +2,7 @@ package application.crawler.article
 
 import javax.inject.{Inject, Singleton}
 
+import domain.crawler.Progress
 import domain.qiita.article.{QiitaArticleIdRepository, QiitaArticleRepository, QiitaItemId, QiitaRawPropsArticleJsonRepository}
 import play.api.Logger
 
@@ -22,7 +23,7 @@ final class QiitaArticleRegisterApplication @Inject()(
     val itemsCount   = qiitaItemIds.size
     qiitaItemIds.zipWithIndex.foreach {
       case (qiitaItemId, index) =>
-        val progress = calculateProgress(index, itemsCount)
+        val progress = Progress.calculate(index, itemsCount)
         quietlyRegister(qiitaItemId, progress)
     }
     Logger.warn(s"${this.getClass.getSimpleName} register error ${errors.size.toString} items : ${errors.toString()}")
@@ -43,10 +44,5 @@ final class QiitaArticleRegisterApplication @Inject()(
         errors += qiitaItemId.value
         Logger.warn(s"${this.getClass.getSimpleName} register error ${qiitaItemId.value}.", e)
     }
-  }
-
-  private def calculateProgress(index: Int, itemsCount: Int): String = {
-    val progress = ((index + 1) / itemsCount.toDouble) * 100.0
-    s"(${index + 1} / $itemsCount = $progress%)"
   }
 }

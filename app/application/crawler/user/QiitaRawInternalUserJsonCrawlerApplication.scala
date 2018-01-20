@@ -3,6 +3,7 @@ package application.crawler.user
 import java.util.concurrent.TimeUnit
 import javax.inject.{Inject, Singleton}
 
+import domain.crawler.Progress
 import domain.qiita.user._
 import library.scalaj.ScalajHttpException
 import play.api.Logger
@@ -25,7 +26,7 @@ final class QiitaRawInternalUserJsonCrawlerApplication @Inject()(
     val itemsCount     = qiitaUserNames.size
     qiitaUserNames.zipWithIndex.foreach {
       case (qiitaUserName, index) =>
-        val progress = calculateProgress(index, itemsCount)
+        val progress = Progress.calculate(index, itemsCount)
         quietlyCrawlOneUser(qiitaUserName, progress)
     }
     Logger.warn(s"${this.getClass.getSimpleName} crawl error ${errorQiitaUserNames.size.toString} users : ${errorQiitaUserNames.toString()}")
@@ -46,10 +47,5 @@ final class QiitaRawInternalUserJsonCrawlerApplication @Inject()(
     } finally {
       TimeUnit.MILLISECONDS.sleep(SleepTimeMilliseconds)
     }
-  }
-
-  private def calculateProgress(index: Int, itemsCount: Int): String = {
-    val progress = ((index + 1) / itemsCount.toDouble) * 100.0
-    s"(${index + 1} / $itemsCount = $progress%)"
   }
 }
