@@ -2,14 +2,11 @@ package application.crawler.article
 
 import javax.inject.{Inject, Singleton}
 
-import domain.crawler.{Progress, QuietlyCrawler}
+import domain.crawler.{Bulk, QuietlyCrawler}
 import domain.qiita.article._
 import domain.qiita.article.contribution._
 import domain.qiita.article.json.RawPropsArticleJson
-import play.api.Logger
 import scalikejdbc.DB
-
-import scala.collection.mutable
 
 @Singleton
 final class QiitaArticleContributionCrawlerApplication @Inject()(
@@ -21,19 +18,14 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
     qiitaArticleRepository: QiitaArticleRepository,
     idRepository:           QiitaArticleIdRepository,
     rawJsonRepository:      QiitaRawPropsArticleJsonRepository
-) extends QuietlyCrawler {
-  @SuppressWarnings(Array("org.wartremover.warts.MutableDataStructures"))
-  private val errors = mutable.ListBuffer.empty[String]
+) extends Bulk
+    with QuietlyCrawler {
 
   def crawl(): Unit = {
-    val items      = idRepository.retrieveNotRegisteredContribution()
-    val itemsCount = items.size
-    items.zipWithIndex.foreach {
-      case (qiitaItemId, index) =>
-        val progress = Progress.calculate(index, itemsCount)
-        quietlyCrawl(qiitaItemId, progress)
+    val items = idRepository.retrieveNotRegisteredContribution()
+    withLoop[QiitaItemId](items) { (qiitaItemId, progress) =>
+      quietlyCrawl(qiitaItemId, progress)
     }
-    Logger.warn(s"${this.getClass.getSimpleName} crawl error ${errors.size.toString} items : ${errors.toString()}")
   }
 
   private def quietlyCrawl(qiitaItemId: QiitaItemId, progress: String): Unit = {
