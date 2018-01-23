@@ -18,8 +18,11 @@ final class QiitaUserContributionRankingApplication @Inject()(
     pageRange(max).foreach { page =>
       val offset     = LIMIT * (page - 1)
       val qiitaUsers = repository.retrieveContribution(LIMIT, offset)
-      val json       = qiitaUsers.map(QiitaUserJson.build).toJson
-      val fileName   = s"/tmp/user.article.${page.toString}.json"
+      val json = qiitaUsers.zipWithIndex.map {
+        case (qiitaUser, index) =>
+          QiitaUserJson.build(qiitaUser, index + offset + 1)
+      }.toJson
+      val fileName = s"/tmp/user.article.${page.toString}.json"
       FileWriter.write(fileName, json)
     }
   }
@@ -30,8 +33,9 @@ final class QiitaUserContributionRankingApplication @Inject()(
 }
 
 object QiitaUserJson {
-  def build(qiitaUser: QiitaUser): Map[String, _] = {
+  def build(qiitaUser: QiitaUser, rank: Int): Map[String, _] = {
     Map(
+      "index" -> rank,
       "name" -> qiitaUser.profile.name.value,
       "contribution" -> qiitaUser.qiitaUserContribution.contribution.value,
       "articles_count" -> qiitaUser.qiitaUserContribution.articlesCount.value
