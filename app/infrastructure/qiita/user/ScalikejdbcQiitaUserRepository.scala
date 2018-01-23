@@ -23,6 +23,17 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
       .apply()
   }
 
+  override def countContribution()(implicit session: DBSession = AutoSession): Long = {
+    sql"""
+          SELECT COUNT(user_name) FROM qiita_user_contributions
+          WHERE contribution > 0;
+       """
+      .map(_.long(1))
+      .single()
+      .apply()
+      .get
+  }
+
   private def toQiitaUser(rs: WrappedResultSet): QiitaUser = {
     QiitaUser(
       QiitaUserProfile(
