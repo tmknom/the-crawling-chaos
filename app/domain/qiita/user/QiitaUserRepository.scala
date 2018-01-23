@@ -7,4 +7,6 @@ trait QiitaUserRepository {
   def retrieveTop100()(implicit session: DBSession = AutoSession): List[QiitaUser]
 
   def countContribution()(implicit session: DBSession = AutoSession): Long
+
+  def retrieveContribution(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser]
 }
