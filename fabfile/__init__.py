@@ -39,6 +39,13 @@ def ec2_stop():
 
 
 @task
+def s3_deploy_json():
+    '''S3へJSONをデプロイ'''
+    import s3
+    s3.deploy_json()
+
+
+@task
 def s3_upload():
     '''S3へのアップロード'''
     import s3
