@@ -23,14 +23,12 @@
     },
     methods: {
       get_ajax_users() {
-        return axios.get('http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com/qiita-ranker/user_contribution/user.article.1.json')
-          .then(function (response) {
-            return response.data;
-          })
-          .catch(function (error) {
-            console.log(error);
-            return [];
-          });
+        const url = 'http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com/qiita-ranker/user_contribution/user.article.1.json';
+        const request = async (_url) => {
+          const response = await axios.get(_url);
+          return response.data;
+        };
+        return request(url);
       }
     },
     created() {
