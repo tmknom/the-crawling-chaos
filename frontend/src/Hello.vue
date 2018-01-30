@@ -3,10 +3,7 @@
     <div id="articles" v-for="result in results">
       <div class="card">
         <div class="card-divider">
-          {{ result.permanent_id }}：{{ result.id }}
-        </div>
-        <div class="card-section">
-          <img v-bind:src="result.profile_image_url"/>
+          {{ result.index }}：{{ result.name }}
         </div>
       </div>
     </div>
@@ -26,9 +23,8 @@
     },
     methods: {
       get_ajax_users() {
-        return axios.get('https://qiita.com/api/v2/users')
+        return axios.get('http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com/qiita-ranker/user_contribution/user.article.1.json')
           .then(function (response) {
-            console.log(response.data);
             return response.data;
           })
           .catch(function (error) {
@@ -38,9 +34,11 @@
       }
     },
     created() {
-      console.log(this.results);
-      this.results = this.get_ajax_users();
-      console.log(this.results);
+      this.get_ajax_users().then((result) => {
+        this.$data.results = result;
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
   }
 </script>
