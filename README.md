@@ -170,6 +170,13 @@ S3からダウンロードしてリストアする。一度ダンプしたら、
 fab mysql_restore
 ```
 
+### クロール
+
+```
+fab crawl_user
+fab crawl_article
+```
+
 
 ## テスト
 
