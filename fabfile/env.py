@@ -19,6 +19,10 @@ class PATH:
     JSON = 'JSON_PATH'
 
 
+class DB:
+    NAME = 'DB_NAME'
+
+
 class AWS:
     INSTANCE_NAME = 'INSTANCE_NAME'
     SECURITY_GROUP_NAME = 'SECURITY_GROUP_NAME'
