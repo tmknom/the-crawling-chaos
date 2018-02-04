@@ -59,10 +59,12 @@ final class ScalikejdbcQiitaArticleIdRepository extends QiitaArticleIdRepository
 
   override def retrieveNotRegisteredRawJson()(implicit session: DBSession = AutoSession): List[QiitaItemId] = {
     sql"""
-          SELECT item_id FROM qiita_articles AS qa
+          SELECT qa.item_id FROM qiita_articles AS qa
+          INNER JOIN qiita_article_contributions AS qac
+          ON qa.item_id = qac.item_id
           WHERE NOT EXISTS
           (SELECT 1 FROM raw_qiita_article_jsons AS r WHERE r.item_id = qa.item_id)
-          ORDER BY qa.posted_date_time ASC;
+          ORDER BY qac.likes_count DESC LIMIT 1000;
        """
       .map(toQiitaItemId)
       .list()
