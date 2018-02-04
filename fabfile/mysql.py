@@ -25,6 +25,16 @@ def restore():
     cleanup(db_name)
 
 
+# https://www.mk-mode.com/octopress/2014/03/23/mysql-getting-row-counts/
+def show():
+    '''MySQLの情報表示'''
+    db_name = get_local_env(DB.NAME)
+    tables = show_tables(db_name).splitlines()
+    selects = map(select_table_rows, tables)
+    sql = 'UNION ALL '.join(selects) + ' ORDER BY table_name ASC;'
+    execute_sql(sql, db_name)
+
+
 def dump_mysql(db_name):
     # --opt ：デフォルト有効だが明示的にしている。
     # --skip-lock-tables　：--optが--lock-tablesを有効にするので、それを打ち消す為に使用する。
@@ -79,8 +89,18 @@ def switch_zcat_command():
             return "zcat"
 
 
-def execute_sql(sql):
-    local('mysql -u root -e "%s"' % sql)
+def select_table_rows(table):
+    return 'SELECT \'%s\' AS table_name, COUNT(*) AS table_rows FROM %s ' % (table, table)
+
+
+def show_tables(db_name):
+    sql = 'show tables;'
+    result = local('mysql -sN -u root %s -e "%s"' % (db_name, sql), capture=True)
+    return result
+
+
+def execute_sql(sql, db_name=''):
+    local('mysql -u root %s -e "%s"' % (db_name, sql))
 
 
 def dump_file_path(db_name):

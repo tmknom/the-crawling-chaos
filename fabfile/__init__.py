@@ -53,6 +53,13 @@ def mysql_restore():
 
 
 @task
+def mysql_show():
+    '''MySQLの情報表示'''
+    import mysql
+    mysql.show()
+
+
+@task
 def crawl_user():
     '''ユーザのクロール'''
     import crawl
