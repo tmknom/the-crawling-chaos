@@ -130,24 +130,36 @@ run-main presentation.cli.onetime.AllQiitaRawArticleJsonCrawlerCli
 
 ## 運用
 
-### データベースの初期化
-
-事前にロード対象の CSV ファイルのパスを `CSV_PATH` 環境変数にセットしておく。
+### EC2のスタート／ストップ
 
 ```
-fab init_db
+fab ec2_start
+fab ec2_stop
 ```
 
-### データのエクスポート
+### セキュリティグループの有効化／無効化
+
+実行した端末のIPアドレスでSSH接続できるようにする。
 
 ```
-fab export_data
+fab sg_authorize
+fab sg_revoke
 ```
 
-### CSVのダウンロード
+### データベースのダンプ
+
+ダンプして、S3へアップロードする。本番サーバでの実行を想定。S3へのアクセス権が必要。
 
 ```
-fab download_csv -H $SSH_HOST -u $SSH_USER_NAME --port=$SSH_PORT
+fab mysql_dump
+```
+
+### データベースのリストア
+
+S3からダウンロードしてリストアする。一度ダンプしたら、どこで実行してもOK。S3へのアクセス権が必要。
+
+```
+fab mysql_restore
 ```
 
 
