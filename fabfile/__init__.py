@@ -39,6 +39,13 @@ def ec2_stop():
 
 
 @task
+def mysql_dump():
+    '''MySQLのダンプ'''
+    import mysql
+    mysql.dump()
+
+
+@task
 def s3_deploy_json():
     '''S3へJSONをデプロイ'''
     import s3
