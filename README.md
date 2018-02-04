@@ -130,6 +130,14 @@ run-main presentation.cli.onetime.AllQiitaArticleContributionCrawlerCli
 run-main presentation.cli.onetime.AllQiitaRawArticleJsonCrawlerCli
 ```
 
+#### 全記事のマークダウンを登録
+
+```
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-article-markdown-register-cli > /dev/null 2>&1 &
+
+run-main presentation.cli.onetime.AllQiitaArticleMarkdownRegisterCli
+```
+
 ## デプロイ
 
 ```

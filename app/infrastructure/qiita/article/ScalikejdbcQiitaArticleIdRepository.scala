@@ -71,6 +71,18 @@ final class ScalikejdbcQiitaArticleIdRepository extends QiitaArticleIdRepository
       .apply()
   }
 
+  override def retrieveNotRegisteredMarkdown()(implicit session: DBSession = AutoSession): List[QiitaItemId] = {
+    sql"""
+          SELECT item_id FROM raw_qiita_article_jsons AS r
+          WHERE NOT EXISTS
+          (SELECT 1 FROM qiita_article_markdowns AS qam WHERE r.item_id = qam.item_id)
+          ORDER BY r.crawled_date_time ASC;
+       """
+      .map(toQiitaItemId)
+      .list()
+      .apply()
+  }
+
   private def toQiitaItemId(rs: WrappedResultSet): QiitaItemId = {
     QiitaItemId(rs.string("item_id"))
   }
