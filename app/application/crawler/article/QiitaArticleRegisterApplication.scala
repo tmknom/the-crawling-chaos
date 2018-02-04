@@ -12,7 +12,7 @@ final class QiitaArticleRegisterApplication @Inject()(
     idRepository:      QiitaArticleIdRepository
 ) extends Crawler {
 
-  def crawl(): Unit = {
+  def register(): Unit = {
     val items = idRepository.retrieveNotRegistered()
     withoutSleepLoop[QiitaItemId](items)(registerOne)
   }
