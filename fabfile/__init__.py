@@ -46,6 +46,13 @@ def mysql_dump():
 
 
 @task
+def mysql_restore():
+    '''MySQLのリストア'''
+    import mysql
+    mysql.restore()
+
+
+@task
 def s3_deploy_json():
     '''S3へJSONをデプロイ'''
     import s3
