@@ -64,7 +64,19 @@ def create_database(db_name):
 
 
 def restore_mysql(db_name):
-    local('gzcat %s | mysql -uroot %s' % (dump_file_path(db_name), db_name))
+    zcat = switch_zcat_command()
+    local('%s %s | mysql -uroot %s' % (zcat, dump_file_path(db_name), db_name))
+
+
+# Macではgzcatでないと実行できない
+# 一方、Amazon Linuxにはzcatしか入っていないので、どっちを使うか判定させる
+def switch_zcat_command():
+    with settings(warn_only=True):
+        result = local("which gzcat", capture=True)
+        if (len(result) > 0):
+            return "gzcat"
+        else:
+            return "zcat"
 
 
 def execute_sql(sql):
