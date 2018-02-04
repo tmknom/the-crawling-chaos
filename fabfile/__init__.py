@@ -53,6 +53,20 @@ def mysql_restore():
 
 
 @task
+def crawl_user():
+    '''ユーザのクロール'''
+    import crawl
+    crawl.user()
+
+
+@task
+def crawl_article():
+    '''記事のクロール'''
+    import crawl
+    crawl.article()
+
+
+@task
 def s3_deploy_json():
     '''S3へJSONをデプロイ'''
     import s3
