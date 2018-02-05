@@ -1,0 +1,20 @@
+#!/bin/sh
+# chkconfig: 345 97 20
+# description: Qiita article crawler
+# processname: qiita-crawler
+
+start(){
+  for i in $(seq 10)
+  do
+    mysql -u root -e 'show databases' || (sleep 3; false) && break
+  done
+
+  /tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-raw-article-json-crawler-cli > /dev/null 2>&1 &
+}
+
+case "$1" in
+ start)
+       start
+       ;;
+  *) break ;;
+esac
