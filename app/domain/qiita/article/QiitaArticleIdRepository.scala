@@ -15,4 +15,6 @@ trait QiitaArticleIdRepository {
   def retrieveNotRegisteredRawJson()(implicit session: DBSession = AutoSession): List[QiitaItemId]
 
   def retrieveNotRegisteredMarkdown()(implicit session: DBSession = AutoSession): List[QiitaItemId]
+
+  def delete(qiitaItemId: QiitaItemId)(implicit session: DBSession = AutoSession): Unit
 }
