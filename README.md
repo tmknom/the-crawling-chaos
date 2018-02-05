@@ -319,6 +319,12 @@ cd qiita-ranker
 sbt dist
 rm -rf /tmp/qiita-ranker-1.0-SNAPSHOT
 unzip target/universal/qiita-ranker-1.0-SNAPSHOT.zip -d /tmp
+
+# Init script
+sudo cp qiita-crawler /etc/init.d
+sudo chmod 755 qiita-crawler
+sudo chkconfig --add qiita-crawler
+sudo chkconfig qiita-crawler on
 ```
 
 ### ログ確認
