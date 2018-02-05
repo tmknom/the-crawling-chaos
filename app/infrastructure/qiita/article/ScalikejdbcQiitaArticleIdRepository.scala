@@ -83,6 +83,21 @@ final class ScalikejdbcQiitaArticleIdRepository extends QiitaArticleIdRepository
       .apply()
   }
 
+  override def delete(qiitaItemId: QiitaItemId)(implicit session: DBSession = AutoSession): Unit = {
+    val itemId = qiitaItemId.value
+    Seq(
+      sqls"qiita_article_markdowns",
+      sqls"raw_qiita_article_jsons",
+      sqls"qiita_article_contribution_histories",
+      sqls"qiita_article_contributions",
+      sqls"qiita_articles",
+      sqls"raw_qiita_props_article_jsons",
+      sqls"qiita_article_ids"
+    ).foreach { table: SQLSyntax =>
+      sql"DELETE FROM $table WHERE item_id = $itemId ;".update().apply()
+    }
+  }
+
   private def toQiitaItemId(rs: WrappedResultSet): QiitaItemId = {
     QiitaItemId(rs.string("item_id"))
   }
