@@ -64,6 +64,14 @@ run-main presentation.cli.batch.daily.article.QiitaArticleIdCrawlerCli
 run-main presentation.cli.batch.daily.article.QiitaArticleCrawlerCli
 ```
 
+#### 指定した記事IDを削除
+
+```
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/deletion-qiita-item-id-cli xxxx
+
+run-main presentation.cli.operation.DeletionQiitaItemIdCli xxxx
+```
+
 ### 初期データ取得
 
 #### 全Qiitaユーザ名をクロール
