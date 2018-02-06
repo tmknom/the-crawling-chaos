@@ -3,13 +3,19 @@
 # description: Qiita article crawler
 # processname: qiita-crawler
 
+# source function library
+. /etc/rc.d/init.d/functions
+
 start(){
-  for i in $(seq 10)
+  for i in $(seq 100)
   do
     mysql -u root -e 'show databases' || (sleep 3; false) && break
   done
 
-  /tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-raw-article-json-crawler-cli > /dev/null 2>&1 &
+  source /home/<user>/.bashrc
+  java -version
+
+  /tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-raw-article-json-crawler-cli
 }
 
 case "$1" in
