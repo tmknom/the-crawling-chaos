@@ -22,6 +22,22 @@ final class ScalikejdbcQiitaArticleAggregateRepository extends QiitaArticleAggre
       .apply()
   }
 
+  override def retrieveHatenaCount()(implicit session: DBSession = AutoSession): Seq[QiitaArticleAggregate] = {
+    retrieve(sqls"hatena_count")
+  }
+
+  private def retrieve(orderBy: SQLSyntax)(implicit session: DBSession = AutoSession) = {
+    sql"""
+          SELECT * FROM qiita_articles AS qa
+          INNER JOIN qiita_article_contributions AS qac
+          ON qa.item_id = qac.item_id
+          ORDER BY $orderBy DESC LIMIT 1000;
+      """
+      .map(toQiitaArticleAggregate)
+      .list()
+      .apply()
+  }
+
   private def toQiitaArticleAggregate(rs: WrappedResultSet): QiitaArticleAggregate = {
     QiitaArticleAggregate(
       QiitaArticle(
