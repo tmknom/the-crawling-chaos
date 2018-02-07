@@ -24,15 +24,7 @@ final class ScalikejdbcQiitaArticleAggregateRepository extends QiitaArticleAggre
   }
 
   override def retrieveContribution()(implicit session: DBSession = AutoSession): Seq[QiitaArticleAggregate] = {
-    sql"""
-          SELECT * FROM qiita_articles AS qa
-          INNER JOIN qiita_article_contributions AS qac
-          ON qa.item_id = qac.item_id
-          ORDER BY qac.likes_count DESC LIMIT 1000;
-      """
-      .map(toQiitaArticleAggregate)
-      .list()
-      .apply()
+    retrieve(sqls"likes_count")
   }
 
   override def retrieveCommentsCount()(implicit session: DBSession = AutoSession): Seq[QiitaArticleAggregate] = {
