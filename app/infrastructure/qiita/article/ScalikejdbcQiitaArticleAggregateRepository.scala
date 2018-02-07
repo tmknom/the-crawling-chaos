@@ -22,8 +22,20 @@ final class ScalikejdbcQiitaArticleAggregateRepository extends QiitaArticleAggre
       .apply()
   }
 
+  override def retrieveCommentsCount()(implicit session: DBSession = AutoSession): Seq[QiitaArticleAggregate] = {
+    retrieve(sqls"comments_count")
+  }
+
   override def retrieveHatenaCount()(implicit session: DBSession = AutoSession): Seq[QiitaArticleAggregate] = {
     retrieve(sqls"hatena_count")
+  }
+
+  override def retrieveFacebookCount()(implicit session: DBSession = AutoSession): Seq[QiitaArticleAggregate] = {
+    retrieve(sqls"facebook_count")
+  }
+
+  override def retrievePocketCount()(implicit session: DBSession = AutoSession): Seq[QiitaArticleAggregate] = {
+    retrieve(sqls"pocket_count")
   }
 
   private def retrieve(orderBy: SQLSyntax)(implicit session: DBSession = AutoSession) = {
