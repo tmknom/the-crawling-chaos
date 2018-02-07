@@ -12,9 +12,37 @@ final class QiitaArticleRankingApplication @Inject()(
     repository: QiitaArticleAggregateRepository
 ) {
 
-  def createContribution(): Unit = {
+  def create(): Unit = {
+    createContribution()
+    createCommentsCount()
+    createHatenaCount()
+    createFacebookCount()
+    createPocketCount()
+  }
+
+  private def createContribution(): Unit = {
     val qiitaArticleAggregates = repository.retrieveContribution()
     createJsonFile("contribution", qiitaArticleAggregates)
+  }
+
+  private def createCommentsCount(): Unit = {
+    val qiitaArticleAggregates = repository.retrieveCommentsCount()
+    createJsonFile("comment", qiitaArticleAggregates)
+  }
+
+  private def createHatenaCount(): Unit = {
+    val qiitaArticleAggregates = repository.retrieveHatenaCount()
+    createJsonFile("hatena", qiitaArticleAggregates)
+  }
+
+  private def createFacebookCount(): Unit = {
+    val qiitaArticleAggregates = repository.retrieveFacebookCount()
+    createJsonFile("facebook", qiitaArticleAggregates)
+  }
+
+  private def createPocketCount(): Unit = {
+    val qiitaArticleAggregates = repository.retrievePocketCount()
+    createJsonFile("pocket", qiitaArticleAggregates)
   }
 
   private def createJsonFile(fileType: String, qiitaArticleAggregates: Seq[QiitaArticleAggregate]): Unit = {

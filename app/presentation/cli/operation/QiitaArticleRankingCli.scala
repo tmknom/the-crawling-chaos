@@ -13,7 +13,7 @@ object QiitaArticleRankingCli extends App with Task {
   override def task(app: Application): Unit = {
     try {
       Logger.info(s"Started ${this.getClass.getSimpleName}.")
-      app.injector.instanceOf[QiitaArticleRankingApplication].createContribution()
+      app.injector.instanceOf[QiitaArticleRankingApplication].create()
       Logger.info(s"Completed ${this.getClass.getSimpleName}.")
     } catch {
       case e: Exception => Logger.error(s"Failed ${this.getClass.getSimpleName}.", e)
