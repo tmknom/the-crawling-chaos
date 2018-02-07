@@ -1,13 +1,10 @@
 <template>
-  <div id="hello">
-    <div id="articles" v-for="result in results">
-      <div class="card">
-        <div class="card-divider">
-          {{ result.index }}：{{ result.name }}
-        </div>
-      </div>
-    </div>
-  </div>
+  <ul id="articles">
+    <li class="article" v-for="result in results">
+      {{ result.index }}：<a v-bind:href="result.article.url">{{ result.article.name }}</a>
+      {{ result.contribution.likes_count }}
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -23,7 +20,8 @@
     },
     methods: {
       get_ajax_users() {
-        const url = 'http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com/qiita-ranker/user_contribution/user.article.1.json';
+        const baseUrl = 'http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com';
+        const url = baseUrl + '/qiita-ranker/article/article.contribution.json.gz';
         const request = async (_url) => {
           const response = await axios.get(_url);
           return response.data;
@@ -61,8 +59,8 @@
   }
 
   li {
-    display: inline-block;
     margin: 0 10px;
+    text-align: left;
   }
 
   a {
