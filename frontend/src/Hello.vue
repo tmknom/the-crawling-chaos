@@ -1,17 +1,44 @@
 <template>
   <div id="hello">
-    <img src="./assets/logo.png">
-    <h2>{{ msg }}</h2>
+    <div id="articles" v-for="result in results">
+      <div class="card">
+        <div class="card-divider">
+          {{ result.index }}：{{ result.name }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+  // Ajax通信ライブラリ
+  import axios from 'axios';
+
   export default {
     name: 'Hello',
     data() {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        results: []
       }
+    },
+    methods: {
+      get_ajax_users() {
+        return axios.get('http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com/qiita-ranker/user_contribution/user.article.1.json')
+          .then(function (response) {
+            return response.data;
+          })
+          .catch(function (error) {
+            console.log(error);
+            return [];
+          });
+      }
+    },
+    created() {
+      this.get_ajax_users().then((result) => {
+        this.$data.results = result;
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
   }
 </script>
