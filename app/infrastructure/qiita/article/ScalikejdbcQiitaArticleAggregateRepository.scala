@@ -10,6 +10,19 @@ import scalikejdbc._
 @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter", "org.wartremover.warts.DefaultArguments", "org.wartremover.warts.Nothing"))
 @Singleton
 final class ScalikejdbcQiitaArticleAggregateRepository extends QiitaArticleAggregateRepository {
+  override def retrieveSumAll()(implicit session: DBSession = AutoSession): Seq[(QiitaArticleAggregate, Int)] = {
+    sql"""
+          SELECT *, likes_count + comments_count + hatena_count + facebook_count + pocket_count AS all_count
+          FROM qiita_articles AS qa
+          INNER JOIN qiita_article_contributions AS qac
+          ON qa.item_id = qac.item_id
+          ORDER BY all_count DESC LIMIT 1000;
+      """
+      .map(toQiitaArticleAggregateAndAllCount)
+      .list()
+      .apply()
+  }
+
   override def retrieveContribution()(implicit session: DBSession = AutoSession): Seq[QiitaArticleAggregate] = {
     sql"""
           SELECT * FROM qiita_articles AS qa
@@ -68,5 +81,9 @@ final class ScalikejdbcQiitaArticleAggregateRepository extends QiitaArticleAggre
         PocketCount(rs.int("pocket_count"))
       )
     )
+  }
+
+  private def toQiitaArticleAggregateAndAllCount(rs: WrappedResultSet): (QiitaArticleAggregate, Int) = {
+    (toQiitaArticleAggregate(rs), rs.int("all_count"))
   }
 }
