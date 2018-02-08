@@ -1,7 +1,14 @@
 <template>
 
   <el-container>
-    <el-header>Header</el-header>
+    <el-header>
+      <el-tabs type="card" @tab-click="handleClick">
+        <el-tab-pane label="User">User</el-tab-pane>
+        <el-tab-pane label="Config">Config</el-tab-pane>
+        <el-tab-pane label="Role">Role</el-tab-pane>
+        <el-tab-pane label="Task">Task</el-tab-pane>
+      </el-tabs>
+    </el-header>
     <el-container>
       <el-main>
         <ul id="articles">
@@ -32,22 +39,41 @@
       }
     },
     methods: {
-      get_ajax_users() {
+      get_ajax(path) {
         const baseUrl = 'http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com';
-        const url = baseUrl + '/qiita-ranker/article/article.contribution.json.gz';
+        const url = baseUrl + '/qiita-ranker' + path;
         const request = async (_url) => {
           const response = await axios.get(_url);
           return response.data;
         };
         return request(url);
+      },
+      render_ajax(type) {
+        this.get_ajax('/article/article.' + type + '.json.gz').then((result) => {
+          this.$data.results = result;
+        }).catch(function (error) {
+          console.log(error);
+        });
+      },
+      handleClick(tab, event) {
+        switch (tab.label) {
+          case "User":
+            this.render_ajax('contribution');
+            break;
+          case "Config":
+            this.render_ajax('hatena');
+            break;
+          case "Role":
+            this.render_ajax('facebook');
+            break;
+          case "Task":
+            this.render_ajax('pocket');
+            break;
+        }
       }
     },
     created() {
-      this.get_ajax_users().then((result) => {
-        this.$data.results = result;
-      }).catch(function (error) {
-        console.log(error);
-      });
+      this.render_ajax('contribution');
     }
   }
 </script>
