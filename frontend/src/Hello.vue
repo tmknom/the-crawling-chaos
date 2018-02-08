@@ -1,10 +1,23 @@
 <template>
-  <ul id="articles">
-    <li class="article" v-for="result in results">
-      {{ result.index }}：<a v-bind:href="result.article.url">{{ result.article.name }}</a>
-      {{ result.contribution.likes_count }}
-    </li>
-  </ul>
+
+  <el-container>
+    <el-header>Header</el-header>
+    <el-container>
+      <el-main>
+        <ul id="articles">
+          <li class="article" v-for="result in results">
+            {{ result.index }}：<a v-bind:href="result.article.url">{{ result.article.name }}</a>
+            {{ result.contribution.likes_count }}
+          </li>
+        </ul>
+      </el-main>
+      <el-aside>
+        サイドメニュー
+      </el-aside>
+    </el-container>
+    <el-footer>Footer</el-footer>
+  </el-container>
+
 </template>
 
 <script>
