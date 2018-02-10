@@ -4,7 +4,7 @@
       <el-header>ヘッダーだよ</el-header>
       <el-container>
         <el-main>
-          <Hello/>
+          <Contents/>
         </el-main>
         <el-aside>
           サイドメニュー
@@ -16,11 +16,11 @@
 </template>
 
 <script>
-  import Hello from './Hello.vue'
+  import Contents from './components/Contents.vue'
 
   export default {
     components: {
-      Hello
+      Contents
     }
   }
 </script>
