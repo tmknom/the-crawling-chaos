@@ -44,21 +44,24 @@
       ...mapActions('articles', [
         'replaceItems'
       ]),
-      get_ajax(path) {
-        const baseUrl = 'http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com';
-        const url = baseUrl + '/qiita-ranker' + path;
+      request(url) {
         const request = async (_url) => {
           const response = await axios.get(_url);
           return response.data;
         };
         return request(url);
       },
-      render_ajax(type) {
-        this.get_ajax('/article/article.' + type + '.json.gz').then((result) => {
+      fetch(url) {
+        this.request(url).then((result) => {
           this.replaceItems({items: result});
         }).catch(function (error) {
           console.log(error);
         });
+      },
+      getJsonUrl(type) {
+        const path = '/qiita-ranker/article/article.' + type + '.json.gz';
+        const baseUrl = 'http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com';
+        return baseUrl + path;
       },
       getTypeByLabel(label) {
         const tabs = this.$data.tabs;
@@ -68,11 +71,12 @@
       },
       handleClick(tab, event) {
         const type = this.getTypeByLabel(tab.label);
-        this.render_ajax(type);
+        const url = this.getJsonUrl(type);
+        this.fetch(url);
       }
     },
     created() {
-      this.render_ajax('contribution');
+      this.fetch(this.getJsonUrl('contribution'));
     }
   }
 </script>
