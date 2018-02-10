@@ -2,16 +2,16 @@
   <div id="contents">
     <el-tabs type="card" @tab-click="handleClick">
       <el-tab-pane v-bind:label="tabs.contribution">
-        <ArticleList :articles="items"/>
+        <ArticleList :articles="items"></ArticleList>
       </el-tab-pane>
       <el-tab-pane v-bind:label="tabs.hatena">
-        <ArticleList :articles="items"/>
+        <ArticleList :articles="items"></ArticleList>
       </el-tab-pane>
       <el-tab-pane v-bind:label="tabs.facebook">
-        <ArticleList :articles="items"/>
+        <ArticleList :articles="items"></ArticleList>
       </el-tab-pane>
       <el-tab-pane v-bind:label="tabs.pocket">
-        <ArticleList :articles="items"/>
+        <ArticleList :articles="items"></ArticleList>
       </el-tab-pane>
     </el-tabs>
   </div>
