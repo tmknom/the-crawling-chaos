@@ -17,8 +17,6 @@
 </template>
 
 <script>
-  // Ajax通信ライブラリ
-  import axios from 'axios';
   // Vuex関連
   import {mapState, mapGetters, mapActions} from 'vuex';
 
@@ -42,27 +40,8 @@
     },
     methods: {
       ...mapActions('articles', [
-        'replaceItems'
+        'fetchJson'
       ]),
-      request(url) {
-        const request = async (_url) => {
-          const response = await axios.get(_url);
-          return response.data;
-        };
-        return request(url);
-      },
-      fetch(url) {
-        this.request(url).then((result) => {
-          this.replaceItems({items: result});
-        }).catch(function (error) {
-          console.log(error);
-        });
-      },
-      getJsonUrl(type) {
-        const path = '/qiita-ranker/article/article.' + type + '.json.gz';
-        const baseUrl = 'http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com';
-        return baseUrl + path;
-      },
       getTypeByLabel(label) {
         const tabs = this.$data.tabs;
         return Object.keys(tabs).filter((key) => {
@@ -70,13 +49,13 @@
         }).shift();
       },
       handleClick(tab, event) {
-        const type = this.getTypeByLabel(tab.label);
-        const url = this.getJsonUrl(type);
-        this.fetch(url);
+        const jsonType = this.getTypeByLabel(tab.label);
+        // const url = this.getJsonUrl(type);
+        this.fetchJson({jsonType: jsonType});
       }
     },
     created() {
-      this.fetch(this.getJsonUrl('contribution'));
+      this.fetchJson({jsonType: 'contribution'});
     }
   }
 </script>
