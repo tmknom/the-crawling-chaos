@@ -40,8 +40,7 @@
     },
     methods: {
       ...mapActions('articles', [
-        'fetchJson',
-        'replaceItems'
+        'fetchJson'
       ]),
       getTypeByLabel(label) {
         const tabs = this.$data.tabs;
