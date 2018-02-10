@@ -61,6 +61,10 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.(ttf|woff)$/,
+        loader: "file-loader?prefix=font/"
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
