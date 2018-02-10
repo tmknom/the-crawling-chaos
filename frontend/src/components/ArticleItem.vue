@@ -1,7 +1,8 @@
 <template>
   <li class="article">
     {{ item.index }}：<a v-bind:href="item.article.url">{{ item.article.name }}</a>
-    {{ item.contribution.likes_count }}
+    {{ item.contribution.likes_count }}, {{ item.contribution.comments_count }}, {{ item.contribution.hatena_count }},
+    {{ item.contribution.facebook_count }}, {{ item.contribution.pocket_count }}
   </li>
 </template>
 
