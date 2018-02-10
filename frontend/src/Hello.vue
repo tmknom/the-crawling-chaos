@@ -1,6 +1,7 @@
 <template>
 
   <el-container>
+    <p>カウント: "{{ count }}"</p>
     <el-header>
       <el-tabs type="card" @tab-click="handleClick">
         <el-tab-pane label="User">User</el-tab-pane>
@@ -33,6 +34,11 @@
 
   export default {
     name: 'Hello',
+    computed: {
+      count() {
+        return this.$store.state.count
+      }
+    },
     data() {
       return {
         results: []
@@ -56,6 +62,8 @@
         });
       },
       handleClick(tab, event) {
+        this.$store.commit('increment');
+        console.log(this.$store.state.count);
         switch (tab.label) {
           case "User":
             this.render_ajax('contribution');
