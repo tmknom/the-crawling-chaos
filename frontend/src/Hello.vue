@@ -67,7 +67,7 @@
         });
       },
       handleClick(tab, event) {
-        this.$store.commit('increment');
+        this.$store.commit('increment', {amount: 100});
         console.log(this.count);
         switch (tab.label) {
           case "User":
