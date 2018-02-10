@@ -1,7 +1,7 @@
 <template>
 
   <el-container>
-    <p>カウント: "{{ count }}"</p>
+    <p>カウント: {{ count }} × 2 = {{ double }}</p>
     <el-header>
       <el-tabs type="card" @tab-click="handleClick">
         <el-tab-pane label="User">User</el-tab-pane>
@@ -32,13 +32,16 @@
   // Ajax通信ライブラリ
   import axios from 'axios';
   // Vuex関連
-  import {mapState} from 'vuex';
+  import {mapState, mapGetters} from 'vuex';
 
   export default {
     name: 'Hello',
     computed: {
       ...mapState([
         'count'
+      ]),
+      ...mapGetters([
+        'double',
       ])
     },
     data() {
