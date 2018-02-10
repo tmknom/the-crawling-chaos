@@ -1,27 +1,32 @@
 <template>
-  <div id="hello">
+  <div id="contents">
     <el-tabs type="card" @tab-click="handleClick">
-      <el-tab-pane v-bind:label="tabs.contribution">User</el-tab-pane>
-      <el-tab-pane v-bind:label="tabs.hatena">Config</el-tab-pane>
-      <el-tab-pane v-bind:label="tabs.facebook">Role</el-tab-pane>
-      <el-tab-pane v-bind:label="tabs.pocket">Task</el-tab-pane>
+      <el-tab-pane v-bind:label="tabs.contribution">
+        <ArticleList :articles="items"/>
+      </el-tab-pane>
+      <el-tab-pane v-bind:label="tabs.hatena">
+        <ArticleList :articles="items"/>
+      </el-tab-pane>
+      <el-tab-pane v-bind:label="tabs.facebook">
+        <ArticleList :articles="items"/>
+      </el-tab-pane>
+      <el-tab-pane v-bind:label="tabs.pocket">
+        <ArticleList :articles="items"/>
+      </el-tab-pane>
     </el-tabs>
-
-    <ul id="articles">
-      <li class="article" v-for="result in items">
-        {{ result.index }}：<a v-bind:href="result.article.url">{{ result.article.name }}</a>
-        {{ result.contribution.likes_count }}
-      </li>
-    </ul>
   </div>
 </template>
 
 <script>
   // Vuex関連
   import {mapState, mapGetters, mapActions} from 'vuex';
+  import ArticleList from './ArticleList';
 
   export default {
-    name: 'Hello',
+    name: 'Contents',
+    components: {
+      ArticleList
+    },
     data() {
       return {
         tabs: {
@@ -59,19 +64,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    margin: 0 10px;
-    text-align: left;
-  }
-
-  a {
-    color: #42b983;
-  }
-</style>
