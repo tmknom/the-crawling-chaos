@@ -37,10 +37,10 @@
   export default {
     name: 'Hello',
     computed: {
-      ...mapState([
+      ...mapState('counter', [
         'count'
       ]),
-      ...mapGetters([
+      ...mapGetters('counter', [
         'double',
       ])
     },
@@ -50,7 +50,7 @@
       }
     },
     methods: {
-      ...mapActions([
+      ...mapActions('counter', [
         'increment'
       ]),
       get_ajax(path) {
