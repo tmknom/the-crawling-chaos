@@ -1,10 +1,10 @@
 <template>
   <div id="hello">
     <el-tabs type="card" @tab-click="handleClick">
-      <el-tab-pane label="User">User</el-tab-pane>
-      <el-tab-pane label="Config">Config</el-tab-pane>
-      <el-tab-pane label="Role">Role</el-tab-pane>
-      <el-tab-pane label="Task">Task</el-tab-pane>
+      <el-tab-pane v-bind:label="tabs.contribution">User</el-tab-pane>
+      <el-tab-pane v-bind:label="tabs.hatena">Config</el-tab-pane>
+      <el-tab-pane v-bind:label="tabs.facebook">Role</el-tab-pane>
+      <el-tab-pane v-bind:label="tabs.pocket">Task</el-tab-pane>
     </el-tabs>
 
     <ul id="articles">
@@ -24,6 +24,17 @@
 
   export default {
     name: 'Hello',
+    data() {
+      return {
+        tabs: {
+          'contribution': 'いいね',
+          'hatena': 'はてブ',
+          'facebook': 'Facebook',
+          'pocket': 'Pocket',
+
+        }
+      }
+    },
     computed: {
       ...mapState('articles', [
         'items'
@@ -49,21 +60,15 @@
           console.log(error);
         });
       },
+      getTypeByLabel(label) {
+        const tabs = this.$data.tabs;
+        return Object.keys(tabs).filter((key) => {
+          return tabs[key] === label
+        }).shift();
+      },
       handleClick(tab, event) {
-        switch (tab.label) {
-          case "User":
-            this.render_ajax('contribution');
-            break;
-          case "Config":
-            this.render_ajax('hatena');
-            break;
-          case "Role":
-            this.render_ajax('facebook');
-            break;
-          case "Task":
-            this.render_ajax('pocket');
-            break;
-        }
+        const type = this.getTypeByLabel(tab.label);
+        this.render_ajax(type);
       }
     },
     created() {
