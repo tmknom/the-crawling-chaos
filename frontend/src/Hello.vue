@@ -1,31 +1,21 @@
 <template>
-
-  <el-container>
+  <div id="hello">
     <p>カウント: {{ count }} × 2 = {{ double }}</p>
-    <el-header>
-      <el-tabs type="card" @tab-click="handleClick">
-        <el-tab-pane label="User">User</el-tab-pane>
-        <el-tab-pane label="Config">Config</el-tab-pane>
-        <el-tab-pane label="Role">Role</el-tab-pane>
-        <el-tab-pane label="Task">Task</el-tab-pane>
-      </el-tabs>
-    </el-header>
-    <el-container>
-      <el-main>
-        <ul id="articles">
-          <li class="article" v-for="result in results">
-            {{ result.index }}：<a v-bind:href="result.article.url">{{ result.article.name }}</a>
-            {{ result.contribution.likes_count }}
-          </li>
-        </ul>
-      </el-main>
-      <el-aside>
-        サイドメニュー
-      </el-aside>
-    </el-container>
-    <el-footer>Footer</el-footer>
-  </el-container>
 
+    <el-tabs type="card" @tab-click="handleClick">
+      <el-tab-pane label="User">User</el-tab-pane>
+      <el-tab-pane label="Config">Config</el-tab-pane>
+      <el-tab-pane label="Role">Role</el-tab-pane>
+      <el-tab-pane label="Task">Task</el-tab-pane>
+    </el-tabs>
+
+    <ul id="articles">
+      <li class="article" v-for="result in results">
+        {{ result.index }}：<a v-bind:href="result.article.url">{{ result.article.name }}</a>
+        {{ result.contribution.likes_count }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -95,19 +85,6 @@
 </script>
 
 <style lang="scss">
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-  }
-
-  h1, h2 {
-    font-weight: normal;
-  }
-
   ul {
     list-style-type: none;
     padding: 0;

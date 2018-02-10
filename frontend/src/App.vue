@@ -1,8 +1,17 @@
 <template>
-
   <div id="app">
-    <h1>Hello App!</h1>
-    <Hello/>
+    <el-container>
+      <el-header>ヘッダーだよ</el-header>
+      <el-container>
+        <el-main>
+          <Hello/>
+        </el-main>
+        <el-aside>
+          サイドメニュー
+        </el-aside>
+      </el-container>
+      <el-footer>Footer</el-footer>
+    </el-container>
   </div>
 </template>
 
@@ -15,3 +24,14 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin: 0;
+  }
+</style>
