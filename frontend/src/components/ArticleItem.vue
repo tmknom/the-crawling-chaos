@@ -1,7 +1,7 @@
 <template>
   <li class="article">
-    {{ article.index }}：<a v-bind:href="article.article.url">{{ article.article.name }}</a>
-    {{ article.contribution.likes_count }}
+    {{ item.index }}：<a v-bind:href="item.article.url">{{ item.article.name }}</a>
+    {{ item.contribution.likes_count }}
   </li>
 </template>
 
@@ -9,7 +9,7 @@
   export default {
     name: 'ArticleItem',
     props: [
-      'article'
+      'item'
     ]
   }
 </script>
