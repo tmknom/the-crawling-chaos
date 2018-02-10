@@ -1,7 +1,5 @@
 <template>
   <div id="hello">
-    <p>カウント: {{ count }} × 2 = {{ double }}</p>
-
     <el-tabs type="card" @tab-click="handleClick">
       <el-tab-pane label="User">User</el-tab-pane>
       <el-tab-pane label="Config">Config</el-tab-pane>
@@ -10,7 +8,7 @@
     </el-tabs>
 
     <ul id="articles">
-      <li class="article" v-for="result in results">
+      <li class="article" v-for="result in items">
         {{ result.index }}：<a v-bind:href="result.article.url">{{ result.article.name }}</a>
         {{ result.contribution.likes_count }}
       </li>
@@ -27,21 +25,13 @@
   export default {
     name: 'Hello',
     computed: {
-      ...mapState('counter', [
-        'count'
-      ]),
-      ...mapGetters('counter', [
-        'double',
+      ...mapState('articles', [
+        'items'
       ])
     },
-    data() {
-      return {
-        results: []
-      }
-    },
     methods: {
-      ...mapActions('counter', [
-        'increment'
+      ...mapActions('articles', [
+        'replaceItems'
       ]),
       get_ajax(path) {
         const baseUrl = 'http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com';
@@ -54,14 +44,12 @@
       },
       render_ajax(type) {
         this.get_ajax('/article/article.' + type + '.json.gz').then((result) => {
-          this.$data.results = result;
+          this.replaceItems({items: result});
         }).catch(function (error) {
           console.log(error);
         });
       },
       handleClick(tab, event) {
-        this.increment({amount: 1000});
-        console.log(this.count);
         switch (tab.label) {
           case "User":
             this.render_ajax('contribution');
