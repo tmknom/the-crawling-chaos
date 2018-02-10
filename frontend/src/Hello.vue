@@ -31,13 +31,15 @@
 <script>
   // Ajax通信ライブラリ
   import axios from 'axios';
+  // Vuex関連
+  import {mapState} from 'vuex';
 
   export default {
     name: 'Hello',
     computed: {
-      count() {
-        return this.$store.state.count
-      }
+      ...mapState([
+        'count'
+      ])
     },
     data() {
       return {
@@ -63,7 +65,7 @@
       },
       handleClick(tab, event) {
         this.$store.commit('increment');
-        console.log(this.$store.state.count);
+        console.log(this.count);
         switch (tab.label) {
           case "User":
             this.render_ajax('contribution');
