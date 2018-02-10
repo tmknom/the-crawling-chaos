@@ -1,6 +1,6 @@
 <template>
   <div id="contents">
-    <el-tabs type="card" @tab-click="handleClick">
+    <el-tabs type="card" @tab-click="handle">
       <el-tab-pane v-bind:label="tabs.contribution">
         <ArticleList :articles="items"></ArticleList>
       </el-tab-pane>
@@ -53,9 +53,8 @@
           return tabs[key] === label
         }).shift();
       },
-      handleClick(tab, event) {
+      handle(tab, event) {
         const jsonType = this.getTypeByLabel(tab.label);
-        // const url = this.getJsonUrl(type);
         this.fetchJson({jsonType: jsonType});
       }
     },
