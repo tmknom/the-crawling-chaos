@@ -32,7 +32,7 @@
   // Ajax通信ライブラリ
   import axios from 'axios';
   // Vuex関連
-  import {mapState, mapGetters} from 'vuex';
+  import {mapState, mapGetters, mapActions} from 'vuex';
 
   export default {
     name: 'Hello',
@@ -50,6 +50,9 @@
       }
     },
     methods: {
+      ...mapActions([
+        'increment'
+      ]),
       get_ajax(path) {
         const baseUrl = 'http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com';
         const url = baseUrl + '/qiita-ranker' + path;
@@ -67,7 +70,7 @@
         });
       },
       handleClick(tab, event) {
-        this.$store.dispatch('increment', {amount: 10});
+        this.increment({amount: 1000});
         console.log(this.count);
         switch (tab.label) {
           case "User":
