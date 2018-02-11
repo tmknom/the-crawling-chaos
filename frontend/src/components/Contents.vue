@@ -66,7 +66,7 @@
     },
     data() {
       return {
-        jsonType: 'qiita',
+        currentJsonType: 'qiita',
         pagination: {
           total: 10000,
           perPage: 100,
@@ -99,13 +99,13 @@
         return Object.keys(this.$data.tabs)[index];
       },
       fetch(index) {
-        const jsonType = this.$data.jsonType;
+        const jsonType = this.$data.currentJsonType;
         this.fetchJson({jsonType: jsonType, index: index});
       },
       handle(labelIndex) {
         const jsonType = this.getTypeByLabel(labelIndex);
         const index = this.$data.pagination.current[jsonType];
-        this.$data.jsonType = jsonType;
+        this.$data.currentJsonType = jsonType;
         this.fetch(index);
       },
       pageChange(index) {
