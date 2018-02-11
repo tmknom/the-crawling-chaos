@@ -48,7 +48,7 @@ final class ScalikejdbcQiitaArticleAggregateRepository extends QiitaArticleAggre
           SELECT * FROM qiita_articles AS qa
           INNER JOIN qiita_article_contributions AS qac
           ON qa.item_id = qac.item_id
-          ORDER BY $orderBy DESC LIMIT 10000;
+          ORDER BY $orderBy DESC, posted_date_time DESC LIMIT 10000;
       """
       .map(toQiitaArticleAggregate)
       .list()
