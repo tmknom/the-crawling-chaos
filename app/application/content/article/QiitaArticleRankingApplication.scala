@@ -16,17 +16,17 @@ final class QiitaArticleRankingApplication @Inject()(
   private var lastRank         = -1
 
   def create(): Unit = {
-    createContribution()
+    createQiita()
     createCommentsCount()
     createHatenaCount()
     createFacebookCount()
     createPocketCount()
   }
 
-  private def createContribution(): Unit = {
+  private def createQiita(): Unit = {
     init()
     val qiitaArticleAggregates = repository.retrieveContribution()
-    createJsonFileAll("contribution", qiitaArticleAggregates)
+    createJsonFileAll("qiita", qiitaArticleAggregates)
   }
 
   private def createCommentsCount(): Unit = {
@@ -74,11 +74,11 @@ final class QiitaArticleRankingApplication @Inject()(
 
   private def calculateRank(offset: Int, index: Int, fileType: String, qiitaArticleAggregate: QiitaArticleAggregate): Int = {
     val count = fileType match {
-      case "contribution" => qiitaArticleAggregate.contribution.likesCount.value
-      case "comment"      => qiitaArticleAggregate.contribution.commentsCount.value
-      case "hatena"       => qiitaArticleAggregate.contribution.hatenaCount.value
-      case "facebook"     => qiitaArticleAggregate.contribution.facebookCount.value
-      case "pocket"       => qiitaArticleAggregate.contribution.pocketCount.value
+      case "qiita"    => qiitaArticleAggregate.contribution.likesCount.value
+      case "comment"  => qiitaArticleAggregate.contribution.commentsCount.value
+      case "hatena"   => qiitaArticleAggregate.contribution.hatenaCount.value
+      case "facebook" => qiitaArticleAggregate.contribution.facebookCount.value
+      case "pocket"   => qiitaArticleAggregate.contribution.pocketCount.value
     }
 
     if (lastContribution != count) {
