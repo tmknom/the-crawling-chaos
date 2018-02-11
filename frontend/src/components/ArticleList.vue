@@ -11,27 +11,27 @@
       :mobile-cards="true">
 
       <template slot-scope="props">
-        <b-table-column field="index" label="順位" numeric>
+        <b-table-column field="index" label="順位" width="60" numeric>
           {{ props.row.index }}
         </b-table-column>
 
-        <b-table-column field="title" label="タイトル" class="title2">
+        <b-table-column field="title" label="タイトル">
           <a :href="props.row.article.url">{{ props.row.article.name }}</a>
         </b-table-column>
 
-        <b-table-column field="likes_count" label="いいね" numeric>
+        <b-table-column field="likes_count" label="いいね" width="70" numeric>
           {{ props.row.contribution.likes_count.toLocaleString() }}
         </b-table-column>
 
-        <b-table-column field="hatena_count" label="はてブ" numeric>
+        <b-table-column field="hatena_count" label="はてブ" width="70" numeric>
           {{ props.row.contribution.hatena_count.toLocaleString() }}
         </b-table-column>
 
-        <b-table-column field="facebook_count" label="Facebook" numeric>
+        <b-table-column field="facebook_count" label="FB" width="70" numeric>
           {{ props.row.contribution.facebook_count.toLocaleString() }}
         </b-table-column>
 
-        <b-table-column field="pocket_count" label="Pocket" numeric>
+        <b-table-column field="pocket_count" label="Pocket" width="70" numeric>
           {{ props.row.contribution.pocket_count.toLocaleString() }}
         </b-table-column>
       </template>
@@ -56,6 +56,10 @@
 
 <style lang="scss" scoped>
   /deep/ {
+    th {
+      padding-left: 6px;
+    }
+
     th .th-wrap {
       font-size: 0.87em;
     }
