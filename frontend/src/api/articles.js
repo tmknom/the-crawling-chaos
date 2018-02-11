@@ -12,8 +12,9 @@ export default {
     return request(url);
   },
 
-  getJsonUrl(type) {
-    const path = '/qiita-ranker/article/article.' + type + '.json.gz';
+  getJsonUrl(jsonType) {
+    const page = 1;
+    const path = '/qiita-ranker/article/article.' + jsonType + '.' + page + '.json.gz';
     const baseUrl = 'http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com';
     return baseUrl + path;
   }
