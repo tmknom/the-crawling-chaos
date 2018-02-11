@@ -3,6 +3,9 @@
     <div class="container">
       <section id="contents_header" class="section">
         <!--https://qiita.com/hkusu/items/fda8d8178dd693f95f3c-->
+        <span class="icon has-text-info">
+          <i class="fas fa-info-circle"></i>
+        </span>
         <span class="fa-stack text-qiita">
           <i class="fa fa-square fa-stack-2x"></i>
           <i class="fa fa-stack-1x fa-inverse fa-search fa-2x"></i>
@@ -28,16 +31,16 @@
     </div>
 
     <b-tabs type="is-boxed" @change="handle">
-      <b-tab-item :label="tabs.contribution">
+      <b-tab-item :label="tabs.contribution" icon-pack="fab" icon="qiita">
         <ArticleList :articles="items"></ArticleList>
       </b-tab-item>
-      <b-tab-item :label="tabs.hatena">
+      <b-tab-item :label="tabs.hatena" icon-pack="fab" icon="hatena">
         <ArticleList :articles="items"></ArticleList>
       </b-tab-item>
-      <b-tab-item :label="tabs.facebook">
+      <b-tab-item :label="tabs.facebook" icon-pack="fab" icon="facebook">
         <ArticleList :articles="items"></ArticleList>
       </b-tab-item>
-      <b-tab-item :label="tabs.pocket">
+      <b-tab-item :label="tabs.pocket" icon-pack="fab" icon="get-pocket">
         <ArticleList :articles="items"></ArticleList>
       </b-tab-item>
     </b-tabs>
@@ -103,5 +106,24 @@
 
   .text-get-pocket {
     color: #ee4256;
+  }
+
+  /deep/ {
+    /* http://hayashikejinan.com/webwork/css/913/ */
+    .fa-hatena {
+      &:before {
+        content: "B!";
+        font-family: Verdana;
+        font-weight: bold;
+      }
+    }
+
+    .fa-qiita {
+      &:before {
+        content: "Q";
+        font-family: Verdana;
+        font-weight: bold;
+      }
+    }
   }
 </style>
