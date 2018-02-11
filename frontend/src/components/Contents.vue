@@ -6,14 +6,14 @@
     </h2>
 
     <b-tabs type="is-boxed" @change="handle" expanded>
-      <b-tab-item :label="tabs.contribution" icon-pack="fab" icon="qiita">
+      <b-tab-item :label="tabs.qiita" icon-pack="fab" icon="qiita">
         <ArticleList :articles="items"></ArticleList>
 
         <b-pagination
           :total="pagination.total"
           :per-page="pagination.perPage"
           :order="pagination.order"
-          :current.sync="pagination.current.contribution"
+          :current.sync="pagination.current.qiita"
           @change="pageChange">
         </b-pagination>
       </b-tab-item>
@@ -66,20 +66,20 @@
     },
     data() {
       return {
-        jsonType: 'contribution',
+        jsonType: 'qiita',
         pagination: {
           total: 10000,
           perPage: 100,
           order: 'is-centered',
           current: {
-            'contribution': 1,
+            'qiita': 1,
             'hatena': 1,
             'facebook': 1,
             'pocket': 1,
           },
         },
         tabs: {
-          'contribution': 'いいね！',
+          'qiita': 'いいね！',
           'hatena': 'はてブ',
           'facebook': 'Facebook',
           'pocket': 'Pocket',
