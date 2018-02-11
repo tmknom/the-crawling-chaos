@@ -1,34 +1,9 @@
 <template>
   <section id="contents" class="section">
-    <div class="container">
-      <section id="contents_header" class="section">
-        <!--https://qiita.com/hkusu/items/fda8d8178dd693f95f3c-->
-        <span class="icon has-text-info">
-          <i class="fas fa-info-circle"></i>
-        </span>
-        <span class="fa-stack text-qiita">
-          <i class="fa fa-square fa-stack-2x"></i>
-          <i class="fa fa-stack-1x fa-inverse fa-search fa-2x"></i>
-        </span>
-        <span class="fa-stack text-twitter">
-          <i class="fas fa-square fa-stack-2x"></i>
-          <i class="fab fa-stack-1x fa-inverse fa-twitter"></i>
-          </span>
-        <span class="fa-stack text-facebook">
-          <i class="fas fa-square fa-stack-2x"></i>
-          <i class="fab fa-stack-1x fa-inverse fa-facebook"></i>
-        </span>
-        <span class="fa-stack text-get-pocket">
-          <i class="fas fa-square fa-stack-2x"></i>
-          <i class="fab fa-stack-1x fa-inverse fa-get-pocket"></i>
-        </span>
-
-        <h1 class="title">Section</h1>
-        <h2 class="subtitle">
-          A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading
-        </h2>
-      </section>
-    </div>
+    <h1 class="title">Section</h1>
+    <h2 class="subtitle">
+      A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading
+    </h2>
 
     <b-tabs type="is-boxed" @change="handle" expanded>
       <b-tab-item :label="tabs.contribution" icon-pack="fab" icon="qiita">
@@ -92,20 +67,8 @@
 </script>
 
 <style lang="scss" scoped>
-  .text-qiita {
-    color: #4cb10d;
-  }
-
-  .text-twitter {
-    color: #55acee;
-  }
-
-  .text-facebook {
-    color: #3b5998;
-  }
-
-  .text-get-pocket {
-    color: #ee4256;
+  .subtitle {
+    margin-bottom: 30px;
   }
 
   /deep/ {
