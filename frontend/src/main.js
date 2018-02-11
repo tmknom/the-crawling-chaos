@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/ja'
+import Buefy from 'buefy'
+import 'buefy/lib/buefy.css'
+
 import App from './App.vue'
 import store from './store'
 
-Vue.use(ElementUI, {locale});
+Vue.use(Buefy);
 
 new Vue({
   el: '#app',

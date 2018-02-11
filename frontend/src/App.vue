@@ -1,37 +1,21 @@
 <template>
-  <div id="app">
-    <el-container>
-      <el-header>ヘッダーだよ</el-header>
-      <el-container>
-        <el-main>
-          <Contents/>
-        </el-main>
-        <el-aside>
-          サイドメニュー
-        </el-aside>
-      </el-container>
-      <el-footer>Footer</el-footer>
-    </el-container>
+  <div id="app" class="container is-fluid">
+    <Header></Header>
+    <Contents></Contents>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
+  import Header from './components/layout/Header.vue'
+  import Footer from './components/layout/Footer.vue'
   import Contents from './components/Contents.vue'
 
   export default {
     components: {
+      Header,
+      Footer,
       Contents
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin: 0;
-  }
-</style>

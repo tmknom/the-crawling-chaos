@@ -1,48 +1,42 @@
 <template>
 
-  <el-table
-    :data="articles"
-    stripe
-    style="width: 100%">
-    <el-table-column
-      class-name="left"
-      prop="index"
-      label="順位"
-      width="60">
-    </el-table-column>
-    <el-table-column
-      class-name="left cell-link"
-      label="タイトル"
-      width="520">
-      <template slot-scope="scope">
-        <a v-bind:href="scope.row.article.url">{{ scope.row.article.name }}</a>
+  <div id="articles">
+    <b-table
+      :data="articles"
+      :bordered="false"
+      :striped="true"
+      :narrowed="false"
+      :hoverable="true"
+      :loading="false"
+      :mobile-cards="true">
+
+      <template slot-scope="props">
+        <b-table-column field="index" label="順位" numeric>
+          {{ props.row.index }}
+        </b-table-column>
+
+        <b-table-column field="title" label="タイトル" class="title2">
+          <a :href="props.row.article.url">{{ props.row.article.name }}</a>
+        </b-table-column>
+
+        <b-table-column field="likes_count" label="いいね" numeric>
+          {{ props.row.contribution.likes_count.toLocaleString() }}
+        </b-table-column>
+
+        <b-table-column field="hatena_count" label="はてブ" numeric>
+          {{ props.row.contribution.hatena_count.toLocaleString() }}
+        </b-table-column>
+
+        <b-table-column field="facebook_count" label="Facebook" numeric>
+          {{ props.row.contribution.facebook_count.toLocaleString() }}
+        </b-table-column>
+
+        <b-table-column field="pocket_count" label="Pocket" numeric>
+          {{ props.row.contribution.pocket_count.toLocaleString() }}
+        </b-table-column>
       </template>
-    </el-table-column>
-    <el-table-column
-      class-name="right"
-      prop="contribution.likes_count"
-      label="いいね">
-    </el-table-column>
-    <el-table-column
-      class-name="right"
-      prop="contribution.hatena_count"
-      label="はてブ">
-    </el-table-column>
-    <el-table-column
-      class-name="right"
-      label-class-name="label-small"
-      prop="contribution.facebook_count"
-      label="Facebook">
-    </el-table-column>
-    <el-table-column
-      class-name="right"
-      prop="contribution.pocket_count"
-      label="Pocket">
-    </el-table-column>
-  </el-table>
-  <!--<ul id="articles">-->
-  <!--<ArticleItem v-for="item in articles" :item="item" :key="item.article.item_id"></ArticleItem>-->
-  <!--</ul>-->
+    </b-table>
+  </div>
 </template>
 
 <script>
@@ -62,22 +56,8 @@
 
 <style lang="scss" scoped>
   /deep/ {
-    .cell-link {
-      a {
-        color: #42b983;
-      }
-    }
-
-    .label-small {
-      font-size: 0.97em;
-    }
-
-    .left {
-      text-align: left;
-    }
-
-    .right {
-      text-align: right;
+    th .th-wrap {
+      font-size: 0.87em;
     }
   }
 </style>
