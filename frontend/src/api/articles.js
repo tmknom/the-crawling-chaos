@@ -3,18 +3,17 @@ import axios from 'axios';
 
 export default {
 
-  request(jsonType) {
+  request(jsonType, index) {
     const request = async (_url) => {
       const response = await axios.get(_url);
       return response.data;
     };
-    const url = this.getJsonUrl(jsonType);
+    const url = this.getJsonUrl(jsonType, index);
     return request(url);
   },
 
-  getJsonUrl(jsonType) {
-    const page = 1;
-    const path = '/qiita-ranker/article/article.' + jsonType + '.' + page + '.json.gz';
+  getJsonUrl(jsonType, index) {
+    const path = '/qiita-ranker/article/article.' + jsonType + '.' + index + '.json.gz';
     const baseUrl = 'http://temporary-7037dee17452.s3-website-ap-northeast-1.amazonaws.com';
     return baseUrl + path;
   }
