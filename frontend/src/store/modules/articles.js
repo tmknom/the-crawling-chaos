@@ -15,7 +15,7 @@ export default {
 
   actions: {
     fetchJson({commit}, payload) {
-      api.request(payload.jsonType).then((result) => {
+      api.request(payload.jsonType, payload.index).then((result) => {
         commit('replaceItems', result)
       }).catch(function (error) {
         console.log(error);
