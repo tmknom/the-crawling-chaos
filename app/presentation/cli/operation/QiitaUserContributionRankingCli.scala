@@ -1,11 +1,11 @@
-package presentation.cli.batch.monthly.content
+package presentation.cli.operation
 
 import application.content.QiitaUserContributionRankingApplication
 import library.task.Task
 import play.api.{Application, Logger}
 
 /**
-  * run-main presentation.cli.batch.monthly.content.QiitaUserContributionRankingCli
+  * run-main presentation.cli.operation.QiitaUserContributionRankingCli
   */
 object QiitaUserContributionRankingCli extends App with Task {
   run()
