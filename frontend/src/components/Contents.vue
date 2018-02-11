@@ -30,7 +30,7 @@
       </section>
     </div>
 
-    <b-tabs type="is-boxed" @change="handle">
+    <b-tabs type="is-boxed" @change="handle" expanded>
       <b-tab-item :label="tabs.contribution" icon-pack="fab" icon="qiita">
         <ArticleList :articles="items"></ArticleList>
       </b-tab-item>
@@ -60,7 +60,7 @@
     data() {
       return {
         tabs: {
-          'contribution': 'いいね',
+          'contribution': 'いいね！',
           'hatena': 'はてブ',
           'facebook': 'Facebook',
           'pocket': 'Pocket',
