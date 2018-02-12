@@ -1,5 +1,5 @@
 <template>
-  <li class="article">
+  <li class="article has-text-left">
     {{ item.index }}：<a v-bind:href="item.article.url">{{ item.article.name }}</a>
     {{ item.contribution.likes_count }}, {{ item.contribution.comments_count }}, {{ item.contribution.hatena_count }},
     {{ item.contribution.facebook_count }}, {{ item.contribution.pocket_count }}
@@ -18,7 +18,6 @@
 <style lang="scss" scoped>
   .article {
     margin: 0 10px;
-    text-align: left;
   }
 
   .article a {
