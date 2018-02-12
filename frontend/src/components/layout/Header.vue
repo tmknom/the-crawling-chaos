@@ -20,7 +20,7 @@
                 Home
               </a>
               <a class="navbar-item">
-                Examples
+                <router-link to="/about">About</router-link>
               </a>
               <a class="navbar-item">
                 Documentation
@@ -68,3 +68,9 @@
     </div>
   </section>
 </template>
+
+<style lang="scss" scoped>
+  .navbar-item a {
+    color: rgba(255, 255, 255, 0.7);
+  }
+</style>
