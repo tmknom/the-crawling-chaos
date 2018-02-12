@@ -56,8 +56,12 @@
       <nav class="tabs is-boxed is-fullwidth">
         <div class="container">
           <ul>
-            <li class="is-active"><a>Overview</a></li>
-            <li><a>Modifiers</a></li>
+            <li class="is-active">
+              <router-link to="/">記事ランキング</router-link>
+            </li>
+            <li>
+              <router-link to="/ranking/users">ユーザランキング</router-link>
+            </li>
             <li><a>Grid</a></li>
             <li><a>Elements</a></li>
             <li><a>Components</a></li>
