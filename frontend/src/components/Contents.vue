@@ -1,10 +1,5 @@
 <template>
   <section id="contents" class="section">
-    <h1 class="title">Section</h1>
-    <h2 class="subtitle">
-      A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading
-    </h2>
-
     <b-tabs type="is-boxed" @change="handle" expanded>
       <b-tab-item :label="tabs.qiita" icon-pack="fab" icon="qiita">
         <ArticleList :articles="items"></ArticleList>
@@ -119,10 +114,6 @@
 </script>
 
 <style lang="scss" scoped>
-  .subtitle {
-    margin-bottom: 30px;
-  }
-
   .pagination {
     margin-top: 10px;
     margin-bottom: 10px;
