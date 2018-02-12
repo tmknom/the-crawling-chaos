@@ -17,7 +17,7 @@
           <div id="navbarMenuHeroC" class="navbar-menu">
             <div class="navbar-end">
               <a class="navbar-item is-active">
-                Home
+                <router-link to="/">Home</router-link>
               </a>
               <a class="navbar-item">
                 <router-link to="/about">About</router-link>
