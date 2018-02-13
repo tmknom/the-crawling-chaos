@@ -8,7 +8,7 @@ import presentation.controller.internal.MapJsonProtocol._
 import spray.json._
 
 @Singleton
-final class QiitaUserContributionRankingApplication @Inject()(
+final class QiitaUserRankingApplication @Inject()(
     repository: QiitaUserRepository
 ) {
   private val LIMIT = 100
