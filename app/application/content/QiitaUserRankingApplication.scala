@@ -37,6 +37,7 @@ object QiitaUserJson {
     Map(
       "index" -> rank,
       "name" -> qiitaUser.profile.name.value,
+      "profile_image_url" -> qiitaUser.profile.profileImageUrl.value,
       "contribution" -> qiitaUser.qiitaUserContribution.contribution.value,
       "articles_count" -> qiitaUser.qiitaUserContribution.articlesCount.value
     )
