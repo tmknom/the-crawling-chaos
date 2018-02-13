@@ -2,7 +2,7 @@
   <section id="contents" class="section">
     <h1 class="title">ユーザランキング</h1>
 
-    <UserList :users="items"></UserList>
+    <UserList :contributions="contributions" :articles_counts="articles_counts"></UserList>
   </section>
 </template>
 
@@ -17,16 +17,19 @@
     },
     computed: {
       ...mapState('users', [
-        'items'
+        'contributions',
+        'articles_counts',
       ])
     },
     methods: {
       ...mapActions('users', [
-        'fetchJson'
+        'fetchContributions',
+        'fetchArticlesCounts'
       ]),
     },
     created() {
-      this.fetchJson({index: 1});
+      this.fetchContributions({index: 1});
+      this.fetchArticlesCounts({index: 1});
     }
   }
 </script>

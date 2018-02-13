@@ -4,19 +4,30 @@ export default {
   namespaced: true,
 
   state: {
-    items: []
+    contributions: [],
+    articles_counts: [],
   },
 
   mutations: {
-    replaceItems(state, items) {
-      state.items = items
+    replaceContributions(state, contributions) {
+      state.contributions = contributions
+    },
+    replaceArticlesCounts(state, articles_counts) {
+      state.articles_counts = articles_counts
     }
   },
 
   actions: {
-    fetchJson({commit}, payload) {
-      api.request(payload.index).then((result) => {
-        commit('replaceItems', result)
+    fetchContributions({commit}, payload) {
+      api.request('contribution', payload.index).then((result) => {
+        commit('replaceContributions', result)
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    fetchArticlesCounts({commit}, payload) {
+      api.request('articles_count', payload.index).then((result) => {
+        commit('replaceArticlesCounts', result)
       }).catch(function (error) {
         console.log(error);
       });
