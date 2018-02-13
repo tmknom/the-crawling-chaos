@@ -15,6 +15,7 @@ final class QiitaUserRankingApplication @Inject()(
 
   def create(): Unit = {
     createContribution()
+    createArticlesCount()
   }
 
   private def createContribution(): Unit = {
@@ -23,6 +24,15 @@ final class QiitaUserRankingApplication @Inject()(
       val offset     = LIMIT * (page - 1)
       val qiitaUsers = repository.retrieveContribution(LIMIT, offset)
       createJsonFile(page, offset, "contribution", qiitaUsers)
+    }
+  }
+
+  private def createArticlesCount(): Unit = {
+    val max = repository.countArticlesCount()
+    pageRange(max).foreach { page =>
+      val offset     = LIMIT * (page - 1)
+      val qiitaUsers = repository.retrieveArticlesCount(LIMIT, offset)
+      createJsonFile(page, offset, "articles_count", qiitaUsers)
     }
   }
 
