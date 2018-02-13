@@ -8,7 +8,10 @@ import domain.qiita.article.{QiitaArticleIdRepository, QiitaItemId}
 final class QiitaItemIdApplication @Inject()(
     repository: QiitaArticleIdRepository
 ) {
-  def delete(qiitaItemId: QiitaItemId): Unit = {
-    repository.delete(qiitaItemId)
+  def delete(stringQiitaItemIds: String): Unit = {
+    stringQiitaItemIds.split(",").foreach { stringQiitaItemId =>
+      val qiitaItemId = QiitaItemId(stringQiitaItemId.trim)
+      repository.delete(qiitaItemId)
+    }
   }
 }
