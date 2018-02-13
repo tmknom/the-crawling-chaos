@@ -40,7 +40,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
           INNER JOIN qiita_user_contributions AS quc
           ON qu.user_name = quc.user_name
           WHERE quc.contribution > 0
-          ORDER BY quc.contribution DESC
+          ORDER BY quc.contribution DESC, quc.articles_count DESC
           LIMIT $limit OFFSET $offset;
        """
       .map(toQiitaUser)
@@ -65,7 +65,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
           INNER JOIN qiita_user_contributions AS quc
           ON qu.user_name = quc.user_name
           WHERE quc.articles_count > 0
-          ORDER BY quc.articles_count DESC
+          ORDER BY quc.articles_count DESC, quc.contribution DESC
           LIMIT $limit OFFSET $offset;
        """
       .map(toQiitaUser)
