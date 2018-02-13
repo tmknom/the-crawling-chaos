@@ -9,4 +9,8 @@ trait QiitaUserRepository {
   def countContribution()(implicit session: DBSession = AutoSession): Long
 
   def retrieveContribution(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser]
+
+  def countArticlesCount()(implicit session: DBSession = AutoSession): Long
+
+  def retrieveArticlesCount(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser]
 }

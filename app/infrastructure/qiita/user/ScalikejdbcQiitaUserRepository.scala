@@ -48,6 +48,31 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
       .apply()
   }
 
+  override def countArticlesCount()(implicit session: DBSession = AutoSession): Long = {
+    sql"""
+          SELECT COUNT(user_name) FROM qiita_user_contributions
+          WHERE articles_count > 0;
+       """
+      .map(_.long(1))
+      .single()
+      .apply()
+      .get
+  }
+
+  override def retrieveArticlesCount(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser] = {
+    sql"""
+          SELECT * FROM qiita_users AS qu
+          INNER JOIN qiita_user_contributions AS quc
+          ON qu.user_name = quc.user_name
+          WHERE quc.articles_count > 0
+          ORDER BY quc.articles_count DESC
+          LIMIT $limit OFFSET $offset;
+       """
+      .map(toQiitaUser)
+      .list()
+      .apply()
+  }
+
   private def toQiitaUser(rs: WrappedResultSet): QiitaUser = {
     QiitaUser(
       QiitaUserProfile(
