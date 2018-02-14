@@ -12,7 +12,16 @@
           </div>
           <UserList :items="contributions"></UserList>
         </div>
+
+        <b-pagination
+          :total="pagination.total.contributions"
+          :per-page="pagination.perPage"
+          :order="pagination.order"
+          :current.sync="pagination.current.contributions"
+          @change="pageChangeContributions">
+        </b-pagination>
       </div>
+
       <div class="column">
         <div class="card">
           <div class="card-header">
@@ -22,6 +31,14 @@
           </div>
           <UserList :items="articles_counts"></UserList>
         </div>
+
+        <b-pagination
+          :total="pagination.total.articles_counts"
+          :per-page="pagination.perPage"
+          :order="pagination.order"
+          :current.sync="pagination.current.articles_counts"
+          @change="pageChangeArticlesCounts">
+        </b-pagination>
       </div>
     </div>
   </section>
@@ -36,6 +53,22 @@
     components: {
       UserList
     },
+    data() {
+      return {
+        pagination: {
+          total: {
+            'contributions': 30000,
+            'articles_counts': 30000,
+          },
+          perPage: 100,
+          order: 'is-centered',
+          current: {
+            'contributions': 1,
+            'articles_counts': 1,
+          },
+        }
+      }
+    },
     computed: {
       ...mapState('users', [
         'contributions',
@@ -47,6 +80,12 @@
         'fetchContributions',
         'fetchArticlesCounts'
       ]),
+      pageChangeContributions(index) {
+        this.fetchContributions({index: index});
+      },
+      pageChangeArticlesCounts(index) {
+        this.fetchArticlesCounts({index: index});
+      }
     },
     created() {
       this.fetchContributions({index: 1});
@@ -62,6 +101,10 @@
 
   .card-header {
     border-bottom: solid 1px #dbdbdb;
+  }
+
+  .pagination {
+    margin-top: 10px;
   }
 
   .subtitle {
