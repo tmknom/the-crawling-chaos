@@ -2,7 +2,28 @@
   <section id="contents" class="section">
     <h1 class="title">ユーザランキング</h1>
 
-    <UserList :contributions="contributions" :articles_counts="articles_counts"></UserList>
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-title">
+              <h2 class="subtitle">いいね！ランキング</h2>
+            </div>
+          </div>
+          <UserList :items="contributions"></UserList>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-title">
+              <h2 class="subtitle">投稿数ランキング</h2>
+            </div>
+          </div>
+          <UserList :items="articles_counts"></UserList>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -35,6 +56,15 @@
 </script>
 
 <style lang="scss" scoped>
-  /deep/ {
+  .card {
+    border-radius: 0.3em;
+  }
+
+  .card-header {
+    border-bottom: solid 1px #dbdbdb;
+  }
+
+  .subtitle {
+    font-weight: bold;
   }
 </style>
