@@ -56,22 +56,70 @@
       <nav class="tabs is-boxed is-fullwidth">
         <div class="container">
           <ul>
-            <li class="is-active">
+            <li :class="tabClass.articleRanking" @click="handle">
               <router-link to="/">記事ランキング</router-link>
             </li>
-            <li>
+            <li :class="tabClass.userRanking" @click="handle">
               <router-link to="/ranking/users">ユーザランキング</router-link>
             </li>
+            <li :class="tabClass.about" @click="handle">
+              <router-link to="/about">このサイトについて</router-link>
+            </li>
             <li><a>Grid</a></li>
-            <li><a>Elements</a></li>
-            <li><a>Components</a></li>
-            <li><a>Layout</a></li>
           </ul>
         </div>
       </nav>
     </div>
   </section>
 </template>
+
+<script>
+  export default {
+    name: 'Header',
+    data() {
+      return {
+        tabClass: {
+          articleRanking: '',
+          userRanking: '',
+          about: '',
+        }
+      }
+    },
+    methods: {
+      handle() {
+        this.renderTab();
+      },
+      renderTab() {
+        this.clearTab();
+        this.changeTab();
+      },
+      changeTab() {
+        const activeClassName = 'is-active';
+        switch (this.$route.path) {
+          case '/':
+            this.$data.tabClass.articleRanking = activeClassName;
+            break;
+          case '/ranking/users':
+            this.$data.tabClass.userRanking = activeClassName;
+            break;
+          case '/about':
+            this.$data.tabClass.about = activeClassName;
+            break;
+          default:
+            this.$data.tabClass.articleRanking = activeClassName;
+        }
+      },
+      clearTab() {
+        Object.keys(this.$data.tabClass).forEach(key => {
+          this.$data.tabClass[key] = '';
+        });
+      },
+    },
+    created() {
+      this.renderTab();
+    }
+  }
+</script>
 
 <style lang="scss" scoped>
   .navbar-item a {
