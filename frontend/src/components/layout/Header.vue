@@ -56,16 +56,18 @@
       <nav class="tabs is-boxed is-fullwidth">
         <div class="container">
           <ul>
-            <li :class="tabClass.articleRanking" @click="handle">
-              <router-link to="/">記事ランキング</router-link>
+            <li :class="tabClass.usersSearch" @click="handle">
+              <router-link to="/users/search">あなたのランクは？</router-link>
             </li>
             <li :class="tabClass.userRanking" @click="handle">
               <router-link to="/ranking/users">ユーザランキング</router-link>
             </li>
+            <li :class="tabClass.articleRanking" @click="handle">
+              <router-link to="/">記事ランキング</router-link>
+            </li>
             <li :class="tabClass.about" @click="handle">
               <router-link to="/about">このサイトについて</router-link>
             </li>
-            <li><a>Grid</a></li>
           </ul>
         </div>
       </nav>
@@ -79,8 +81,9 @@
     data() {
       return {
         tabClass: {
-          articleRanking: '',
+          usersSearch: '',
           userRanking: '',
+          articleRanking: '',
           about: '',
         }
       }
@@ -98,6 +101,9 @@
         switch (this.$route.path) {
           case '/':
             this.$data.tabClass.articleRanking = activeClassName;
+            break;
+          case '/users/search':
+            this.$data.tabClass.usersSearch = activeClassName;
             break;
           case '/ranking/users':
             this.$data.tabClass.userRanking = activeClassName;
