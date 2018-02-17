@@ -44,11 +44,19 @@ final class QiitaUserRankingApplication @Inject()(
     val json = qiitaUsers.zipWithIndex.map {
       case (qiitaUser, index) =>
         val rank = calculateRank(offset, index, fileType, qiitaUser)
+        if (fileType == "contribution") {
+          createPersonalJsonFile(qiitaUser, rank)
+        }
         QiitaUserJson.build(qiitaUser, rank)
     }.toJson
 
     val fileName = s"/tmp/user.$fileType.${page.toString}.json"
     FileWriter.write(fileName, json)
+  }
+
+  private def createPersonalJsonFile(qiitaUser: QiitaUser, rank: Int): Unit = {
+    val fileName = s"/tmp/user/${qiitaUser.profile.name.value}.json"
+    FileWriter.write(fileName, QiitaUserJson.build(qiitaUser, rank).toJson)
   }
 
   private def calculateRank(offset: Int, index: Int, fileType: String, qiitaUser: QiitaUser): Int = {
@@ -75,7 +83,7 @@ final class QiitaUserRankingApplication @Inject()(
 }
 
 object QiitaUserJson {
-  def build(qiitaUser: QiitaUser, rank: Int): Map[String, _] = {
+  def build(qiitaUser: QiitaUser, rank: Int): Map[String, Any] = {
     Map(
       "index" -> rank,
       "name" -> qiitaUser.profile.name.value,
