@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import index from '../pages/index.vue'
 import error from '../pages/error.vue'
 import about from '../pages/about.vue'
+import Articles from '../pages/articles.vue'
 import RankingUsers from '../pages/ranking/users.vue'
 import UsersSearch from '../pages/users/search.vue'
 
@@ -19,6 +20,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: about
+  },
+  {
+    path: '/articles',
+    name: 'Articles',
+    component: Articles
   },
   {
     path: '/ranking/users',

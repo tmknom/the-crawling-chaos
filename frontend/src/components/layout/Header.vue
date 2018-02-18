@@ -63,7 +63,7 @@
               <router-link :to="{name: 'RankingUsers'}">ユーザランキング</router-link>
             </li>
             <li :class="tabClass.articleRanking" @click="handle">
-              <router-link :to="{name: 'Index'}">記事ランキング</router-link>
+              <router-link :to="{name: 'Articles'}">記事ランキング</router-link>
             </li>
             <li :class="tabClass.about" @click="handle">
               <router-link :to="{name: 'About'}">このサイトについて</router-link>
