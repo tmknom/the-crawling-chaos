@@ -57,7 +57,7 @@
         <div class="container">
           <ul>
             <li :class="tabClass.usersSearch">
-              <router-link :to="{name: 'UsersSearch'}">あなたのランクは？</router-link>
+              <router-link :to="{name: 'Scouter'}">あなたのランクは？</router-link>
             </li>
             <li :class="tabClass.userRanking">
               <router-link :to="{name: 'Users'}">ユーザランキング</router-link>
@@ -102,7 +102,7 @@
           case 'Articles':
             this.$data.tabClass.articleRanking = activeClassName;
             break;
-          case 'UsersSearch':
+          case 'Scouter':
             this.$data.tabClass.usersSearch = activeClassName;
             break;
           case 'Users':

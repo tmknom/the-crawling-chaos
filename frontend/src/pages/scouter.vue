@@ -70,7 +70,7 @@
   //import UserList from '../../components/UserList';
 
   export default {
-    name: 'UsersSearch',
+    name: 'Scouter',
     components: {
       //UserList
     },
