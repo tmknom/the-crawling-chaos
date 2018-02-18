@@ -10,14 +10,29 @@ import UsersSearch from '../pages/users/search.vue'
 Vue.use(VueRouter);
 
 const routes = [
-  {path: '/', component: index},
-  {path: '/about', component: about},
-  {path: '/ranking/users', component: RankingUsers},
-  {path: '/users/search', component: UsersSearch},
+  {
+    path: '/',
+    component: index
+  },
+  {
+    path: '/about',
+    component: about
+  },
+  {
+    path: '/ranking/users',
+    component: RankingUsers
+  },
+  {
+    path: '/users/search',
+    component: UsersSearch
+  },
 
   // エラーページなので、必ず最後に記述する
   // https://router.vuejs.org/ja/essentials/history-mode.html
-  {path: '*', component: error}
+  {
+    path: '*',
+    component: error
+  }
 ];
 
 export default new VueRouter({mode: 'history', routes: routes});
