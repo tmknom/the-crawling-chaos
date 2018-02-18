@@ -14,7 +14,7 @@
             <span></span>
           </span>
           </div>
-          <div id="navbarMenuHeroC" class="navbar-menu">
+          <div class="navbar-menu">
             <div class="navbar-end">
               <a class="navbar-item is-active">
                 <router-link :to="{name: 'Index'}">Home</router-link>
