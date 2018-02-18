@@ -56,16 +56,16 @@
       <nav class="tabs is-boxed is-fullwidth">
         <div class="container">
           <ul>
-            <li :class="tabClass.usersSearch" @click="handle">
+            <li :class="tabClass.usersSearch">
               <router-link :to="{name: 'UsersSearch'}">あなたのランクは？</router-link>
             </li>
-            <li :class="tabClass.userRanking" @click="handle">
+            <li :class="tabClass.userRanking">
               <router-link :to="{name: 'RankingUsers'}">ユーザランキング</router-link>
             </li>
-            <li :class="tabClass.articleRanking" @click="handle">
+            <li :class="tabClass.articleRanking">
               <router-link :to="{name: 'Articles'}">記事ランキング</router-link>
             </li>
-            <li :class="tabClass.about" @click="handle">
+            <li :class="tabClass.about">
               <router-link :to="{name: 'About'}">このサイトについて</router-link>
             </li>
           </ul>
@@ -89,9 +89,6 @@
       }
     },
     methods: {
-      handle() {
-        this.renderTab();
-      },
       renderTab() {
         this.clearTab();
         this.changeTab();
@@ -123,6 +120,11 @@
           this.$data.tabClass[key] = '';
         });
       },
+    },
+    watch: {
+      '$route'(newValue, oldValue) {
+        this.renderTab();
+      }
     },
     created() {
       this.renderTab();
