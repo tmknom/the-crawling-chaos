@@ -4,7 +4,7 @@ import error from '../pages/error.vue'
 import about from '../pages/about.vue'
 import Articles from '../pages/articles.vue'
 import Users from '../pages/users.vue'
-import UsersSearch from '../pages/users/search.vue'
+import Scouter from '../pages/scouter.vue'
 
 Vue.use(VueRouter);
 
@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/',
     name: 'Index',
-    component: UsersSearch
+    component: Scouter
   },
   {
     path: '/about',
@@ -30,9 +30,9 @@ const routes = [
     component: Users
   },
   {
-    path: '/users/search',
-    name: 'UsersSearch',
-    component: UsersSearch
+    path: '/scouter',
+    name: 'Scouter',
+    component: Scouter
   },
 
   // エラーページなので、必ず最後に記述する
