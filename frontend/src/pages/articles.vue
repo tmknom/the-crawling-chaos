@@ -82,12 +82,12 @@
       }
     },
     computed: {
-      ...mapState('articles', [
+      ...mapState('ArticleListStore', [
         'items'
       ])
     },
     methods: {
-      ...mapActions('articles', [
+      ...mapActions('ArticleListStore', [
         'fetchJson'
       ]),
       getTypeByLabel(index) {

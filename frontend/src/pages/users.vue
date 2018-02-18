@@ -70,13 +70,13 @@
       }
     },
     computed: {
-      ...mapState('users', [
+      ...mapState('UserListStore', [
         'contributions',
         'articles_counts',
       ])
     },
     methods: {
-      ...mapActions('users', [
+      ...mapActions('UserListStore', [
         'fetchContributions',
         'fetchArticlesCounts'
       ]),
