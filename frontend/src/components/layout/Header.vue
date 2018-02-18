@@ -60,7 +60,7 @@
               <router-link :to="{name: 'UsersSearch'}">あなたのランクは？</router-link>
             </li>
             <li :class="tabClass.userRanking">
-              <router-link :to="{name: 'RankingUsers'}">ユーザランキング</router-link>
+              <router-link :to="{name: 'Users'}">ユーザランキング</router-link>
             </li>
             <li :class="tabClass.articleRanking">
               <router-link :to="{name: 'Articles'}">記事ランキング</router-link>
@@ -95,20 +95,20 @@
       },
       changeTab() {
         const activeClassName = 'is-active';
-        switch (this.$route.path) {
-          case '/':
+        switch (this.$route.name) {
+          case 'Index':
             this.$data.tabClass.usersSearch = activeClassName;
             break;
-          case '/articles':
+          case 'Articles':
             this.$data.tabClass.articleRanking = activeClassName;
             break;
-          case '/users/search':
+          case 'UsersSearch':
             this.$data.tabClass.usersSearch = activeClassName;
             break;
-          case '/ranking/users':
+          case 'Users':
             this.$data.tabClass.userRanking = activeClassName;
             break;
-          case '/about':
+          case 'About':
             this.$data.tabClass.about = activeClassName;
             break;
           default:
