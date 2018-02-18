@@ -9,4 +9,6 @@ trait QiitaRawPropsArticleJsonRepository {
   def register(itemId: QiitaItemId, rawJson: RawPropsArticleJson, crawled: CrawledDateTime)(implicit session: DBSession = AutoSession): Unit
 
   def retrieve(itemId: QiitaItemId)(implicit session: DBSession = AutoSession): Option[RawPropsArticleJson]
+
+  def retrieveList(itemIds: Seq[QiitaItemId])(implicit session: DBSession = AutoSession): Seq[RawPropsArticleJson]
 }
