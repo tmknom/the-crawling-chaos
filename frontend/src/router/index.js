@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import error from '../pages/error.vue'
 import about from '../pages/about.vue'
 import Articles from '../pages/articles.vue'
-import RankingUsers from '../pages/users.vue'
+import Users from '../pages/users.vue'
 import UsersSearch from '../pages/users/search.vue'
 
 Vue.use(VueRouter);
@@ -25,9 +25,9 @@ const routes = [
     component: Articles
   },
   {
-    path: '/ranking/users',
-    name: 'RankingUsers',
-    component: RankingUsers
+    path: '/users',
+    name: 'Users',
+    component: Users
   },
   {
     path: '/users/search',
