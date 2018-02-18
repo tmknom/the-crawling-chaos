@@ -30,7 +30,7 @@ const routes = [
     component: Users
   },
   {
-    path: '/users/search',
+    path: '/scouter',
     name: 'Scouter',
     component: Scouter
   },
