@@ -45,8 +45,8 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
-  import UserList from '../components/UserList';
+  import {mapState, mapActions} from 'vuex'
+  import UserList from '../components/UserList'
 
   export default {
     name: 'Users',

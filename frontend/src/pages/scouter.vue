@@ -66,14 +66,10 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
-  //import UserList from '../../components/UserList';
+  import {mapState, mapActions} from 'vuex'
 
   export default {
     name: 'Scouter',
-    components: {
-      //UserList
-    },
     data() {
       return {
         userName: '',

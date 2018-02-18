@@ -1,4 +1,4 @@
-import api from '../../api/users/users';
+import api from '../../api/users/users'
 
 export default {
   namespaced: true,
