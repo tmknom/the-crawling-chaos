@@ -1,4 +1,4 @@
-import api from '../../api/ranking/articles'
+import api from '../../api/modules/ArticleListApi'
 
 export default {
   namespaced: true,
