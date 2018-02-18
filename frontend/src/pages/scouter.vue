@@ -80,7 +80,7 @@
       }
     },
     computed: {
-      ...mapState('userProfile', [
+      ...mapState('scouter', [
         'user',
       ]),
       qiitaUrl: function () {
@@ -91,7 +91,7 @@
       }
     },
     methods: {
-      ...mapActions('userProfile', [
+      ...mapActions('scouter', [
         'fetchUser',
       ]),
       searchUser(name) {
