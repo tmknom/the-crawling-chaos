@@ -22,7 +22,7 @@ def restore():
     drop_database(db_name)
     create_database(db_name)
     restore_mysql(db_name)
-    cleanup(db_name)
+    #cleanup(db_name)
 
 
 # https://www.mk-mode.com/octopress/2014/03/23/mysql-getting-row-counts/
