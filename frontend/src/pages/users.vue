@@ -1,5 +1,5 @@
 <template>
-  <section id="contents" class="section">
+  <section class="section">
     <h1 class="title">ユーザランキング</h1>
 
     <div class="columns">

@@ -1,5 +1,5 @@
 <template>
-  <section id="contents" class="section">
+  <section class="section">
     <b-tabs type="is-boxed" @change="handle" expanded>
       <b-tab-item :label="tabs.qiita" icon-pack="fab" icon="qiita">
         <ArticleList :articles="items"></ArticleList>
