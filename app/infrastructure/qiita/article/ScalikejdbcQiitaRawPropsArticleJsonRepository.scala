@@ -25,7 +25,7 @@ final class ScalikejdbcQiitaRawPropsArticleJsonRepository extends QiitaRawPropsA
     () // 明示的に Unit を返す
   }
 
-  def retrieve(itemId: QiitaItemId)(implicit session: DBSession = AutoSession): Option[RawPropsArticleJson] = {
+  override def retrieve(itemId: QiitaItemId)(implicit session: DBSession = AutoSession): Option[RawPropsArticleJson] = {
     val id = itemId.value
 
     sql"""
@@ -34,6 +34,18 @@ final class ScalikejdbcQiitaRawPropsArticleJsonRepository extends QiitaRawPropsA
        """
       .map(toRawJson)
       .single()
+      .apply()
+  }
+
+  override def retrieveList(itemIds: Seq[QiitaItemId])(implicit session: DBSession = AutoSession): Seq[RawPropsArticleJson] = {
+    val qiitaItemIds: Seq[String] = itemIds.map(_.value)
+
+    sql"""
+          SELECT raw_json FROM raw_qiita_props_article_jsons
+          WHERE item_id IN( $qiitaItemIds );
+       """
+      .map(toRawJson)
+      .list()
       .apply()
   }
 
