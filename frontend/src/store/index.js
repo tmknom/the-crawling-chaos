@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import articles from './modules/ArticleListStore'
 import users from './modules/UserListStore'
-import scouter from "./modules/scouter"
+import scouter from "./modules/UserStore"
 
 Vue.use(Vuex);
 
