@@ -13,11 +13,11 @@
                 <router-link :to="{name: 'About'}">About</router-link>
               </a>
               <span class="navbar-item">
-              <a class="button is-success is-inverted">
+              <a href="https://twitter.com/tmknom" class="button is-success is-inverted text-twitter">
                 <span class="icon">
-                  <i class="fab fa-github"></i>
+                  <i class="fab fa-twitter"></i>
                 </span>
-                <span>Download</span>
+                <span>Twitter</span>
               </a>
             </span>
             </div>
@@ -122,5 +122,11 @@
 <style lang="scss" scoped>
   .navbar-item a {
     color: rgba(255, 255, 255, 0.7);
+  }
+
+  .navbar-end {
+    .text-twitter {
+      color: #55acee;
+    }
   }
 </style>
