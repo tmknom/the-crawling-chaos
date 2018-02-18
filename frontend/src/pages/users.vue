@@ -49,7 +49,7 @@
   import UserList from '../components/UserList';
 
   export default {
-    name: 'Contents',
+    name: 'Users',
     components: {
       UserList
     },
