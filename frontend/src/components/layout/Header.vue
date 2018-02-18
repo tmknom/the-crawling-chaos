@@ -17,10 +17,10 @@
           <div id="navbarMenuHeroC" class="navbar-menu">
             <div class="navbar-end">
               <a class="navbar-item is-active">
-                <router-link to="/">Home</router-link>
+                <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
               <a class="navbar-item">
-                <router-link to="/about">About</router-link>
+                <router-link :to="{name: 'About'}">About</router-link>
               </a>
               <a class="navbar-item">
                 Documentation
@@ -63,7 +63,7 @@
               <router-link :to="{name: 'RankingUsers'}">ユーザランキング</router-link>
             </li>
             <li :class="tabClass.articleRanking" @click="handle">
-              <router-link :to="{name: 'Index'}">記事ランキング</router-link>
+              <router-link :to="{name: 'Articles'}">記事ランキング</router-link>
             </li>
             <li :class="tabClass.about" @click="handle">
               <router-link :to="{name: 'About'}">このサイトについて</router-link>
@@ -100,6 +100,9 @@
         const activeClassName = 'is-active';
         switch (this.$route.path) {
           case '/':
+            this.$data.tabClass.usersSearch = activeClassName;
+            break;
+          case '/articles':
             this.$data.tabClass.articleRanking = activeClassName;
             break;
           case '/users/search':
@@ -112,7 +115,7 @@
             this.$data.tabClass.about = activeClassName;
             break;
           default:
-            this.$data.tabClass.articleRanking = activeClassName;
+            this.$data.tabClass.usersSearch = activeClassName;
         }
       },
       clearTab() {
