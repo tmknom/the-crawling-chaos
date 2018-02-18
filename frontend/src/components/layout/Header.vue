@@ -17,10 +17,10 @@
           <div id="navbarMenuHeroC" class="navbar-menu">
             <div class="navbar-end">
               <a class="navbar-item is-active">
-                <router-link to="/">Home</router-link>
+                <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
               <a class="navbar-item">
-                <router-link to="/about">About</router-link>
+                <router-link :to="{name: 'About'}">About</router-link>
               </a>
               <a class="navbar-item">
                 Documentation
@@ -100,6 +100,9 @@
         const activeClassName = 'is-active';
         switch (this.$route.path) {
           case '/':
+            this.$data.tabClass.usersSearch = activeClassName;
+            break;
+          case '/articles':
             this.$data.tabClass.articleRanking = activeClassName;
             break;
           case '/users/search':
@@ -112,7 +115,7 @@
             this.$data.tabClass.about = activeClassName;
             break;
           default:
-            this.$data.tabClass.articleRanking = activeClassName;
+            this.$data.tabClass.usersSearch = activeClassName;
         }
       },
       clearTab() {
