@@ -51,8 +51,8 @@
 
 <script>
   // Vuex関連
-  import {mapState, mapGetters, mapActions} from 'vuex';
-  import ArticleList from '../components/ArticleList';
+  import {mapState, mapGetters, mapActions} from 'vuex'
+  import ArticleList from '../components/ArticleList'
 
   export default {
     name: 'Articles',

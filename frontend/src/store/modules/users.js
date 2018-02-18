@@ -1,4 +1,4 @@
-import api from '../../api/ranking/users';
+import api from '../../api/ranking/users'
 
 export default {
   namespaced: true,
