@@ -40,17 +40,11 @@
 </template>
 
 <script>
-  import ArticleItem from './ArticleItem';
-
   export default {
     name: 'ArticleList',
-    components: {
-      ArticleItem
-    },
     props: [
       'articles'
-    ],
-    template: '<div>{{ message }}</div>'
+    ]
   }
 </script>
 
