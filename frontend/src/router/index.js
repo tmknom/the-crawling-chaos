@@ -4,7 +4,7 @@ import error from '../pages/error.vue'
 import about from '../pages/about.vue'
 import Articles from '../pages/articles.vue'
 import Users from '../pages/users.vue'
-import UsersSearch from '../pages/users/search.vue'
+import UsersSearch from '../pages/scouter.vue'
 
 Vue.use(VueRouter);
 
