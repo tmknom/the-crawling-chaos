@@ -14,7 +14,12 @@ final class QiitaUserNameApplication @Inject()(
     * 指定した Qiita ユーザを登録
     */
   def register(stringQiitaUserNames: String): Unit = {
-    val items = stringQiitaUserNames.split(",").map(QiitaUserName(_)).toList
+    val items = stringQiitaUserNames
+      .split(",")
+      .map { item =>
+        QiitaUserName(item.trim)
+      }
+      .toList
     withoutSleepLoop[QiitaUserName](items)(repository.register)
   }
 
