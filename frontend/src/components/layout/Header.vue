@@ -57,16 +57,16 @@
         <div class="container">
           <ul>
             <li :class="tabClass.usersSearch" @click="handle">
-              <router-link to="/users/search">あなたのランクは？</router-link>
+              <router-link :to="{name: 'UsersSearch'}">あなたのランクは？</router-link>
             </li>
             <li :class="tabClass.userRanking" @click="handle">
-              <router-link to="/ranking/users">ユーザランキング</router-link>
+              <router-link :to="{name: 'RankingUsers'}">ユーザランキング</router-link>
             </li>
             <li :class="tabClass.articleRanking" @click="handle">
-              <router-link to="/">記事ランキング</router-link>
+              <router-link :to="{name: 'Index'}">記事ランキング</router-link>
             </li>
             <li :class="tabClass.about" @click="handle">
-              <router-link to="/about">このサイトについて</router-link>
+              <router-link :to="{name: 'About'}">このサイトについて</router-link>
             </li>
           </ul>
         </div>

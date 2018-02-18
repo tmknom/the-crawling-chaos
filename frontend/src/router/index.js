@@ -12,18 +12,22 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
+    name: 'Index',
     component: index
   },
   {
     path: '/about',
+    name: 'About',
     component: about
   },
   {
     path: '/ranking/users',
+    name: 'RankingUsers',
     component: RankingUsers
   },
   {
     path: '/users/search',
+    name: 'UsersSearch',
     component: UsersSearch
   },
 
@@ -31,6 +35,7 @@ const routes = [
   // https://router.vuejs.org/ja/essentials/history-mode.html
   {
     path: '*',
+    name: 'Error',
     component: error
   }
 ];
