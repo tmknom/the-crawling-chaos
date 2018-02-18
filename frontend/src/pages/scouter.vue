@@ -1,5 +1,5 @@
 <template>
-  <section id="contents" class="section">
+  <section class="section">
     <h1 class="title">ユーザ検索</h1>
     <div class="columns">
       <div class="column is-6">
