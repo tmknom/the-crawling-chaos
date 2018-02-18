@@ -9,6 +9,6 @@ private[json] final case class PocketParser(html: String) {
   def parse: PocketCount = {
     val doc = JsoupBrowser().parseString(html)
     val raw = doc >> text("#cnt")
-    PocketCount(raw.toInt)
+    PocketCount(raw.replaceAll(",", "").toInt)
   }
 }
