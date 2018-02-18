@@ -38,6 +38,14 @@ run-main presentation.cli.batch.monthly.user.TopQiitaUserCrawlerCli
 run-main presentation.cli.batch.monthly.user.ContributedQiitaUserCrawlerCli
 ```
 
+#### Qiitaユーザを登録
+
+```
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/registration-qiita-user-name-cli "xxxx, yyyy" > /dev/null 2>&1 &
+
+run-main presentation.cli.operation.RegistrationQiitaUserNameCli "xxxx, yyyy"
+```
+
 #### 無効なQiitaユーザを削除
 
 ```
