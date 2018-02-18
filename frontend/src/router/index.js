@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import error from '../pages/error.vue'
 import about from '../pages/about.vue'
 import Articles from '../pages/articles.vue'
-import RankingUsers from '../pages/ranking/users.vue'
+import RankingUsers from '../pages/users.vue'
 import UsersSearch from '../pages/users/search.vue'
 
 Vue.use(VueRouter);

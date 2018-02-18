@@ -46,7 +46,7 @@
 
 <script>
   import {mapState, mapActions} from 'vuex';
-  import UserList from '../../components/UserList';
+  import UserList from '../components/UserList';
 
   export default {
     name: 'Contents',
