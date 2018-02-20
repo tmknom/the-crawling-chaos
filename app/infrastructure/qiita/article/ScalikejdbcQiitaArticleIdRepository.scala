@@ -33,6 +33,16 @@ final class ScalikejdbcQiitaArticleIdRepository extends QiitaArticleIdRepository
       .apply()
   }
 
+  override def retrieveTopArticle()(implicit session: DBSession = AutoSession): List[QiitaItemId] = {
+    sql"""
+          SELECT * FROM qiita_article_contributions
+          ORDER BY likes_count DESC LIMIT 1000;
+       """
+      .map(toQiitaItemId)
+      .list()
+      .apply()
+  }
+
   override def retrieveNotRegistered()(implicit session: DBSession = AutoSession): List[QiitaItemId] = {
     sql"""
           SELECT item_id FROM raw_qiita_props_article_jsons AS r
