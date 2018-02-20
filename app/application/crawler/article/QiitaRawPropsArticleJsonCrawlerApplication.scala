@@ -18,6 +18,11 @@ final class QiitaRawPropsArticleJsonCrawlerApplication @Inject()(
     withSleepLoop[QiitaItemId](items)(crawlOne)
   }
 
+  def crawlTopArticle(): Unit = {
+    val items = qiitaArticleIdRepository.retrieveTopArticle()
+    withSleepLoop[QiitaItemId](items)(crawlOne)
+  }
+
   def crawlOne(qiitaItemId: QiitaItemId): Unit = {
     val rawArticleJson  = gateway.fetch(qiitaItemId)
     val crawledDateTime = CrawledDateTime.now()

@@ -17,7 +17,10 @@ final class ScalikejdbcQiitaRawPropsArticleJsonRepository extends QiitaRawPropsA
 
     sql"""
           INSERT INTO raw_qiita_props_article_jsons (item_id, raw_json, crawled_date_time)
-          VALUES ($qiitaItemId, $rawArticleJson, $crawledDateTime);
+          VALUES ($qiitaItemId, $rawArticleJson, $crawledDateTime)
+          ON DUPLICATE KEY UPDATE
+          raw_json = VALUES(raw_json),
+          crawled_date_time = VALUES(crawled_date_time);
        """
       .update()
       .apply()
