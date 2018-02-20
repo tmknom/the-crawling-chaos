@@ -72,6 +72,14 @@ run-main presentation.cli.batch.daily.article.QiitaArticleIdCrawlerCli
 run-main presentation.cli.batch.daily.article.QiitaArticleCrawlerCli
 ```
 
+#### トップ記事をクロール
+
+```
+/tmp/qiita-ranker-1.0-SNAPSHOT/bin/top-qiita-article-crawler-cli > /dev/null 2>&1 &
+
+run-main presentation.cli.batch.monthly.article.TopQiitaArticleCrawlerCli
+```
+
 #### 指定した記事IDを削除
 
 ```
