@@ -25,6 +25,11 @@ final class QiitaArticleContributionCrawlerApplication @Inject()(
     withSleepLoop[QiitaItemId](items)(crawlOne)
   }
 
+  def crawlTopArticle(): Unit = {
+    val items = idRepository.retrieveTopArticle()
+    withSleepLoop[QiitaItemId](items)(crawlOne)
+  }
+
   def crawlOne(qiitaItemId: QiitaItemId): Unit = {
     val event = crawlContribution(qiitaItemId)
     registerWithTransaction(event)
