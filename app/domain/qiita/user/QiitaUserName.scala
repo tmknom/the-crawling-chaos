@@ -6,6 +6,10 @@ final case class QiitaUserName(value: String) extends Identifier[String] {
   def urlHovercardUsers: String = {
     s"https://qiita.com/api/internal/hovercard_users/$value"
   }
+
+  def urlHatena: String = {
+    s"http://b.hatena.ne.jp/bc/http://qiita.com/$value/"
+  }
 }
 
 object QiitaUserName {
