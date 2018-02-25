@@ -36,6 +36,13 @@ class HttpQiitaUserInternalApiGatewaySpec extends PlaySpec {
         |}
       """.stripMargin
     }
+
+    def getHeaders(url:        String,
+                   httpParams: HttpParams = HttpParams.empty,
+                   headers:    HttpHeaders = HttpHeaders.empty,
+                   timeout:    HttpTimeout = HttpTimeout.default): Map[String, IndexedSeq[String]] = {
+      Map.empty[String, IndexedSeq[String]]
+    }
   }
 
 }

@@ -1,5 +1,6 @@
 package infrastructure.qiita.user.contribution
 
+import domain.qiita.article.contribution.HatenaCount
 import domain.qiita.user.contribution.{ArticlesCount, Contribution, QiitaUserContribution, QiitaUserContributionCrawledEvent}
 import domain.qiita.user.{CrawledDateTime, QiitaUserName}
 import fixture.db.qiita.QiitaUsersFixture
@@ -23,7 +24,7 @@ class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
         crawledDateTime = CrawledDateTime(DateTimeProvider.nowJST())
       )
 
-      sut.register(crawledEvent)
+      sut.register(crawledEvent, HatenaCount(98))
     }
   }
 }
