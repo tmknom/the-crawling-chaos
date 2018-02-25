@@ -15,4 +15,6 @@ trait QiitaArticleAggregateRepository {
   def retrieveFacebookCount()(implicit session: DBSession = AutoSession): Seq[QiitaArticleAggregate]
 
   def retrievePocketCount()(implicit session: DBSession = AutoSession): Seq[QiitaArticleAggregate]
+
+  def retrieveYearContribution(year: Int)(implicit session: DBSession = AutoSession): Seq[QiitaArticleAggregate]
 }

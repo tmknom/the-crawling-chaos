@@ -16,6 +16,7 @@ final class QiitaArticleRankingApplication @Inject()(
   private var lastRank         = -1
 
   def create(): Unit = {
+    createYearQiita()
     createQiita()
     createCommentsCount()
     createHatenaCount()
@@ -53,6 +54,14 @@ final class QiitaArticleRankingApplication @Inject()(
     createJsonFileAll("pocket", qiitaArticleAggregates)
   }
 
+  private def createYearQiita(): Unit = {
+    yearRange.foreach { year =>
+      init()
+      val qiitaArticleAggregates = repository.retrieveYearContribution(year)
+      createJsonFileAll(year.toString, qiitaArticleAggregates)
+    }
+  }
+
   private def createJsonFileAll(fileType: String, qiitaArticleAggregates: Seq[QiitaArticleAggregate]): Unit = {
     val max = qiitaArticleAggregates.size
     pageRange(max).foreach { page =>
@@ -79,6 +88,7 @@ final class QiitaArticleRankingApplication @Inject()(
       case "hatena"   => qiitaArticleAggregate.contribution.hatenaCount.value
       case "facebook" => qiitaArticleAggregate.contribution.facebookCount.value
       case "pocket"   => qiitaArticleAggregate.contribution.pocketCount.value
+      case _          => qiitaArticleAggregate.contribution.likesCount.value
     }
 
     if (lastContribution != count) {
@@ -95,5 +105,9 @@ final class QiitaArticleRankingApplication @Inject()(
 
   private def pageRange(max: Long): Range = {
     1 to Math.floor(max / LIMIT).toInt
+  }
+
+  private def yearRange: Range = {
+    2012 to 2018
   }
 }
