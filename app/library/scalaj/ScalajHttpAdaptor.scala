@@ -5,31 +5,56 @@ import scalaj.http.{Http, HttpOptions, HttpRequest, HttpResponse}
 @SuppressWarnings(Array("org.wartremover.warts.DefaultArguments"))
 trait ScalajHttpAdaptor {
   def get(url: String, httpParams: HttpParams = HttpParams.empty, headers: HttpHeaders = HttpHeaders.empty, timeout: HttpTimeout = HttpTimeout.default): String
+
+  def getHeaders(url:        String,
+                 httpParams: HttpParams = HttpParams.empty,
+                 headers:    HttpHeaders = HttpHeaders.empty,
+                 timeout:    HttpTimeout = HttpTimeout.default): Map[String, IndexedSeq[String]]
 }
 
 @SuppressWarnings(Array("org.wartremover.warts.DefaultArguments"))
 final class RealScalajHttpAdaptor extends ScalajHttpAdaptor {
 
-  def get(url:        String,
-          httpParams: HttpParams = HttpParams.empty,
-          headers:    HttpHeaders = HttpHeaders.empty,
-          timeout:    HttpTimeout = HttpTimeout.default): String = {
-    request(url, httpParams, headers, timeout, HttpMethod.Get)
+  override def get(url:        String,
+                   httpParams: HttpParams = HttpParams.empty,
+                   headers:    HttpHeaders = HttpHeaders.empty,
+                   timeout:    HttpTimeout = HttpTimeout.default): String = {
+    val response = request(url, httpParams, headers, timeout, HttpMethod.Get)
+    response.body
   }
 
-  private def request(url: String, httpParams: HttpParams, headers: HttpHeaders, timeout: HttpTimeout, httpMethod: HttpMethod): String = {
-    val httpRequest  = buildHttpRequest(url, httpParams, headers, timeout, httpMethod)
+  override def getHeaders(url:        String,
+                          httpParams: HttpParams = HttpParams.empty,
+                          headers:    HttpHeaders = HttpHeaders.empty,
+                          timeout:    HttpTimeout = HttpTimeout.default): Map[String, IndexedSeq[String]] = {
+    val notRedirects = false
+    val response     = request(url, httpParams, headers, timeout, HttpMethod.Get, notRedirects)
+    response.headers
+  }
+
+  private def request(url:               String,
+                      httpParams:        HttpParams,
+                      headers:           HttpHeaders,
+                      timeout:           HttpTimeout,
+                      httpMethod:        HttpMethod,
+                      isFollowRedirects: Boolean = true): HttpResponse[String] = {
+    val httpRequest  = buildHttpRequest(url, httpParams, headers, timeout, httpMethod, isFollowRedirects)
     val httpResponse = requestAndLog(httpRequest)
-    httpResponse.body
+    httpResponse
   }
 
-  private def buildHttpRequest(url: String, httpParams: HttpParams, headers: HttpHeaders, timeout: HttpTimeout, httpMethod: HttpMethod): HttpRequest = {
+  private def buildHttpRequest(url:               String,
+                               httpParams:        HttpParams,
+                               headers:           HttpHeaders,
+                               timeout:           HttpTimeout,
+                               httpMethod:        HttpMethod,
+                               isFollowRedirects: Boolean): HttpRequest = {
     Http(url)
       .method(httpMethod.value)
       .params(httpParams.toMap)
       .headers(headers.toMap)
       .timeout(timeout.connectionTimeoutMs, timeout.readTimeoutMs)
-      .option(HttpOptions.followRedirects(true))
+      .option(HttpOptions.followRedirects(isFollowRedirects))
   }
 
   private def requestAndLog(httpRequest: HttpRequest): HttpResponse[String] = {
