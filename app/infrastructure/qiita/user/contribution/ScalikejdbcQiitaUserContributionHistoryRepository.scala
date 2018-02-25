@@ -2,6 +2,7 @@ package infrastructure.qiita.user.contribution
 
 import javax.inject.Singleton
 
+import domain.qiita.article.contribution.HatenaCount
 import domain.qiita.user.contribution.{QiitaUserContributionCrawledEvent, QiitaUserContributionHistoryRepository}
 import scalikejdbc._
 
@@ -9,17 +10,18 @@ import scalikejdbc._
 @Singleton
 final class ScalikejdbcQiitaUserContributionHistoryRepository extends QiitaUserContributionHistoryRepository {
 
-  def register(event: QiitaUserContributionCrawledEvent)(implicit session: DBSession = AutoSession): Int = {
+  def register(event: QiitaUserContributionCrawledEvent, hatenaCount: HatenaCount)(implicit session: DBSession = AutoSession): Int = {
     val name          = event.qiitaUserName.value
     val contribution  = event.qiitaUserContribution.contribution.value
     val articlesCount = event.qiitaUserContribution.articlesCount.value
+    val hatena        = hatenaCount.value
     val dateTime      = event.crawledDateTime.value
     val date          = event.crawledDateTime.toLocalDate
 
     sql"""
           INSERT INTO qiita_user_contribution_histories
-          (user_name, contribution, articles_count, registered_date, registered_date_time)
-          VALUES ($name, $contribution, $articlesCount, $date, $dateTime);
+          (user_name, contribution, articles_count, hatena_count, registered_date, registered_date_time)
+          VALUES ($name, $contribution, $articlesCount, $hatena, $date, $dateTime);
        """
       .update()
       .apply()

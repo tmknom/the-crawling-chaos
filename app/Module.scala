@@ -42,6 +42,7 @@ class Module extends AbstractModule {
   private def configureInfrastructureUser(): Unit = {
     bind(classOf[QiitaUserNameGateway]).to(classOf[HttpQiitaUserNameGateway])
     bind(classOf[QiitaUserInternalApiGateway]).to(classOf[HttpQiitaUserInternalApiGateway])
+    bind(classOf[HatenaApiGateway]).to(classOf[HttpHatenaApiGateway])
 
     bind(classOf[QiitaUserRepository]).to(classOf[ScalikejdbcQiitaUserRepository])
     bind(classOf[QiitaUserNameRepository]).to(classOf[ScalikejdbcQiitaUserNameRepository])
