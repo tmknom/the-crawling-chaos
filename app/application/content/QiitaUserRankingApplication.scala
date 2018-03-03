@@ -89,6 +89,7 @@ object QiitaUserJson {
       "name" -> qiitaUser.profile.name.value,
       "profile_image_url" -> qiitaUser.profile.profileImageUrl.value,
       "contribution" -> qiitaUser.qiitaUserContribution.contribution.value,
+      "hatena_count" -> qiitaUser.qiitaUserContribution.hatenaCount.value,
       "articles_count" -> qiitaUser.qiitaUserContribution.articlesCount.value
     )
   }
