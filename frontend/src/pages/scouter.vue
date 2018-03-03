@@ -42,19 +42,19 @@
                 <div class="level-item has-text-centered">
                   <div>
                     <p class="heading">総合評価</p>
-                    <p class="title">{{ user.total.toLocaleString() }}</p>
+                    <p class="title">{{ Number(user.total).toLocaleString() }}</p>
                   </div>
                 </div>
                 <div class="level-item has-text-centered">
                   <div>
                     <p class="heading">Qiita</p>
-                    <p class="title">{{ user.contribution.toLocaleString() }}</p>
+                    <p class="title">{{ Number(user.contribution).toLocaleString() }}</p>
                   </div>
                 </div>
                 <div class="level-item has-text-centered">
                   <div>
                     <p class="heading">はてブ</p>
-                    <p class="title">{{ user.hatena_count.toLocaleString() }}</p>
+                    <p class="title">{{ Number(user.hatena_count).toLocaleString() }}</p>
                   </div>
                 </div>
               </div>
