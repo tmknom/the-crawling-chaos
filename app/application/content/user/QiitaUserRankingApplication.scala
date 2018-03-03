@@ -94,12 +94,12 @@ final class QiitaUserRankingApplication @Inject()(
         QiitaUserJson.build(qiitaUser, rank)
     }.toJson
 
-    val fileName = s"/tmp/user.$fileType.${page.toString}.json"
+    val fileName = s"/var/opt/qiita-ranker/ranking/users/$fileType.${page.toString}.json"
     FileWriter.write(fileName, json)
   }
 
   private def createPersonalJsonFile(qiitaUser: QiitaUser, rank: Int): Unit = {
-    val fileName = s"/tmp/user/${qiitaUser.profile.name.value}.json"
+    val fileName = s"/var/opt/qiita-ranker/users/${qiitaUser.profile.name.value}.json"
     FileWriter.write(fileName, QiitaUserJson.build(qiitaUser, rank).toJson)
   }
 
