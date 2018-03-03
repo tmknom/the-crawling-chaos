@@ -2,4 +2,21 @@ package domain.qiita.user.contribution
 
 import domain.qiita.article.contribution.HatenaCount
 
-final case class QiitaUserContribution(contribution: Contribution, articlesCount: ArticlesCount, hatenaCount: HatenaCount)
+final case class QiitaUserContribution(
+    contribution:  Contribution,
+    articlesCount: ArticlesCount,
+    hatenaCount:   HatenaCount
+) {
+
+  def totalEvaluation: TotalEvaluation = {
+    TotalEvaluation(contribution.value + hatenaCount.value)
+  }
+
+  def contributionAverage: ContributionAverage = {
+    ContributionAverage(contribution.value / articlesCount.value)
+  }
+
+  def hatenaCountAverage: HatenaCountAverage = {
+    HatenaCountAverage(hatenaCount.value / articlesCount.value)
+  }
+}
