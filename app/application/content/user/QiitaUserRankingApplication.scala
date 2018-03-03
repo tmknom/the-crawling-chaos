@@ -16,8 +16,19 @@ final class QiitaUserRankingApplication @Inject()(
   private var lastRank  = -1
 
   def create(): Unit = {
+    createTotalEvaluation()
     createContribution()
     createArticlesCount()
+  }
+
+  private def createTotalEvaluation(): Unit = {
+    init()
+    val max = repository.countTotalEvaluation()
+    pageRange(max).foreach { page =>
+      val offset     = LIMIT * (page - 1)
+      val qiitaUsers = repository.retrieveTotalEvaluation(LIMIT, offset)
+      createJsonFile(page, offset, "total", qiitaUsers)
+    }
   }
 
   private def createContribution(): Unit = {
@@ -44,7 +55,7 @@ final class QiitaUserRankingApplication @Inject()(
     val json = qiitaUsers.zipWithIndex.map {
       case (qiitaUser, index) =>
         val rank = calculateRank(offset, index, fileType, qiitaUser)
-        if (fileType == "contribution") {
+        if (fileType == "total") {
           createPersonalJsonFile(qiitaUser, rank)
         }
         QiitaUserJson.build(qiitaUser, rank)
@@ -61,6 +72,7 @@ final class QiitaUserRankingApplication @Inject()(
 
   private def calculateRank(offset: Int, index: Int, fileType: String, qiitaUser: QiitaUser): Int = {
     val count = fileType match {
+      case "total"          => qiitaUser.qiitaUserContribution.totalEvaluation.value
       case "contribution"   => qiitaUser.qiitaUserContribution.contribution.value
       case "articles_count" => qiitaUser.qiitaUserContribution.articlesCount.value
     }
