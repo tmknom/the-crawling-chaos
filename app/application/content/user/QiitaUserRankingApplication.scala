@@ -19,6 +19,8 @@ final class QiitaUserRankingApplication @Inject()(
     createTotalEvaluation()
     createContribution()
     createHatenaCount()
+    createContributionAverage()
+    createHatenaAverage()
     createArticlesCount()
   }
 
@@ -49,6 +51,26 @@ final class QiitaUserRankingApplication @Inject()(
       val offset     = LIMIT * (page - 1)
       val qiitaUsers = repository.retrieveHatenaCount(LIMIT, offset)
       createJsonFile(page, offset, "hatena_count", qiitaUsers)
+    }
+  }
+
+  private def createContributionAverage(): Unit = {
+    init()
+    val max = repository.countContributionAverage()
+    pageRange(max).foreach { page =>
+      val offset     = LIMIT * (page - 1)
+      val qiitaUsers = repository.retrieveContributionAverage(LIMIT, offset)
+      createJsonFile(page, offset, "contribution_average", qiitaUsers)
+    }
+  }
+
+  private def createHatenaAverage(): Unit = {
+    init()
+    val max = repository.countHatenaAverage()
+    pageRange(max).foreach { page =>
+      val offset     = LIMIT * (page - 1)
+      val qiitaUsers = repository.retrieveHatenaAverage(LIMIT, offset)
+      createJsonFile(page, offset, "hatena_count_average", qiitaUsers)
     }
   }
 
@@ -83,10 +105,12 @@ final class QiitaUserRankingApplication @Inject()(
 
   private def calculateRank(offset: Int, index: Int, fileType: String, qiitaUser: QiitaUser): Int = {
     val count = fileType match {
-      case "total"          => qiitaUser.qiitaUserContribution.totalEvaluation.value
-      case "contribution"   => qiitaUser.qiitaUserContribution.contribution.value
-      case "hatena_count"   => qiitaUser.qiitaUserContribution.hatenaCount.value
-      case "articles_count" => qiitaUser.qiitaUserContribution.articlesCount.value
+      case "total"                => qiitaUser.qiitaUserContribution.totalEvaluation.value
+      case "contribution"         => qiitaUser.qiitaUserContribution.contribution.value
+      case "hatena_count"         => qiitaUser.qiitaUserContribution.hatenaCount.value
+      case "contribution_average" => qiitaUser.qiitaUserContribution.contributionAverage.value
+      case "hatena_count_average" => qiitaUser.qiitaUserContribution.hatenaCountAverage.value
+      case "articles_count"       => qiitaUser.qiitaUserContribution.articlesCount.value
     }
 
     if (lastCount != count) {
