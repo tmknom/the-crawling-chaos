@@ -1,4 +1,4 @@
-package application.content
+package application.content.user
 
 import javax.inject.{Inject, Singleton}
 

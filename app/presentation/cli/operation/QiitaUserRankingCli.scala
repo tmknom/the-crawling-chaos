@@ -1,6 +1,6 @@
 package presentation.cli.operation
 
-import application.content.QiitaUserRankingApplication
+import application.content.user.QiitaUserRankingApplication
 import library.task.Task
 import play.api.{Application, Logger}
 
