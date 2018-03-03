@@ -38,55 +38,40 @@
             </div>
 
             <div class="content">
-              <div class="level">
-                <div class="level-item has-text-centered">
-                  <div>
-                    <p class="heading">総合評価</p>
-                    <p class="title">{{ Number(user.total).toLocaleString() }}</p>
-                  </div>
-                </div>
-                <div class="level-item has-text-centered">
-                  <div>
-                    <p class="heading">Qiita</p>
-                    <p class="title">{{ Number(user.contribution).toLocaleString() }}</p>
-                  </div>
-                </div>
-                <div class="level-item has-text-centered">
-                  <div>
-                    <p class="heading">はてブ</p>
-                    <p class="title">{{ Number(user.hatena_count).toLocaleString() }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="content">
-              <div class="level">
-                <div class="level-item has-text-centered">
-                  <div>
-                    <p class="heading">投稿数</p>
-                    <p class="title">{{ user.articles_count }}</p>
-                  </div>
-                </div>
-                <div class="level-item has-text-centered">
-                  <div>
-                    <p class="heading">Qiita打率</p>
-                    <p class="title">{{ user.contribution_average }}</p>
-                  </div>
-                </div>
-                <div class="level-item has-text-centered">
-                  <div>
-                    <p class="heading">はてブ打率</p>
-                    <p class="title">{{ user.hatena_count_average }}</p>
-                  </div>
-                </div>
-              </div>
+              <table class="table">
+                <tr>
+                  <th>総合評価</th>
+                  <th>{{ total }}</th>
+                </tr>
+                <tr>
+                  <th>いいね数</th>
+                  <th>{{ contribution }}</th>
+                </tr>
+                <tr>
+                  <th>はてブ数</th>
+                  <th>{{ hatena_count }}</th>
+                </tr>
+                <tr>
+                  <th>平均いいね数</th>
+                  <th>{{ contribution_average }}</th>
+                </tr>
+                <tr>
+                  <th>平均はてブ数</th>
+                  <th>{{ hatena_count_average }}</th>
+                </tr>
+                <tr>
+                  <th>投稿数</th>
+                  <th>{{ articles_count }}</th>
+                </tr>
+              </table>
             </div>
 
           </div>
         </div>
       </div>
     </div>
+
+
   </section>
 </template>
 
@@ -109,12 +94,36 @@
       },
       isCardVisible: function () {
         return 0 !== Object.keys(this.user).length
-      }
+      },
+      rank: function () {
+        return this.localeNumber(this.user.rank);
+      },
+      total: function () {
+        return this.localeNumber(this.user.total);
+      },
+      contribution: function () {
+        return this.localeNumber(this.user.contribution);
+      },
+      hatena_count: function () {
+        return this.localeNumber(this.user.hatena_count);
+      },
+      contribution_average: function () {
+        return this.localeNumber(this.user.contribution_average);
+      },
+      hatena_count_average: function () {
+        return this.localeNumber(this.user.hatena_count_average);
+      },
+      articles_count: function () {
+        return this.localeNumber(this.user.articles_count);
+      },
     },
     methods: {
       ...mapActions('UserStore', [
         'fetchUser',
       ]),
+      localeNumber(number) {
+        return Number(number).toLocaleString();
+      },
       searchUser(name) {
         this.fetchUser({name: name});
       },
