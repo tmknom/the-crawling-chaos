@@ -13,10 +13,10 @@ final case class QiitaUserContribution(
   }
 
   def contributionAverage: ContributionAverage = {
-    ContributionAverage(contribution.value / articlesCount.value)
+    articlesCount.contributionAverage(contribution)
   }
 
   def hatenaCountAverage: HatenaCountAverage = {
-    HatenaCountAverage(hatenaCount.value / articlesCount.value)
+    articlesCount.hatenaCountAverage(hatenaCount)
   }
 }
