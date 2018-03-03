@@ -88,9 +88,12 @@ object QiitaUserJson {
       "index" -> rank,
       "name" -> qiitaUser.profile.name.value,
       "profile_image_url" -> qiitaUser.profile.profileImageUrl.value,
+      "total" -> qiitaUser.qiitaUserContribution.totalEvaluation.value,
       "contribution" -> qiitaUser.qiitaUserContribution.contribution.value,
       "hatena_count" -> qiitaUser.qiitaUserContribution.hatenaCount.value,
-      "articles_count" -> qiitaUser.qiitaUserContribution.articlesCount.value
+      "articles_count" -> qiitaUser.qiitaUserContribution.articlesCount.value,
+      "contributionAverage" -> qiitaUser.qiitaUserContribution.contributionAverage.value,
+      "hatenaCountAverage" -> qiitaUser.qiitaUserContribution.hatenaCountAverage.value
     )
   }
 }
