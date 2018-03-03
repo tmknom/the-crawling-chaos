@@ -75,6 +75,22 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
       .apply()
   }
 
+  override def retrieveContributionAverage(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser] = {
+    sql"""
+          SELECT *, (quc.contribution / quc.articles_count) AS contribution_average
+          FROM qiita_users AS qu
+          INNER JOIN qiita_user_contributions AS quc
+          ON qu.user_name = quc.user_name
+          WHERE quc.contribution > 0
+          AND quc.articles_count >= 10
+          ORDER BY contribution_average DESC, quc.contribution DESC, quc.hatena_count DESC, quc.articles_count DESC
+          LIMIT $limit OFFSET $offset;
+       """
+      .map(toQiitaUser)
+      .list()
+      .apply()
+  }
+
   override def countHatenaCount()(implicit session: DBSession = AutoSession): Long = {
     sql"""
           SELECT COUNT(user_name) FROM qiita_user_contributions
@@ -93,6 +109,22 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
           ON qu.user_name = quc.user_name
           WHERE quc.hatena_count > 0
           ORDER BY quc.hatena_count DESC, quc.contribution DESC, quc.articles_count DESC
+          LIMIT $limit OFFSET $offset;
+       """
+      .map(toQiitaUser)
+      .list()
+      .apply()
+  }
+
+  override def retrieveHatenaAverage(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser] = {
+    sql"""
+          SELECT *, (quc.hatena_count / quc.articles_count) AS hatena_count_average
+          FROM qiita_users AS qu
+          INNER JOIN qiita_user_contributions AS quc
+          ON qu.user_name = quc.user_name
+          WHERE quc.hatena_count > 0
+          AND quc.articles_count >= 10
+          ORDER BY hatena_count_average DESC, quc.hatena_count DESC, quc.contribution DESC, quc.articles_count DESC
           LIMIT $limit OFFSET $offset;
        """
       .map(toQiitaUser)
