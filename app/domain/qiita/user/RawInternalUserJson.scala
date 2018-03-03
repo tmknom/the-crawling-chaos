@@ -1,5 +1,6 @@
 package domain.qiita.user
 
+import domain.qiita.article.contribution.HatenaCount
 import domain.qiita.user.contribution.{ArticlesCount, Contribution, QiitaUserContribution, QiitaUserContributionCrawledEvent}
 import spray.json.DefaultJsonProtocol._
 import spray.json._
@@ -18,7 +19,8 @@ final case class RawInternalUserJson(value: String) {
       QiitaUserName(parseJsonString("url_name")),
       QiitaUserContribution(
         Contribution(parseJsonInt("contribution")),
-        ArticlesCount(parseJsonInt("articles_count"))
+        ArticlesCount(parseJsonInt("articles_count")),
+        HatenaCount(0)
       ),
       CrawledDateTime.now()
     )

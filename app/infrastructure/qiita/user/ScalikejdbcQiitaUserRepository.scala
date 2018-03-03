@@ -2,6 +2,7 @@ package infrastructure.qiita.user
 
 import javax.inject.Singleton
 
+import domain.qiita.article.contribution.HatenaCount
 import domain.qiita.user._
 import domain.qiita.user.contribution.{ArticlesCount, Contribution, QiitaUserContribution}
 import scalikejdbc._
@@ -82,7 +83,8 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
       ),
       QiitaUserContribution(
         Contribution(rs.int("contribution")),
-        ArticlesCount(rs.int("articles_count"))
+        ArticlesCount(rs.int("articles_count")),
+        HatenaCount(rs.int("hatena_count"))
       )
     )
   }

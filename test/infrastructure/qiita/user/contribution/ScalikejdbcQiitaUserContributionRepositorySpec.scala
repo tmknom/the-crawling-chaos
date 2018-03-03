@@ -19,7 +19,8 @@ class ScalikejdbcQiitaUserContributionRepositorySpec extends DatabaseSpec {
         qiitaUserName = QiitaUserName(QiitaUsersFixture.Default.UserName),
         qiitaUserContribution = QiitaUserContribution(
           contribution  = Contribution(1234),
-          articlesCount = ArticlesCount(123)
+          articlesCount = ArticlesCount(123),
+          hatenaCount   = HatenaCount(0)
         ),
         crawledDateTime = CrawledDateTime(DateTimeProvider.nowJST())
       )

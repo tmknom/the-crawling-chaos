@@ -1,3 +1,5 @@
 package domain.qiita.user.contribution
 
-final case class QiitaUserContribution(contribution: Contribution, articlesCount: ArticlesCount)
+import domain.qiita.article.contribution.HatenaCount
+
+final case class QiitaUserContribution(contribution: Contribution, articlesCount: ArticlesCount, hatenaCount: HatenaCount)
