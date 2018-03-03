@@ -85,7 +85,7 @@ final class QiitaUserRankingApplication @Inject()(
 object QiitaUserJson {
   def build(qiitaUser: QiitaUser, rank: Int): Map[String, Any] = {
     Map(
-      "index" -> rank,
+      "rank" -> rank,
       "name" -> qiitaUser.profile.name.value,
       "profile_image_url" -> qiitaUser.profile.profileImageUrl.value,
       "total" -> qiitaUser.qiitaUserContribution.totalEvaluation.value,
