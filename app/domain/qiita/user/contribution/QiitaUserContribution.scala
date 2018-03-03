@@ -8,4 +8,7 @@ final case class QiitaUserContribution(
     hatenaCount:   HatenaCount
 ) {
 
+  def totalEvaluation: TotalEvaluation = {
+    TotalEvaluation(contribution.value + hatenaCount.value)
+  }
 }
