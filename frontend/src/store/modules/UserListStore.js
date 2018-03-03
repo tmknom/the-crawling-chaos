@@ -4,11 +4,15 @@ export default {
   namespaced: true,
 
   state: {
+    totals: [],
     contributions: [],
     articles_counts: [],
   },
 
   mutations: {
+    replaceTotals(state, totals) {
+      state.totals = totals
+    },
     replaceContributions(state, contributions) {
       state.contributions = contributions
     },
@@ -18,6 +22,13 @@ export default {
   },
 
   actions: {
+    fetchTotals({commit}, payload) {
+      api.request('total', payload.index).then((result) => {
+        commit('replaceTotals', result)
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
     fetchContributions({commit}, payload) {
       api.request('contribution', payload.index).then((result) => {
         commit('replaceContributions', result)

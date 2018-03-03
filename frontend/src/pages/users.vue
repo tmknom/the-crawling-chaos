@@ -7,18 +7,18 @@
         <div class="card">
           <div class="card-header">
             <div class="card-header-title">
-              <h2 class="subtitle">いいね！ランキング</h2>
+              <h2 class="subtitle">総合ランキング</h2>
             </div>
           </div>
-          <UserList :items="contributions"></UserList>
+          <UserList :items="totals"></UserList>
         </div>
 
         <b-pagination
-          :total="pagination.total.contributions"
+          :total="pagination.total.totals"
           :per-page="pagination.perPage"
           :order="pagination.order"
-          :current.sync="pagination.current.contributions"
-          @change="pageChangeContributions">
+          :current.sync="pagination.current.totals"
+          @change="pageChangeTotals">
         </b-pagination>
       </div>
 
@@ -57,12 +57,14 @@
       return {
         pagination: {
           total: {
+            'totals': 30000,
             'contributions': 30000,
             'articles_counts': 30000,
           },
           perPage: 100,
           order: 'is-centered',
           current: {
+            'totals': 1,
             'contributions': 1,
             'articles_counts': 1,
           },
@@ -71,15 +73,20 @@
     },
     computed: {
       ...mapState('UserListStore', [
+        'totals',
         'contributions',
         'articles_counts',
       ])
     },
     methods: {
       ...mapActions('UserListStore', [
+        'fetchTotals',
         'fetchContributions',
         'fetchArticlesCounts'
       ]),
+      pageChangeTotals(index) {
+        this.fetchTotals({index: index});
+      },
       pageChangeContributions(index) {
         this.fetchContributions({index: index});
       },
@@ -88,6 +95,7 @@
       }
     },
     created() {
+      this.fetchTotals({index: 1});
       this.fetchContributions({index: 1});
       this.fetchArticlesCounts({index: 1});
     }
