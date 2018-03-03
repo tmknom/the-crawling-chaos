@@ -24,6 +24,32 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
       .apply()
   }
 
+  override def countTotalEvaluation()(implicit session: DBSession = AutoSession): Long = {
+    sql"""
+          SELECT COUNT(user_name) FROM qiita_user_contributions
+          WHERE (contribution + hatena_count) > 0;
+       """
+      .map(_.long(1))
+      .single()
+      .apply()
+      .get
+  }
+
+  override def retrieveTotalEvaluation(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser] = {
+    sql"""
+          SELECT *, (quc.contribution + quc.hatena_count) AS total_evaluation
+          FROM qiita_users AS qu
+          INNER JOIN qiita_user_contributions AS quc
+          ON qu.user_name = quc.user_name
+          WHERE (quc.contribution + quc.hatena_count) > 0
+          ORDER BY total_evaluation DESC, quc.contribution DESC, quc.hatena_count DESC
+          LIMIT $limit OFFSET $offset;
+       """
+      .map(toQiitaUser)
+      .list()
+      .apply()
+  }
+
   override def countContribution()(implicit session: DBSession = AutoSession): Long = {
     sql"""
           SELECT COUNT(user_name) FROM qiita_user_contributions

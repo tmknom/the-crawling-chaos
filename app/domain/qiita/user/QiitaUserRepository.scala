@@ -6,6 +6,10 @@ import scalikejdbc.{AutoSession, DBSession}
 trait QiitaUserRepository {
   def retrieveTop100()(implicit session: DBSession = AutoSession): List[QiitaUser]
 
+  def countTotalEvaluation()(implicit session: DBSession = AutoSession): Long
+
+  def retrieveTotalEvaluation(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser]
+
   def countContribution()(implicit session: DBSession = AutoSession): Long
 
   def retrieveContribution(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser]
