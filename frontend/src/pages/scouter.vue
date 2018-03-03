@@ -41,7 +41,7 @@
                 <div class="level-item has-text-centered">
                   <div>
                     <p class="heading">順位</p>
-                    <p class="title">{{ user.index }}</p>
+                    <p class="title">{{ user.rank }}</p>
                   </div>
                 </div>
                 <div class="level-item has-text-centered">
