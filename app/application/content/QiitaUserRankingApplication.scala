@@ -92,8 +92,8 @@ object QiitaUserJson {
       "contribution" -> qiitaUser.qiitaUserContribution.contribution.value,
       "hatena_count" -> qiitaUser.qiitaUserContribution.hatenaCount.value,
       "articles_count" -> qiitaUser.qiitaUserContribution.articlesCount.value,
-      "contributionAverage" -> qiitaUser.qiitaUserContribution.contributionAverage.value,
-      "hatenaCountAverage" -> qiitaUser.qiitaUserContribution.hatenaCountAverage.value
+      "contribution_average" -> qiitaUser.qiitaUserContribution.contributionAverage.value,
+      "hatenaCount_average" -> qiitaUser.qiitaUserContribution.hatenaCountAverage.value
     )
   }
 }
