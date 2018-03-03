@@ -14,11 +14,15 @@ trait QiitaUserRepository {
 
   def retrieveContribution(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser]
 
+  def countContributionAverage()(implicit session: DBSession = AutoSession): Long
+
   def retrieveContributionAverage(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser]
 
   def countHatenaCount()(implicit session: DBSession = AutoSession): Long
 
   def retrieveHatenaCount(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser]
+
+  def countHatenaAverage()(implicit session: DBSession = AutoSession): Long
 
   def retrieveHatenaAverage(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser]
 

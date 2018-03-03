@@ -75,6 +75,17 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
       .apply()
   }
 
+  override def countContributionAverage()(implicit session: DBSession = AutoSession): Long = {
+    sql"""
+          SELECT COUNT(user_name) FROM qiita_user_contributions
+          WHERE contribution > 0 AND articles_count >= 10;
+       """
+      .map(_.long(1))
+      .single()
+      .apply()
+      .get
+  }
+
   override def retrieveContributionAverage(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser] = {
     sql"""
           SELECT *, (quc.contribution / quc.articles_count) AS contribution_average
@@ -114,6 +125,17 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
       .map(toQiitaUser)
       .list()
       .apply()
+  }
+
+  override def countHatenaAverage()(implicit session: DBSession = AutoSession): Long = {
+    sql"""
+          SELECT COUNT(user_name) FROM qiita_user_contributions
+          WHERE hatena_count > 0 AND articles_count >= 10;
+       """
+      .map(_.long(1))
+      .single()
+      .apply()
+      .get
   }
 
   override def retrieveHatenaAverage(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser] = {
