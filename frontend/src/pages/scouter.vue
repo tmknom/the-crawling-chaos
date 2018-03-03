@@ -32,7 +32,8 @@
                 </figure>
               </div>
               <div class="media-content">
-                <p class="title"><a :href="qiitaUrl">@{{ user.name }}</a></p>
+                <p class="title">総合 {{ user.rank }} 位</p>
+                <p class="subtitle is-6"><a :href="qiitaUrl">@{{ user.name }}</a></p>
               </div>
             </div>
 
@@ -40,24 +41,48 @@
               <div class="level">
                 <div class="level-item has-text-centered">
                   <div>
-                    <p class="heading">順位</p>
-                    <p class="title">{{ user.rank }}</p>
+                    <p class="heading">総合評価</p>
+                    <p class="title">{{ user.total.toLocaleString() }}</p>
                   </div>
                 </div>
                 <div class="level-item has-text-centered">
                   <div>
-                    <p class="heading">Contributions</p>
-                    <p class="title">{{ user.contribution }}</p>
+                    <p class="heading">Qiita</p>
+                    <p class="title">{{ user.contribution.toLocaleString() }}</p>
                   </div>
                 </div>
                 <div class="level-item has-text-centered">
                   <div>
-                    <p class="heading">Items</p>
-                    <p class="title">{{ user.articles_count }}</p>
+                    <p class="heading">はてブ</p>
+                    <p class="title">{{ user.hatena_count.toLocaleString() }}</p>
                   </div>
                 </div>
               </div>
             </div>
+
+            <div class="content">
+              <div class="level">
+                <div class="level-item has-text-centered">
+                  <div>
+                    <p class="heading">投稿数</p>
+                    <p class="title">{{ user.articles_count }}</p>
+                  </div>
+                </div>
+                <div class="level-item has-text-centered">
+                  <div>
+                    <p class="heading">Qiita打率</p>
+                    <p class="title">{{ user.contribution_average }}</p>
+                  </div>
+                </div>
+                <div class="level-item has-text-centered">
+                  <div>
+                    <p class="heading">はてブ打率</p>
+                    <p class="title">{{ user.hatena_count_average }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
