@@ -11,4 +11,12 @@ final case class QiitaUserContribution(
   def totalEvaluation: TotalEvaluation = {
     TotalEvaluation(contribution.value + hatenaCount.value)
   }
+
+  def contributionAverage: ContributionAverage = {
+    ContributionAverage(contribution.value / articlesCount.value)
+  }
+
+  def hatenaCountAverage: HatenaCountAverage = {
+    HatenaCountAverage(hatenaCount.value / articlesCount.value)
+  }
 }
