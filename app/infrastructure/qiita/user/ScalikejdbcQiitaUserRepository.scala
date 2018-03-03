@@ -42,7 +42,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
           INNER JOIN qiita_user_contributions AS quc
           ON qu.user_name = quc.user_name
           WHERE (quc.contribution + quc.hatena_count) > 0
-          ORDER BY total_evaluation DESC, quc.contribution DESC, quc.hatena_count DESC
+          ORDER BY total_evaluation DESC, quc.contribution DESC, quc.hatena_count DESC, quc.articles_count DESC
           LIMIT $limit OFFSET $offset;
        """
       .map(toQiitaUser)
@@ -67,7 +67,32 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
           INNER JOIN qiita_user_contributions AS quc
           ON qu.user_name = quc.user_name
           WHERE quc.contribution > 0
-          ORDER BY quc.contribution DESC, quc.articles_count DESC
+          ORDER BY quc.contribution DESC, quc.hatena_count DESC, quc.articles_count DESC
+          LIMIT $limit OFFSET $offset;
+       """
+      .map(toQiitaUser)
+      .list()
+      .apply()
+  }
+
+  override def countHatenaCount()(implicit session: DBSession = AutoSession): Long = {
+    sql"""
+          SELECT COUNT(user_name) FROM qiita_user_contributions
+          WHERE hatena_count > 0;
+       """
+      .map(_.long(1))
+      .single()
+      .apply()
+      .get
+  }
+
+  override def retrieveHatenaCount(limit: Int, offset: Int)(implicit session: DBSession = AutoSession): List[QiitaUser] = {
+    sql"""
+          SELECT * FROM qiita_users AS qu
+          INNER JOIN qiita_user_contributions AS quc
+          ON qu.user_name = quc.user_name
+          WHERE quc.hatena_count > 0
+          ORDER BY quc.hatena_count DESC, quc.contribution DESC, quc.articles_count DESC
           LIMIT $limit OFFSET $offset;
        """
       .map(toQiitaUser)
@@ -92,7 +117,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
           INNER JOIN qiita_user_contributions AS quc
           ON qu.user_name = quc.user_name
           WHERE quc.articles_count > 0
-          ORDER BY quc.articles_count DESC, quc.contribution DESC
+          ORDER BY quc.articles_count DESC, quc.contribution DESC, quc.hatena_count DESC
           LIMIT $limit OFFSET $offset;
        """
       .map(toQiitaUser)

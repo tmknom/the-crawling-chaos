@@ -18,6 +18,7 @@ final class QiitaUserRankingApplication @Inject()(
   def create(): Unit = {
     createTotalEvaluation()
     createContribution()
+    createHatenaCount()
     createArticlesCount()
   }
 
@@ -38,6 +39,16 @@ final class QiitaUserRankingApplication @Inject()(
       val offset     = LIMIT * (page - 1)
       val qiitaUsers = repository.retrieveContribution(LIMIT, offset)
       createJsonFile(page, offset, "contribution", qiitaUsers)
+    }
+  }
+
+  private def createHatenaCount(): Unit = {
+    init()
+    val max = repository.countHatenaCount()
+    pageRange(max).foreach { page =>
+      val offset     = LIMIT * (page - 1)
+      val qiitaUsers = repository.retrieveHatenaCount(LIMIT, offset)
+      createJsonFile(page, offset, "hatena_count", qiitaUsers)
     }
   }
 
@@ -74,6 +85,7 @@ final class QiitaUserRankingApplication @Inject()(
     val count = fileType match {
       case "total"          => qiitaUser.qiitaUserContribution.totalEvaluation.value
       case "contribution"   => qiitaUser.qiitaUserContribution.contribution.value
+      case "hatena_count"   => qiitaUser.qiitaUserContribution.hatenaCount.value
       case "articles_count" => qiitaUser.qiitaUserContribution.articlesCount.value
     }
 
