@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <h1 class="title">ユーザ検索</h1>
+    <h1 class="title">Qiita戦闘力計測</h1>
     <div class="columns">
       <div class="column is-8">
         <b-input v-model="userName"
@@ -17,7 +17,7 @@
           <span class="icon is-medium">
             <i class="fas fa-search"></i>
           </span>
-          <span>Push</span>
+          <span>戦闘力を計測する！</span>
         </a>
       </div>
     </div>
