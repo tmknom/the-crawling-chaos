@@ -4,8 +4,20 @@
       <h2>Qiita戦闘力…たったの {{ total }} か…ゴミめ…</h2>
     </div>
     <div v-else>
-      <h2 class="subtitle is-3">Qiita戦闘力は<span class="db-character">{{ dbCharacter }}</span>レベルです！</h2>
-      <h3 class="subtitle is-4">あなたは上位 <span class="rare">{{ rare }}%</span> に食い込んでいます！！ </h3>
+      <h2 class="subtitle is-3">Qiita戦闘力は<span class="is-size-1 has-text-danger">{{ dbCharacter }}</span>レベルです！</h2>
+      <h3 class="subtitle is-4">あなたは上位 <span class="is-size-2 has-text-info">{{ rare }}%</span> に食い込んでいます！！ </h3>
+    </div>
+
+    <div class="content">
+      <div class="button is-large bd-tw-button">
+        <a :href="tweetUrl('Qiita戦闘力は' + total + 'で、全国ランキング' + rank + '位でした！')"
+           target="_blank"
+           rel="nofollow">
+
+          <span class="icon"><i class="fab fa-twitter"></i></span>
+          <span class="has-text-weight-bold">結果をツイートする</span>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -24,6 +36,9 @@
     computed: {
       isCardVisible: function () {
         return 0 !== Object.keys(this.user).length
+      },
+      rank: function () {
+        return this.localeNumber(this.user.rank);
       },
       total: function () {
         return this.localeNumber(this.user.total);
@@ -78,18 +93,30 @@
           return '魔人ブウ';
         }
       }
+    },
+    methods: {
+      localeNumber(number) {
+        return Number(number).toLocaleString();
+      },
+      tweetUrl(message) {
+        const baseUrl = 'http://twitter.com/share';
+        const encodedMessage = encodeURIComponent(message);
+        const url = 'http://localhost:8080/';
+        const hashtags = 'QiitaScouter';
+        const via = 'tmknom';
+        return baseUrl + '?text=' + encodedMessage + '&url=' + url + '&hashtags=' + hashtags + '&via=' + via;
+      }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  .db-character {
-    color: #ff0099;
-    font-size: 1.5em;
-  }
-
-  .rare {
-    color: #000099;
-    font-size: 1.2em;
+  .bd-tw-button {
+    margin-top: 50px;
+    background-color: #55acee;
+    border-color: transparent !important;
+    a {
+      color: white;
+    }
   }
 </style>
