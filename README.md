@@ -167,7 +167,7 @@ run-main presentation.cli.onetime.AllQiitaArticleMarkdownRegisterCli
 ### Webサーバ
 
 ```
-firebase deploy
+fab firebase_deploy
 ```
 
 ### スクレイピングサーバ
