@@ -45,17 +45,17 @@
       <nav class="tabs is-boxed is-fullwidth">
         <div class="container">
           <ul>
-            <li :class="tabClass.usersSearch">
-              <router-link :to="{name: 'Scouter'}">あなたのランクは？</router-link>
+            <li :class="tabClass.scouter">
+              <router-link :to="{name: 'Scouter'}">Qiita戦闘力計測</router-link>
             </li>
-            <li :class="tabClass.userRanking">
-              <router-link :to="{name: 'Users'}">ユーザランキング</router-link>
+            <li :class="tabClass.userTotalRanking">
+              <router-link :to="{name: 'UserTotal'}">総合ランキング</router-link>
             </li>
-            <li :class="tabClass.articleRanking">
-              <router-link :to="{name: 'Articles'}">記事ランキング</router-link>
+            <li :class="tabClass.userContributionRanking">
+              <router-link :to="{name: 'UserContribution'}">Qiitaランキング</router-link>
             </li>
-            <li :class="tabClass.about">
-              <router-link :to="{name: 'About'}">このサイトについて</router-link>
+            <li :class="tabClass.userHatenaRanking">
+              <router-link :to="{name: 'UserHatena'}">はてブランキング</router-link>
             </li>
           </ul>
         </div>
@@ -70,10 +70,10 @@
     data() {
       return {
         tabClass: {
-          usersSearch: '',
-          userRanking: '',
-          articleRanking: '',
-          about: '',
+          scouter: '',
+          userTotalRanking: '',
+          userContributionRanking: '',
+          userHatenaRanking: '',
         }
       }
     },
@@ -86,22 +86,22 @@
         const activeClassName = 'is-active';
         switch (this.$route.name) {
           case 'Index':
-            this.$data.tabClass.usersSearch = activeClassName;
+            this.$data.tabClass.scouter = activeClassName;
             break;
-          case 'Articles':
-            this.$data.tabClass.articleRanking = activeClassName;
+          case 'UserContribution':
+            this.$data.tabClass.userContributionRanking = activeClassName;
             break;
           case 'Scouter':
-            this.$data.tabClass.usersSearch = activeClassName;
+            this.$data.tabClass.scouter = activeClassName;
             break;
-          case 'Users':
-            this.$data.tabClass.userRanking = activeClassName;
+          case 'UserTotal':
+            this.$data.tabClass.userTotalRanking = activeClassName;
             break;
-          case 'About':
-            this.$data.tabClass.about = activeClassName;
+          case 'UserHatena':
+            this.$data.tabClass.userHatenaRanking = activeClassName;
             break;
           default:
-            this.$data.tabClass.usersSearch = activeClassName;
+            this.$data.tabClass.scouter = activeClassName;
         }
       },
       clearTab() {

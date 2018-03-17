@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import ArticleListStore from './modules/ArticleListStore'
-import UserListStore from './modules/UserListStore'
+import UserContributionStore from './modules/UserContributionStore'
+import UserHatenaStore from './modules/UserHatenaStore'
+import UserTotalStore from './modules/UserTotalStore'
 import UserStore from "./modules/UserStore"
 
 Vue.use(Vuex);
@@ -9,7 +11,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     ArticleListStore: ArticleListStore,
-    UserListStore: UserListStore,
+    UserContributionStore: UserContributionStore,
+    UserHatenaStore: UserHatenaStore,
+    UserTotalStore: UserTotalStore,
     UserStore: UserStore,
   },
   // https://vuex.vuejs.org/ja/strict.html
