@@ -51,8 +51,8 @@
             <li :class="tabClass.userTotalRanking">
               <router-link :to="{name: 'Users'}">総合ランキング</router-link>
             </li>
-            <li :class="tabClass.articleRanking">
-              <router-link :to="{name: 'Articles'}">記事ランキング</router-link>
+            <li :class="tabClass.userContributionRanking">
+              <router-link :to="{name: 'Articles'}">Qiitaランキング</router-link>
             </li>
             <li :class="tabClass.about">
               <router-link :to="{name: 'About'}">このサイトについて</router-link>
@@ -72,7 +72,7 @@
         tabClass: {
           scouter: '',
           userTotalRanking: '',
-          articleRanking: '',
+          userContributionRanking: '',
           about: '',
         }
       }
@@ -89,7 +89,7 @@
             this.$data.tabClass.scouter = activeClassName;
             break;
           case 'Articles':
-            this.$data.tabClass.articleRanking = activeClassName;
+            this.$data.tabClass.userContributionRanking = activeClassName;
             break;
           case 'Scouter':
             this.$data.tabClass.scouter = activeClassName;
