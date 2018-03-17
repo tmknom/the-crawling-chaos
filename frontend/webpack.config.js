@@ -3,6 +3,10 @@ var webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+const isProduction = function () {
+  return process.env.NODE_ENV === 'production';
+};
+
 module.exports = {
   entry: {
     vendor: ['babel-polyfill', 'vue', 'vue-router', 'vuex', 'axios', 'buefy'],
@@ -21,6 +25,8 @@ module.exports = {
     }),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
+      isProduction: isProduction(),
+      gaCode: process.env.GA_CODE,
       template: 'index.html'
     })
   ],
@@ -102,7 +108,7 @@ module.exports = {
   devtool: '#eval-source-map'
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (isProduction()) {
   module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
