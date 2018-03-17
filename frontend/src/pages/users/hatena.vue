@@ -4,7 +4,7 @@
     <div class="content">
       <h5>
         『打率』＝「はてなブックマーク数」／「投稿数」
-        （なお、規定打席は投稿数10以上としている）
+        （なお、規定打席は投稿数10以上）
       </h5>
     </div>
 
@@ -35,7 +35,7 @@
               <h2 class="subtitle">はてなブックマーク打率</h2>
             </div>
           </div>
-          <UserList :items="averages"></UserList>
+          <UserHatenaAverageList :items="averages"></UserHatenaAverageList>
         </div>
 
         <b-pagination
@@ -52,11 +52,13 @@
 
 <script>
   import {mapState, mapActions} from 'vuex'
+  import UserHatenaAverageList from '../../components/UserHatenaAverageList.vue'
   import UserList from '../../components/UserList'
 
   export default {
     name: 'UserHatena',
     components: {
+      UserHatenaAverageList,
       UserList
     },
     data() {
