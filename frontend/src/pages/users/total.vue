@@ -1,6 +1,11 @@
 <template>
   <section class="section">
     <h1 class="title">総合ランキング</h1>
+    <div class="content">
+      <h5>
+        『総合』＝「QiitaのContribution数」＋「はてなブックマーク数」
+      </h5>
+    </div>
 
     <div class="columns">
       <div class="column">
