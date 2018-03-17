@@ -19,11 +19,11 @@
         </a>
       </b-table-column>
 
-      <b-table-column field="likes_count" label="Qiita" width="75" numeric>
+      <b-table-column field="likes_count" label="打点" width="75" numeric>
         {{ props.row.contribution.toLocaleString() }}
       </b-table-column>
 
-      <b-table-column field="articles_count" label="投稿数" width="75" numeric>
+      <b-table-column field="articles_count" label="打席数" width="75" numeric>
         {{ props.row.articles_count.toLocaleString() }}
       </b-table-column>
 
