@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isProduction = function () {
   return process.env.NODE_ENV === 'production';
@@ -24,6 +25,13 @@ module.exports = {
       minChunks: Infinity
     }),
     new CleanWebpackPlugin(['dist']),
+    new CopyWebpackPlugin([
+      {
+        from: './src/assets/ogp.png',
+        to: 'ogp.png',
+        toType: 'file'
+      },
+    ]),
     new HtmlWebpackPlugin({
       isProduction: isProduction(),
       gaCode: process.env.GA_CODE,
