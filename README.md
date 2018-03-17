@@ -311,6 +311,9 @@ export CSV_PATH='/path/to/csv'
 export INSTANCE_NAME='xxxx'
 export SECURITY_GROUP_NAME='xxxx'
 export S3_BUCKET='xxxx'
+
+# Google Analytics
+export GA_CODE='UA-XXXXXXXX-X'
 ```
 
 ### ログイン
