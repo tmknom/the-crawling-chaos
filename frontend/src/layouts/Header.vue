@@ -45,8 +45,8 @@
       <nav class="tabs is-boxed is-fullwidth">
         <div class="container">
           <ul>
-            <li :class="tabClass.usersSearch">
-              <router-link :to="{name: 'Scouter'}">あなたのランクは？</router-link>
+            <li :class="tabClass.scouter">
+              <router-link :to="{name: 'Scouter'}">Qiita戦闘力計測</router-link>
             </li>
             <li :class="tabClass.userRanking">
               <router-link :to="{name: 'Users'}">ユーザランキング</router-link>
@@ -70,7 +70,7 @@
     data() {
       return {
         tabClass: {
-          usersSearch: '',
+          scouter: '',
           userRanking: '',
           articleRanking: '',
           about: '',
@@ -86,13 +86,13 @@
         const activeClassName = 'is-active';
         switch (this.$route.name) {
           case 'Index':
-            this.$data.tabClass.usersSearch = activeClassName;
+            this.$data.tabClass.scouter = activeClassName;
             break;
           case 'Articles':
             this.$data.tabClass.articleRanking = activeClassName;
             break;
           case 'Scouter':
-            this.$data.tabClass.usersSearch = activeClassName;
+            this.$data.tabClass.scouter = activeClassName;
             break;
           case 'Users':
             this.$data.tabClass.userRanking = activeClassName;
@@ -101,7 +101,7 @@
             this.$data.tabClass.about = activeClassName;
             break;
           default:
-            this.$data.tabClass.usersSearch = activeClassName;
+            this.$data.tabClass.scouter = activeClassName;
         }
       },
       clearTab() {
