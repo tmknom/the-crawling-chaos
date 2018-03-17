@@ -19,19 +19,19 @@
         </a>
       </b-table-column>
 
-      <b-table-column field="total" label="総合評価" width="70" numeric>
+      <b-table-column field="total" label="総合" width="75" numeric>
         {{ props.row.total.toLocaleString() }}
       </b-table-column>
 
-      <b-table-column field="likes_count" label="いいね" width="70" numeric>
+      <b-table-column field="likes_count" label="Qiita" width="75" numeric>
         {{ props.row.contribution.toLocaleString() }}
       </b-table-column>
 
-      <b-table-column field="hatena_count" label="はてブ数" width="70" numeric>
+      <b-table-column field="hatena_count" label="はてブ" width="75" numeric>
         {{ props.row.hatena_count.toLocaleString() }}
       </b-table-column>
 
-      <b-table-column field="hatena_count" label="記事数" width="70" numeric>
+      <b-table-column field="hatena_count" label="投稿数" width="75" numeric>
         {{ props.row.articles_count.toLocaleString() }}
       </b-table-column>
     </template>
