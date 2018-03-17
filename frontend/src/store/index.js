@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import ArticleListStore from './modules/ArticleListStore'
 import UserContributionStore from './modules/UserContributionStore'
+import UserHatenaStore from './modules/UserHatenaStore'
 import UserListStore from './modules/UserListStore'
 import UserStore from "./modules/UserStore"
 
@@ -11,6 +12,7 @@ export default new Vuex.Store({
   modules: {
     ArticleListStore: ArticleListStore,
     UserContributionStore: UserContributionStore,
+    UserHatenaStore: UserHatenaStore,
     UserListStore: UserListStore,
     UserStore: UserStore,
   },
