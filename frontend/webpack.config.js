@@ -4,13 +4,21 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: ['babel-polyfill', './src/main.js'],
+  entry: {
+    vendor: ['babel-polyfill', 'vue', 'vue-router', 'vuex', 'axios', 'buefy'],
+    main: ['./src/main.js']
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
-    filename: 'build.[hash].js'
+    filename: '[name].[hash].js'
   },
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.js',
+      minChunks: Infinity
+    }),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       template: 'index.html'
