@@ -6,7 +6,7 @@
         <div class="container">
           <div class="navbar-menu">
             <div class="navbar-end">
-              <a class="navbar-item is-active">
+              <a class="navbar-item">
                 <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
               <a class="navbar-item">
