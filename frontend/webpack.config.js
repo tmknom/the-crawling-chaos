@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const isProduction = function () {
   return process.env.NODE_ENV === 'production';
@@ -32,6 +33,26 @@ module.exports = {
         toType: 'file'
       },
     ]),
+    new FaviconsWebpackPlugin({
+      logo: './src/assets/logo.png',
+      prefix: 'icons/',
+      persistentCache: true,
+      inject: true,
+      background: '#fff',
+      title: 'エンジニアスカウター',
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: false,
+        coast: false,
+        favicons: true,
+        firefox: false,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false
+      }
+    }),
     new HtmlWebpackPlugin({
       isProduction: isProduction(),
       gaCode: process.env.GA_CODE,
