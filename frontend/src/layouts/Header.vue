@@ -30,13 +30,15 @@
     </div>
 
     <!-- Hero content: will be in the middle -->
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <h1 class="title">
-          <router-link :to="{name: 'Index'}">エンジニアスカウター</router-link>
-        </h1>
+    <router-link :to="{name: 'Index'}">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title">
+            エンジニアスカウター
+          </h1>
+        </div>
       </div>
-    </div>
+    </router-link>
 
     <!-- Hero footer: will stick at the bottom -->
     <div class="hero-foot">
