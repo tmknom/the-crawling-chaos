@@ -164,6 +164,14 @@ run-main presentation.cli.onetime.AllQiitaArticleMarkdownRegisterCli
 
 ## デプロイ
 
+### Webサーバ
+
+```
+firebase deploy
+```
+
+### スクレイピングサーバ
+
 ```
 ./deploy.sh
 ```
@@ -269,6 +277,17 @@ IntelliJが環境変数を認識できる `~/.bashrc` に下記を追加。
 export ARTIFACT_REPOSITORY=xxxx
 export AWS_ACCESS_KEY_ID=xxxx
 export AWS_SECRET_ACCESS_KEY=xxxx
+```
+
+## Firebaseの設定
+
+```
+# prepared firebase
+npm install -g firebase-tools
+firebase login
+
+# initialized firebase project
+firebase init
 ```
 
 ## 本番環境
