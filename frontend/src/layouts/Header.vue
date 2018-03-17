@@ -48,8 +48,8 @@
             <li :class="tabClass.scouter">
               <router-link :to="{name: 'Scouter'}">Qiita戦闘力計測</router-link>
             </li>
-            <li :class="tabClass.userRanking">
-              <router-link :to="{name: 'Users'}">ユーザランキング</router-link>
+            <li :class="tabClass.userTotalRanking">
+              <router-link :to="{name: 'Users'}">総合ランキング</router-link>
             </li>
             <li :class="tabClass.articleRanking">
               <router-link :to="{name: 'Articles'}">記事ランキング</router-link>
@@ -71,7 +71,7 @@
       return {
         tabClass: {
           scouter: '',
-          userRanking: '',
+          userTotalRanking: '',
           articleRanking: '',
           about: '',
         }
@@ -95,7 +95,7 @@
             this.$data.tabClass.scouter = activeClassName;
             break;
           case 'Users':
-            this.$data.tabClass.userRanking = activeClassName;
+            this.$data.tabClass.userTotalRanking = activeClassName;
             break;
           case 'About':
             this.$data.tabClass.about = activeClassName;
