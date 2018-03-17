@@ -30,7 +30,7 @@
     <div class="hero-body">
       <div class="container has-text-centered">
         <h1 class="title">
-          エンジニアスカウター
+          <router-link :to="{name: 'Index'}">エンジニアスカウター</router-link>
         </h1>
       </div>
     </div>
@@ -117,6 +117,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .title a {
+    color: white;
+  }
+
   .navbar-item a {
     color: rgba(255, 255, 255, 0.7);
   }
