@@ -49,13 +49,13 @@
               <router-link :to="{name: 'Scouter'}">Qiita戦闘力計測</router-link>
             </li>
             <li :class="tabClass.userTotalRanking">
-              <router-link :to="{name: 'Users'}">総合ランキング</router-link>
+              <router-link :to="{name: 'UserTotal'}">総合ランキング</router-link>
             </li>
             <li :class="tabClass.userContributionRanking">
-              <router-link :to="{name: 'Articles'}">Qiitaランキング</router-link>
+              <router-link :to="{name: 'UserContribution'}">Qiitaランキング</router-link>
             </li>
             <li :class="tabClass.userHatenaRanking">
-              <router-link :to="{name: 'About'}">はてブランキング</router-link>
+              <router-link :to="{name: 'UserHatena'}">はてブランキング</router-link>
             </li>
           </ul>
         </div>
@@ -88,16 +88,16 @@
           case 'Index':
             this.$data.tabClass.scouter = activeClassName;
             break;
-          case 'Articles':
+          case 'UserContribution':
             this.$data.tabClass.userContributionRanking = activeClassName;
             break;
           case 'Scouter':
             this.$data.tabClass.scouter = activeClassName;
             break;
-          case 'Users':
+          case 'UserTotal':
             this.$data.tabClass.userTotalRanking = activeClassName;
             break;
-          case 'About':
+          case 'UserHatena':
             this.$data.tabClass.userHatenaRanking = activeClassName;
             break;
           default:
