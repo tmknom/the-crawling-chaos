@@ -6,7 +6,7 @@
         <div class="container">
           <div class="navbar-menu">
             <div class="navbar-end">
-              <a class="navbar-item is-active">
+              <a class="navbar-item">
                 <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
               <a class="navbar-item">
@@ -30,11 +30,8 @@
     <div class="hero-body">
       <div class="container has-text-centered">
         <h1 class="title">
-          Title
+          <router-link :to="{name: 'Index'}">エンジニアスカウター</router-link>
         </h1>
-        <h2 class="subtitle">
-          Subtitle
-        </h2>
       </div>
     </div>
 
@@ -120,6 +117,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .title a {
+    color: white;
+  }
+
   .navbar-item a {
     color: rgba(255, 255, 255, 0.7);
   }
