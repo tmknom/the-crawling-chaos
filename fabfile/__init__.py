@@ -4,6 +4,13 @@ from fabric.api import *
 
 
 @task
+def firebase_deploy():
+    '''Firebaseへのデプロイ'''
+    import firebase
+    firebase.deploy()
+
+
+@task
 def sg_authorize():
     '''セキュリティグループの許可'''
     import security_group
