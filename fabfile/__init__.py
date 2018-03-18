@@ -60,6 +60,20 @@ def mysql_restore():
 
 
 @task
+def mysql_dump_light():
+    '''MySQLのダンプ(軽量版)'''
+    import mysql
+    mysql.dump_light()
+
+
+@task
+def mysql_restore_light():
+    '''MySQLのリストア(軽量版)'''
+    import mysql
+    mysql.restore_light()
+
+
+@task
 def mysql_show():
     '''MySQLの情報表示'''
     import mysql

@@ -14,6 +14,15 @@ def dump():
     cleanup(db_name)
 
 
+def dump_light():
+    '''MySQLのダンプ(軽量版)'''
+    db_name = get_local_env(DB.NAME)
+    s3_bucket = get_local_env(AWS.S3_BUCKET)
+    dump_mysql_light(db_name)
+    light_upload_s3(db_name, s3_bucket)
+    light_cleanup(db_name)
+
+
 def restore():
     '''MySQLのリストア'''
     db_name = get_local_env(DB.NAME)
@@ -22,7 +31,18 @@ def restore():
     drop_database(db_name)
     create_database(db_name)
     restore_mysql(db_name)
-    #cleanup(db_name)
+    # cleanup(db_name)
+
+
+def restore_light():
+    '''MySQLのリストア(軽量版)'''
+    db_name = get_local_env(DB.NAME)
+    s3_bucket = get_local_env(AWS.S3_BUCKET)
+    light_download_s3(db_name, s3_bucket)
+    drop_database(db_name)
+    create_database(db_name)
+    light_restore_mysql(db_name)
+    # light_cleanup(db_name)
 
 
 # https://www.mk-mode.com/octopress/2014/03/23/mysql-getting-row-counts/
@@ -49,8 +69,23 @@ def dump_mysql(db_name):
     local(command)
 
 
+def dump_mysql_light(db_name):
+    command = "mysqldump -uroot --opt --skip-lock-tables --single-transaction --quote-names %s " % db_name \
+              + " --ignore-table=%s.raw_qiita_internal_user_jsons " % db_name \
+              + " --ignore-table=%s.raw_qiita_props_article_jsons " % db_name \
+              + " --ignore-table=%s.raw_qiita_article_jsons " % db_name \
+              + " --ignore-table=%s.qiita_article_markdowns " % db_name \
+              + " | gzip > %s " % light_dump_file_path(db_name)
+    local(command)
+
+
 def upload_s3(db_name, s3_bucket):
     command = 'aws s3 cp %s s3://%s/qiita-ranker/%s.gz' % (dump_file_path(db_name), s3_bucket, db_name)
+    local(command)
+
+
+def light_upload_s3(db_name, s3_bucket):
+    command = 'aws s3 cp %s s3://%s/qiita-ranker/%s.gz' % (light_dump_file_path(db_name), s3_bucket, db_name)
     local(command)
 
 
@@ -58,8 +93,17 @@ def cleanup(db_name):
     local('rm %s' % dump_file_path(db_name))
 
 
+def light_cleanup(db_name):
+    local('rm %s' % light_dump_file_path(db_name))
+
+
 def download_s3(db_name, s3_bucket):
     command = 'aws s3 cp s3://%s/qiita-ranker/%s.gz %s' % (s3_bucket, db_name, dump_file_path(db_name))
+    local(command)
+
+
+def light_download_s3(db_name, s3_bucket):
+    command = 'aws s3 cp s3://%s/qiita-ranker/%s.gz %s' % (s3_bucket, db_name, light_dump_file_path(db_name))
     local(command)
 
 
@@ -76,6 +120,11 @@ def create_database(db_name):
 def restore_mysql(db_name):
     zcat = switch_zcat_command()
     local('%s %s | mysql -uroot %s' % (zcat, dump_file_path(db_name), db_name))
+
+
+def light_restore_mysql(db_name):
+    zcat = switch_zcat_command()
+    local('%s %s | mysql -uroot %s' % (zcat, light_dump_file_path(db_name), db_name))
 
 
 # Macではgzcatでないと実行できない
@@ -105,3 +154,7 @@ def execute_sql(sql, db_name=''):
 
 def dump_file_path(db_name):
     return '/tmp/%s.gz' % db_name
+
+
+def light_dump_file_path(db_name):
+    return '/tmp/light_%s.gz' % db_name
