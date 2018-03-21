@@ -4,7 +4,7 @@
     <div class="content">
       <h5>
         『打率』＝「QiitaのContribution数」／「投稿数」
-        （なお、規定打席は投稿数10以上）
+        （規定打席は投稿数10以上）
       </h5>
     </div>
 

@@ -9,9 +9,6 @@
               <a class="navbar-item">
                 <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
-              <a class="navbar-item">
-                <router-link :to="{name: 'About'}">About</router-link>
-              </a>
               <span class="navbar-item">
               <a href="https://twitter.com/tmknom"
                  class="button is-success is-inverted text-twitter"
@@ -57,6 +54,9 @@
             <li :class="tabClass.userHatenaRanking">
               <router-link :to="{name: 'UserHatena'}">はてブランキング</router-link>
             </li>
+            <li :class="tabClass.about">
+              <router-link :to="{name: 'About'}">このサイトについて</router-link>
+            </li>
           </ul>
         </div>
       </nav>
@@ -74,6 +74,7 @@
           userTotalRanking: '',
           userContributionRanking: '',
           userHatenaRanking: '',
+          about: '',
         }
       }
     },
@@ -99,6 +100,9 @@
             break;
           case 'UserHatena':
             this.$data.tabClass.userHatenaRanking = activeClassName;
+            break;
+          case 'About':
+            this.$data.tabClass.about = activeClassName;
             break;
           default:
             this.$data.tabClass.scouter = activeClassName;
