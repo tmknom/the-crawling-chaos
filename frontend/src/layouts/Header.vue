@@ -9,9 +9,6 @@
               <a class="navbar-item">
                 <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
-              <a class="navbar-item">
-                <router-link :to="{name: 'About'}">About</router-link>
-              </a>
               <span class="navbar-item">
               <a href="https://twitter.com/tmknom"
                  class="button is-success is-inverted text-twitter"
