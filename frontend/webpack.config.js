@@ -32,6 +32,11 @@ module.exports = {
         to: 'ogp.png',
         toType: 'file'
       },
+      {
+        from: './src/assets/logo.png',
+        to: 'logo.png',
+        toType: 'file'
+      },
     ]),
     new FaviconsWebpackPlugin({
       logo: './src/assets/logo.png',
