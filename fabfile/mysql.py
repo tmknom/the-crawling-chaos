@@ -85,7 +85,7 @@ def upload_s3(db_name, s3_bucket):
 
 
 def light_upload_s3(db_name, s3_bucket):
-    command = 'aws s3 cp %s s3://%s/qiita-ranker/%s.gz' % (light_dump_file_path(db_name), s3_bucket, db_name)
+    command = 'aws s3 cp %s s3://%s/qiita-ranker/light_%s.gz' % (light_dump_file_path(db_name), s3_bucket, db_name)
     local(command)
 
 
@@ -103,7 +103,7 @@ def download_s3(db_name, s3_bucket):
 
 
 def light_download_s3(db_name, s3_bucket):
-    command = 'aws s3 cp s3://%s/qiita-ranker/%s.gz %s' % (s3_bucket, db_name, light_dump_file_path(db_name))
+    command = 'aws s3 cp s3://%s/qiita-ranker/light_%s.gz %s' % (s3_bucket, db_name, light_dump_file_path(db_name))
     local(command)
 
 
