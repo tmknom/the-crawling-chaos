@@ -23,7 +23,6 @@ final class ScalikejdbcQiitaArticleContributionRepository extends QiitaArticleCo
           VALUES ($itemId, $likesCount, $commentsCount, $hatenaCount, $facebookCount, $pocketCount, $updated)
           ON DUPLICATE KEY UPDATE
           likes_count = VALUES(likes_count),
-          comments_count = VALUES(comments_count),
           hatena_count = VALUES(hatena_count),
           facebook_count = VALUES(facebook_count),
           pocket_count = VALUES(pocket_count),
