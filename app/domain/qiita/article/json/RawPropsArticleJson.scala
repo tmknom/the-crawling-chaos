@@ -39,6 +39,12 @@ final case class RawPropsArticleJson(value: String) {
   }
 
   def toCommentsCount: CommentsCount = {
-    CommentsCount(parseJsonInt("commentsCount"))
+    try {
+      CommentsCount(parseJsonInt("commentsCount"))
+    } catch {
+      case e: Exception => {
+        CommentsCount(0)
+      }
+    }
   }
 }
