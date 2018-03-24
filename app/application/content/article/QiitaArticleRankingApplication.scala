@@ -77,7 +77,7 @@ final class QiitaArticleRankingApplication @Inject()(
         QiitaArticleJson.build(qiitaArticleAggregate, rank)
     }.toJson
 
-    val fileName = s"/tmp/article.$fileType.${page.toString}.json"
+    val fileName = s"/var/opt/qiita-ranker/ranking/articles/article.$fileType.${page.toString}.json"
     FileWriter.write(fileName, json)
   }
 
