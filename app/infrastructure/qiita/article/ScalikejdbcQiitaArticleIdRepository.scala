@@ -36,7 +36,7 @@ final class ScalikejdbcQiitaArticleIdRepository extends QiitaArticleIdRepository
   override def retrieveTopArticle()(implicit session: DBSession = AutoSession): List[QiitaItemId] = {
     sql"""
           SELECT * FROM qiita_article_contributions
-          ORDER BY likes_count DESC LIMIT 1000;
+          ORDER BY likes_count DESC LIMIT 3000;
        """
       .map(toQiitaItemId)
       .list()
