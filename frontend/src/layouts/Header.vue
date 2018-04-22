@@ -10,16 +10,14 @@
                 <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
               <span class="navbar-item">
-              <a :href="tweetUrl('Qiitaでの発信力を計測するサービス「エンジニアスカウター」')"
-                 class="button is-success is-inverted text-twitter"
-                 target="_blank"
-                 rel="noopener noreferrer">
-                <span class="icon">
-                  <i class="fab fa-twitter"></i>
-                </span>
-                <span>ツイート</span>
-              </a>
-            </span>
+                <a :href="tweetUrl('Qiitaでの発信力を計測するサービス「エンジニアスカウター」')"
+                   class="button is-success is-inverted text-twitter"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                  <span class="icon"><i class="fab fa-twitter"></i></span>
+                  <span>ツイート</span>
+                </a>
+              </span>
             </div>
           </div>
         </div>
