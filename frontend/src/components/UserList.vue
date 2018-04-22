@@ -19,7 +19,7 @@
         </a>
       </b-table-column>
 
-      <b-table-column field="total" label="総合" width="75" numeric>
+      <b-table-column field="total" label="戦闘力" width="75" numeric>
         {{ props.row.total.toLocaleString() }}
       </b-table-column>
 
