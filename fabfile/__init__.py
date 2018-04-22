@@ -81,20 +81,6 @@ def mysql_show():
 
 
 @task
-def crawl_user():
-    '''ユーザのクロール'''
-    import crawl
-    crawl.user()
-
-
-@task
-def crawl_article():
-    '''記事のクロール'''
-    import crawl
-    crawl.article()
-
-
-@task
 def deploy_json():
     '''JSONをデプロイ'''
     import create_json, s3
