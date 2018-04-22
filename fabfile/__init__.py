@@ -81,64 +81,8 @@ def mysql_show():
 
 
 @task
-def crawl_user():
-    '''ユーザのクロール'''
-    import crawl
-    crawl.user()
-
-
-@task
-def crawl_article():
-    '''記事のクロール'''
-    import crawl
-    crawl.article()
-
-
-@task
 def deploy_json():
     '''JSONをデプロイ'''
     import create_json, s3
     create_json.create()
     s3.deploy_json()
-
-
-@task
-def create_json():
-    '''JSONの生成'''
-    import create_json
-    create_json.create()
-
-
-@task
-def s3_deploy_json():
-    '''S3へJSONをデプロイ'''
-    import s3
-    s3.deploy_json()
-
-
-@task
-def s3_upload():
-    '''S3へのアップロード'''
-    import s3
-    s3.upload()
-
-
-@task
-def s3_download():
-    '''S3へのダウンロード'''
-    import s3
-    s3.download()
-
-
-@task
-def export_data():
-    '''データのエクスポート'''
-    import export_data
-    export_data.execute()
-
-
-@task
-def init_db():
-    '''データベースの初期化'''
-    import init_db
-    init_db.execute()
