@@ -9,7 +9,9 @@
               <a class="navbar-item">
                 <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
-
+              <a class="navbar-item">
+                <router-link :to="{name: 'About'}">About</router-link>
+              </a>
               <a href="https://twitter.com/tmknom"
                  target="_blank"
                  rel="noopener noreferrer" class="navbar-item">
