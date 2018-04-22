@@ -5,7 +5,7 @@
       <div class="column is-8">
         <b-input v-model="userName"
                  @keyup.native.enter="handle"
-                 placeholder="ユーザ名を入力してください"
+                 placeholder="Qiitaのユーザ名を入力してください。@は不要です。"
                  type="search"
                  size="is-large"
                  icon-pack="fas"
