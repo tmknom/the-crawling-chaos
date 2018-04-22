@@ -10,14 +10,14 @@
                 <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
               <span class="navbar-item">
-              <a href="https://twitter.com/tmknom"
+              <a :href="tweetUrl('Qiitaでの発信力を計測するサービス「エンジニアスカウター」')"
                  class="button is-success is-inverted text-twitter"
                  target="_blank"
                  rel="noopener noreferrer">
                 <span class="icon">
                   <i class="fab fa-twitter"></i>
                 </span>
-                <span>Twitter</span>
+                <span>ツイート</span>
               </a>
             </span>
             </div>
@@ -79,6 +79,14 @@
       }
     },
     methods: {
+      tweetUrl(message) {
+        const baseUrl = 'http://twitter.com/share';
+        const encodedMessage = encodeURIComponent(message);
+        const url = 'https://engineer-scouter.firebaseapp.com/';
+        const hashtags = 'EngineerScouter';
+        const via = 'tmknom';
+        return baseUrl + '?text=' + encodedMessage + '&url=' + url + '&hashtags=' + hashtags + '&via=' + via;
+      },
       renderTab() {
         this.clearTab();
         this.changeTab();

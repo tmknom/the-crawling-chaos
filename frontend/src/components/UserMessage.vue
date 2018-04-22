@@ -10,7 +10,7 @@
 
     <div class="content">
       <div class="button is-large bd-tw-button">
-        <a :href="tweetUrl('Qiita戦闘力は' + total + 'で、全国ランキング' + rank + '位でした！')"
+        <a :href="tweetUrl('Qiita戦闘力' + total + 'で、全国ランキング' + rank + '位でした！')"
            target="_blank"
            rel="nofollow">
 
@@ -101,8 +101,8 @@
       tweetUrl(message) {
         const baseUrl = 'http://twitter.com/share';
         const encodedMessage = encodeURIComponent(message);
-        const url = 'http://localhost:8080/';
-        const hashtags = 'QiitaScouter';
+        const url = 'https://engineer-scouter.firebaseapp.com/';
+        const hashtags = 'EngineerScouter';
         const via = 'tmknom';
         return baseUrl + '?text=' + encodedMessage + '&url=' + url + '&hashtags=' + hashtags + '&via=' + via;
       }
