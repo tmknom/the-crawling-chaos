@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/tmknom/qiita-ranker.svg?style=svg)](https://circleci.com/gh/tmknom/qiita-ranker)
+[![CircleCI](https://circleci.com/gh/tmknom/the-crawling-chaos.svg?style=svg)](https://circleci.com/gh/tmknom/the-crawling-chaos)
 
 # the-crawling-chaos
 
