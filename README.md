@@ -75,3 +75,9 @@ tail /tmp/qiita-ranker-1.0-SNAPSHOT/logs/application.log
 ```
 mysql.server start
 ```
+
+## ドキュメント
+
+- [運用方法](https://github.com/tmknom/the-crawling-chaos/blob/develop/doc/operation.md)
+- [sbtコマンド](https://github.com/tmknom/the-crawling-chaos/blob/develop/doc/sbt.md)
+- [その他ドキュメント](https://github.com/tmknom/the-crawling-chaos/tree/develop/doc)
