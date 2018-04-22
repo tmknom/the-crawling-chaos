@@ -10,6 +10,15 @@
                 <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
               <span class="navbar-item">
+                <a href="https://facebook.com/sharer/sharer.php?u=https://engineer-scouter.firebaseapp.com/"
+                   class="button is-success is-inverted text-facebook"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                  <span class="icon"><i class="fab fa-facebook"></i></span>
+                  <span>シェア</span>
+                </a>
+              </span>
+              <span class="navbar-item">
                 <a :href="tweetUrl('Qiitaでの発信力を計測するサービス「エンジニアスカウター」')"
                    class="button is-success is-inverted text-twitter"
                    target="_blank"
@@ -143,6 +152,9 @@
   .navbar-end {
     .text-twitter {
       color: #55acee;
+    }
+    .text-facebook {
+      color: #3b5998;
     }
   }
 </style>
