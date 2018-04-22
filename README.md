@@ -1,173 +1,19 @@
 [![CircleCI](https://circleci.com/gh/tmknom/qiita-ranker.svg?style=svg)](https://circleci.com/gh/tmknom/qiita-ranker)
 
-# qiita-ranker
-
-## 使い方
-
-### Qiitaユーザ
-
-#### Qiitaユーザ名をクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/qiita-user-name-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.batch.daily.user.QiitaUserNameCrawlerCli
-```
-
-#### Qiitaユーザをクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/qiita-user-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.batch.daily.user.QiitaUserCrawlerCli
-```
-
-#### トップQiitaユーザをクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/top-qiita-user-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.batch.monthly.user.TopQiitaUserCrawlerCli
-```
-
-#### コントリービュートしたことのあるQiitaユーザをクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/contributed-qiita-user-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.batch.monthly.user.ContributedQiitaUserCrawlerCli
-```
-
-#### Qiitaユーザを登録
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/registration-qiita-user-name-cli "xxxx, yyyy" > /dev/null 2>&1 &
-
-run-main presentation.cli.operation.RegistrationQiitaUserNameCli "xxxx, yyyy"
-```
-
-#### 無効なQiitaユーザを削除
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/deletion-unavailable-qiita-user-name-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.batch.monthly.user.DeletionUnavailableQiitaUserNameCli
-```
-
-### Qiita記事
-
-#### 記事IDをクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/qiita-article-id-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.batch.daily.article.QiitaArticleIdCrawlerCli
-```
-
-#### 記事をクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/qiita-article-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.batch.daily.article.QiitaArticleCrawlerCli
-```
-
-#### トップ記事をクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/top-qiita-article-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.batch.monthly.article.TopQiitaArticleCrawlerCli
-```
-
-#### 指定した記事IDを削除
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/deletion-qiita-item-id-cli xxxx
-
-run-main presentation.cli.operation.DeletionQiitaItemIdCli xxxx
-```
-
-### 初期データ取得
-
-#### 全Qiitaユーザ名をクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-user-name-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.onetime.AllQiitaUserNameCrawlerCli
-```
-
-#### 全Qiitaユーザ情報をクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-raw-internal-user-json-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.onetime.AllQiitaRawInternalUserJsonCrawlerCli
-```
-
-#### 全Qiitaユーザ情報を登録
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-user-register-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.onetime.AllQiitaUserRegisterCli
-```
-
-#### 全記事IDをクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-article-id-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.onetime.AllQiitaArticleIdCrawlerCli
-```
-
-#### 全記事の情報をクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-raw-props-article-json-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.onetime.AllQiitaRawPropsArticleJsonCrawlerCli
-```
-
-#### 全記事の情報を登録
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-article-register-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.onetime.AllQiitaArticleRegisterCli
-```
-
-#### 全記事の評価をクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-article-contribution-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.onetime.AllQiitaArticleContributionCrawlerCli
-```
-
-#### 全記事の詳細をクロール
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-raw-article-json-crawler-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.onetime.AllQiitaRawArticleJsonCrawlerCli
-```
-
-#### 全記事のマークダウンを登録
-
-```
-/tmp/qiita-ranker-1.0-SNAPSHOT/bin/all-qiita-article-markdown-register-cli > /dev/null 2>&1 &
-
-run-main presentation.cli.onetime.AllQiitaArticleMarkdownRegisterCli
-```
+# the-crawling-chaos
 
 ## デプロイ
 
-### Webサーバ
+### Web
 
 ```
 fab firebase_deploy
+```
+
+### JSON
+
+```
+fab deploy_json
 ```
 
 ### スクレイピングサーバ
@@ -176,7 +22,7 @@ fab firebase_deploy
 ./deploy.sh
 ```
 
-## 運用
+## チートシート
 
 ### EC2のスタート／ストップ
 
@@ -200,6 +46,7 @@ fab sg_revoke
 
 ```
 fab mysql_dump
+fab mysql_dump_light
 ```
 
 ### データベースのリストア
@@ -208,112 +55,7 @@ S3からダウンロードしてリストアする。一度ダンプしたら、
 
 ```
 fab mysql_restore
-```
-
-### クロール
-
-```
-fab crawl_user
-fab crawl_article
-```
-
-
-## テスト
-
-```
-sbt test
-```
-
-## マイグレーション
-
-```
-sbt flywayMigrate
-sbt flywayClean # 全部消したい場合
-```
-
-## 起動
-
-```
-sbt run
-```
-
-## 静的解析：Scalastyle
-
-```
-sbt scalastyle
-```
-
-### コピペチェック
-
-```
-sbt cpd
-```
-
-## 依存ライブラリのバージョンアップチェック
-
-```
-sbt dependencyUpdates
-```
-
-## コードの統計情報
-
-```
-sbt stats
-```
-
-## データベースの起動
-
-```
-mysql.server start
-```
-
-## IntelliJ向けの設定
-
-IntelliJのsbtの設定で `Use sbt shell for build and import` にチェックを入れる。
-
-IntelliJが環境変数を認識できる `~/.bashrc` に下記を追加。
-
-```
-export ARTIFACT_REPOSITORY=xxxx
-export AWS_ACCESS_KEY_ID=xxxx
-export AWS_SECRET_ACCESS_KEY=xxxx
-```
-
-## Firebaseの設定
-
-```
-# prepared firebase
-npm install -g firebase-tools
-firebase login
-
-# initialized firebase project
-firebase init
-```
-
-## 本番環境
-
-### direnv
-
-```
-# ssh
-export SSH_PORT='xxxx'
-export SSH_USER_NAME='xxxx'
-export SSH_HOME='/home/xxxx'
-export SSH_HOST='XX.XX.XX.XX'
-
-# api token
-export QIITA_ACCESS_TOKEN='xxxx'
-
-# path
-export CSV_PATH='/path/to/csv'
-
-# aws
-export INSTANCE_NAME='xxxx'
-export SECURITY_GROUP_NAME='xxxx'
-export S3_BUCKET='xxxx'
-
-# Google Analytics
-export GA_CODE='UA-XXXXXXXX-X'
+fab mysql_restore_light
 ```
 
 ### ログイン
@@ -322,59 +64,14 @@ export GA_CODE='UA-XXXXXXXX-X'
 ssh -l $SSH_USER_NAME -p $SSH_PORT $SSH_HOST
 ```
 
-### サーバプロビジョニング
-
-IntelliJ向けの設定に記述した環境変数を `~/.bash_profile` に追記。
-手動で適当に作った ec2-sbt-sample ユーザのアクセスキーを払い出してセット。
-
-```
-# Install MySQL
-sudo yum update -y
-sudo yum install -y http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
-sudo yum install -y mysql-community-server
-sudo sh -c 'echo "skip-grant-tables" >> /etc/my.cnf'
-sudo sh -c 'echo secure-file-priv = "" >> /etc/my.cnf'
-sudo service mysqld start
-mysql -u root -h 127.0.0.1 -e 'create database db_production character set utf8mb4 collate utf8mb4_bin;'
-
-# Install sbt
-curl -s "https://get.sdkman.io" | bash
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk install java 8u152-zulu
-sdk install sbt
-
-# Install fabric
-sudo /usr/bin/pip install --upgrade pip
-sudo /usr/bin/pip install fabric
-
-# Setup dir
-sudo mkdir /var/data
-sudo chmod 777 /var/data
-
-# Deploy
-git clone https://github.com/tmknom/qiita-ranker.git
-cd qiita-ranker
-sbt dist
-rm -rf /tmp/qiita-ranker-1.0-SNAPSHOT
-unzip target/universal/qiita-ranker-1.0-SNAPSHOT.zip -d /tmp
-
-# Init script
-vi qiita-crawler # Edit user name
-sudo cp qiita-crawler /etc/init.d
-sudo chmod 755 qiita-crawler
-sudo chkconfig --add qiita-crawler
-sudo chkconfig qiita-crawler on
-```
-
 ### ログ確認
 
 ```
-less /tmp/qiita-ranker-1.0-SNAPSHOT/logs/application.log
+tail /tmp/qiita-ranker-1.0-SNAPSHOT/logs/application.log
 ```
 
-## Codacyの設定方法
+### データベースの起動
 
-* GitHubとのヒモ付を有効化
-* CircleCIに環境変数にセットするトークンを払い出し
- * CODACY_PROJECT_TOKEN
-* sbtでテスト実行時にcodacyCoverageも実行させるよう設定
+```
+mysql.server start
+```
