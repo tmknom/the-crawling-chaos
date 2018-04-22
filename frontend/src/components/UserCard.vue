@@ -4,14 +4,14 @@
       <div class="media">
         <div class="media-left">
           <figure class="image is-48x48">
-            <a :href="url" target="_blank">
+            <a :href="url" target="_blank" rel="noopener noreferrer">
               <img :src="user.profile_image_url" alt="Profile image">
             </a>
           </figure>
         </div>
         <div class="media-content">
           <p class="title">全国 {{ rank }} 位</p>
-          <p class="subtitle is-6"><a :href="url" target="_blank">@{{ user.name }}</a></p>
+          <p class="subtitle is-6"><a :href="url" target="_blank" rel="noopener noreferrer">@{{ user.name }}</a></p>
         </div>
       </div>
 
