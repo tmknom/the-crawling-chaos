@@ -75,9 +75,6 @@
             <li :class="tabClass.userHatenaRanking">
               <router-link :to="{name: 'UserHatena'}">はてブランキング</router-link>
             </li>
-            <li :class="tabClass.about">
-              <router-link :to="{name: 'About'}">このサイトについて</router-link>
-            </li>
           </ul>
         </div>
       </nav>
@@ -95,7 +92,6 @@
           userTotalRanking: '',
           userContributionRanking: '',
           userHatenaRanking: '',
-          about: '',
         }
       }
     },
@@ -129,9 +125,6 @@
             break;
           case 'UserHatena':
             this.$data.tabClass.userHatenaRanking = activeClassName;
-            break;
-          case 'About':
-            this.$data.tabClass.about = activeClassName;
             break;
           default:
             this.$data.tabClass.scouter = activeClassName;
