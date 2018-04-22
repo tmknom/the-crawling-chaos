@@ -95,6 +95,14 @@ def crawl_article():
 
 
 @task
+def deploy_json():
+    '''JSONをデプロイ'''
+    import create_json, s3
+    create_json.create()
+    s3.deploy_json()
+
+
+@task
 def create_json():
     '''JSONの生成'''
     import create_json
