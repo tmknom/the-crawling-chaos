@@ -12,7 +12,7 @@
       <div class="button is-large bd-tw-button">
         <a :href="tweetUrl('Qiita戦闘力' + total + 'で、全国ランキング' + rank + '位でした！')"
            target="_blank"
-           rel="nofollow">
+           rel="noopener noreferrer">
 
           <span class="icon"><i class="fab fa-twitter"></i></span>
           <span class="has-text-weight-bold">結果をツイートする</span>
