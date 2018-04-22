@@ -9,6 +9,12 @@
               <a class="navbar-item">
                 <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
+
+              <a href="https://twitter.com/tmknom"
+                 target="_blank"
+                 rel="noopener noreferrer" class="navbar-item">
+                <span class="icon"><i class="fab fa-twitter"></i></span>
+              </a>
             </div>
             <div class="navbar-end">
               <div class="navbar-item">
