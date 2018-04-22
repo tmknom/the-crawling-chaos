@@ -6,10 +6,10 @@
         <div class="container">
           <div class="navbar-menu">
             <div class="navbar-start">
-              <a class="navbar-item">
+              <a class="navbar-item text-link">
                 <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
-              <a class="navbar-item">
+              <a class="navbar-item text-link">
                 <router-link :to="{name: 'About'}">About</router-link>
               </a>
               <a href="https://twitter.com/tmknom"
@@ -152,11 +152,11 @@
     color: white;
   }
 
-  .navbar-item a {
+  .text-link a {
     color: rgba(255, 255, 255, 0.7);
   }
 
-  .navbar-item a:hover {
+  .text-link a:hover {
     color: rgba(255, 255, 255, 1.0);
   }
 
