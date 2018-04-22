@@ -10,7 +10,7 @@
           </figure>
         </div>
         <div class="media-content">
-          <p class="title">総合 {{ rank }} 位</p>
+          <p class="title">全国 {{ rank }} 位</p>
           <p class="subtitle is-6"><a :href="url" target="_blank">@{{ user.name }}</a></p>
         </div>
       </div>
@@ -18,11 +18,11 @@
       <div class="content">
         <table class="table">
           <tr>
-            <th>総合評価</th>
+            <th>Qiita戦闘力</th>
             <th>{{ total }}</th>
           </tr>
           <tr>
-            <th>いいね数</th>
+            <th>Contribution数</th>
             <th>{{ contribution }}</th>
           </tr>
           <tr>
@@ -30,7 +30,7 @@
             <th>{{ hatena_count }}</th>
           </tr>
           <tr>
-            <th>平均いいね数</th>
+            <th>平均Contribution数</th>
             <th>{{ contribution_average }}</th>
           </tr>
           <tr>
