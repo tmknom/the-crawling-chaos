@@ -27,7 +27,7 @@
         {{ props.row.articles_count.toLocaleString() }}
       </b-table-column>
 
-      <b-table-column field="hatena_count_average" label="打率" width="75" numeric>
+      <b-table-column field="hatena_count_average" label="平均" width="75" numeric>
         {{ props.row.hatena_count_average.toLocaleString() }}
       </b-table-column>
     </template>

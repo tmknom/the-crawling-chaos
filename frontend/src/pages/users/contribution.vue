@@ -1,9 +1,9 @@
 <template>
   <section class="section">
-    <h1 class="title">Qiitaランキング</h1>
+    <h1 class="title">Contributionランキング</h1>
     <div class="content">
       <h5>
-        『打率』＝「QiitaのContribution数」／「投稿数」
+        『平均打点』＝「QiitaのContribution数」／「投稿数」
         （規定打席は投稿数10以上）
       </h5>
     </div>
@@ -32,7 +32,7 @@
         <div class="card">
           <div class="card-header">
             <div class="card-header-title">
-              <h2 class="subtitle">Contribution打率</h2>
+              <h2 class="subtitle">Contribution平均打点</h2>
             </div>
           </div>
           <UserContributionAverageList :items="averages"></UserContributionAverageList>
