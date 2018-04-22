@@ -9,7 +9,7 @@
     </div>
     <div class="field is-grouped is-grouped-multiline share-button">
       <div class="control button is-large bd-tw-button">
-        <a :href="tweetUrl('Qiita戦闘力' + total + 'で、全国ランキング' + rank + '位でした！')"
+        <a :href="tweetUrl('Qiita戦闘力' + total + 'で、全国ランキング' + rank + '位でした！ - Qiita戦闘力計測サイト「エンジニアスカウター」')"
            target="_blank"
            rel="noopener noreferrer">
 
