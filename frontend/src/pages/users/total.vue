@@ -1,9 +1,9 @@
 <template>
   <section class="section">
-    <h1 class="title">総合ランキング</h1>
+    <h1 class="title">戦闘力ランキング</h1>
     <div class="content">
       <h5>
-        『総合』＝「QiitaのContribution数」＋「はてなブックマーク数」
+        『Qiita戦闘力』＝「QiitaのContribution数」＋「はてなブックマーク数」
       </h5>
     </div>
 
@@ -12,7 +12,7 @@
         <div class="card">
           <div class="card-header">
             <div class="card-header-title">
-              <h2 class="subtitle">総合</h2>
+              <h2 class="subtitle">Qiita戦闘力</h2>
             </div>
           </div>
           <UserList :items="totals"></UserList>
