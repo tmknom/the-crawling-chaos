@@ -27,7 +27,7 @@
         {{ props.row.articles_count.toLocaleString() }}
       </b-table-column>
 
-      <b-table-column field="contribution_average" label="打率" width="75" numeric>
+      <b-table-column field="contribution_average" label="平均" width="75" numeric>
         {{ props.row.contribution_average.toLocaleString() }}
       </b-table-column>
     </template>
