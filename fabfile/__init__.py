@@ -128,10 +128,3 @@ def s3_download():
     '''S3へのダウンロード'''
     import s3
     s3.download()
-
-
-@task
-def export_data():
-    '''データのエクスポート'''
-    import export_data
-    export_data.execute()
