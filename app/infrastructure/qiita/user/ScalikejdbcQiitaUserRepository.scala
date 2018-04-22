@@ -78,7 +78,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
   override def countContributionAverage()(implicit session: DBSession = AutoSession): Long = {
     sql"""
           SELECT COUNT(user_name) FROM qiita_user_contributions
-          WHERE contribution > 0 AND articles_count >= 10;
+          WHERE contribution > 0 AND articles_count >= 9;
        """
       .map(_.long(1))
       .single()
@@ -93,7 +93,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
           INNER JOIN qiita_user_contributions AS quc
           ON qu.user_name = quc.user_name
           WHERE quc.contribution > 0
-          AND quc.articles_count >= 10
+          AND quc.articles_count >= 9
           ORDER BY contribution_average DESC, quc.contribution DESC, quc.hatena_count DESC, quc.articles_count DESC
           LIMIT $limit OFFSET $offset;
        """
@@ -130,7 +130,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
   override def countHatenaAverage()(implicit session: DBSession = AutoSession): Long = {
     sql"""
           SELECT COUNT(user_name) FROM qiita_user_contributions
-          WHERE hatena_count > 0 AND articles_count >= 10;
+          WHERE hatena_count > 0 AND articles_count >= 9;
        """
       .map(_.long(1))
       .single()
@@ -145,7 +145,7 @@ final class ScalikejdbcQiitaUserRepository extends QiitaUserRepository {
           INNER JOIN qiita_user_contributions AS quc
           ON qu.user_name = quc.user_name
           WHERE quc.hatena_count > 0
-          AND quc.articles_count >= 10
+          AND quc.articles_count >= 9
           ORDER BY hatena_count_average DESC, quc.hatena_count DESC, quc.contribution DESC, quc.articles_count DESC
           LIMIT $limit OFFSET $offset;
        """
