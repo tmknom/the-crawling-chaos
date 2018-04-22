@@ -46,10 +46,10 @@
               <router-link :to="{name: 'Scouter'}">Qiita戦闘力計測</router-link>
             </li>
             <li :class="tabClass.userTotalRanking">
-              <router-link :to="{name: 'UserTotal'}">総合ランキング</router-link>
+              <router-link :to="{name: 'UserTotal'}">戦闘力ランキング</router-link>
             </li>
             <li :class="tabClass.userContributionRanking">
-              <router-link :to="{name: 'UserContribution'}">Qiitaランキング</router-link>
+              <router-link :to="{name: 'UserContribution'}">Contributionランキング</router-link>
             </li>
             <li :class="tabClass.userHatenaRanking">
               <router-link :to="{name: 'UserHatena'}">はてブランキング</router-link>
