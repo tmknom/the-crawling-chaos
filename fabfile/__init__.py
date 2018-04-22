@@ -100,17 +100,3 @@ def deploy_json():
     import create_json, s3
     create_json.create()
     s3.deploy_json()
-
-
-@task
-def create_json():
-    '''JSONの生成'''
-    import create_json
-    create_json.create()
-
-
-@task
-def s3_deploy_json():
-    '''S3へJSONをデプロイ'''
-    import s3
-    s3.deploy_json()
