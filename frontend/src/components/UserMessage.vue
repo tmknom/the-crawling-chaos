@@ -7,15 +7,24 @@
       <h2 class="subtitle is-3">Qiita戦闘力は<span class="is-size-1 has-text-danger">{{ dbCharacter }}</span>レベルです！</h2>
       <h3 class="subtitle is-4">あなたは上位 <span class="is-size-2 has-text-info">{{ rare }}%</span> に食い込んでいます！！ </h3>
     </div>
-
-    <div class="content">
-      <div class="button is-large bd-tw-button">
+    <div class="field is-grouped is-grouped-multiline share-button">
+      <div class="control button is-large bd-tw-button">
         <a :href="tweetUrl('Qiita戦闘力' + total + 'で、全国ランキング' + rank + '位でした！')"
            target="_blank"
            rel="noopener noreferrer">
 
           <span class="icon"><i class="fab fa-twitter"></i></span>
           <span class="has-text-weight-bold">結果をツイートする</span>
+        </a>
+      </div>
+
+      <div class="control button is-large bd-fa-button">
+        <a href="https://facebook.com/sharer/sharer.php?u=https://engineer-scouter.firebaseapp.com/"
+           target="_blank"
+           rel="noopener noreferrer">
+
+          <span class="icon"><i class="fab fa-facebook"></i></span>
+          <span class="has-text-weight-bold">結果をシェアする</span>
         </a>
       </div>
     </div>
@@ -111,12 +120,19 @@
 </script>
 
 <style lang="scss" scoped>
-  .bd-tw-button {
+  .share-button {
     margin-top: 50px;
-    background-color: #55acee;
     border-color: transparent !important;
     a {
       color: white;
     }
+  }
+
+  .bd-tw-button {
+    background-color: #55acee;
+  }
+
+  .bd-fa-button {
+    background-color: #3b5998;
   }
 </style>
