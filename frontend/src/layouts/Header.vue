@@ -6,10 +6,12 @@
         <div class="container">
           <div class="navbar-menu">
             <div class="navbar-start">
-              <a class="navbar-item">
+              <a class="navbar-item text-link">
                 <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
-
+              <a class="navbar-item text-link">
+                <router-link :to="{name: 'About'}">About</router-link>
+              </a>
               <a href="https://twitter.com/tmknom"
                  target="_blank"
                  rel="noopener noreferrer" class="navbar-item">
@@ -73,9 +75,6 @@
             <li :class="tabClass.userHatenaRanking">
               <router-link :to="{name: 'UserHatena'}">はてブランキング</router-link>
             </li>
-            <li :class="tabClass.about">
-              <router-link :to="{name: 'About'}">このサイトについて</router-link>
-            </li>
           </ul>
         </div>
       </nav>
@@ -93,7 +92,6 @@
           userTotalRanking: '',
           userContributionRanking: '',
           userHatenaRanking: '',
-          about: '',
         }
       }
     },
@@ -128,9 +126,6 @@
           case 'UserHatena':
             this.$data.tabClass.userHatenaRanking = activeClassName;
             break;
-          case 'About':
-            this.$data.tabClass.about = activeClassName;
-            break;
           default:
             this.$data.tabClass.scouter = activeClassName;
         }
@@ -157,8 +152,12 @@
     color: white;
   }
 
-  .navbar-item a {
+  .text-link a {
     color: rgba(255, 255, 255, 0.7);
+  }
+
+  .text-link a:hover {
+    color: rgba(255, 255, 255, 1.0);
   }
 
   .navbar-end {
