@@ -5,10 +5,12 @@
       <header class="navbar">
         <div class="container">
           <div class="navbar-menu">
-            <div class="navbar-end">
+            <div class="navbar-start">
               <a class="navbar-item">
                 <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
+            </div>
+            <div class="navbar-end">
               <div class="navbar-item">
                 <div class="field is-grouped is-grouped-multiline">
                   <div class="control">
