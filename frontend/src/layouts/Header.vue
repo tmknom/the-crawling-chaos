@@ -9,24 +9,28 @@
               <a class="navbar-item">
                 <router-link :to="{name: 'Index'}">Home</router-link>
               </a>
-              <span class="navbar-item">
-                <a href="https://facebook.com/sharer/sharer.php?u=https://engineer-scouter.firebaseapp.com/"
-                   class="button is-success is-inverted text-facebook"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                  <span class="icon"><i class="fab fa-facebook"></i></span>
-                  <span>シェア</span>
-                </a>
-              </span>
-              <span class="navbar-item">
-                <a :href="tweetUrl('Qiitaでの発信力を計測するサービス「エンジニアスカウター」')"
-                   class="button is-success is-inverted text-twitter"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                  <span class="icon"><i class="fab fa-twitter"></i></span>
-                  <span>ツイート</span>
-                </a>
-              </span>
+              <div class="navbar-item">
+                <div class="field is-grouped is-grouped-multiline">
+                  <div class="control">
+                    <a href="https://facebook.com/sharer/sharer.php?u=https://engineer-scouter.firebaseapp.com/"
+                       class="button is-success is-inverted text-facebook"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                      <span class="icon"><i class="fab fa-facebook"></i></span>
+                      <span>シェア</span>
+                    </a>
+                  </div>
+                  <div class="control">
+                    <a :href="tweetUrl('Qiitaでの発信力を計測するサービス「エンジニアスカウター」')"
+                       class="button is-success is-inverted text-twitter"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                      <span class="icon"><i class="fab fa-twitter"></i></span>
+                      <span>ツイート</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
