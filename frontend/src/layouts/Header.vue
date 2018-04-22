@@ -161,6 +161,10 @@
     color: rgba(255, 255, 255, 0.7);
   }
 
+  .navbar-item a:hover {
+    color: rgba(255, 255, 255, 1.0);
+  }
+
   .navbar-end {
     .text-twitter {
       color: #55acee;
