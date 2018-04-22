@@ -135,10 +135,3 @@ def export_data():
     '''データのエクスポート'''
     import export_data
     export_data.execute()
-
-
-@task
-def init_db():
-    '''データベースの初期化'''
-    import init_db
-    init_db.execute()
