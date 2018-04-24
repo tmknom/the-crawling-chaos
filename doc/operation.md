@@ -50,6 +50,11 @@ run-main presentation.cli.operation.RegistrationQiitaUserNameCli "xxxx, yyyy"
 run-main presentation.cli.batch.monthly.user.DeletionUnavailableQiitaUserNameCli
 ```
 
+### 指定したQiitaユーザをクロール
+
+```
+run-main presentation.cli.operation.CrawlOneQiitaUserCli "xxxx"
+```
 
 ## Qiita記事
 
