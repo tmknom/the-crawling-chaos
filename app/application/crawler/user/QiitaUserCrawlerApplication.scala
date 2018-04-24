@@ -17,6 +17,11 @@ final class QiitaUserCrawlerApplication @Inject()(
     qiitaUserNameRepository:                QiitaUserNameRepository
 ) extends Crawler {
 
+  def crawlAllUser(): Unit = {
+    val items = qiitaUserNameRepository.retrieveAllUser()
+    crawlUsers(items)
+  }
+
   def crawlTopUser(): Unit = {
     val items = qiitaUserNameRepository.retrieveTopUser()
     crawlUsers(items)

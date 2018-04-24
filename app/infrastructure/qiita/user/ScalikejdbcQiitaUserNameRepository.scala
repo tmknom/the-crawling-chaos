@@ -47,6 +47,18 @@ final class ScalikejdbcQiitaUserNameRepository extends QiitaUserNameRepository {
     retrieveRecently()
   }
 
+  override def retrieveAllUser()(implicit session: DBSession = AutoSession): List[QiitaUserName] = {
+    sql"""
+          SELECT qu.user_name FROM qiita_users AS qu
+          INNER JOIN qiita_user_contributions AS quc
+          ON qu.user_name = quc.user_name
+          ORDER BY quc.contribution DESC;
+       """
+      .map(toQiitaUserName)
+      .list()
+      .apply()
+  }
+
   override def retrieveTopUser()(implicit session: DBSession = AutoSession): List[QiitaUserName] = {
     sql"""
           SELECT qu.user_name FROM qiita_users AS qu
